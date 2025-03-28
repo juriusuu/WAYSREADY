@@ -1,0 +1,5 @@
+C:/Users/juliu/Desktop/March 19/Ready Ways/Ready Ways/My project (1)/.utmp/RelWithDebInfo/5i4y6k1z/armeabi-v7a/CMakeFiles/edit_cache.dir
+C:/Users/juliu/Desktop/March 19/Ready Ways/Ready Ways/My project (1)/.utmp/RelWithDebInfo/5i4y6k1z/armeabi-v7a/CMakeFiles/rebuild_cache.dir
+C:/Users/juliu/Desktop/March 19/Ready Ways/Ready Ways/My project (1)/.utmp/RelWithDebInfo/5i4y6k1z/armeabi-v7a/FramePacing/CMakeFiles/swappywrapper.dir
+C:/Users/juliu/Desktop/March 19/Ready Ways/Ready Ways/My project (1)/.utmp/RelWithDebInfo/5i4y6k1z/armeabi-v7a/FramePacing/CMakeFiles/edit_cache.dir
+C:/Users/juliu/Desktop/March 19/Ready Ways/Ready Ways/My project (1)/.utmp/RelWithDebInfo/5i4y6k1z/armeabi-v7a/FramePacing/CMakeFiles/rebuild_cache.dir
