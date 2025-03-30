@@ -1,9 +1,59 @@
 using UnityEngine;
-using UnityEngine.UI;
 
-using UnityEngine;
-using UnityEngine.UI;
+public class InventoryUIManager : MonoBehaviour
+{
+    public GameObject canvasInventory; // Reference to the entire CanvasInventory
 
+    private void Start()
+    {
+        // Ensure the CanvasInventory is hidden at the start
+        if (canvasInventory != null)
+        {
+            canvasInventory.SetActive(false);
+        }
+    }
+
+    public void OpenInventory()
+    {
+        if (canvasInventory != null)
+        {
+            canvasInventory.SetActive(true); // Show the entire CanvasInventory
+            InventoryManagers.Instance.DisplayInventory(); // Enable SpriteRenderers for inventory items
+            Debug.Log("Inventory canvas opened.");
+        }
+    }
+
+    public void CloseInventory()
+    {
+        if (canvasInventory != null)
+        {
+            canvasInventory.SetActive(false); // Hide the entire CanvasInventory
+            InventoryManagers.Instance.HideInventory(); // Disable SpriteRenderers for inventory items
+            Debug.Log("Inventory canvas closed.");
+        }
+    }
+
+    public void ToggleInventory()
+    {
+        if (canvasInventory != null)
+        {
+            bool isActive = canvasInventory.activeSelf;
+            canvasInventory.SetActive(!isActive);
+
+            if (isActive)
+            {
+                InventoryManagers.Instance.HideInventory(); // Hide inventory items
+                Debug.Log("Inventory canvas closed.");
+            }
+            else
+            {
+                InventoryManagers.Instance.DisplayInventory(); // Show inventory items
+                Debug.Log("Inventory canvas opened.");
+            }
+        }
+    }
+}
+/* 
 public class InventoryUIManager : MonoBehaviour
 {
     public GameObject inventoryPanel; // Reference to the Inventory Panel
@@ -56,7 +106,7 @@ public class InventoryUIManager : MonoBehaviour
             }
         }
     }
-}
+} */
 /* 
 public class InventoryUIManager : MonoBehaviour
 {

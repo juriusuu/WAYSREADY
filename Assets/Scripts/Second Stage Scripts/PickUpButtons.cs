@@ -106,15 +106,59 @@ public class PickupButtons : MonoBehaviour
             {
                 Debug.Log($"Processing PickupItems instance at index {currentItemIndex}");
                 item.OnPickupButtonPressed(); // Call the pickup method on the current item
-
+                /* 
+                                foreach (var pickupItem in item.Items)
+                                {
+                                    string itemName = pickupItem.name;
+                                    Sprite itemSprite = pickupItem.GetComponent<SpriteRenderer>()?.sprite;
+                                    Debug.Log($"Adding item to inventory: {itemName}");
+                                    AddItemToInventory(itemName, itemSprite); // Add the item to the inventory UI
+                                                                              //    InventoryManagers.Instance.AddItem(itemName, 1); // Add the item to the inventory system
+                                    Debug.Log($"Added {itemName} to inventory.");
+                                } */
                 foreach (var pickupItem in item.Items)
                 {
                     string itemName = pickupItem.name;
-                    Sprite itemSprite = pickupItem.GetComponent<SpriteRenderer>()?.sprite;
+
+                    // Get the SpriteRenderer component
+                    SpriteRenderer spriteRenderer = pickupItem.GetComponent<SpriteRenderer>();
+
+                    if (spriteRenderer == null)
+                    {
+                        Debug.LogWarning($"Item {itemName} does not have a SpriteRenderer component.");
+                        continue; // Skip this item if no SpriteRenderer is found
+                    }
+
+                    // Temporarily enable the SpriteRenderer to retrieve the sprite
+                    bool wasSpriteRendererDisabled = !spriteRenderer.enabled;
+                    if (wasSpriteRendererDisabled)
+                    {
+                        spriteRenderer.enabled = true; // Enable the SpriteRenderer temporarily
+                    }
+
+                    // Retrieve the sprite
+                    Sprite itemSprite = spriteRenderer.sprite;
+
+                    if (itemSprite == null)
+                    {
+                        Debug.LogWarning($"Item {itemName} does not have a sprite assigned in its SpriteRenderer.");
+                        if (wasSpriteRendererDisabled)
+                        {
+                            spriteRenderer.enabled = false; // Restore the original state
+                        }
+                        continue; // Skip this item if no sprite is assigned
+                    }
+
                     Debug.Log($"Adding item to inventory: {itemName}");
                     AddItemToInventory(itemName, itemSprite); // Add the item to the inventory UI
-                                                              //    InventoryManagers.Instance.AddItem(itemName, 1); // Add the item to the inventory system
+                                                              // InventoryManagers.Instance.AddItem(itemName, 1); // Add the item to the inventory system
                     Debug.Log($"Added {itemName} to inventory.");
+
+                    // Restore the original state of the SpriteRenderer
+                    if (wasSpriteRendererDisabled)
+                    {
+                        spriteRenderer.enabled = false;
+                    }
                 }
 
                 currentItemIndex++;
@@ -147,21 +191,109 @@ public class PickupButtons : MonoBehaviour
         // Create a new inventory slot
         GameObject newSlot = Instantiate(inventorySlotPrefab, inventoryPanel.transform);
 
-        // Set the item's image
-        Image slotImage = newSlot.GetComponent<Image>();
-        if (slotImage != null && itemSprite != null)
+        // Set the item's sprite using the SpriteRenderer
+        SpriteRenderer slotSpriteRenderer = newSlot.GetComponent<SpriteRenderer>();
+        if (slotSpriteRenderer != null && itemSprite != null)
         {
-            slotImage.sprite = itemSprite;
+            slotSpriteRenderer.sprite = itemSprite; // Assign the sprite to the SpriteRenderer
+            Debug.Log($"Assigned sprite for item: {itemName}");
+        }
+        else
+        {
+            Debug.LogWarning($"Failed to assign sprite for item: {itemName}. Ensure the prefab has a SpriteRenderer component and the sprite is not null.");
         }
 
-        // Optionally, set the item's name or quantity as text
-        Text slotText = newSlot.GetComponentInChildren<Text>();
-        if (slotText != null)
+        // Set the item's name in the text component
+        Text itemNameText = newSlot.GetComponentInChildren<Text>();
+        if (itemNameText != null)
         {
-            slotText.text = itemName; // You can also display the quantity here
+            itemNameText.text = itemName; // Set the item's name
+        }
+        else
+        {
+            Debug.LogWarning($"Failed to find Text component in inventory slot prefab for item: {itemName}");
         }
     }
+    /*   private void AddItemToInventory(string itemName, Sprite itemSprite)
+      {
+          if (inventoryPanel == null || inventorySlotPrefab == null)
+          {
+              Debug.LogWarning("Inventory panel or slot prefab is not assigned.");
+              return;
+          }
 
+          // Create a new inventory slot
+          GameObject newSlot = Instantiate(inventorySlotPrefab, inventoryPanel.transform);
+
+          // Set the item's sprite using the SpriteRenderer
+          SpriteRenderer slotSpriteRenderer = newSlot.GetComponent<SpriteRenderer>();
+          if (slotSpriteRenderer != null && itemSprite != null)
+          {
+              slotSpriteRenderer.sprite = itemSprite; // Assign the sprite to the SpriteRenderer
+              Debug.Log($"Assigned sprite for item: {itemName}");
+          }
+          else
+          {
+              Debug.LogWarning($"Failed to assign sprite for item: {itemName}. Ensure the prefab has a SpriteRenderer component and the sprite is not null.");
+          }
+
+          // Optionally, set the item's name or other properties if needed
+      } */
+    /*     private void AddItemToInventory(string itemName, Sprite itemSprite)
+        {
+            if (inventoryPanel == null || inventorySlotPrefab == null)
+            {
+                Debug.LogWarning("Inventory panel or slot prefab is not assigned.");
+                return;
+            }
+
+            // Create a new inventory slot
+            GameObject newSlot = Instantiate(inventorySlotPrefab, inventoryPanel.transform);
+
+            // Set the item's image
+            Image slotImage = newSlot.GetComponent<Image>();
+            if (slotImage != null && itemSprite != null)
+            {
+                slotImage.sprite = itemSprite; // Assign the sprite to the slot
+            }
+            else
+            {
+                Debug.LogWarning($"Failed to assign sprite for item: {itemName}");
+            }
+
+            // Optionally, set the item's name or quantity as text
+            Text slotText = newSlot.GetComponentInChildren<Text>();
+            if (slotText != null)
+            {
+                slotText.text = itemName; // Display the item's name
+            }
+        } */
+    /*     private void AddItemToInventory(string itemName, Sprite itemSprite)
+        {
+            if (inventoryPanel == null || inventorySlotPrefab == null)
+            {
+                Debug.LogWarning("Inventory panel or slot prefab is not assigned.");
+                return;
+            }
+
+            // Create a new inventory slot
+            GameObject newSlot = Instantiate(inventorySlotPrefab, inventoryPanel.transform);
+
+            // Set the item's image
+            Image slotImage = newSlot.GetComponent<Image>();
+            if (slotImage != null && itemSprite != null)
+            {
+                slotImage.sprite = itemSprite;
+            }
+
+            // Optionally, set the item's name or quantity as text
+            Text slotText = newSlot.GetComponentInChildren<Text>();
+            if (slotText != null)
+            {
+                slotText.text = itemName; // You can also display the quantity here
+            }
+        }
+     */
     public void SetPickupItems(List<PickupItems> newPickupItems)
     {
         if (newPickupItems == null || newPickupItems.Count == 0)
