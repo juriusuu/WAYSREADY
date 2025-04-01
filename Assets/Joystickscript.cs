@@ -263,7 +263,7 @@ namespace Supercyan.FreeSample
             // Call the HandlePlayerDeath method
             if (transform.position.y < -5) // Adjust this value as needed
             {
-                HandlePlayerDeath();
+                //  HandlePlayerDeath();
             }
 
         }
@@ -328,41 +328,44 @@ namespace Supercyan.FreeSample
 
             JumpingAndLanding();
         }
-        public void HandlePlayerDeath()
-        {
-            // Check if lifeManager is not null before calling Die
-            if (lifeManager != null)
-            {
-                lifeManager.Die(); // Call the Die method in LifeManager
-            }
-            else
-            {
-                Debug.LogError("LifeManager is not found!");
-                return; // Exit if lifeManager is null
-            }
 
-            // Check if InventoryManager is accessible
-            if (InventoryManager.Instance == null)
-            {
-                Debug.LogError("InventoryManager is null before player destruction!");
-            }
+        /*  public void HandlePlayerDeath()
+         {
+             // Check if lifeManager is not null before calling Die
+             if (lifeManager != null)
+             {
+                 lifeManager.Die(); // Call the Die method in LifeManager
+             }
+             else
+             {
+                 Debug.LogError("LifeManager is not found!");
+                 return; // Exit if lifeManager is null
+             }
 
-            // Check if the player has lives remaining
-            if (GameManager.Instance.currentLives > 0)
-            {
-                // Start the respawn coroutine in TimerManager
-                timerManager.StartRespawnCoroutine(lifeManager);
-            }
-            else
-            {
-                // If no lives left, handle game over logic
-                Debug.Log("No lives left. Game Over!");
-                // You can add additional game over handling here if needed
-            }
+             // Check if InventoryManager is accessible
+             if (InventoryManager.Instance == null)
+             {
+                 Debug.LogError("InventoryManager is null before player destruction!");
+             }
 
-            // Optionally destroy the player object
-            Destroy(gameObject);
-        }
+             // Check if the player has lives remaining
+             if (GameManager.Instance.currentLives > 0)
+             {
+                 // Start the respawn coroutine in TimerManager
+                 timerManager.StartRespawnCoroutine(lifeManager);
+             }
+             else
+             {
+                 // If no lives left, handle game over logic
+                 Debug.Log("No lives left. Game Over!");
+                 // You can add additional game over handling here if needed
+             }
+
+             // Optionally destroy the player object
+             Destroy(gameObject);
+         } */
+
+
         /* 
                 // Handle player death
                 public void HandlePlayerDeath()

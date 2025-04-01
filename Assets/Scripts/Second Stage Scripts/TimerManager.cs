@@ -4,7 +4,7 @@ using System.Collections; // Include this for IEnumerator
 using UnityEngine.SceneManagement; // Include this for scene management
 
 
-public enum GameState
+public enum GameeState
 {
     Playing,
     PlayerDead,
@@ -17,11 +17,11 @@ public class TimerManager : MonoBehaviour
     public TMP_Text timerText; // Reference to the UI Text for the timer
 
     private float timer;
-    private GameState currentState;
+    private GameeState currentState;
 
     void Start()
     {
-        currentState = GameState.Playing; // Initialize the state to Playing
+        currentState = GameeState.Playing; // Initialize the state to Playing
         StartCountdown(); // Start the countdown when the game starts
     }
 
@@ -39,14 +39,14 @@ public class TimerManager : MonoBehaviour
 
     private IEnumerator CountdownCoroutine()
     {
-        while (timer > 0 && currentState == GameState.Playing)
+        while (timer > 0 && currentState == GameeState.Playing)
         {
             timer -= Time.deltaTime; // Decrease the timer
             UpdateTimerUI(); // Update the timer UI
             yield return null; // Wait for the next frame
         }
 
-        if (currentState == GameState.Playing)
+        if (currentState == GameeState.Playing)
         {
             timer = 0; // Ensure timer does not go below 0
             UpdateTimerUI(); // Update the UI to show 0
@@ -72,19 +72,19 @@ public class TimerManager : MonoBehaviour
         {
             case "FirstSceneEasy":
                 Debug.Log("Time's up in FirstScene (Easy)! Player has died.");
-                TransitionToState(GameState.PlayerDead);
-                GameManager.Instance.Die();
+                TransitionToState(GameeState.PlayerDead);
+                GameeManager.Instance.Die();
                 break;
 
             case "FirstSceneMedium":
                 Debug.Log("Time's up in FirstScene (Medium)! Player has completed the stage.");
-                TransitionToState(GameState.StageCompleted);
+                TransitionToState(GameeState.StageCompleted);
                 break;
 
             case "FirstSceneHard":
                 Debug.Log("Time's up in FirstScene (Hard)! Player has died.");
-                TransitionToState(GameState.PlayerDead);
-                GameManager.Instance.Die();
+                TransitionToState(GameeState.PlayerDead);
+                GameeManager.Instance.Die();
                 break;
 
             case "Second Stage Easy":
@@ -105,18 +105,18 @@ public class TimerManager : MonoBehaviour
                 // Add more cases for other scenes as needed
         }
     }
-    private void TransitionToState(GameState newState)
+    private void TransitionToState(GameeState newState)
     {
         currentState = newState;
 
         switch (currentState)
         {
-            case GameState.PlayerDead:
+            case GameeState.PlayerDead:
                 Debug.Log("Player has died.");
                 // Handle player death logic
                 break;
 
-            case GameState.StageCompleted:
+            case GameeState.StageCompleted:
                 Debug.Log("Player has passed the stage.");
                 // Handle stage completion logic
                 break;

@@ -129,10 +129,10 @@ TextureImporter:
       name: mobile phone_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 1080
-        height: 1350
+        x: 220
+        y: 90
+        width: 617
+        height: 1215
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}

@@ -118,7 +118,7 @@ namespace Supercyan.FreeSample
             }
 
             // Check if the player has lives remaining
-            if (GameManager.Instance.currentLives > 0)
+            if (GameeManager.Instance.currentLives > 0)
             {
                 // Start the respawn coroutine in TimerManager
                 timerManager.StartRespawnCoroutine(lifeManager);

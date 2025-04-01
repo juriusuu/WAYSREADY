@@ -6,14 +6,14 @@ using TMPro; // Include this for TextMeshPro
 using UnityEngine;
 using TMPro; // Include this for TextMeshPro
 
-public class GameManager : MonoBehaviour
+public class GameeManager : MonoBehaviour
 {
-    public static GameManager Instance; // Singleton instance
+    public static GameeManager Instance; // Singleton instance
     public int maxLives = 3; // Maximum number of lives
     public int currentLives; // Current number of lives
 
     public TMP_Text livesText; // Reference to the UI Text for lives
-    public GameState currentGameState; // Current game state
+    public GameeState currentGameState; // Current game state
 
     private void Awake()
     {
@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
         }
 
         ResetPlayerState(); // Initialize lives at the start
-        currentGameState = GameState.Playing; // Set initial game state
+        currentGameState = GameeState.Playing; // Set initial game state
     }
 
     public void ResetPlayerState()
@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
 
             if (currentLives <= 0)
             {
-                currentGameState = GameState.PlayerDead; // Set game state to PlayerDead
+                currentGameState = GameeState.PlayerDead; // Set game state to PlayerDead
                 GameOver(); // Trigger game over
             }
             else

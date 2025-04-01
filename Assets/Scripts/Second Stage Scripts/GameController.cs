@@ -25,15 +25,15 @@ public class GameController : MonoBehaviour
         switch (difficulty)
         {
             case DifficultyManager.DifficultyLevel.Easy:
-                GameManager.Instance.SetInitialLives(2); // Set lives for Easy
+                GameeManager.Instance.SetInitialLives(2); // Set lives for Easy
                 timerManager.SetCountdownTime(300f); // 5 minutes for Easy
                 break;
             case DifficultyManager.DifficultyLevel.Normal:
-                GameManager.Instance.SetInitialLives(3); // Set lives for Normal
+                GameeManager.Instance.SetInitialLives(3); // Set lives for Normal
                 timerManager.SetCountdownTime(180f); // 3 minutes for Normal
                 break;
             case DifficultyManager.DifficultyLevel.Hard:
-                GameManager.Instance.SetInitialLives(1); // Set lives for Hard
+                GameeManager.Instance.SetInitialLives(1); // Set lives for Hard
                 timerManager.SetCountdownTime(60f); // 1 minute for Hard
                 break;
         }

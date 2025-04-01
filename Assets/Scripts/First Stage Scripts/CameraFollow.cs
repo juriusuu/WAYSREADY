@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class CameraFollow : MonoBehaviour
+public class CameraaaFollow : MonoBehaviour
 {
     public Transform target; // The target to follow (your character)
     public float distance = 5.0f; // Distance from the target

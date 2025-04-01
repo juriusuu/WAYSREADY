@@ -59,7 +59,7 @@ public class DifficultyManager : MonoBehaviour
         }
 
         // Apply settings (you can add more logic here if needed)
-        GameManager.Instance.SetInitialLives(currentSettings.lives);
+        GameeManager.Instance.SetInitialLives(currentSettings.lives);
         // You can also manage hints and other settings here
         Debug.Log($"Current Difficulty: {currentDifficulty}, Hints: {currentSettings.hints}, Lives: {currentSettings.lives}, Time Limit: {currentSettings.timeLimit}");
     }

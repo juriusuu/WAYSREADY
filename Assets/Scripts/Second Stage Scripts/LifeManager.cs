@@ -19,10 +19,10 @@ public class LifeManager : MonoBehaviour
 
     public void Die()
     {
-        GameManager.Instance.Die(); // Call the Die method from GameManager
+        GameeManager.Instance.Die(); // Call the Die method from GameManager
         UpdateLivesUI(); // Update the UI when the player dies
 
-        if (GameManager.Instance.currentLives > 0)
+        if (GameeManager.Instance.currentLives > 0)
         {
             Respawn(); // Respawn the player if lives are remaining
         }
@@ -44,7 +44,7 @@ public class LifeManager : MonoBehaviour
     {
         if (livesText != null)
         {
-            livesText.text = "Lives: " + GameManager.Instance.currentLives; // Update the text to show current lives
+            livesText.text = "Lives: " + GameeManager.Instance.currentLives; // Update the text to show current lives
         }
     }
 }

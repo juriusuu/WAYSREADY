@@ -1,5 +1,3 @@
-
-
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -54,7 +52,46 @@ public class PickupItems : MonoBehaviour
 
            Debug.Log("Initiating pickup for items: " + string.Join(", ", items.ConvertAll(item => item.name)));
     */
+        /*    Debug.Log($"OnPickupButtonPressed called for {gameObject.name} at {Time.time}");
+           if (HasBeenPickedUp)
+           {
+               Debug.LogWarning($"{gameObject.name} has already been picked up.");
+               return; // Exit if the item has already been picked up
+           }
+
+           HasBeenPickedUp = true; // Mark the item as picked up
+           Debug.Log($"{gameObject.name} has been picked up.");
+           // Additional logic for picking up the item
+           if (InventoryManagers != null)
+           {
+               Debug.Log("InventoryManager is available.");
+               if (IsPickupSuccessful())
+               {
+                   Debug.Log("Pickup successful.");
+                   foreach (var item in items)
+                   {
+                       string itemName = item.name;
+                       InventoryManagers.AddItem(itemName, 1); // Add the item to the inventory
+                       Debug.Log($"Added {itemName} to inventory.");
+                       Debug.Log($"Item in list: {item.name}");
+                   }
+                   HasBeenPickedUp = true; // Mark as picked up
+                   Debug.Log($"Setting hasBeenPickedUp to true for {gameObject.name}");
+                   Destroy(gameObject); // Destroy the GameObject after pickup
+                   Debug.Log($"Destroyed pickup items for {gameObject.name}");
+               }
+               else
+               {
+                   Debug.Log("Pickup failed. Player too far away.");
+               }
+           }
+           else
+           {
+               Debug.LogError("InventoryManager is not set.");
+           } */
+
         Debug.Log($"OnPickupButtonPressed called for {gameObject.name} at {Time.time}");
+
         if (HasBeenPickedUp)
         {
             Debug.LogWarning($"{gameObject.name} has already been picked up.");
@@ -63,34 +100,29 @@ public class PickupItems : MonoBehaviour
 
         HasBeenPickedUp = true; // Mark the item as picked up
         Debug.Log($"{gameObject.name} has been picked up.");
-        // Additional logic for picking up the item
-        if (InventoryManagers != null)
+
+        // Add the item to the inventory
+        if (InventoryManagers.Instance != null)
         {
-            Debug.Log("InventoryManager is available.");
-            if (IsPickupSuccessful())
+            string itemName = gameObject.name;
+
+            // Clean up the item name (e.g., remove "(Clone)" if present)
+            if (itemName.Contains("(Clone)"))
             {
-                Debug.Log("Pickup successful.");
-                foreach (var item in items)
-                {
-                    string itemName = item.name;
-                    InventoryManagers.AddItem(itemName, 1); // Add the item to the inventory
-                    Debug.Log($"Added {itemName} to inventory.");
-                    Debug.Log($"Item in list: {item.name}");
-                }
-                HasBeenPickedUp = true; // Mark as picked up
-                Debug.Log($"Setting hasBeenPickedUp to true for {gameObject.name}");
-                Destroy(gameObject); // Destroy the GameObject after pickup
-                Debug.Log($"Destroyed pickup items for {gameObject.name}");
+                itemName = itemName.Replace("(Clone)", "").Trim();
             }
-            else
-            {
-                Debug.Log("Pickup failed. Player too far away.");
-            }
+
+            InventoryManagers.Instance.AddItem(itemName, 1); // Add the item to the inventory
+            Debug.Log($"Added {itemName} to inventory.");
         }
         else
         {
             Debug.LogError("InventoryManager is not set.");
         }
+
+        // Destroy the GameObject after pickup
+        Destroy(gameObject);
+        Debug.Log($"Destroyed pickup items for {gameObject.name}");
     }
     private bool IsPickupSuccessful()
     {
