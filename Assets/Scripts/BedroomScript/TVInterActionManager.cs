@@ -78,9 +78,11 @@ public class TVInteractionManager : MonoBehaviour
                 tvAudioSource.Play(); // Play the sound
                 Debug.Log("TV sound played!");
             }
+
+            // Mark the "Click the TV to see the news" task as completed
+            FindObjectOfType<QuestClipboardManager>().CompleteTask(0); // Assuming this is the first task
         }
     }
-
     private System.Collections.IEnumerator HideWeatherUpdateUI()
     {
         // Wait for 5 seconds

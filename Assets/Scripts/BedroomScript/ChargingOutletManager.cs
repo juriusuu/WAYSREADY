@@ -143,6 +143,9 @@ public class ChargingOutletManager : MonoBehaviour
 
         Debug.Log("Charging complete! Phone and PowerBank are fully charged.");
 
+        // Mark the "Charge devices" task as completed
+        FindObjectOfType<QuestClipboardManager>().CompleteTask(2); // Assuming this is the third task
+
         // Wait for 4 seconds before hiding the "fully charged" panel
         yield return new WaitForSeconds(4f);
 

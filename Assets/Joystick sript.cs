@@ -3,7 +3,7 @@ using UnityEngine.InputSystem; // Required for the new Input System
 
 namespace Supercyan.FreeSample
 {
-    public class Joysticksscript : MonoBehaviour
+    public class jJoystickscript : MonoBehaviour
     {
         [SerializeField] private float m_moveSpeed = 2f;
         [SerializeField] private Animator m_animator = null;

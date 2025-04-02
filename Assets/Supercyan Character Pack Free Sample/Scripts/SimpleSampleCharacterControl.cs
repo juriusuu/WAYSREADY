@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement; // For restarting
+using UnityEngine.UI; // If using UI for lives or game over
 
 namespace Supercyan.FreeSample
 {
@@ -7,13 +9,7 @@ namespace Supercyan.FreeSample
     {
         private enum ControlMode
         {
-            /// <summary>
-            /// Up moves the character forward, left and right turn the character gradually and down moves the character backwards
-            /// </summary>
             Tank,
-            /// <summary>
-            /// Character freely moves in the chosen direction from the perspective of the camera
-            /// </summary>
             Direct
         }
 
@@ -42,68 +38,21 @@ namespace Supercyan.FreeSample
         private bool m_jumpInput = false;
 
         private bool m_isGrounded;
-
         private List<Collider> m_collisions = new List<Collider>();
+
+        // New variables for fall detection, lives, and game over
+        [SerializeField] private float fallThreshold = -10f; // Player dies if below this Y position
+        [SerializeField] private int maxLives = 3;
+        private int currentLives;
+        public GameObject gameOverPanel; // Assign GameOver UI Panel in the Inspector
 
         private void Awake()
         {
-            if (!m_animator) { gameObject.GetComponent<Animator>(); }
-            if (!m_rigidBody) { gameObject.GetComponent<Animator>(); }
-        }
+            if (!m_animator) { m_animator = gameObject.GetComponent<Animator>(); }
+            if (!m_rigidBody) { m_rigidBody = gameObject.GetComponent<Rigidbody>(); }
 
-        private void OnCollisionEnter(Collision collision)
-        {
-            ContactPoint[] contactPoints = collision.contacts;
-            for (int i = 0; i < contactPoints.Length; i++)
-            {
-                if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
-                {
-                    if (!m_collisions.Contains(collision.collider))
-                    {
-                        m_collisions.Add(collision.collider);
-                    }
-                    m_isGrounded = true;
-                }
-            }
-        }
-
-        private void OnCollisionStay(Collision collision)
-        {
-            ContactPoint[] contactPoints = collision.contacts;
-            bool validSurfaceNormal = false;
-            for (int i = 0; i < contactPoints.Length; i++)
-            {
-                if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
-                {
-                    validSurfaceNormal = true; break;
-                }
-            }
-
-            if (validSurfaceNormal)
-            {
-                m_isGrounded = true;
-                if (!m_collisions.Contains(collision.collider))
-                {
-                    m_collisions.Add(collision.collider);
-                }
-            }
-            else
-            {
-                if (m_collisions.Contains(collision.collider))
-                {
-                    m_collisions.Remove(collision.collider);
-                }
-                if (m_collisions.Count == 0) { m_isGrounded = false; }
-            }
-        }
-
-        private void OnCollisionExit(Collision collision)
-        {
-            if (m_collisions.Contains(collision.collider))
-            {
-                m_collisions.Remove(collision.collider);
-            }
-            if (m_collisions.Count == 0) { m_isGrounded = false; }
+            currentLives = maxLives;
+            if (gameOverPanel) gameOverPanel.SetActive(false); // Hide game over UI at start
         }
 
         private void Update()
@@ -111,6 +60,12 @@ namespace Supercyan.FreeSample
             if (!m_jumpInput && Input.GetKey(KeyCode.Space))
             {
                 m_jumpInput = true;
+            }
+
+            // Check if the player has fallen below the threshold
+            if (transform.position.y < fallThreshold)
+            {
+                LoseLife();
             }
         }
 
@@ -209,6 +164,66 @@ namespace Supercyan.FreeSample
                 m_jumpTimeStamp = Time.time;
                 m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
             }
+        }
+
+        private void LoseLife()
+        {
+            currentLives--;
+
+            if (currentLives <= 0)
+            {
+                GameOver();
+            }
+            else
+            {
+                Respawn();
+            }
+        }
+
+        private void Respawn()
+        {
+            transform.position = new Vector3(0, 2, 0); // Adjust this respawn point
+            m_rigidBody.linearVelocity = Vector3.zero; // Reset velocity
+        }
+
+        private void GameOver()
+        {
+            if (gameOverPanel)
+            {
+                gameOverPanel.SetActive(true);
+            }
+            Time.timeScale = 0f; // Pause the game
+        }
+
+        public void RestartGame()
+        {
+            Time.timeScale = 1f; // Resume the game
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            ContactPoint[] contactPoints = collision.contacts;
+            for (int i = 0; i < contactPoints.Length; i++)
+            {
+                if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+                {
+                    if (!m_collisions.Contains(collision.collider))
+                    {
+                        m_collisions.Add(collision.collider);
+                    }
+                    m_isGrounded = true;
+                }
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            if (m_collisions.Contains(collision.collider))
+            {
+                m_collisions.Remove(collision.collider);
+            }
+            if (m_collisions.Count == 0) { m_isGrounded = false; }
         }
     }
 }

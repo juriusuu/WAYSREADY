@@ -52,7 +52,23 @@ public class InventoryManagers : MonoBehaviour
         }
 
         Debug.Log($"Total items in inventory after addition: {GetTotalItemCount()}");
+
+        //Represents the Clipboard
+        // Check if the total item count matches the required number
+        if (GetTotalItemCount() >= totalItemsToCollect)
+        {
+            Debug.Log("All required items have been collected!");
+
+            // Notify the QuestClipboardManager
+            QuestClipboardManager questClipboardManager = FindObjectOfType<QuestClipboardManager>();
+            if (questClipboardManager != null)
+            {
+                questClipboardManager.CompleteTask(1); // Assuming "Prepare an Emergency Kit" is the second task
+            }
+        }
+
     }
+
 
     public int GetTotalItemCount()
     {
