@@ -24,6 +24,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance; // Singleton instance
     public GameState currentState; // Current game state
 
+    private string currentSceneName; // Store the name of the current scene
+
     private void Awake()
     {
         // Implement Singleton pattern
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // Initialize the game state
+        currentSceneName = SceneManager.GetActiveScene().name; // Get the name of the current scene
         currentState = GameState.Stage1_Easy;
         StartStage();
     }
@@ -50,8 +53,12 @@ public class GameManager : MonoBehaviour
         switch (currentState)
         {
             case GameState.Stage1_Easy:
-                Debug.Log("Starting Stage 1 - Easy");
-                SceneManager.LoadScene("Stage1_Easy"); // Load the scene for Stage 1 Easy
+                if (currentSceneName != "Stage 1 Bedroom")
+                {
+                    Debug.Log("Starting Stage 1 - Easy");
+                    SceneManager.LoadScene("Stage 1 Bedroom");
+                    currentSceneName = "Stage 1 Bedroom"; // Update the current scene name
+                }
                 break;
 
             case GameState.Stage1_Medium:
