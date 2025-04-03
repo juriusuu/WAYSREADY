@@ -5,8 +5,137 @@ using System.Collections.Generic; // Required for Dictionary
 using UnityEngine;
 using System.IO; // Required for file operations
 using Newtonsoft.Json; // Install Newtonsoft.Json via Unity Package Manager
-
 public class InventoryManagers : MonoBehaviour
+{
+    private static InventoryManagers _instance;
+    private Dictionary<string, int> itemInventory = new Dictionary<string, int>();
+    private int totalItemsToCollect = 11;
+
+    public static InventoryManagers Instance
+    {
+        get
+        {
+            if (_instance == null)
+            {
+                Debug.LogError("InventoryManager instance is null!");
+            }
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        if (_instance == null)
+        {
+            _instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void AddItem(string itemName, int quantity)
+    {
+        Debug.Log($"AddItem called for: {itemName}, Quantity: {quantity}");
+
+        if (itemInventory.ContainsKey(itemName))
+        {
+            itemInventory[itemName] += quantity;
+            Debug.Log($"Updated {itemName} in inventory. New total: {itemInventory[itemName]}");
+        }
+        else
+        {
+            itemInventory[itemName] = quantity;
+            Debug.Log($"Added new item {itemName} with quantity: {quantity}");
+        }
+
+        Debug.Log($"Total items in inventory after addition: {GetTotalItemCount()}");
+
+        if (GetTotalItemCount() >= totalItemsToCollect)
+        {
+            Debug.Log("All required items have been collected!");
+
+            QuestClipboardManager questClipboardManager = FindObjectOfType<QuestClipboardManager>();
+            if (questClipboardManager != null)
+            {
+                questClipboardManager.CompleteTask(1);
+            }
+
+            // Reward coins and save the game using GameSaveManager
+            // FindObjectOfType<GameSaveManager>()?.RewardAndSave(50);
+        }
+    }
+
+    public int GetTotalItemCount()
+    {
+        int totalCount = 0;
+        foreach (var item in itemInventory)
+        {
+            totalCount += item.Value;
+        }
+        return totalCount;
+    }
+
+    public int GetItemCount(string itemName)
+    {
+        int count = itemInventory.ContainsKey(itemName) ? itemInventory[itemName] : 0; // Return count or 0 if not found
+        Debug.Log($"Current count for {itemName}: {count}");
+        return count;
+    }
+
+    public Dictionary<string, int> GetInventory()
+    {
+        return new Dictionary<string, int>(itemInventory);
+    }
+
+    public void SetInventory(Dictionary<string, int> inventory)
+    {
+        itemInventory = new Dictionary<string, int>(inventory);
+    }
+
+    public void DisplayInventory()
+    {
+        Debug.Log("Current Inventory:");
+        foreach (var item in itemInventory)
+        {
+            Debug.Log($"{item.Key}: {item.Value}");
+
+            // Find the GameObject for the item and enable its SpriteRenderer
+            GameObject itemObject = GameObject.Find(item.Key);
+            if (itemObject != null)
+            {
+                SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.enabled = true; // Enable the SpriteRenderer
+                }
+            }
+        }
+    }
+
+    public void HideInventory()
+    {
+        Debug.Log("Hiding Inventory...");
+        foreach (var item in itemInventory)
+        {
+            // Find the GameObject for the item and disable its SpriteRenderer
+            GameObject itemObject = GameObject.Find(item.Key);
+            if (itemObject != null)
+            {
+                SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
+                if (spriteRenderer != null)
+                {
+                    spriteRenderer.enabled = false; // Disable the SpriteRenderer
+                }
+            }
+        }
+    }
+}
+
+// edit below april 3
+/* public class InventoryManagers : MonoBehaviour
 {
     private static InventoryManagers _instance; // Singleton instance
     private Dictionary<string, int> itemInventory = new Dictionary<string, int>(); // Dictionary to hold item types and their quantities
@@ -225,7 +354,9 @@ public class SaveData
     public string currentScene; // The name of the current scene
     public int coinCount; // The player's total coins
     public Dictionary<string, int> inventory; // The player's inventory
-}
+} */
+
+//edit ^^ April 3
 /* 
 public class InventoryManagers : MonoBehaviour
 {
