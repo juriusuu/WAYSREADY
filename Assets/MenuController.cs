@@ -31,30 +31,21 @@ public class MenuController : MonoBehaviour
   private string levelToLoad;
   [SerializeField] private GameObject noSavedGameDialog = null;
 
-  [SerializeField] private GameObject loadMenuStageMenuDifficulty = null;
-
   public void NewGameDialogYes()
-  {    // Activate the LoadMenuStageMenuDifficulty UI panel
-    if (loadMenuStageMenuDifficulty != null)
-    {
-      loadMenuStageMenuDifficulty.SetActive(true); // Activate the UI panel
-    }
-    else
-    {
-      Debug.LogWarning("LoadMenuStageMenuDifficulty UI is not assigned.");
-    }
+  {
+    SceneManager.LoadScene(_newGameLevel);
   }
 
   public void LoadGameDialogYes()
   {
     if (PlayerPrefs.HasKey("SavedLevel"))
     {
-      levelToLoad = PlayerPrefs.GetString("SavedLevel");
-      SceneManager.LoadScene(levelToLoad);
+        levelToLoad = PlayerPrefs.GetString("SavedLevel");
+        SceneManager.LoadScene(levelToLoad);
     }
     else
     {
-      noSavedGameDialog.SetActive(true);
+        noSavedGameDialog.SetActive(true);
     }
   }
 
@@ -102,13 +93,13 @@ public class MenuController : MonoBehaviour
 
   public void ResetButton(string MenuType)
   {
-    if (MenuType == "Graphics")
+    if(MenuType == "Graphics")
     {
       brightnessSlider.value = defaultBrightness;
       brightnessTextValue.text = defaultBrightness.ToString("0.0");
 
-      qualityDropdown.value = 1;
-      QualitySettings.SetQualityLevel(1);
+      qualityDropdown.value = 2;
+      QualitySettings.SetQualityLevel(2);
       GraphicsApply();
     }
 

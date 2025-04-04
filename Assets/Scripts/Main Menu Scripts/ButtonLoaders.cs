@@ -6,7 +6,7 @@ public class ButtonLoaders : MonoBehaviour
     // Method to load the first stage on Easy difficulty
     public void LoadFirstStageEasy()
     {
-        SceneManager.LoadScene("Stage 1 Living Room"); // Replace with the actual scene name
+        SceneManager.LoadScene("Stage 1 Bedroom"); // Replace with the actual scene name
     }
 
     // Method to load the first stage on Medium difficulty

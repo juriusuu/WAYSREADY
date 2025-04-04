@@ -1596,7 +1596,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &340116225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1936,6 +1936,7 @@ GameObject:
   - component: {fileID: 439135931}
   - component: {fileID: 439135933}
   - component: {fileID: 439135934}
+  - component: {fileID: 439135935}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1997,6 +1998,18 @@ MonoBehaviour:
   m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a18bc14933d7f4241ba823061077159b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &439135935
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 439135930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a134ce3733df4449a8e9f546d646452, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &448359922
@@ -6816,9 +6829,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: LoadMain, Assembly-CSharp
-        m_MethodName: LoadGameSelection
+      - m_Target: {fileID: 439135935}
+        m_TargetAssemblyTypeName: BackButton, Assembly-CSharp
+        m_MethodName: GoToGameMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
