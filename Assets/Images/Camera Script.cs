@@ -3,7 +3,7 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public Transform target; // Target to follow (e.g., player)
-    
+
     [Header("Camera Position")]
     public float distance = 5.0f; // Distance from target
     public float height = 2.0f; // Height above target
@@ -50,27 +50,54 @@ public class CameraFollow : MonoBehaviour
 
     void HandleRotation()
     {
-        // Mouse or Touch Input
-        if (Input.GetMouseButtonDown(0)) // Start dragging
-        {
-            isDragging = true;
-            lastTouchPosition = Input.mousePosition;
-        }
-        else if (Input.GetMouseButtonUp(0)) // Stop dragging
-        {
-            isDragging = false;
-        }
+        /*      // Mouse or Touch Input
+             if (Input.GetMouseButtonDown(0)) // Start dragging
+             {
+                 isDragging = true;
+                 lastTouchPosition = Input.mousePosition;
+             }
+             else if (Input.GetMouseButtonUp(0)) // Stop dragging
+             {
+                 isDragging = false;
+             }
 
-        if (isDragging)
+             if (isDragging)
+             {
+                 Vector2 delta = (Vector2)Input.mousePosition - lastTouchPosition;
+                 lastTouchPosition = Input.mousePosition;
+
+                 float rotateY = delta.x * rotationSpeed * Time.deltaTime; // Left/Right swipe (Yaw)
+                 float rotateX = -delta.y * rotationSpeed * Time.deltaTime; // Up/Down swipe (Pitch)
+
+                 yaw += rotateY;
+                 pitch = Mathf.Clamp(pitch + rotateX, minPitch, maxPitch); // Limit vertical movement
+             } */
+        // Touch Input
+        if (Input.touchCount == 1) // Ensure there's one finger on the screen
         {
-            Vector2 delta = (Vector2)Input.mousePosition - lastTouchPosition;
-            lastTouchPosition = Input.mousePosition;
+            Touch touch = Input.GetTouch(0);
 
-            float rotateY = delta.x * rotationSpeed * Time.deltaTime; // Left/Right swipe (Yaw)
-            float rotateX = -delta.y * rotationSpeed * Time.deltaTime; // Up/Down swipe (Pitch)
+            if (touch.phase == TouchPhase.Began) // Start dragging
+            {
+                isDragging = true;
+                lastTouchPosition = touch.position;
+            }
+            else if (touch.phase == TouchPhase.Ended || touch.phase == TouchPhase.Canceled) // Stop dragging
+            {
+                isDragging = false;
+            }
 
-            yaw += rotateY;
-            pitch = Mathf.Clamp(pitch + rotateX, minPitch, maxPitch); // Limit vertical movement
+            if (isDragging && touch.phase == TouchPhase.Moved) // While dragging
+            {
+                Vector2 delta = touch.position - lastTouchPosition;
+                lastTouchPosition = touch.position;
+
+                float rotateY = delta.x * rotationSpeed * Time.deltaTime; // Left/Right swipe (Yaw)
+                float rotateX = -delta.y * rotationSpeed * Time.deltaTime; // Up/Down swipe (Pitch)
+
+                yaw += rotateY;
+                pitch = Mathf.Clamp(pitch + rotateX, minPitch, maxPitch); // Limit vertical movement
+            }
         }
     }
 }

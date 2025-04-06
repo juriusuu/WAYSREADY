@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage 1 Bedroom.unity
     guid: 2e5b4bcf890d62b46941d677303441a0
+  - enabled: 1
+    path: Assets/Scenes/Stage 1 Normal.unity
+    guid: c94724a965711cc429ff9e5b65ad5acf
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: cb9074c90c1bff547852cc751a38017a, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 0ab810b47b94d334dad59d94ea8f8d86, type: 2}

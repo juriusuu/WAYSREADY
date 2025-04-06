@@ -1,8 +1,50 @@
 using UnityEngine;
+using UnityEngine.UI;
+using System.Collections.Generic; // Required for List<T>
 
 public class InventoryUIManager : MonoBehaviour
 {
     public GameObject canvasInventory; // Reference to the entire CanvasInventory
+    public Transform inventoryPanel; // Reference to the Inventory Panel (parent for slots)
+    public GameObject inventorySlotPrefab; // Reference to the Inventory Slot Prefab
+    public static InventoryUIManager Instance { get; private set; } // Singleton instance
+
+    private List<GameObject> slotPool = new List<GameObject>(); // Pool of inventory slots for reuse
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this; // Set the singleton instance
+            DontDestroyOnLoad(gameObject); // Ensure this object persists across scenes
+            Debug.Log("InventoryUIManager initialized successfully.");
+        }
+        else
+        {
+            Debug.LogWarning("Duplicate InventoryUIManager detected. Destroying this instance.");
+            Destroy(gameObject); // Destroy duplicate instances
+            return;
+        }
+
+        // Check for missing references
+        if (canvasInventory == null)
+        {
+            Debug.LogError("CanvasInventory is not assigned!");
+        }
+        else
+        {
+            DontDestroyOnLoad(canvasInventory); // Ensure CanvasInventory persists across scenes
+        }
+
+        if (inventoryPanel == null)
+        {
+            Debug.LogError("InventoryPanel is not assigned!");
+        }
+
+        if (inventorySlotPrefab == null)
+        {
+            Debug.LogError("InventorySlotPrefab is not assigned!");
+        }
+    }
 
     private void Start()
     {
@@ -11,6 +53,83 @@ public class InventoryUIManager : MonoBehaviour
         {
             canvasInventory.SetActive(false);
         }
+
+        // Delay updating the inventory UI
+        Invoke(nameof(UpdateInventoryUI), 0.1f);
+    }
+
+    public void UpdateInventoryUI()
+    {
+        if (canvasInventory == null || inventoryPanel == null) return;
+
+        // Fetch the inventory from InventoryManagers
+        var inventory = InventoryManagers.Instance.GetInventory();
+        Debug.Log($"Updating Inventory UI with {inventory.Count} items.");
+
+        // Ensure the pool has enough slots
+        while (slotPool.Count < inventory.Count)
+        {
+            GameObject newSlot = Instantiate(inventorySlotPrefab, inventoryPanel);
+            newSlot.SetActive(false); // Initially deactivate the slot
+            slotPool.Add(newSlot);
+        }
+
+        // Update the slots with inventory data
+        int index = 0;
+        foreach (var item in inventory)
+        {
+            if (item.Key == null || item.Value.sprite == null)
+            {
+                Debug.LogWarning($"Skipping invalid item: {item.Key}");
+                continue;
+            }
+
+            GameObject slot = slotPool[index];
+            slot.SetActive(true); // Activate the slot
+            InventorySlot slotComponent = slot.GetComponent<InventorySlot>();
+            if (slotComponent != null)
+            {
+                slotComponent.Setup(item.Key, item.Value.quantity, item.Value.sprite);
+            }
+            else
+            {
+                Debug.LogError("InventorySlot script is missing on the prefab!");
+            }
+            index++;
+        }
+
+        // Deactivate unused slots
+        for (int i = index; i < slotPool.Count; i++)
+        {
+            slotPool[i].SetActive(false);
+        }
+
+        Debug.Log("Inventory UI updated.");
+    }
+
+    private Sprite GetItemSprite(string itemName)
+    {
+        // Fetch the sprite from the GameObject in the scene
+        GameObject itemObject = GameObject.Find(itemName);
+        if (itemObject != null)
+        {
+            Image itemImage = itemObject.GetComponent<Image>();
+            if (itemImage != null)
+            {
+                Debug.Log($"Sprite found for {itemName}: {itemImage.sprite.name}");
+                return itemImage.sprite;
+            }
+            else
+            {
+                Debug.LogWarning($"Image component not found on GameObject: {itemName}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning($"GameObject not found for item: {itemName}");
+        }
+
+        return null; // Return null if the sprite could not be found
     }
 
     public void OpenInventory()
@@ -18,7 +137,7 @@ public class InventoryUIManager : MonoBehaviour
         if (canvasInventory != null)
         {
             canvasInventory.SetActive(true); // Show the entire CanvasInventory
-            InventoryManagers.Instance.DisplayInventory(); // Enable SpriteRenderers for inventory items
+            UpdateInventoryUI(); // Refresh the UI when opening
             Debug.Log("Inventory canvas opened.");
         }
     }
@@ -28,138 +147,29 @@ public class InventoryUIManager : MonoBehaviour
         if (canvasInventory != null)
         {
             canvasInventory.SetActive(false); // Hide the entire CanvasInventory
-            InventoryManagers.Instance.HideInventory(); // Disable SpriteRenderers for inventory items
             Debug.Log("Inventory canvas closed.");
         }
     }
 
     public void ToggleInventory()
     {
-        if (canvasInventory != null)
+        if (canvasInventory == null)
         {
-            bool isActive = canvasInventory.activeSelf;
-            canvasInventory.SetActive(!isActive);
+            Debug.LogError("CanvasInventory is not assigned! Cannot toggle inventory.");
+            return;
+        }
 
-            if (isActive)
-            {
-                InventoryManagers.Instance.HideInventory(); // Hide inventory items
-                Debug.Log("Inventory canvas closed.");
-            }
-            else
-            {
-                InventoryManagers.Instance.DisplayInventory(); // Show inventory items
-                Debug.Log("Inventory canvas opened.");
-            }
+        bool isActive = canvasInventory.activeSelf;
+        canvasInventory.SetActive(!isActive);
+
+        if (isActive)
+        {
+            Debug.Log("Inventory canvas closed.");
+        }
+        else
+        {
+            UpdateInventoryUI(); // Refresh the UI when opening
+            Debug.Log("Inventory canvas opened.");
         }
     }
 }
-/* 
-public class InventoryUIManager : MonoBehaviour
-{
-    public GameObject inventoryPanel; // Reference to the Inventory Panel
-
-    private void Start()
-    {
-        // Ensure the inventory panel is hidden at the start
-        if (inventoryPanel != null)
-        {
-            inventoryPanel.SetActive(false);
-        }
-    }
-
-    public void OpenInventory()
-    {
-        if (inventoryPanel != null)
-        {
-            inventoryPanel.SetActive(true); // Show the inventory panel
-            InventoryManagers.Instance.DisplayInventory(); // Enable SpriteRenderers for inventory items
-            Debug.Log("Inventory panel opened.");
-        }
-    }
-
-    public void CloseInventory()
-    {
-        if (inventoryPanel != null)
-        {
-            inventoryPanel.SetActive(false); // Hide the inventory panel
-            InventoryManagers.Instance.HideInventory(); // Disable SpriteRenderers for inventory items
-            Debug.Log("Inventory panel closed.");
-        }
-    }
-
-    public void ToggleInventory()
-    {
-        if (inventoryPanel != null)
-        {
-            bool isActive = inventoryPanel.activeSelf;
-            inventoryPanel.SetActive(!isActive);
-
-            if (isActive)
-            {
-                InventoryManagers.Instance.HideInventory(); // Hide inventory items
-                Debug.Log("Inventory panel closed.");
-            }
-            else
-            {
-                InventoryManagers.Instance.DisplayInventory(); // Show inventory items
-                Debug.Log("Inventory panel opened.");
-            }
-        }
-    }
-} */
-/* 
-public class InventoryUIManager : MonoBehaviour
-{
-    public GameObject inventoryPanel;  */// Reference to the Inventory Panel
-/*     public Button openInventoryButton; // Reference to the button that opens the inventory
-    public Button closeInventoryButton; // Optional: Button to close the inventory
-
-    private void Start()
-    {
-        // Ensure the inventory panel is hidden at the start
-        if (inventoryPanel != null)
-        {
-            inventoryPanel.SetActive(false);
-        }
-
-        // Add a listener to the open inventory button
-        if (openInventoryButton != null)
-        {
-            openInventoryButton.onClick.AddListener(OpenInventory);
-        }
-
-        // Add a listener to the close inventory button (if it exists)
-        if (closeInventoryButton != null)
-        {
-            closeInventoryButton.onClick.AddListener(CloseInventory);
-        }
-    }
-
-    public void OpenInventory()
-    {
-        if (inventoryPanel != null)
-        {
-            inventoryPanel.SetActive(true); // Show the inventory panel
-            Debug.Log("Inventory panel opened.");
-        }
-    }
-
-    public void CloseInventory()
-    {
-        if (inventoryPanel != null)
-        {
-            inventoryPanel.SetActive(false); // Hide the inventory panel
-            Debug.Log("Inventory panel closed.");
-        }
-    }
- */
-/*     public void ToggleInventory()
-    {
-        if (inventoryPanel != null)
-        {
-            bool isActive = inventoryPanel.activeSelf;
-            inventoryPanel.SetActive(!isActive);
-            Debug.Log(isActive ? "Inventory panel closed." : "Inventory panel opened.");
-        }
-    }
-} */

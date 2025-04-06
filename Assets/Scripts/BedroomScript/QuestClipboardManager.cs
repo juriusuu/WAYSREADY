@@ -116,23 +116,37 @@ public class QuestClipboardManager : MonoBehaviour
         Debug.Log("All tasks are completed.");
         return true; // All tasks are completed
     }
-
     private void RewardPlayer()
     {
         Debug.Log("All tasks completed! Rewarding the player with coins.");
 
-        // Reward coins and save the game using GameSaveManager
-        GameSaveManager gameSaveManager = FindObjectOfType<GameSaveManager>();
-        if (gameSaveManager != null)
+        if (GameSaveManager.Instance != null)
         {
             Debug.Log("Rewarding the player and saving the game...");
-            gameSaveManager.RewardAndSave(50); // Reward 50 coins and save the game
+            GameSaveManager.Instance.RewardAndSave(50); // Reward 50 coins and save the game
         }
         else
         {
             Debug.LogError("GameSaveManager instance is null! Unable to reward and save the game.");
         }
     }
+
+    /*  private void RewardPlayer()
+     {
+         Debug.Log("All tasks completed! Rewarding the player with coins.");
+
+         // Reward coins and save the game using GameSaveManager
+         GameSaveManager gameSaveManager = FindObjectOfType<GameSaveManager>();
+         if (gameSaveManager != null)
+         {
+             Debug.Log("Rewarding the player and saving the game...");
+             gameSaveManager.RewardAndSave(50); // Reward 50 coins and save the game
+         }
+         else
+         {
+             Debug.LogError("GameSaveManager instance is null! Unable to reward and save the game.");
+         }
+     } */
 }
 /* public class QuestClipboardManager : MonoBehaviour
 {

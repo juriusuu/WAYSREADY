@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement; // Required for scene management
 // Define the GameState enum outside the GameManager class
 public enum GameState
 {
-    MainMenu, // Add MainMenu state
+    MainMenu,
     Stage1_Easy,
     Stage1_Medium,
     Stage1_Hard,
@@ -28,10 +28,10 @@ public class GameManager : MonoBehaviour
 
     private string currentSceneName; // Store the name of the current scene
 
-    public GameObject collectionsPanel;
-    public GameObject shopPanel;
-    public GameObject libraryPanel;
-
+    /*     public GameObject collectionsPanel;
+        public GameObject shopPanel;
+        public GameObject libraryPanel;
+     */
     private void Awake()
     {
         // Implement Singleton pattern
@@ -56,6 +56,7 @@ public class GameManager : MonoBehaviour
 
     public void StartStage()
     {
+        Debug.Log($"Current state: {currentState}");
         switch (currentState)
         {
             case GameState.MainMenu:
@@ -70,7 +71,7 @@ public class GameManager : MonoBehaviour
 
             case GameState.Stage1_Medium:
                 Debug.Log("Starting Stage 1 - Medium");
-                SceneManager.LoadScene("Stage1_Medium");
+                SceneManager.LoadScene("Stage 1 Normal");
                 break;
 
             case GameState.Stage1_Hard:
@@ -188,7 +189,27 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
-    public void ShowCollections()
+    public void StartStage1Easy()
+    {
+        {
+            Debug.Log("Transitioning to Stage 1 - Easy...");
+            currentState = GameState.Stage1_Easy; // Update the game state
+
+            string sceneName = "Stage 1 Bedroom"; // Replace with the exact name of your Stage 1 scene
+            if (Application.CanStreamedLevelBeLoaded(sceneName))
+            {
+                Debug.Log($"Loading scene: {sceneName}");
+                SceneManager.LoadScene(sceneName);
+            }
+            else
+            {
+                Debug.LogError($"Scene '{sceneName}' cannot be loaded. Ensure it is added to the Build Settings.");
+            }
+        }
+    }
+}
+
+/*     public void ShowCollections()
     {
         Debug.Log("Opening Collections Panel...");
         collectionsPanel.SetActive(true);
@@ -219,4 +240,4 @@ public class GameManager : MonoBehaviour
         shopPanel.SetActive(false);
         libraryPanel.SetActive(false);
     }
-}
+} */

@@ -1,14 +1,15 @@
 using System.Collections.Generic; // Required for Dictionary
 using UnityEngine;
-
+using UnityEngine.UI;
 using System.Collections.Generic; // Required for Dictionary
 using UnityEngine;
 using System.IO; // Required for file operations
 using Newtonsoft.Json; // Install Newtonsoft.Json via Unity Package Manager
+
 public class InventoryManagers : MonoBehaviour
 {
     private static InventoryManagers _instance;
-    private Dictionary<string, int> itemInventory = new Dictionary<string, int>();
+    private Dictionary<string, (int quantity, Sprite sprite)> itemInventory = new Dictionary<string, (int, Sprite)>();
     private int totalItemsToCollect = 11;
 
     public static InventoryManagers Instance
@@ -36,23 +37,49 @@ public class InventoryManagers : MonoBehaviour
         }
     }
 
-    public void AddItem(string itemName, int quantity)
+
+    // Method to set the inventory
+    public void SetInventory(Dictionary<string, (int quantity, Sprite sprite)> newInventory)
+    {
+        itemInventory = new Dictionary<string, (int, Sprite)>(newInventory);
+        Debug.Log("Inventory has been updated.");
+    }
+
+    /// <summary>
+    /// Adds an item to the inventory with its quantity and sprite.
+    /// </summary>
+    public void AddItem(string itemName, int quantity, Sprite itemSprite)
     {
         Debug.Log($"AddItem called for: {itemName}, Quantity: {quantity}");
 
+        // Add or update the item in the inventory
         if (itemInventory.ContainsKey(itemName))
         {
-            itemInventory[itemName] += quantity;
-            Debug.Log($"Updated {itemName} in inventory. New total: {itemInventory[itemName]}");
+            // Update the quantity if the item already exists
+            itemInventory[itemName] = (itemInventory[itemName].quantity + quantity, itemSprite);
+            Debug.Log($"Updated {itemName} in inventory. New total: {itemInventory[itemName].quantity}");
         }
         else
         {
-            itemInventory[itemName] = quantity;
+            // Add a new item with its sprite
+            itemInventory[itemName] = (quantity, itemSprite);
             Debug.Log($"Added new item {itemName} with quantity: {quantity}");
         }
 
         Debug.Log($"Total items in inventory after addition: {GetTotalItemCount()}");
 
+        // Notify the UI to update
+        InventoryUIManager inventoryUIManager = FindObjectOfType<InventoryUIManager>();
+        if (inventoryUIManager != null)
+        {
+            inventoryUIManager.UpdateInventoryUI();
+        }
+        else
+        {
+            Debug.LogWarning("No InventoryUIManager found in the scene.");
+        }
+
+        // Check if all required items have been collected
         if (GetTotalItemCount() >= totalItemsToCollect)
         {
             Debug.Log("All required items have been collected!");
@@ -60,41 +87,71 @@ public class InventoryManagers : MonoBehaviour
             QuestClipboardManager questClipboardManager = FindObjectOfType<QuestClipboardManager>();
             if (questClipboardManager != null)
             {
-                questClipboardManager.CompleteTask(1);
+                questClipboardManager.CompleteTask(1); // Assuming task 1 is "Prepare an Emergency Kit"
             }
-
-            // Reward coins and save the game using GameSaveManager
-            // FindObjectOfType<GameSaveManager>()?.RewardAndSave(50);
         }
     }
 
+    /// <summary>
+    /// Gets the total count of all items in the inventory.
+    /// </summary>
     public int GetTotalItemCount()
     {
         int totalCount = 0;
         foreach (var item in itemInventory)
         {
-            totalCount += item.Value;
+            totalCount += item.Value.quantity;
         }
         return totalCount;
     }
 
+    /// <summary>
+    /// Gets the quantity of a specific item in the inventory.
+    /// </summary>
     public int GetItemCount(string itemName)
     {
-        int count = itemInventory.ContainsKey(itemName) ? itemInventory[itemName] : 0; // Return count or 0 if not found
-        Debug.Log($"Current count for {itemName}: {count}");
-        return count;
+        if (itemInventory.ContainsKey(itemName))
+        {
+            return itemInventory[itemName].quantity;
+        }
+        Debug.LogWarning($"Item {itemName} not found in inventory.");
+        return 0;
     }
 
-    public Dictionary<string, int> GetInventory()
+    /// <summary>
+    /// Gets the sprite of a specific item in the inventory.
+    /// </summary>
+    public Sprite GetItemSprite(string itemName)
     {
-        return new Dictionary<string, int>(itemInventory);
+        if (itemInventory.ContainsKey(itemName))
+        {
+            return itemInventory[itemName].sprite;
+        }
+        Debug.LogWarning($"Sprite for item {itemName} not found in inventory.");
+        return null;
     }
 
-    public void SetInventory(Dictionary<string, int> inventory)
+    /// <summary>
+    /// Gets the entire inventory as a dictionary.
+    /// </summary>
+    public Dictionary<string, (int quantity, Sprite sprite)> GetInventory()
     {
-        itemInventory = new Dictionary<string, int>(inventory);
+        Debug.Log("Fetching Inventory:");
+        foreach (var item in itemInventory)
+        {
+            Debug.Log($"{item.Key}: {item.Value.quantity}");
+        }
+        return new Dictionary<string, (int, Sprite)>(itemInventory);
     }
 
+    /// <summary>
+    /// Resets the inventory by clearing all items.
+    /// </summary>
+    public void ResetInventory()
+    {
+        itemInventory.Clear();
+        Debug.Log("Inventory has been reset.");
+    }
     public void DisplayInventory()
     {
         Debug.Log("Current Inventory:");
@@ -102,15 +159,23 @@ public class InventoryManagers : MonoBehaviour
         {
             Debug.Log($"{item.Key}: {item.Value}");
 
-            // Find the GameObject for the item and enable its SpriteRenderer
+            // Find the GameObject for the item and enable its Image component
             GameObject itemObject = GameObject.Find(item.Key);
             if (itemObject != null)
             {
-                SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null)
+                Image itemImage = itemObject.GetComponent<Image>();
+                if (itemImage != null)
                 {
-                    spriteRenderer.enabled = true; // Enable the SpriteRenderer
+                    itemImage.enabled = true; // Enable the Image component
                 }
+                else
+                {
+                    Debug.LogWarning($"No Image component found on {item.Key}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"GameObject for {item.Key} not found.");
             }
         }
     }
@@ -120,18 +185,64 @@ public class InventoryManagers : MonoBehaviour
         Debug.Log("Hiding Inventory...");
         foreach (var item in itemInventory)
         {
-            // Find the GameObject for the item and disable its SpriteRenderer
+            // Find the GameObject for the item and disable its Image component
             GameObject itemObject = GameObject.Find(item.Key);
             if (itemObject != null)
             {
-                SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
-                if (spriteRenderer != null)
+                Image itemImage = itemObject.GetComponent<Image>();
+                if (itemImage != null)
                 {
-                    spriteRenderer.enabled = false; // Disable the SpriteRenderer
+                    itemImage.enabled = false; // Disable the Image component
                 }
+                else
+                {
+                    Debug.LogWarning($"No Image component found on {item.Key}");
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"GameObject for {item.Key} not found.");
             }
         }
     }
+    /* 
+        public void DisplayInventory()
+        {
+            Debug.Log("Current Inventory:");
+            foreach (var item in itemInventory)
+            {
+                Debug.Log($"{item.Key}: {item.Value}");
+
+                // Find the GameObject for the item and enable its SpriteRenderer
+                GameObject itemObject = GameObject.Find(item.Key);
+                if (itemObject != null)
+                {
+                    SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
+                    if (spriteRenderer != null)
+                    {
+                        spriteRenderer.enabled = true; // Enable the SpriteRenderer
+                    }
+                }
+            }
+        }
+
+        public void HideInventory()
+        {
+            Debug.Log("Hiding Inventory...");
+            foreach (var item in itemInventory)
+            {
+                // Find the GameObject for the item and disable its SpriteRenderer
+                GameObject itemObject = GameObject.Find(item.Key);
+                if (itemObject != null)
+                {
+                    SpriteRenderer spriteRenderer = itemObject.GetComponent<SpriteRenderer>();
+                    if (spriteRenderer != null)
+                    {
+                        spriteRenderer.enabled = false; // Disable the SpriteRenderer
+                    }
+                }
+            }
+        } */
 }
 
 // edit below april 3

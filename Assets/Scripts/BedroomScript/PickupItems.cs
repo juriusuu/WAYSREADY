@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public class PickupItems : MonoBehaviour
@@ -41,67 +42,67 @@ public class PickupItems : MonoBehaviour
         }
     }
 
-    public void OnPickupButtonPressed()
-    {
-        /*    Debug.Log($"OnPickupButtonPressed called for {gameObject.name} at {Time.time}");
-           if (HasBeenPickedUp)
-           {
-               Debug.Log("Items have already been picked up.");
-               return; // Exit if already picked up
-           }
 
-           Debug.Log("Initiating pickup for items: " + string.Join(", ", items.ConvertAll(item => item.name)));
-    */
-        /*    Debug.Log($"OnPickupButtonPressed called for {gameObject.name} at {Time.time}");
-           if (HasBeenPickedUp)
-           {
-               Debug.LogWarning($"{gameObject.name} has already been picked up.");
-               return; // Exit if the item has already been picked up
-           }
+    /*    Debug.Log($"OnPickupButtonPressed called for {gameObject.name} at {Time.time}");
+       if (HasBeenPickedUp)
+       {
+           Debug.Log("Items have already been picked up.");
+           return; // Exit if already picked up
+       }
 
-           HasBeenPickedUp = true; // Mark the item as picked up
-           Debug.Log($"{gameObject.name} has been picked up.");
-           // Additional logic for picking up the item
-           if (InventoryManagers != null)
+       Debug.Log("Initiating pickup for items: " + string.Join(", ", items.ConvertAll(item => item.name)));
+*/
+    /*    Debug.Log($"OnPickupButtonPressed called for {gameObject.name} at {Time.time}");
+       if (HasBeenPickedUp)
+       {
+           Debug.LogWarning($"{gameObject.name} has already been picked up.");
+           return; // Exit if the item has already been picked up
+       }
+
+       HasBeenPickedUp = true; // Mark the item as picked up
+       Debug.Log($"{gameObject.name} has been picked up.");
+       // Additional logic for picking up the item
+       if (InventoryManagers != null)
+       {
+           Debug.Log("InventoryManager is available.");
+           if (IsPickupSuccessful())
            {
-               Debug.Log("InventoryManager is available.");
-               if (IsPickupSuccessful())
+               Debug.Log("Pickup successful.");
+               foreach (var item in items)
                {
-                   Debug.Log("Pickup successful.");
-                   foreach (var item in items)
-                   {
-                       string itemName = item.name;
-                       InventoryManagers.AddItem(itemName, 1); // Add the item to the inventory
-                       Debug.Log($"Added {itemName} to inventory.");
-                       Debug.Log($"Item in list: {item.name}");
-                   }
-                   HasBeenPickedUp = true; // Mark as picked up
-                   Debug.Log($"Setting hasBeenPickedUp to true for {gameObject.name}");
-                   Destroy(gameObject); // Destroy the GameObject after pickup
-                   Debug.Log($"Destroyed pickup items for {gameObject.name}");
+                   string itemName = item.name;
+                   InventoryManagers.AddItem(itemName, 1); // Add the item to the inventory
+                   Debug.Log($"Added {itemName} to inventory.");
+                   Debug.Log($"Item in list: {item.name}");
                }
-               else
-               {
-                   Debug.Log("Pickup failed. Player too far away.");
-               }
+               HasBeenPickedUp = true; // Mark as picked up
+               Debug.Log($"Setting hasBeenPickedUp to true for {gameObject.name}");
+               Destroy(gameObject); // Destroy the GameObject after pickup
+               Debug.Log($"Destroyed pickup items for {gameObject.name}");
            }
            else
            {
-               Debug.LogError("InventoryManager is not set.");
-           } */
+               Debug.Log("Pickup failed. Player too far away.");
+           }
+       }
+       else
+       {
+           Debug.LogError("InventoryManager is not set.");
+       } *//* 
+public void OnPickupButtonPressed()
+{
+    Debug.Log($"OnPickupButtonPressed called for {gameObject.name} at {Time.time}");
 
-        Debug.Log($"OnPickupButtonPressed called for {gameObject.name} at {Time.time}");
+    if (HasBeenPickedUp)
+    {
+        Debug.LogWarning($"{gameObject.name} has already been picked up.");
+        return; // Exit if the item has already been picked up
+    }
 
-        if (HasBeenPickedUp)
-        {
-            Debug.LogWarning($"{gameObject.name} has already been picked up.");
-            return; // Exit if the item has already been picked up
-        }
-
-        HasBeenPickedUp = true; // Mark the item as picked up
-        Debug.Log($"{gameObject.name} has been picked up.");
-
-        // Add the item to the inventory
+    HasBeenPickedUp = true; // Mark the item as picked up
+    Debug.Log($"{gameObject.name} has been picked up.");
+*/
+    /*     // Add the item to the inventory
         if (InventoryManagers.Instance != null)
         {
             string itemName = gameObject.name;
@@ -112,18 +113,146 @@ public class PickupItems : MonoBehaviour
                 itemName = itemName.Replace("(Clone)", "").Trim();
             }
 
-            InventoryManagers.Instance.AddItem(itemName, 1); // Add the item to the inventory
+            Sprite itemSprite = GetComponent<SpriteRenderer>()?.sprite; // Get the sprite from the GameObject
+            InventoryManagers.Instance.AddItem(itemName, 1, itemSprite); // Add the item to the inventory
             Debug.Log($"Added {itemName} to inventory.");
         }
         else
         {
             Debug.LogError("InventoryManager is not set.");
         }
+ */
+    /*   if (InventoryManagers.Instance != null)
+      {
+          string itemName = gameObject.name;
 
-        // Destroy the GameObject after pickup
+          // Clean up the item name (e.g., remove "(Clone)" if present)
+          if (itemName.Contains("(Clone)"))
+          {
+              itemName = itemName.Replace("(Clone)", "").Trim();
+          }
+
+          // Get the sprite from the GameObject
+          Sprite itemSprite = GetComponent<SpriteRenderer>()?.sprite;
+          if (itemSprite != null)
+          {
+              Debug.Log($"Sprite found for {gameObject.name}: {itemSprite.name}");
+              InventoryManagers.Instance.AddItem(itemName, 1, itemSprite); // Add the item to the inventory
+          }
+          else
+          {
+              Debug.LogWarning($"No sprite found for {gameObject.name}");
+          }
+      }
+      else
+      {
+          Debug.LogError("InventoryManager is not set.");
+      }
+      // Destroy the GameObject after pickup
+      Destroy(gameObject);
+      Debug.Log($"Destroyed pickup items for {gameObject.name}");
+  } *//* 
+
+    public void OnPickupButtonPressed()
+    {
+        if (hasBeenPickedUp)
+        {
+            Debug.LogWarning($"{gameObject.name} has already been picked up.");
+            return; // Exit if the item has already been picked up
+        }
+
+        hasBeenPickedUp = true; // Mark the item as picked up
+        Debug.Log($"{gameObject.name} has been picked up.");
+
+        if (InventoryManagers != null)
+        {
+            string itemName = gameObject.name;
+
+            // Clean up the item name (e.g., remove "(Clone)" if present)
+            if (itemName.Contains("(Clone)"))
+            {
+                itemName = itemName.Replace("(Clone)", "").Trim();
+            }
+
+            // Get the sprite from the Image component
+            Image itemImage = GetComponent<Image>();
+            if (itemImage != null && itemImage.sprite != null)
+            {
+                Debug.Log($"Sprite found for {gameObject.name}: {itemImage.sprite.name}");
+
+                // Add the item to the inventory with its sprite
+                InventoryManagers.Instance.AddItem(itemName, 1, itemImage.sprite);
+            }
+            else
+            {
+                Debug.LogWarning($"No sprite found for {gameObject.name}");
+            }
+        }
+        else
+        {
+            Debug.LogError("InventoryManager is not set.");
+        }
+
+        // Destroy the GameObject after saving its data
         Destroy(gameObject);
-        Debug.Log($"Destroyed pickup items for {gameObject.name}");
+        Debug.Log($"Destroyed pickup item: {gameObject.name}");
+    } */
+    public void OnPickupButtonPressed()
+    {
+        if (hasBeenPickedUp)
+        {
+            Debug.LogWarning($"{gameObject.name} has already been picked up.");
+            return; // Exit if the item has already been picked up
+        }
+
+        hasBeenPickedUp = true; // Mark the item as picked up
+        Debug.Log($"{gameObject.name} has been picked up.");
+
+        if (InventoryManagers != null)
+        {
+            string itemName = gameObject.name;
+
+            // Clean up the item name (e.g., remove "(Clone)" if present)
+            if (itemName.Contains("(Clone)"))
+            {
+                itemName = itemName.Replace("(Clone)", "").Trim();
+            }
+
+            // Get the sprite from the Image component
+            Image itemImage = GetComponent<Image>();
+            if (itemImage != null && itemImage.sprite != null)
+            {
+                Debug.Log($"Sprite found for {gameObject.name}: {itemImage.sprite.name}");
+
+                // Add the item to the inventory with its sprite
+                InventoryManagers.Instance.AddItem(itemName, 1, itemImage.sprite);
+
+                // Check and update the inventory UI
+                if (InventoryUIManager.Instance == null)
+                {
+                    Debug.LogError("No InventoryUIManager found in the scene.");
+                }
+                else
+                {
+                    Debug.Log("Updating Inventory UI.");
+                    InventoryUIManager.Instance.UpdateInventoryUI();
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"No sprite found for {gameObject.name}");
+            }
+        }
+        else
+        {
+            Debug.LogError("InventoryManager is not set.");
+        }
+
+        // Destroy the GameObject after saving its data
+        Destroy(gameObject);
+        Debug.Log($"Destroyed pickup item: {gameObject.name}");
     }
+
     private bool IsPickupSuccessful()
     {
         float distanceThreshold = 80.0f; // The maximum distance for pickup
