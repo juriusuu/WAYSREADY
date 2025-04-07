@@ -12,6 +12,9 @@ TagManager:
   - PickUpItems
   - Television
   - ChargingOutlet
+  - Telephone
+  - Radio
+  - Table
   layers:
   - Default
   - TransparentFX
@@ -20,7 +23,7 @@ TagManager:
   - Water
   - UI
   - Walls
-  - 
+  - Interactable
   - 
   - 
   - 
