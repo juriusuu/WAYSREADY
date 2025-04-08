@@ -1000,7 +1000,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 93.67993, y: 0, z: 3.1757812, w: -50.80951}
+  m_margin: {x: 0.29760742, y: 0, z: 3.1757812, w: -50.80951}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -5571,7 +5571,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854900975}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 97bdbb14369348a46918095c48291729, type: 3}
   m_Name: 
@@ -7533,17 +7533,9 @@ MonoBehaviour:
   layfManager: {fileID: 1750777563}
   totalHintsAllowed: 3
   objectsToHighlight:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 13514692}
+  - {fileID: 427986429}
+  - {fileID: 954437987}
   arrowPrefab: {fileID: 7404223956060802447, guid: f2bfbd7b1d17434418016273ad70afb2, type: 3}
 --- !u!4 &1207602312
 Transform:
