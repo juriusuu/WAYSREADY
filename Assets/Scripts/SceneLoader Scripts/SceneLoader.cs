@@ -20,12 +20,39 @@ public class SceneLoader : MonoBehaviour
     }
 
     // Load a scene by its name
+    /*  public void LoadSceneByName(string sceneName)
+     {
+         if (Application.CanStreamedLevelBeLoaded(sceneName))
+         {
+             Debug.Log($"Loading scene: {sceneName}");
+             SceneManager.LoadScene(sceneName);
+         }
+         else
+         {
+             Debug.LogError($"Scene '{sceneName}' cannot be loaded. Ensure it is added to the Build Settings.");
+         }
+     } */
     public void LoadSceneByName(string sceneName)
     {
         if (Application.CanStreamedLevelBeLoaded(sceneName))
         {
+            // Save the current game state before transitioning
+            if (GameSaveManager.Instance != null)
+            {
+                GameSaveManager.Instance.SaveGame();
+                Debug.Log("Game state saved before transitioning to the next scene.");
+            }
+            else
+            {
+                Debug.LogError("GameSaveManager instance is null! Unable to save the game.");
+            }
+
+            // Load the next scene
             Debug.Log($"Loading scene: {sceneName}");
             SceneManager.LoadScene(sceneName);
+
+            // Load the saved game state in the new scene
+            SceneManager.sceneLoaded += OnSceneLoaded;
         }
         else
         {
@@ -33,6 +60,22 @@ public class SceneLoader : MonoBehaviour
         }
     }
 
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        // Load the saved game state
+        if (GameSaveManager.Instance != null)
+        {
+            GameSaveManager.Instance.LoadGame();
+            Debug.Log("Game state loaded after transitioning to the new scene.");
+        }
+        else
+        {
+            Debug.LogError("GameSaveManager instance is null! Unable to load the game.");
+        }
+
+        // Unsubscribe from the event to avoid duplicate calls
+        SceneManager.sceneLoaded -= OnSceneLoaded;
+    }
     // Reload the current scene
     public void ReloadCurrentScene()
     {

@@ -41,15 +41,15 @@ public class QuestClipboardManagerS2 : MonoBehaviour
             helpButton.GetComponent<Button>().onClick.AddListener(ToggleClipboard);
         }
 
-        // Add a listener to the proceed button
-        if (proceedButton != null)
-        {
-            proceedButton.onClick.AddListener(() =>
+        /*     // Add a listener to the proceed button
+            if (proceedButton != null)
             {
-                Debug.Log("Proceed button clicked. Transitioning to the next scene...");
-                GameManager.Instance.TransitionToNextState(); // Call the GameManager to transition to the next state
-            });
-        }
+                proceedButton.onClick.AddListener(() =>
+                {
+                    Debug.Log("Proceed button clicked. Transitioning to the next scene...");
+                    GameManager.Instance.TransitionToNextState(); // Call the GameManager to transition to the next state
+                });
+            } */
     }
 
     public void ToggleClipboard()

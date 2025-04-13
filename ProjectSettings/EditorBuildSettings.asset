@@ -17,6 +17,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Stage 1 Hard.unity
     guid: ccab66c61ecc8b34bb4c576e9a7c23b8
+  - enabled: 1
+    path: Assets/Scenes/Stage 2 Classroom.unity
+    guid: fb549882dc12929469eefccc00e52c34
+  - enabled: 1
+    path: Assets/Scenes/Stage 2 Normal.unity
+    guid: 6ad60d730eb5efd418e6c331d174723b
+  - enabled: 1
+    path: Assets/Scenes/Stage 2 Hard.unity
+    guid: b276f1e65406d244993869d851abc248
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: cb9074c90c1bff547852cc751a38017a, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 0ab810b47b94d334dad59d94ea8f8d86, type: 2}

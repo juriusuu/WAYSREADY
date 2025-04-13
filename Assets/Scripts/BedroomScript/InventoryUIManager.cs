@@ -57,10 +57,62 @@ public class InventoryUIManager : MonoBehaviour
         // Delay updating the inventory UI
         Invoke(nameof(UpdateInventoryUI), 0.1f);
     }
+    /* 
+        public void UpdateInventoryUI()
+        {
+            if (canvasInventory == null || inventoryPanel == null) return;
 
+            // Fetch the inventory from InventoryManagers
+            var inventory = InventoryManagers.Instance.GetInventory();
+            Debug.Log($"Updating Inventory UI with {inventory.Count} items.");
+
+            // Ensure the pool has enough slots
+            while (slotPool.Count < inventory.Count)
+            {
+                GameObject newSlot = Instantiate(inventorySlotPrefab, inventoryPanel);
+                newSlot.SetActive(false); // Initially deactivate the slot
+                slotPool.Add(newSlot);
+            }
+
+            // Update the slots with inventory data
+            int index = 0;
+            foreach (var item in inventory)
+            {
+                if (item.Key == null || item.Value.sprite == null)
+                {
+                    Debug.LogWarning($"Skipping invalid item: {item.Key}");
+                    continue;
+                }
+
+                GameObject slot = slotPool[index];
+                slot.SetActive(true); // Activate the slot
+                InventorySlot slotComponent = slot.GetComponent<InventorySlot>();
+                if (slotComponent != null)
+                {
+                    slotComponent.Setup(item.Key, item.Value.quantity, item.Value.sprite);
+                }
+                else
+                {
+                    Debug.LogError("InventorySlot script is missing on the prefab!");
+                }
+                index++;
+            }
+
+            // Deactivate unused slots
+            for (int i = index; i < slotPool.Count; i++)
+            {
+                slotPool[i].SetActive(false);
+            }
+
+            Debug.Log("Inventory UI updated.");
+        } */
     public void UpdateInventoryUI()
     {
-        if (canvasInventory == null || inventoryPanel == null) return;
+        if (canvasInventory == null || inventoryPanel == null)
+        {
+            Debug.LogError("CanvasInventory or InventoryPanel is not assigned!");
+            return;
+        }
 
         // Fetch the inventory from InventoryManagers
         var inventory = InventoryManagers.Instance.GetInventory();
@@ -72,6 +124,7 @@ public class InventoryUIManager : MonoBehaviour
             GameObject newSlot = Instantiate(inventorySlotPrefab, inventoryPanel);
             newSlot.SetActive(false); // Initially deactivate the slot
             slotPool.Add(newSlot);
+            Debug.Log($"Created new inventory slot: {newSlot.name}");
         }
 
         // Update the slots with inventory data
@@ -90,6 +143,7 @@ public class InventoryUIManager : MonoBehaviour
             if (slotComponent != null)
             {
                 slotComponent.Setup(item.Key, item.Value.quantity, item.Value.sprite);
+                Debug.Log($"Updated slot {index} with item: {item.Key}, quantity: {item.Value.quantity}");
             }
             else
             {
@@ -102,11 +156,11 @@ public class InventoryUIManager : MonoBehaviour
         for (int i = index; i < slotPool.Count; i++)
         {
             slotPool[i].SetActive(false);
+            Debug.Log($"Deactivated unused slot {i}");
         }
 
         Debug.Log("Inventory UI updated.");
     }
-
     private Sprite GetItemSprite(string itemName)
     {
         // Fetch the sprite from the GameObject in the scene
@@ -151,6 +205,27 @@ public class InventoryUIManager : MonoBehaviour
         }
     }
 
+    /*     public void ToggleInventory()
+        {
+            if (canvasInventory == null)
+            {
+                Debug.LogError("CanvasInventory is not assigned! Cannot toggle inventory.");
+                return;
+            }
+
+            bool isActive = canvasInventory.activeSelf;
+            canvasInventory.SetActive(!isActive);
+
+            if (isActive)
+            {
+                Debug.Log("Inventory canvas closed.");
+            }
+            else
+            {
+                UpdateInventoryUI(); // Refresh the UI when opening
+                Debug.Log("Inventory canvas opened.");
+            }
+        } */
     public void ToggleInventory()
     {
         if (canvasInventory == null)
@@ -169,6 +244,13 @@ public class InventoryUIManager : MonoBehaviour
         else
         {
             UpdateInventoryUI(); // Refresh the UI when opening
+
+            // Ensure all slots are active
+            foreach (GameObject slot in slotPool)
+            {
+                slot.SetActive(true);
+            }
+
             Debug.Log("Inventory canvas opened.");
         }
     }

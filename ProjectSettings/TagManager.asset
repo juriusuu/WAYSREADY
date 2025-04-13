@@ -15,6 +15,9 @@ TagManager:
   - Telephone
   - Radio
   - Table
+  - Whiteboard
+  - DangerousObject
+  - Ash
   layers:
   - Default
   - TransparentFX

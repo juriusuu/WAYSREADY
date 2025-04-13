@@ -154,7 +154,7 @@ public class QuestClipboardManager : MonoBehaviour
     public GameObject helpButton; // Reference to the help button
     public Toggle[] taskCheckboxes; // Array of checkboxes for tasks
 
-    private bool[] taskCompletionStatus; // Tracks the completion status of tasks
+    private bool[] taskCompletionStatus; //  Tracks the completion status of tasks
 
     private void Start()
     {
