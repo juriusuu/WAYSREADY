@@ -17,15 +17,15 @@ public class WaveCollision : MonoBehaviour
             // Log the current count of sandbags
             Debug.Log("Current sandbag count: " + sandbagCount);
 
-            // Check if the current count of sandbags is greater than or equal to 36
-            if (sandbagCount >= 36)
+            // Check if the current count of sandbags is greater than or equal to 12
+            if (sandbagCount >= 12)
             {
                 Debug.Log("Wave destroyed due to high sandbag count.");
                 Destroy(other.gameObject); // Destroy the wave
             }
-            else if (sandbagCount < 35) // Change this condition
+            else if (sandbagCount < 11) // Change this condition
             {
-                // If there are fewer than 35 sandbags, destroy the player
+                // If there are fewer than 11 sandbags, destroy the player
                 GameObject player = GameObject.FindGameObjectWithTag("Player"); // Find the player by tag
                 if (player != null)
                 {

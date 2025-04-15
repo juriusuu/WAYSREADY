@@ -3469,14 +3469,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1220990609}
-  distance: 3
+  distance: 2
   height: 2
   smoothSpeed: 0.125
   wallOffset: 0.3
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 1
-  rotationSpeed: 200
+  rotationSpeed: 30
   minPitch: -30
   maxPitch: 60
 --- !u!1 &331371319

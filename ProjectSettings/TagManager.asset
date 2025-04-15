@@ -18,6 +18,7 @@ TagManager:
   - Whiteboard
   - DangerousObject
   - Ash
+  - Dropet
   layers:
   - Default
   - TransparentFX

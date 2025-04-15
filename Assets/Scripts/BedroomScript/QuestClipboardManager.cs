@@ -1,4 +1,177 @@
+using UnityEngine;
+using UnityEngine.UI;
 
+public class QuestClipboardManager : MonoBehaviour
+{
+    public string questName; // Unique name for this quest
+    public GameObject clipboardPanel; // Reference to the clipboard panel
+    public GameObject helpButton; // Reference to the help button
+    public Toggle[] taskCheckboxes; // Array of checkboxes for tasks
+    public Button proceedButton; // Reference to the proceed button
+
+    private bool[] taskCompletionStatus; // Tracks the completion status of tasks
+
+    private void Start()
+    {
+        // Ensure the clipboard panel is hidden at the start
+        if (clipboardPanel != null)
+        {
+            clipboardPanel.SetActive(false);
+        }
+
+        // Initialize task completion status
+        taskCompletionStatus = new bool[taskCheckboxes.Length];
+
+        // Load saved state if it exists
+        LoadState();
+
+        // Ensure all checkboxes are updated
+        UpdateCheckboxes();
+
+        // Disable the proceed button at the start
+        if (proceedButton != null)
+        {
+            proceedButton.interactable = AreAllTasksCompleted();
+        }
+
+        // Add a listener to the help button if it exists
+        if (helpButton != null)
+        {
+            helpButton.GetComponent<Button>().onClick.AddListener(ToggleClipboard);
+        }
+    }
+
+    public void ToggleClipboard()
+    {
+        // Toggle the visibility of the clipboard panel
+        if (clipboardPanel != null)
+        {
+            clipboardPanel.SetActive(!clipboardPanel.activeSelf);
+        }
+
+        // Update the checkboxes to reflect the current task completion status
+        UpdateCheckboxes();
+    }
+
+    public void CompleteTask(int taskIndex)
+    {
+        // Mark the task as completed
+        if (taskIndex >= 0 && taskIndex < taskCompletionStatus.Length)
+        {
+            taskCompletionStatus[taskIndex] = true;
+        }
+
+        // Update the checkboxes
+        UpdateCheckboxes();
+
+        // Check if all tasks are completed
+        if (AreAllTasksCompleted())
+        {
+            Debug.Log($"All tasks for quest '{questName}' are completed. Calling RewardPlayer...");
+            if (proceedButton != null)
+            {
+                proceedButton.interactable = true; // Enable the button
+            }
+            RewardPlayer();
+        }
+
+        // Save the updated state
+        SaveState();
+    }
+
+    private void UpdateCheckboxes()
+    {
+        // Update the checkboxes to reflect task completion
+        for (int i = 0; i < taskCheckboxes.Length; i++)
+        {
+            if (taskCheckboxes[i] != null)
+            {
+                taskCheckboxes[i].isOn = taskCompletionStatus[i];
+            }
+        }
+    }
+
+    private bool AreAllTasksCompleted()
+    {
+        foreach (bool isCompleted in taskCompletionStatus)
+        {
+            if (!isCompleted)
+            {
+                return false; // If any task is not completed, return false
+            }
+        }
+        return true; // All tasks are completed
+    }
+
+    private void RewardPlayer()
+    {
+        Debug.Log($"All tasks for quest '{questName}' completed! Rewarding the player with coins.");
+
+        if (GameSaveManager.Instance != null)
+        {
+            GameSaveManager.Instance.RewardAndSave(50); // Reward 50 coins and save the game
+        }
+        else
+        {
+            Debug.LogError("GameSaveManager instance is null! Unable to reward and save the game.");
+        }
+    }
+
+    private void SaveState()
+    {
+        // Save the task completion status to the GameStateManager
+        if (GameStateManager.Instance != null)
+        {
+            var wrapper = new BoolArrayWrapper { array = taskCompletionStatus };
+            var state = new ObjectState
+            {
+                isActive = true, // Not used here but required by ObjectState
+                position = Vector3.zero, // Not used here but required by ObjectState
+                rotation = Quaternion.identity, // Not used here but required by ObjectState
+                customData = JsonUtility.ToJson(wrapper) // Serialize the wrapped array
+            };
+
+            GameStateManager.Instance.SaveObjectState(questName, state);
+        }
+    }
+    private void LoadState()
+    {
+        if (string.IsNullOrEmpty(questName))
+        {
+            Debug.LogError("QuestClipboardManager: questName is null or empty. Cannot load state.");
+            taskCompletionStatus = new bool[taskCheckboxes.Length]; // Initialize default state
+            return;
+        }
+
+        // Load the task completion status from the GameStateManager
+        if (GameStateManager.Instance != null)
+        {
+            var state = GameStateManager.Instance.LoadObjectState(questName);
+            if (state != null && !string.IsNullOrEmpty(state.customData))
+            {
+                var wrapper = JsonUtility.FromJson<BoolArrayWrapper>(state.customData);
+                taskCompletionStatus = wrapper.array;
+            }
+            else
+            {
+                Debug.LogWarning($"No saved state found for quest '{questName}'. Initializing default state.");
+                taskCompletionStatus = new bool[taskCheckboxes.Length]; // Initialize default state
+            }
+        }
+        else
+        {
+            Debug.LogError("GameStateManager instance is null! Unable to load state.");
+        }
+    }
+
+    [System.Serializable]
+    public class BoolArrayWrapper
+    {
+        public bool[] array;
+    }
+}
+
+/* 
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine;
@@ -41,15 +214,6 @@ public class QuestClipboardManager : MonoBehaviour
             helpButton.GetComponent<Button>().onClick.AddListener(ToggleClipboard);
         }
 
-        /*    // Add a listener to the proceed button
-           if (proceedButton != null)
-           {
-               proceedButton.onClick.AddListener(() =>
-               {
-                   Debug.Log("Proceed button clicked. Transitioning to the next scene...");
-                   GameManager.Instance.TransitionToNextState(); // Call the GameManager to transition to the next state
-               });
-           } */
     }
 
     public void ToggleClipboard()
@@ -130,24 +294,24 @@ public class QuestClipboardManager : MonoBehaviour
             Debug.LogError("GameSaveManager instance is null! Unable to reward and save the game.");
         }
     }
+} */
+/*  private void RewardPlayer()
+ {
+     Debug.Log("All tasks completed! Rewarding the player with coins.");
 
-    /*  private void RewardPlayer()
+     // Reward coins and save the game using GameSaveManager
+     GameSaveManager gameSaveManager = FindObjectOfType<GameSaveManager>();
+     if (gameSaveManager != null)
      {
-         Debug.Log("All tasks completed! Rewarding the player with coins.");
+         Debug.Log("Rewarding the player and saving the game...");
+         gameSaveManager.RewardAndSave(50); // Reward 50 coins and save the game
+     }
+     else
+     {
+         Debug.LogError("GameSaveManager instance is null! Unable to reward and save the game.");
+     }
+ } */
 
-         // Reward coins and save the game using GameSaveManager
-         GameSaveManager gameSaveManager = FindObjectOfType<GameSaveManager>();
-         if (gameSaveManager != null)
-         {
-             Debug.Log("Rewarding the player and saving the game...");
-             gameSaveManager.RewardAndSave(50); // Reward 50 coins and save the game
-         }
-         else
-         {
-             Debug.LogError("GameSaveManager instance is null! Unable to reward and save the game.");
-         }
-     } */
-}
 /* public class QuestClipboardManager : MonoBehaviour
 {
     public GameObject clipboardPanel; // Reference to the clipboard panel

@@ -5265,6 +5265,7 @@ GameObject:
   - component: {fileID: 589848442}
   - component: {fileID: 589848441}
   - component: {fileID: 589848443}
+  - component: {fileID: 589848444}
   m_Layer: 0
   m_Name: ManagerforAll
   m_TagString: Untagged
@@ -5334,6 +5335,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6dbf9cee6c476a549a6840a65b5289aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &589848444
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 589848438}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd8e436e64462a74fa046f0f02b25e14, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &599318463
@@ -11528,16 +11541,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 325863713}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 863120406}
+        m_TargetAssemblyTypeName: SceneLoaderButtonHelper, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Stage 1 Normal
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1084289685
@@ -21902,16 +21915,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 325863713}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 863120406}
+        m_TargetAssemblyTypeName: SceneLoaderButtonHelper, Assembly-CSharp
+        m_MethodName: LoadScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Stage 1 Hard
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1931493688

@@ -1,4 +1,123 @@
-using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+namespace Supercyan.FreeSample
+{
+    public class PlayerControllerScript : MonoBehaviour
+    {
+        [SerializeField] private float m_moveSpeed = 2f; // Movement speed
+        [SerializeField] private Animator m_animator = null; // Animator reference
+        [SerializeField] private Rigidbody m_rigidBody = null; // Rigidbody reference
+        [SerializeField] private JumpController m_jumpController = null; // Reference to JumpController
+
+        private Vector2 m_movementInput; // Store joystick input
+        private float m_currentV = 0f; // Current vertical input
+        private float m_currentH = 0f; // Current horizontal input
+        private readonly float m_interpolation = 10f; // Interpolation factor
+        private bool m_isGrounded; // Is the player grounded?
+
+        private LifeManager lifeManager; // Reference to LifeManager
+        private TimerManager timerManager; // Reference to TimerManager
+        private PanelManager panelManager; // Reference to PanelManager
+
+        private void Awake()
+        {
+            // Get components
+            if (!m_animator) { m_animator = GetComponent<Animator>(); }
+            if (!m_rigidBody) { m_rigidBody = GetComponent<Rigidbody>(); }
+            if (!m_jumpController) { m_jumpController = GetComponent<JumpController>(); }
+
+            // Find the LifeManager, TimerManager, and PanelManager in the scene
+            lifeManager = FindFirstObjectByType<LifeManager>();
+            timerManager = FindFirstObjectByType<TimerManager>();
+            panelManager = FindFirstObjectByType<PanelManager>();
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            // Check if the player is grounded
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                if (Vector3.Dot(contact.normal, Vector3.up) > 0.5f)
+                {
+                    m_isGrounded = true;
+                    m_animator.SetBool("Grounded", m_isGrounded); // Update animator state
+                    break; // Exit loop once grounded
+                }
+            }
+        }
+
+        private void OnCollisionExit(Collision collision)
+        {
+            // Set grounded to false when the player leaves the ground
+            m_isGrounded = false;
+            m_animator.SetBool("Grounded", m_isGrounded); // Update animator state
+        }
+
+        private void Update()
+        {
+            // Check if the player is out of bounds
+            if (transform.position.y < -5) // Adjust this value as needed
+            {
+                HandlePlayerDeath();
+            }
+        }
+
+        private void FixedUpdate()
+        {
+            m_animator.SetBool("Grounded", m_isGrounded); // Update animator state
+
+            // Get input from the left joystick
+            m_movementInput = Gamepad.current.leftStick.ReadValue(); // Read the left joystick input
+
+            // Direct control mode update
+            DirectUpdate();
+
+            // Debug log for player's position and grounded state
+            Debug.Log($"Player Position: {transform.position}, Is Grounded: {m_isGrounded}");
+        }
+
+        private void DirectUpdate()
+        {
+            // Get input from the left joystick
+            float v = m_movementInput.y; // Up/Down
+            float h = m_movementInput.x; // Left/Right
+
+            Transform camera = Camera.main.transform;
+
+            m_currentV = Mathf.Lerp(m_currentV, v, Time.deltaTime * m_interpolation);
+            m_currentH = Mathf.Lerp(m_currentH, h, Time.deltaTime * m_interpolation);
+
+            Vector3 direction = camera.forward * m_currentV + camera.right * m_currentH;
+            direction.y = 0; // Keep the direction flat
+            direction.Normalize(); // Normalize the direction
+
+            if (direction != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(direction); // Rotate player to face direction
+                transform.position += direction * m_moveSpeed * Time.deltaTime; // Move player
+
+                m_animator.SetFloat("MoveSpeed", direction.magnitude); // Update animator with movement speed
+            }
+        }
+
+        // Handle player death
+        private void HandlePlayerDeath()
+        {
+            // Display the fail panel using PanelManager
+            if (panelManager != null)
+            {
+                panelManager.ShowFailPanel(); // Call the method to show the fail panel
+            }
+            else
+            {
+                Debug.LogError("PanelManager is not found!");
+            }
+        }
+    }
+}
+
+/* using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem; // Make sure to include this
 using UnityEngine.InputSystem.Controls; // Make sure to include this
@@ -141,7 +260,7 @@ namespace Supercyan.FreeSample
             m_movementInput = context.ReadValue<Vector2>(); // Update movement input
         }
     }
-}
+} */
 /*
 namespace Supercyan.FreeSample
 {

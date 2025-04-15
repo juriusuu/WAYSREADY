@@ -1,10 +1,6 @@
 using System.Collections.Generic; // Required for Dictionary
 using UnityEngine;
 using UnityEngine.UI;
-using System.Collections.Generic; // Required for Dictionary
-using UnityEngine;
-using System.IO; // Required for file operations
-using Newtonsoft.Json; // Install Newtonsoft.Json via Unity Package Manager
 
 public class InventoryManagers : MonoBehaviour
 {

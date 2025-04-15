@@ -14,7 +14,7 @@ public class InventoryManager : MonoBehaviour
         if (_instance == null)
         {
             _instance = this;
-            DontDestroyOnLoad(gameObject); // Keep this instance alive across scenes
+            //   DontDestroyOnLoad(gameObject); // Keep this instance alive across scenes
             Debug.Log("InventoryManager instance created.");
         }
         else
