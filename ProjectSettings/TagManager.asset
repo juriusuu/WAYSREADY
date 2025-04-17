@@ -19,6 +19,8 @@ TagManager:
   - DangerousObject
   - Ash
   - Dropet
+  - FireExtinguisher
+  - Unplug
   layers:
   - Default
   - TransparentFX

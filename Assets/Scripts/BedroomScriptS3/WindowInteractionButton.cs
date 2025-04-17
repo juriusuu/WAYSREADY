@@ -44,7 +44,7 @@ public class WindowInteractionManager : MonoBehaviour
     private void OnInteractButtonPressed()
     {
         // Mark the first quest task (task 0) as completed
-        FindObjectOfType<QuestClipboardManagerS3>()?.CompleteTask(0);
+        FindObjectOfType<QuestClipboardManager>()?.CompleteTask(0);
 
         // Hide the button after interaction
         interactButton.gameObject.SetActive(false);

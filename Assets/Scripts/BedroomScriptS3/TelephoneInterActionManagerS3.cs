@@ -111,7 +111,7 @@ public class TelephoneInteractionManagerS3 : MonoBehaviour
             }
 
             // Mark the "Answer the telephone" task as completed
-            FindObjectOfType<QuestClipboardManagerS3>()?.CompleteTask(1); // Assuming this is the first task
+            FindObjectOfType<QuestClipboardManager>()?.CompleteTask(1); // Assuming this is the first task
 
             // Activate the phone button
             phoneButtonManager?.ActivatePhoneButton();

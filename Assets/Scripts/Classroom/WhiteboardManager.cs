@@ -105,7 +105,7 @@ public class WhiteboardManager : MonoBehaviour
         }
 
         // Mark the task as completed after showing all panels
-        FindObjectOfType<QuestClipboardManagerS4>()?.CompleteTask(0);
+        FindObjectOfType<QuestClipboardManager>()?.CompleteTask(0);
         Debug.Log("Task 0 completed in QuestClipboardManagerS4.");
     }
 }

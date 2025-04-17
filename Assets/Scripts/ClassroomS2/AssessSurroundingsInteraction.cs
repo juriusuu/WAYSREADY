@@ -168,7 +168,7 @@ public class AssessSurroundingsInteraction : MonoBehaviour
         }
 
         // Notify the quest manager
-        FindObjectOfType<QuestClipboardManagerS5>()?.CompleteTask(1); // Task index 1
+        FindObjectOfType<QuestClipboardManager>()?.CompleteTask(1); // Task index 1
         Debug.Log("All dangerous objects have been marked. Task completed.");
     }
 }

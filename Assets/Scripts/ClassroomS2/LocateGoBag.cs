@@ -73,7 +73,7 @@ public class LocateGoBagInteraction : MonoBehaviour
         }
 
         // Notify the quest manager
-        FindObjectOfType<QuestClipboardManagerS5>()?.CompleteTask(0); // Task index 0
+        FindObjectOfType<QuestClipboardManager>()?.CompleteTask(0); // Task index 0
         Debug.Log("Go Bag located. Task completed.");
     }
 

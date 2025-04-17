@@ -454,7 +454,8 @@ namespace Supercyan.FreeSample
              }
          }
      }
-  */
+
+  *//* 
         private void OnTriggerExit(Collider other)
         {
             // Check if the object is a pickup item
@@ -478,8 +479,33 @@ namespace Supercyan.FreeSample
 
                 Debug.Log("Pickup item exited: " + string.Join(", ", pickupItems.GetPickupItems().Select(item => item.GetComponent<PickupItems>()?.ToString()))); // Replace ItemName with ToString() or another valid property
             }
-        }
+        } */
+        private void OnTriggerExit(Collider other)
+        {
+            // Check if the object is a pickup item
+            PickupItems pickupItems = other.GetComponent<PickupItems>();
+            if (pickupItems != null)
+            {
+                // Remove the pickup item from the list
+                currentPickupItems.Remove(pickupItems);
 
+                if (currentPickupItems.Count > 0)
+                {
+                    // Set the last item's PickupItem list in the PickupButton
+                    pickupButtons.SetPickupItems(currentPickupItems[currentPickupItems.Count - 1].Items
+                        .Select(go => go.GetComponent<PickupItems>())
+                        .Where(pi => pi != null)
+                        .ToList());
+                }
+                else
+                {
+                    // Clear the PickupButton if no items are left
+                    pickupButtons.SetPickupItems(null);
+                }
+
+                Debug.Log("Pickup item exited: " + string.Join(", ", pickupItems.Items.Select(item => item.name)));
+            }
+        }
     }
 
 }

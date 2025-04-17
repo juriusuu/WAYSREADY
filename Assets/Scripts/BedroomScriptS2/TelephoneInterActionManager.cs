@@ -107,7 +107,7 @@ public class TelephoneInteractionManager : MonoBehaviour
             }
 
             // Mark the "Answer the telephone" task as completed
-            FindObjectOfType<QuestClipboardManagerS2>()?.CompleteTask(0); // Assuming this is the first task
+            FindObjectOfType<QuestClipboardManager>()?.CompleteTask(0); // Assuming this is the first task
 
             // Mark interaction as complete and disable the button
             isInteractionComplete = true;

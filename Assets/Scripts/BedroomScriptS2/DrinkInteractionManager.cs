@@ -85,7 +85,7 @@ public class DrinkInteractionManager : MonoBehaviour
             drinkButton.gameObject.SetActive(false);
 
             // Mark the task as completed in QuestClipboardManagerS2
-            QuestClipboardManagerS2 questManager = FindObjectOfType<QuestClipboardManagerS2>();
+            QuestClipboardManager questManager = FindObjectOfType<QuestClipboardManager>();
             if (questManager != null)
             {
                 questManager.CompleteTask(1); // Mark the second task (index 1) as completed

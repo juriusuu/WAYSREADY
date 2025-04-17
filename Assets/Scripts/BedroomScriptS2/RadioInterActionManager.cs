@@ -100,7 +100,7 @@ public class RadioInteractionManager : MonoBehaviour
             }
 
             // Mark the "Turn on the radio" task as completed
-            FindObjectOfType<QuestClipboardManagerS2>()?.CompleteTask(2); // Assuming this is the fourth task
+            FindObjectOfType<QuestClipboardManager>()?.CompleteTask(2); // Assuming this is the fourth task
 
             // Mark interaction as complete and disable the button
             isInteractionComplete = true;

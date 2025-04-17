@@ -100,7 +100,7 @@ public class AshInteractionManager : MonoBehaviour
 
     private void CompleteQuest()
     {
-        var questManager = FindObjectOfType<QuestClipboardManagerS6>();
+        var questManager = FindObjectOfType<QuestClipboardManager>();
         if (questManager != null)
         {
             questManager.CompleteTask(0); // Task index 0

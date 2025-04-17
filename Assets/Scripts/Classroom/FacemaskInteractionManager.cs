@@ -72,7 +72,7 @@ public class FacemaskInteractionManager : MonoBehaviour
         }
 
         // Complete the task in QuestClipboardManagerS4
-        FindObjectOfType<QuestClipboardManagerS4>()?.CompleteTask(2);
+        FindObjectOfType<QuestClipboardManager>()?.CompleteTask(2);
         Debug.Log("Task 2 completed in QuestClipboardManagerS4.");
     }
 

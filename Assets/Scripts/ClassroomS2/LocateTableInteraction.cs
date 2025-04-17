@@ -73,7 +73,7 @@ public class LocateTableInteraction : MonoBehaviour
         }
 
         // Notify the quest manager
-        FindObjectOfType<QuestClipboardManagerS5>()?.CompleteTask(2); // Task index 1
+        FindObjectOfType<QuestClipboardManager>()?.CompleteTask(2); // Task index 1
         Debug.Log("Table located. Task completed.");
     }
 

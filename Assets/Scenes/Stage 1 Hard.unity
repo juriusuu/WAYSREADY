@@ -3206,6 +3206,58 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 5083277787279853439, guid: c7a85b0e92853dd43ab92d03ba96f6fc, type: 3}
+--- !u!1 &231852491
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 231852493}
+  - component: {fileID: 231852492}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &231852492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231852491}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3c5dac0d71a2c4fa3ab9306136c2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questName: Quest3
+  clipboardPanel: {fileID: 439286911}
+  helpButton: {fileID: 386784882}
+  taskCheckboxes:
+  - {fileID: 1261778049}
+  - {fileID: 670950183}
+  - {fileID: 1375914450}
+  proceedButton: {fileID: 820095839}
+--- !u!4 &231852493
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 231852491}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 967.7091, y: 664.00397, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &232395057 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2407675018968493513, guid: c7a85b0e92853dd43ab92d03ba96f6fc, type: 3}
@@ -23491,57 +23543,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!1 &1406629639
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1406629641}
-  - component: {fileID: 1406629642}
-  m_Layer: 0
-  m_Name: QuestManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1406629641
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1406629639}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 967.7091, y: 664.00397, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1406629642
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1406629639}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edcde813a1943ac479b7eecb699d019d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipboardPanel: {fileID: 439286911}
-  helpButton: {fileID: 386784882}
-  taskCheckboxes:
-  - {fileID: 1261778049}
-  - {fileID: 670950183}
-  - {fileID: 1375914450}
-  proceedButton: {fileID: 820095839}
 --- !u!1 &1408018273 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6499868721726275656, guid: c7a85b0e92853dd43ab92d03ba96f6fc, type: 3}
@@ -34014,7 +34015,6 @@ SceneRoots:
   - {fileID: 1411184668}
   - {fileID: 278194074}
   - {fileID: 1927328633}
-  - {fileID: 1406629641}
   - {fileID: 192844610}
   - {fileID: 803464682}
   - {fileID: 213583265}
@@ -34022,3 +34022,4 @@ SceneRoots:
   - {fileID: 1666665084}
   - {fileID: 1163372373}
   - {fileID: 1884928265}
+  - {fileID: 231852493}

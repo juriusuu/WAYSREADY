@@ -78,7 +78,7 @@ namespace BedroomScriptS3
             StartCoroutine(ShowPanelsInSequence());
 
             // Mark the "Use the phone" task as completed
-            var questManager = FindObjectOfType<QuestClipboardManagerS3>();
+            var questManager = FindObjectOfType<QuestClipboardManager>();
             if (questManager != null)
             {
                 questManager.CompleteTask(2); // Assuming this is the second task

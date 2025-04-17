@@ -508,57 +508,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104502380}
   m_CullTransparentMesh: 1
---- !u!1 &124818750
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 124818752}
-  - component: {fileID: 124818753}
-  m_Layer: 0
-  m_Name: QuestManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &124818752
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124818750}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 967.7091, y: 664.00397, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &124818753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124818750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 11b109dfb9e63a942b808376d6213302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipboardPanel: {fileID: 826558617}
-  helpButton: {fileID: 335043658}
-  taskCheckboxes:
-  - {fileID: 570136746}
-  - {fileID: 1967679832}
-  - {fileID: 671875425}
-  proceedButton: {fileID: 1325761480}
 --- !u!1 &135398481
 GameObject:
   m_ObjectHideFlags: 0
@@ -4881,6 +4830,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sandBagManager: {fileID: 0}
+  dropButton: {fileID: 0}
   sandbagType: sandbags
 --- !u!114 &1403265759
 MonoBehaviour:
@@ -5685,6 +5635,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1626964661}
   m_CullTransparentMesh: 1
+--- !u!1 &1627033380
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1627033382}
+  - component: {fileID: 1627033381}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1627033381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627033380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3c5dac0d71a2c4fa3ab9306136c2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questName: Quest4
+  clipboardPanel: {fileID: 826558617}
+  helpButton: {fileID: 335043658}
+  taskCheckboxes:
+  - {fileID: 570136746}
+  - {fileID: 1967679832}
+  - {fileID: 671875425}
+  proceedButton: {fileID: 1325761480}
+--- !u!4 &1627033382
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1627033380}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 967.7091, y: 664.00397, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1667331276
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7179,7 +7181,6 @@ SceneRoots:
   - {fileID: 1712552062}
   - {fileID: 949298457}
   - {fileID: 1171708884}
-  - {fileID: 124818752}
   - {fileID: 1470965234}
   - {fileID: 331371321}
   - {fileID: 268380438}
@@ -7188,3 +7189,4 @@ SceneRoots:
   - {fileID: 1540790626}
   - {fileID: 1667331276}
   - {fileID: 1351619354}
+  - {fileID: 1627033382}

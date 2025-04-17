@@ -3812,6 +3812,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sandBagManager: {fileID: 0}
+  dropButton: {fileID: 0}
   sandbagType: sandbags
 --- !u!114 &480294837
 MonoBehaviour:
@@ -5084,16 +5085,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 676358361}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a3588a75fc04be45a0db475fdfb8aac, type: 3}
+  m_Script: {fileID: 11500000, guid: ce3c5dac0d71a2c4fa3ab9306136c2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  questName: Quest2
   clipboardPanel: {fileID: 1844436727}
   helpButton: {fileID: 957962321}
   taskCheckboxes:
   - {fileID: 2074507000}
   - {fileID: 1466852157}
   - {fileID: 1237064513}
-  proceedButton: {fileID: 0}
+  proceedButton: {fileID: 1302602841}
 --- !u!1 &699571230 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2064743060960505591, guid: 5a5c50b28b7a7ed46be6f88a2f7c6ecb, type: 3}

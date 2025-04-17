@@ -1480,57 +1480,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
---- !u!1 &124818750
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 124818752}
-  - component: {fileID: 124818753}
-  m_Layer: 0
-  m_Name: QuestManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &124818752
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124818750}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 967.7091, y: 664.00397, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &124818753
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 124818750}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b658274d793fe9640978cafcb0350fe9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  clipboardPanel: {fileID: 826558617}
-  helpButton: {fileID: 335043658}
-  taskCheckboxes:
-  - {fileID: 570136746}
-  - {fileID: 1967679832}
-  - {fileID: 671875425}
-  proceedButton: {fileID: 1325761480}
 --- !u!1 &126672490 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 946102590556474195, guid: 42c53569dcb60e5479dc1eb4393f9c5a, type: 3}
@@ -14139,6 +14088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sandBagManager: {fileID: 0}
+  dropButton: {fileID: 0}
   sandbagType: sandbags
 --- !u!114 &1403265759
 MonoBehaviour:
@@ -20002,6 +19952,58 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 1263978675830276771, guid: 42c53569dcb60e5479dc1eb4393f9c5a, type: 3}
+--- !u!1 &1996849409
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1996849411}
+  - component: {fileID: 1996849410}
+  m_Layer: 0
+  m_Name: QuestManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1996849410
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996849409}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce3c5dac0d71a2c4fa3ab9306136c2d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  questName: Quest6
+  clipboardPanel: {fileID: 826558617}
+  helpButton: {fileID: 335043658}
+  taskCheckboxes:
+  - {fileID: 570136746}
+  - {fileID: 1967679832}
+  - {fileID: 671875425}
+  proceedButton: {fileID: 1325761480}
+--- !u!4 &1996849411
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1996849409}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 967.7091, y: 664.00397, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1997357557 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5173969453525652353, guid: 42c53569dcb60e5479dc1eb4393f9c5a, type: 3}
@@ -21724,7 +21726,6 @@ SceneRoots:
   - {fileID: 685513530}
   - {fileID: 949298457}
   - {fileID: 1171708884}
-  - {fileID: 124818752}
   - {fileID: 1470965234}
   - {fileID: 331371321}
   - {fileID: 268380438}
@@ -21742,3 +21743,4 @@ SceneRoots:
   - {fileID: 1558013883}
   - {fileID: 578335458}
   - {fileID: 1735788869}
+  - {fileID: 1996849411}

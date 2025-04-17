@@ -127,7 +127,7 @@ public class RadioInteractionManagerS3 : MonoBehaviour
             secondPanel.SetActive(false);
 
             // Complete the task after the second panel
-            FindObjectOfType<QuestClipboardManagerS6>()?.CompleteTask(1); // Task index 1
+            FindObjectOfType<QuestClipboardManager>()?.CompleteTask(1); // Task index 1
             Debug.Log("Task 1 completed in QuestClipboardManagerS6.");
 
             // Activate the phone button
