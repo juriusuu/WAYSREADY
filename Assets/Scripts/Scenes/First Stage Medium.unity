@@ -13131,6 +13131,13 @@ MonoBehaviour:
   distance: 7.5
   height: 2
   smoothSpeed: 0.125
+  wallOffset: 0.3
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  rotationSpeed: 200
+  minPitch: -30
+  maxPitch: 60
 --- !u!114 &1136385246
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17604,6 +17611,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sandBagManager: {fileID: 1125999571}
+  dropButton: {fileID: 0}
   sandbagType: sandbags
 --- !u!1 &1870764043
 GameObject:
@@ -19691,67 +19699,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!1001 &7286995555365183807
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 6143088069541682348, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_Name
-      value: wave
-      objectReference: {fileID: 0}
-    - target: {fileID: 6143088069541682348, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776636103786530326, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 11.079682
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776636103786530326, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776636103786530326, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 1.8789215
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776636103786530326, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776636103786530326, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.00000003774895
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776636103786530326, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776636103786530326, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776636103786530326, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776636103786530326, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6776636103786530326, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 42e06b25cfcc96d41856e282ca9ee88f, type: 3}
 --- !u!222 &7583842600332656934
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -19886,7 +19833,6 @@ SceneRoots:
   - {fileID: 1125999568}
   - {fileID: 617305315}
   - {fileID: 1027416137}
-  - {fileID: 7286995555365183807}
   - {fileID: 1813804545}
   - {fileID: 1984569629}
   - {fileID: 929711207}

@@ -105,7 +105,7 @@ public class FireSignBoard : MonoBehaviour
         }
 
         // Mark the task as completed after showing all panels
-        FindObjectOfType<QuestClipboardManager>()?.CompleteTask(0);
+        FindObjectOfType<QuestClipboardManager>()?.CompleteTask(2);
         Debug.Log("Task 0 completed in QuestClipboardManagerS4.");
     }
 }

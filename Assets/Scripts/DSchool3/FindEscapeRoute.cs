@@ -11,12 +11,13 @@ public class FindEscapeRouteTask : MonoBehaviour
         {
             isTaskCompleted = true;
 
-            // Notify the QuestClipboardManager to complete the task
+            // Notify the QuestClipboardManager to complete the tasks
             var questManager = FindObjectOfType<QuestClipboardManager>();
             if (questManager != null)
             {
-                questManager.CompleteTask(0); // Task index 0 for "Find the Escape Route"
-                Debug.Log("Task 0: Find the Escape Route completed.");
+                questManager.CompleteTask(1); // Task index 1
+                questManager.CompleteTask(2); // Task index 2
+                Debug.Log("Tasks 1 and 2 completed.");
             }
             else
             {

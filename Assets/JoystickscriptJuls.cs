@@ -41,7 +41,12 @@ namespace Supercyan.FreeSample
         [SerializeField] private PickupButtons pickupButtons;
         private List<PickupItems> currentPickupItems = new List<PickupItems>(); // List to track current pickup items
 
-
+        [SerializeField] private float crouchHeight = 0.5f; // Height when crouching
+        [SerializeField] private float crouchSpeed = 1f;    // Movement speed when crouching
+        private float originalHeight;                      // Original height of the player
+        private float originalSpeed;                       // Original movement speed
+        private CapsuleCollider playerCollider;            // Reference to the player's collider
+        private bool isCrouching = false;                  // Track crouch state
         public LifeManager lifeManager; // Reference to LifeManager
 
         // [SerializeField] private InputActionReference moveActionToUse;
@@ -59,7 +64,68 @@ namespace Supercyan.FreeSample
             // Find the LifeManager and TimerManager in the scene
             lifeManager = FindFirstObjectByType<LifeManager>();
             timerManager = FindFirstObjectByType<TimerManager>();
+
+            // Store the original height and speed
+            playerCollider = GetComponent<CapsuleCollider>();
+            if (playerCollider != null)
+            {
+                originalHeight = playerCollider.height;
+            }
+            originalSpeed = m_moveSpeed;
         }
+        public void Crouch()
+        {
+            if (!isCrouching)
+            {
+                isCrouching = true;
+
+                // Adjust the visual model's position to represent crouching
+                Transform visualModel = transform.Find("common_people_male_1");
+                if (visualModel != null)
+                {
+                    // Move the visual model down by half the difference in height
+                    float heightDifference = originalHeight - crouchHeight;
+                    visualModel.localPosition = new Vector3(0, -heightDifference / 2, 0);
+                }
+
+                // Reduce the player's movement speed
+                m_moveSpeed = crouchSpeed;
+
+                Debug.Log("Player is crouching.");
+            }
+        }
+
+        public void Stand()
+        {
+            if (isCrouching)
+            {
+                isCrouching = false;
+
+                // Restore the visual model's position to represent standing
+                Transform visualModel = transform.Find("common_people_male_1");
+                if (visualModel != null)
+                {
+                    visualModel.localPosition = Vector3.zero; // Reset the visual model's position
+                }
+
+                // Restore the player's movement speed
+                m_moveSpeed = originalSpeed;
+
+                Debug.Log("Player is standing.");
+            }
+        }
+        public void ToggleCrouch()
+        {
+            if (isCrouching)
+            {
+                Stand();
+            }
+            else
+            {
+                Crouch();
+            }
+        }
+
 
         private void OnCollisionEnter(Collision collision)
         {
@@ -287,7 +353,16 @@ namespace Supercyan.FreeSample
             m_wasGrounded = m_isGrounded;
             m_jumpInput = false;
         }
-
+        public void Jump()
+        {
+            // Trigger the jump input when the button is pressed
+            if (m_isGrounded && (Time.time - m_jumpTimeStamp) >= m_minJumpInterval)
+            {
+                m_jumpTimeStamp = Time.time;
+                m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+                Debug.Log("Jump triggered by button!");
+            }
+        }
         private void DirectUpdate()
         {
             // Get input from the left joystick

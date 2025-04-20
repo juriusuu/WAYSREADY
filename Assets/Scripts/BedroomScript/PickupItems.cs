@@ -26,18 +26,18 @@ public class PickupItems : MonoBehaviour
                 Debug.LogError("No InventoryManager found in the scene!");
             }
         }
-
-        // Determine if this is a new game or a loaded game
-        if (GameStateManager.Instance.IsNewGame)
-        {
-            // New game: Save the initial state
-            SaveState(true);
-        }
-        else
-        {
-            // Loaded game: Load the saved state
-            LoadState();
-        }
+        /* 
+                // Determine if this is a new game or a loaded game
+                if (GameStateManager.Instance.IsNewGame)
+                {
+                    // New game: Save the initial state
+                    SaveState(true);
+                }
+                else
+                {
+                    // Loaded game: Load the saved state
+                    LoadState();
+                } */
     }
 
     public void OnPickupButtonPressed()
@@ -122,24 +122,24 @@ public class PickupItems : MonoBehaviour
 
     public void SaveState(bool isActive)
     {
-        if (GameStateManager.Instance != null)
+        if (GameManager.Instance != null)
         {
-            var state = new ObjectState
+            var state = new GameManager.ObjectState
             {
                 isActive = isActive,
                 position = transform.position,
                 rotation = transform.rotation
             };
 
-            GameStateManager.Instance.SaveObjectState(gameObject.name, state);
+            GameManager.Instance.SaveObjectState(gameObject.name, state);
         }
     }
 
     public void LoadState()
     {
-        if (GameStateManager.Instance != null)
+        if (GameManager.Instance != null)
         {
-            var state = GameStateManager.Instance.LoadObjectState(gameObject.name);
+            var state = GameManager.Instance.LoadObjectState(gameObject.name);
             if (state != null)
             {
                 // Restore the saved state

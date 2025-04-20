@@ -21,6 +21,7 @@ TagManager:
   - Dropet
   - FireExtinguisher
   - Unplug
+  - Fire
   layers:
   - Default
   - TransparentFX

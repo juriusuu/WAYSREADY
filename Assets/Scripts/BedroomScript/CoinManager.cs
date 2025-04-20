@@ -21,6 +21,7 @@ public class CoinUIManager : MonoBehaviour
     {
         if (coinText != null)
         {
+            Debug.Log($"CoinUIManager: Updating coin count to {coinCount}"); // Log the update
             coinText.text = $"{coinCount}"; // Update the coin count text
         }
         else

@@ -4524,7 +4524,8 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4749373324051631957, guid: 9854bb05e98038145add8ed7c25af4b1, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 343638522572748073, guid: 9854bb05e98038145add8ed7c25af4b1, type: 3}
@@ -13217,7 +13218,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage 2 Hard
+          m_StringArgument: Stage 3 Easy
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1325761481
@@ -13240,7 +13241,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -7847860406280786260, guid: 8c432bef6f490b14eb385e6b1045ccda, type: 3}
+  m_Sprite: {fileID: -7025561608269350, guid: 9e39fc7b2ee384c429738dff364dcdba, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1

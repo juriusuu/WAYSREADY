@@ -49,8 +49,8 @@ public class GrabEmergencyKit : MonoBehaviour
             var questManager = FindObjectOfType<QuestClipboardManager>();
             if (questManager != null)
             {
-                questManager.CompleteTask(2); // Task index 2 for "Grab the Emergency Kit"
-                Debug.Log("Task 2: Grab the Emergency Kit completed.");
+                questManager.CompleteTask(0); // Task index 0 for "Grab the Emergency Kit"
+                Debug.Log("Task 0: Grab the Emergency Kit completed.");
             }
             else
             {

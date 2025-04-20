@@ -20,10 +20,10 @@ public enum GameState
     GameOver
 }
 
-public class GameManager : MonoBehaviour
+public class GameManager2 : MonoBehaviour
 
 {
-    public static GameManager Instance; // Singleton instance
+    public static GameManager2 Instance; // Singleton instance
     public GameState currentState; // Current game state
 
     private string currentSceneName; // Store the name of the current scene

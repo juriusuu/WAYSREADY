@@ -31,41 +31,21 @@ public class MenuController : MonoBehaviour
   private string levelToLoad;
   [SerializeField] private GameObject noSavedGameDialog = null;
 
-  [SerializeField] private GameObject stageMenuPanel; // Reference to the StageMenu panel
-
-  /*   public void NewGameDialogYes()
-    {
-      if (string.IsNullOrEmpty(_newGameLevel))
-      {
-        Debug.LogError("Scene name is empty or null! Please set the _newGameLevel in the Inspector.");
-        return;
-      }
-
-      Debug.Log($"Attempting to load scene: {_newGameLevel}");
-      SceneManager.LoadScene(_newGameLevel);
-    } */
   public void NewGameDialogYes()
   {
-    if (stageMenuPanel != null)
-    {
-      Debug.Log("Opening StageMenu panel...");
-      stageMenuPanel.SetActive(true); // Activate the StageMenu panel
-    }
-    else
-    {
-      Debug.LogError("StageMenu panel is not assigned in the Inspector!");
-    }
+    SceneManager.LoadScene(_newGameLevel);
   }
+
   public void LoadGameDialogYes()
   {
     if (PlayerPrefs.HasKey("SavedLevel"))
     {
-      levelToLoad = PlayerPrefs.GetString("SavedLevel");
-      SceneManager.LoadScene(levelToLoad);
+        levelToLoad = PlayerPrefs.GetString("SavedLevel");
+        SceneManager.LoadScene(levelToLoad);
     }
     else
     {
-      noSavedGameDialog.SetActive(true);
+        noSavedGameDialog.SetActive(true);
     }
   }
 
@@ -113,7 +93,7 @@ public class MenuController : MonoBehaviour
 
   public void ResetButton(string MenuType)
   {
-    if (MenuType == "Graphics")
+    if(MenuType == "Graphics")
     {
       brightnessSlider.value = defaultBrightness;
       brightnessTextValue.text = defaultBrightness.ToString("0.0");
