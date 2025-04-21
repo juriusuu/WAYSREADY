@@ -18,7 +18,7 @@ namespace ClassroomS3
             // Ensure the phone button is hidden at the start
             if (phoneButton != null)
             {
-                phoneButton.gameObject.SetActive(false);
+                //  phoneButton.gameObject.SetActive(false);
                 phoneButton.onClick.AddListener(OnPhoneButtonPressed); // Add listener for phone button interaction
                 Debug.Log("Phone button initialized and hidden.");
             }
@@ -106,7 +106,7 @@ namespace ClassroomS3
             var questManager = FindObjectOfType<QuestClipboardManager>();
             if (questManager != null)
             {
-                questManager.CompleteTask(2); // Assuming this is the second task
+                questManager.CompleteTask(0); // Assuming this is the second task
                 Debug.Log("Quest task 'Use the phone' marked as completed.");
             }
             else

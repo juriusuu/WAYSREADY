@@ -7,6 +7,8 @@ public class RadioInteractionManagerS4 : MonoBehaviour
     public Button interactButton; // Reference to the interact button
     public GameObject firstPanel; // Reference to the first panel
     public GameObject secondPanel; // Reference to the second panel
+
+    public GameObject thirdPanel; // Reference to the third panel (not used in this script but can be added if needed)
     private GameObject currentInteractable; // The object the player is near
     private AudioSource radioAudioSource; // Reference to the radio's AudioSource
     private bool isInteractionComplete = false; // Tracks if the interaction is already completed
@@ -20,13 +22,14 @@ public class RadioInteractionManagerS4 : MonoBehaviour
         // Ensure the button is hidden at the start
         if (interactButton != null)
         {
-            interactButton.gameObject.SetActive(false);
+
             interactButton.onClick.AddListener(OnInteractButtonPressed); // Add listener for button click
         }
 
         // Ensure all panels are hidden at the start
         if (firstPanel != null) firstPanel.SetActive(false);
         if (secondPanel != null) secondPanel.SetActive(false);
+        if (thirdPanel != null) thirdPanel.SetActive(false);
 
         // Find the AudioSource on the radio GameObject
         radioAudioSource = GetComponent<AudioSource>();
@@ -147,6 +150,14 @@ public class RadioInteractionManagerS4 : MonoBehaviour
             secondPanel.SetActive(true);
             yield return new WaitForSeconds(1.5f); // Wait for 1.5 seconds
             secondPanel.SetActive(false);
+        }
+
+        // Show the second panel
+        if (thirdPanel != null)
+        {
+            thirdPanel.SetActive(true);
+            yield return new WaitForSeconds(1.5f); // Wait for 1.5 seconds
+            thirdPanel.SetActive(false);
         }
 
         // Mark the "Use the radio" task as completed

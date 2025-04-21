@@ -1282,17 +1282,17 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 617535722}
-        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
-        m_MethodName: LoadSceneByName
-        m_Mode: 5
+      - m_Target: {fileID: 507654235}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage 2 Classroom
-          m_BoolArgument: 0
+          m_StringArgument: Stage
+          m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &159490228
 MonoBehaviour:
@@ -2821,16 +2821,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 617535719}
-        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: LoadScene
+      - m_Target: {fileID: 617535722}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadSceneByName
         m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Stage2Easy
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1578524778}
@@ -4201,7 +4201,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage 2 Normal
+          m_StringArgument: Stage2Normal
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &404684834
@@ -4773,7 +4773,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -398, y: -752}
+  m_AnchoredPosition: {x: -398, y: -692}
   m_SizeDelta: {x: 310, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &471175553
@@ -5717,9 +5717,9 @@ GameObject:
   m_Component:
   - component: {fileID: 617535721}
   - component: {fileID: 617535720}
-  - component: {fileID: 617535719}
   - component: {fileID: 617535718}
   - component: {fileID: 617535722}
+  - component: {fileID: 617535723}
   m_Layer: 0
   m_Name: ManagerForAll
   m_TagString: Untagged
@@ -5739,19 +5739,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33093b7c11296434e8897a67b52c02f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &617535719
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 617535717}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a5772b37c15c0c04ea03b7a731bf9ed0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinCount: 0
 --- !u!114 &617535720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5791,6 +5778,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6dbf9cee6c476a549a6840a65b5289aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &617535723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617535717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5772b37c15c0c04ea03b7a731bf9ed0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coinCount: 0
+  completedScenes: []
 --- !u!1 &620706191
 GameObject:
   m_ObjectHideFlags: 0
@@ -7458,7 +7459,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00012207031, y: -752}
+  m_AnchoredPosition: {x: 0.00012207031, y: -692}
   m_SizeDelta: {x: 310, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &731761031
@@ -8645,7 +8646,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -6.726013, y: -4.000244}
+  m_AnchoredPosition: {x: -6.726074, y: -4.000244}
   m_SizeDelta: {x: -536.548, y: -278.00052}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &840479714
@@ -9997,16 +9998,16 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: 
-        m_Mode: 6
+      - m_Target: {fileID: 617535722}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadSceneByName
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Stage3Easy
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1578524778}
@@ -11864,7 +11865,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage 1 Normal
+          m_StringArgument: Stage1Normal
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1084289685
@@ -13029,7 +13030,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 398, y: -451}
+  m_AnchoredPosition: {x: 398, y: -391}
   m_SizeDelta: {x: 310, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1170397641
@@ -14291,16 +14292,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 601998802}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 617535722}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadSceneByName
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Stage3Normal
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1277932692
@@ -16119,6 +16120,70 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1458433427}
   m_CullTransparentMesh: 1
+--- !u!1 &1471203942
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1471203944}
+  - component: {fileID: 1471203943}
+  m_Layer: 0
+  m_Name: StageSelection
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1471203943
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471203942}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6cfb5bf31174ac04b9a6f349ed255e06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stageButtons:
+  - {fileID: 1577332990}
+  - {fileID: 1084289684}
+  - {fileID: 1931493687}
+  - {fileID: 159490227}
+  - {fileID: 404684833}
+  - {fileID: 1505849182}
+  - {fileID: 960408371}
+  - {fileID: 1277932691}
+  - {fileID: 1522756498}
+  stageNames:
+  - Stage1Easy
+  - Stage1Normal
+  - Stage1Hard
+  - Stage2Easy
+  - Stage2Normal
+  - Stage2Hard
+  - Stage3Easy
+  - Stage3Normal
+  - Stage3Hard
+--- !u!4 &1471203944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1471203942}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 4.9002047, y: 0.5349849, z: 3.3072484}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1472739733
 GameObject:
   m_ObjectHideFlags: 0
@@ -16649,16 +16714,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 507654235}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 617535722}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadSceneByName
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Stage2Hard
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1505849183
@@ -17199,16 +17264,16 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 507654235}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 617535722}
+        m_TargetAssemblyTypeName: SceneLoader, Assembly-CSharp
+        m_MethodName: LoadSceneByName
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Stage3Hard
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1522756499
@@ -17684,7 +17749,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 617535719}
+      - m_Target: {fileID: 617535723}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
         m_MethodName: LoadScene
         m_Mode: 5
@@ -17693,7 +17758,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage 1 Bedroom
+          m_StringArgument: Stage1Easy
           m_BoolArgument: 1
         m_CallState: 2
       - m_Target: {fileID: 1578524778}
@@ -18839,7 +18904,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 398, y: -752}
+  m_AnchoredPosition: {x: 398, y: -692}
   m_SizeDelta: {x: 310, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1667390527
@@ -21584,7 +21649,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: -398, y: -451}
+  m_AnchoredPosition: {x: -398, y: -391}
   m_SizeDelta: {x: 310, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1894198407
@@ -22288,7 +22353,7 @@ MonoBehaviour:
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: Stage 1 Hard
+          m_StringArgument: Stage1Hard
           m_BoolArgument: 1
         m_CallState: 2
 --- !u!114 &1931493688
@@ -22925,7 +22990,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 387.144, y: -743.554}
+  m_AnchoredPosition: {x: 387.144, y: -688.3}
   m_SizeDelta: {x: 402.071, y: 222.716}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1992428778
@@ -23999,7 +24064,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 0.00006485, y: -451}
+  m_AnchoredPosition: {x: 0.00006485, y: -391}
   m_SizeDelta: {x: 310, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2057011282
@@ -25744,3 +25809,4 @@ SceneRoots:
   - {fileID: 383950259}
   - {fileID: 2124480821}
   - {fileID: 617535721}
+  - {fileID: 1471203944}

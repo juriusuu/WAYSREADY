@@ -880,6 +880,7 @@ MonoBehaviour:
   timerImage: {fileID: 352933800}
   totalTime: 600
   layfManager: {fileID: 1171708883}
+  failPanel: {fileID: 0}
   totalHintsAllowed: 3
   objectsToHighlight:
   - {fileID: 1540790627}
@@ -1050,6 +1051,7 @@ GameObject:
   - component: {fileID: 330585545}
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
+  - component: {fileID: 330585549}
   - component: {fileID: 330585548}
   m_Layer: 0
   m_Name: Main Camera
@@ -1183,7 +1185,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0f09e7ace2b50a4e8bee841efef9a53, type: 3}
   m_Name: 
@@ -1199,6 +1201,29 @@ MonoBehaviour:
   rotationSpeed: 30
   minPitch: -30
   maxPitch: 60
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 270d60bb20fc4134b97f8b56073914d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1220990609}
+  distance: 2
+  height: 2
+  smoothSpeed: 0.125
+  wallOffset: 0.3
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  rotationSpeed: 30
+  minPitch: 0
+  maxPitch: 0
 --- !u!1 &331371319
 GameObject:
   m_ObjectHideFlags: 0
@@ -4110,6 +4135,8 @@ MonoBehaviour:
   m_rigidBody: {fileID: 434930138}
   m_controlMode: 0
   pickupButtons: {fileID: 0}
+  crouchHeight: 0.5
+  crouchSpeed: 1
   lifeManager: {fileID: 0}
   timerManager: {fileID: 0}
 --- !u!1 &1245135746
@@ -4305,19 +4332,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1325761481}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 685513529}
-        m_TargetAssemblyTypeName: SceneLoaderButtonHelper, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Stage 2 Normal
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &1325761481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5665,7 +5680,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3c5dac0d71a2c4fa3ab9306136c2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questName: Quest4
+  questName: Stage2Easy
   clipboardPanel: {fileID: 826558617}
   helpButton: {fileID: 335043658}
   taskCheckboxes:
@@ -5673,6 +5688,7 @@ MonoBehaviour:
   - {fileID: 1967679832}
   - {fileID: 671875425}
   proceedButton: {fileID: 1325761480}
+  sceneButtonHelper: {fileID: 685513529}
 --- !u!4 &1627033382
 Transform:
   m_ObjectHideFlags: 0

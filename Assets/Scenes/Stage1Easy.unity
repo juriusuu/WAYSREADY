@@ -1228,19 +1228,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 340116226}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1477502570}
-        m_TargetAssemblyTypeName: SceneLoaderButtonHelper, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Stage 1 Normal
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &340116226
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5829,7 +5817,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3c5dac0d71a2c4fa3ab9306136c2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questName: Quest1
+  questName: Stage1Easy
   clipboardPanel: {fileID: 1987420877}
   helpButton: {fileID: 1454167571}
   taskCheckboxes:
@@ -5837,6 +5825,7 @@ MonoBehaviour:
   - {fileID: 1314278300}
   - {fileID: 832889583}
   proceedButton: {fileID: 340116225}
+  sceneButtonHelper: {fileID: 1477502570}
 --- !u!4 &1277823199
 Transform:
   m_ObjectHideFlags: 0

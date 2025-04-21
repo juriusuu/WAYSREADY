@@ -22,11 +22,10 @@ public class GameManager : MonoBehaviour
     private string saveFilePath;
     public int coinCount = 0;
     private string currentScene; // Track the current scene
-    private List<string> completedScenes = new List<string>(); // List of completed scenes
+    public List<string> completedScenes = new List<string>(); // List of completed scenes
     private Dictionary<string, bool[]> questCompletionStatus = new Dictionary<string, bool[]>(); // Quest completion status
     private Dictionary<string, SceneState> sceneStates = new Dictionary<string, SceneState>(); // Tracks all scenes
     private Vector3 playerStartingPosition; // Store the player's starting position
-
 
     private Dictionary<string, ObjectState> objectStates = new Dictionary<string, ObjectState>();
 
@@ -336,6 +335,9 @@ public class GameManager : MonoBehaviour
                 completedScenes = saveData.completedScenes ?? new List<string>();
                 questCompletionStatus = saveData.questCompletionStatus ?? new Dictionary<string, bool[]>();
                 sceneStates = saveData.sceneStates ?? new Dictionary<string, SceneState>();
+
+
+                Debug.Log($"Loaded completed scenes: {string.Join(", ", completedScenes)}");
 
                 // Update the coin UI
                 if (CoinUIManager.Instance != null)

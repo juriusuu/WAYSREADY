@@ -3235,7 +3235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3c5dac0d71a2c4fa3ab9306136c2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questName: Quest3
+  questName: Stage1Hard
   clipboardPanel: {fileID: 439286911}
   helpButton: {fileID: 386784882}
   taskCheckboxes:
@@ -3243,6 +3243,7 @@ MonoBehaviour:
   - {fileID: 670950183}
   - {fileID: 1375914450}
   proceedButton: {fileID: 820095839}
+  sceneButtonHelper: {fileID: 1927328632}
 --- !u!4 &231852493
 Transform:
   m_ObjectHideFlags: 0
@@ -13452,19 +13453,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 820095840}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 1927328632}
-        m_TargetAssemblyTypeName: SceneLoaderButtonHelper, Assembly-CSharp
-        m_MethodName: LoadScene
-        m_Mode: 5
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: Stage 2 Classroom
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!114 &820095840
 MonoBehaviour:
   m_ObjectHideFlags: 0
