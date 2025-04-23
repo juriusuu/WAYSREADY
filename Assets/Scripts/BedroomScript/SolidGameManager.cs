@@ -47,6 +47,32 @@ public class GameManager : MonoBehaviour
         { "Stage3Hard", 180f }
     };
 
+    public Dictionary<string, int> defaultSceneHints = new Dictionary<string, int>
+{
+    { "Stage1Easy", 5 },
+    { "Stage1Normal", 3 },
+    { "Stage1Hard", 0 },
+    { "Stage2Easy", 5 },
+    { "Stage2Normal", 3 },
+    { "Stage2Hard", 0 },
+    { "Stage3Easy", 5 },
+    { "Stage3Normal", 3 },
+    { "Stage3Hard", 0 }
+};
+
+    public Dictionary<string, int> defaultSceneLives = new Dictionary<string, int>
+{
+    { "Stage1Easy", 2 },
+    { "Stage1Normal", 3 },
+    { "Stage1Hard", 1 },
+    { "Stage2Easy", 2 },
+    { "Stage2Normal", 3 },
+    { "Stage2Hard", 1 },
+    { "Stage3Easy", 2 },
+    { "Stage3Normal", 3 },
+    { "Stage3Hard", 1 }
+};
+
     private void Awake()
     {
         // Singleton pattern to ensure only one instance exists
@@ -80,6 +106,30 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning($"Scene '{sceneName}' not found in defaultSceneTimes. Using fallback default time.");
             return 60f; // Fallback default time if the scene is not found
+        }
+    }
+    public int GetDefaultLivesForScene(string sceneName)
+    {
+        if (defaultSceneLives.ContainsKey(sceneName))
+        {
+            return defaultSceneLives[sceneName];
+        }
+        else
+        {
+            Debug.LogWarning($"Scene '{sceneName}' not found in defaultSceneLives. Using fallback default lives.");
+            return 3; // Fallback default lives
+        }
+    }
+    public int GetDefaultHintsForScene(string sceneName)
+    {
+        if (defaultSceneHints.ContainsKey(sceneName))
+        {
+            return defaultSceneHints[sceneName];
+        }
+        else
+        {
+            Debug.LogWarning($"Scene '{sceneName}' not found in defaultSceneHints. Using fallback default hints.");
+            return 0; // Fallback default hints if the scene is not found
         }
     }
 
@@ -381,7 +431,7 @@ public class GameManager : MonoBehaviour
                 layfManager.AddLife();
             }
             Debug.Log($"Applied {additionalLives} lives to LayfManager.");
-            additionalLives = 0; // Reset after applying
+            //  additionalLives = 0; // Reset after applying
             Debug.Log($"Applying {additionalLives} stored lives to LayfManager.");
         }
 
@@ -397,15 +447,16 @@ public class GameManager : MonoBehaviour
 
         }
 
+
         // Apply additional hints to TaymerManager if present
         if (taymerManager != null && additionalHints > 0)
         {
             for (int i = 0; i < additionalHints; i++)
             {
-                taymerManager.UseHint();
+                taymerManager.AddHint(); // Use AddHint instead of UseHint
             }
             Debug.Log($"Applied {additionalHints} hints to TaymerManager.");
-            additionalHints = 0; // Reset after applying
+            /*  additionalHints = 0; */ // Reset after applying
         }
     }
 

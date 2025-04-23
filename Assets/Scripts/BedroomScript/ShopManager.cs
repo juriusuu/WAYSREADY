@@ -236,6 +236,8 @@ public class ShopManager : MonoBehaviour
     {
         if (GameManager.Instance != null && GameManager.Instance.SpendCoins(lifeCost))
         {
+            GameManager.Instance.additionalLives += 1; // Add 1 life to be applied later
+            Debug.Log("Life purchased! Additional Life: " + GameManager.Instance.additionalLives);
             // Find the LayfManager in the current scene
             LayfManager layfManager = FindObjectOfType<LayfManager>();
             if (layfManager != null)
@@ -246,7 +248,7 @@ public class ShopManager : MonoBehaviour
             else
             {
                 // Store the purchased life in GameManager for later use
-                GameManager.Instance.additionalLives += 1;
+                //  GameManager.Instance.additionalLives += 1;
                 Debug.Log("LayfManager not found! Storing purchased life for later. Total additional lives: " + GameManager.Instance.additionalLives);
             }
         }
@@ -325,19 +327,45 @@ public class ShopManager : MonoBehaviour
         Debug.Log("ShopMenu deactivated.");
     }
 
+    /*     public void BuyHint()
+        {
+            if (GameManager.Instance != null && GameManager.Instance.SpendCoins(hintCost))
+            {
+                GameManager.Instance.additionalHints += 1; // Add 1 hint to be applied later
+                Debug.Log("Hint purchased! Additional hints: " + GameManager.Instance.additionalHints);
+
+                // Apply hint directly if TaymerManager is present in the scene
+                TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
+                if (taymerManager != null)
+                {
+                    taymerManager.UseHint(); // Use a hint
+                    Debug.Log("Hint used in TaymerManager.");
+                }
+            }
+            else
+            {
+                Debug.LogWarning("Not enough coins to buy a hint!");
+            }
+        }
+    } */
+
     public void BuyHint()
     {
         if (GameManager.Instance != null && GameManager.Instance.SpendCoins(hintCost))
         {
             GameManager.Instance.additionalHints += 1; // Add 1 hint to be applied later
-            Debug.Log("Hint purchased! Additional hints: " + GameManager.Instance.additionalHints);
+            Debug.Log($"Hint purchased! Total additional hints: {GameManager.Instance.additionalHints}");
 
             // Apply hint directly if TaymerManager is present in the scene
             TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
             if (taymerManager != null)
             {
-                taymerManager.UseHint(); // Use a hint
-                Debug.Log("Hint used in TaymerManager.");
+                taymerManager.AddHint(); // Use a hint
+                Debug.Log("Hint applied directly in TaymerManager.");
+            }
+            else
+            {
+                Debug.Log("TaymerManager not found. Hint will be applied in the next scene.");
             }
         }
         else

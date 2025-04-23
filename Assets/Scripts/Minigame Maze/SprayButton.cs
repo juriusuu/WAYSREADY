@@ -7,14 +7,14 @@ public class SprayButton : MonoBehaviour
     public float extinguishAmount = 1f; // Amount to extinguish per button press
     public float destroyDelay = 2f; // Delay before destroying the fire object
 
-    private Button button;
+    public Button button;
     private Fire fireScript; // Reference to the Fire script on the fire object
 
     void Start()
     {
-        button = GetComponent<Button>();
-        button.onClick.AddListener(OnSprayButtonPressed);
-        button.interactable = false; // Disable the button initially
+        /*       button = GetComponent<Button>();
+              button.onClick.AddListener(OnSprayButtonPressed);
+              button.interactable = false; // Disable the button initially */
     }
 
     private void OnTriggerEnter(Collider other)
@@ -39,17 +39,41 @@ public class SprayButton : MonoBehaviour
         }
     }
 
-    private void OnSprayButtonPressed()
-    {
-        if (fireExtinguisher != null && fireScript != null)
+    /*     private void OnSprayButtonPressed()
         {
-            fireExtinguisher.UseExtinguisher(); // Activate the extinguisher particle system
-            fireScript.Extinguish(extinguishAmount); // Call the Extinguish method on the fire
-
-            if (fireScript.ExtinguishProgress >= fireScript.extinguishTime)
+            if (fireExtinguisher != null && fireScript != null)
             {
-                Destroy(fireScript.gameObject, destroyDelay); // Destroy the fire object after a delay
+                fireExtinguisher.UseExtinguisher(); // Activate the extinguisher particle system
+                fireScript.Extinguish(extinguishAmount); // Call the Extinguish method on the fire
+
+                if (fireScript.ExtinguishProgress >= fireScript.extinguishTime)
+                {
+                    Destroy(fireScript.gameObject, destroyDelay); // Destroy the fire object after a delay
+                }
             }
+        } */
+
+    /*     public void OnSprayButtonPressed()
+        {
+            if (fireExtinguisher != null && fireScript != null)
+            {
+                fireExtinguisher.UseExtinguisher(); // Activate the extinguisher particle system
+                fireScript.Extinguish(extinguishAmount); // Call the Extinguish method on the fire
+
+                if (fireScript.ExtinguishProgress >= fireScript.extinguishTime)
+                {
+                    Debug.Log("Fire extinguished. Destroying fire object after 1 second.");
+                    Destroy(fireScript.gameObject, 1f); // Destroy the fire object after a delay of 1 second
+                }
+            }
+        } */
+
+    public void OnSprayButtonPressed()
+    {
+        if (fireScript != null)
+        {
+            Debug.Log("Destroying fire object after 1 second.");
+            Destroy(fireScript.gameObject, 1f); // Destroy the fire object after a delay of 1 second
         }
     }
 }

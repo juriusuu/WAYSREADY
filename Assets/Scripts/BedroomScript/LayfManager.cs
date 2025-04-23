@@ -1,5 +1,6 @@
 /* using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class LayfManager : MonoBehaviour
 {
@@ -187,7 +188,7 @@ public class LayfManager : MonoBehaviour
 
 using UnityEngine;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class LayfManager : MonoBehaviour
 {
     public Image[] hearts; // Array of heart images
@@ -197,25 +198,55 @@ public class LayfManager : MonoBehaviour
 
     private void Start()
     {
-        // Initialize lives to the number of hearts if not already set
-        if (currentLives <= 0)
-        {
-            currentLives = hearts.Length;
-        }
+        /*       // Initialize lives to the number of hearts if not already set
+              if (currentLives <= 0)
+              {
+                  currentLives = hearts.Length;
+              }
 
-        // Apply additional lives purchased from the shop
+              // Apply additional lives purchased from the shop
+              if (GameManager.Instance != null)
+              {
+                  Debug.Log($"Applying {GameManager.Instance.additionalLives} stored lives from GameManager.");
+                  currentLives += GameManager.Instance.additionalLives; // Add purchased lives
+                  if (currentLives > hearts.Length)
+                  {
+                      currentLives = hearts.Length; // Cap lives at the maximum
+                  }
+                  GameManager.Instance.additionalLives = 0; // Reset additional lives after applying
+              }
+
+              UpdateHeartsUI(); // Initialize the heart UI */
+
+
+        string currentSceneName = SceneManager.GetActiveScene().name;
+
+        // Fetch the default lives for the current scene from GameManager
         if (GameManager.Instance != null)
         {
-            Debug.Log($"Applying {GameManager.Instance.additionalLives} stored lives from GameManager.");
-            currentLives += GameManager.Instance.additionalLives; // Add purchased lives
-            if (currentLives > hearts.Length)
+            currentLives = GameManager.Instance.GetDefaultLivesForScene(currentSceneName);
+            Debug.Log($"Default lives for scene '{currentSceneName}': {currentLives}");
+            Debug.Log($"BOBOTIME'{GameManager.Instance.additionalLives}");
+
+
+            // Apply additional lives purchased from the shop
+            if (GameManager.Instance.additionalLives > 0)
             {
-                currentLives = hearts.Length; // Cap lives at the maximum
+                currentLives += GameManager.Instance.additionalLives;
+                Debug.Log($"Additional lives applied: {GameManager.Instance.additionalLives}. Total lives: {currentLives}");
+
+                // Reset the additional lives after applying
+                GameManager.Instance.additionalLives = 0;
             }
-            GameManager.Instance.additionalLives = 0; // Reset additional lives after applying
+        }
+        else
+        {
+            Debug.LogError("GameManager instance is null! Using fallback default lives.");
+            currentLives = 3; // Fallback default lives
         }
 
-        UpdateHeartsUI(); // Initialize the heart UI
+        // Initialize the life panel
+        UpdateHeartsUI();
     }
 
     public void LoseLife()

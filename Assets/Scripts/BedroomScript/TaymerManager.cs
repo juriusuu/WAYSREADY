@@ -192,7 +192,7 @@ public class TaymerManager : MonoBehaviour
     public LayfManager layfManager; // Reference to the LifeManager (handles lives and hearts)
     public GameObject failPanel; // Reference to the fail panel UI
 
-    public int totalHintsAllowed = 3; // Total number of hints allowed per stage
+    public int totalHintsAllowed; // Total number of hints allowed per stage
     private int hintsUsed = 0; // Counter for used hints
 
     public List<GameObject> objectsToHighlight; // List of objects to highlight
@@ -221,6 +221,7 @@ public class TaymerManager : MonoBehaviour
             totalTime = GameManager.Instance.GetDefaultTimeForScene(currentSceneName);
             Debug.Log($"Default time for scene '{currentSceneName}': {totalTime} seconds");
             Debug.Log($"BOBOTIME'{GameManager.Instance.additionalTime}");
+            Debug.Log($"BOBOTIME'{GameManager.Instance.additionalHints}");
 
             /*   // Add additional time purchased from the shop
               if (GameManager.Instance.additionalTime > 0)
@@ -266,8 +267,38 @@ public class TaymerManager : MonoBehaviour
             remainingTime = totalTime;
         }
 
+
         // Initialize the timer UI
         timerImage.fillAmount = 1f;
+
+
+
+        // Fetch the default hints for the current scene from GameManager
+        if (GameManager.Instance != null)
+        {
+            totalHintsAllowed = GameManager.Instance.GetDefaultHintsForScene(currentSceneName);
+            Debug.Log($"Default hints for scene '{currentSceneName}': {totalHintsAllowed}");
+
+            // Apply additional hints purchased from the shop
+            if (GameManager.Instance.additionalHints > 0)
+            {
+                totalHintsAllowed += GameManager.Instance.additionalHints;
+                Debug.Log($"Additional hints applied: {GameManager.Instance.additionalHints}. Total hints allowed: {totalHintsAllowed}");
+
+                // Reset the additional hints after applying
+                GameManager.Instance.additionalHints = 0;
+            }
+        }
+        else
+        {
+            Debug.LogError("GameManager instance is null! Using fallback default hints.");
+            totalHintsAllowed = 0; // Fallback default hints
+        }
+
+        // Initialize the hintsUsed counter
+        hintsUsed = 0;
+
+
 
         // Ensure the fail panel is hidden at the start
         if (failPanel != null)
@@ -449,6 +480,12 @@ public class TaymerManager : MonoBehaviour
         totalTime += seconds; // Update the total time dynamically
         timerImage.fillAmount = remainingTime / totalTime; // Update the timer UI
         Debug.Log($"{seconds} seconds added. Remaining time: {remainingTime}, Total time: {totalTime}");
+    }
+
+    public void AddHint()
+    {
+        totalHintsAllowed++; // Increment the total hints allowed
+        Debug.Log($"Hint added. Total hints allowed: {totalHintsAllowed}");
     }
 
     private void RestartScene()
