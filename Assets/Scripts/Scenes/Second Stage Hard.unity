@@ -1036,6 +1036,13 @@ MonoBehaviour:
   distance: 7.5
   height: 3
   smoothSpeed: 0.0125
+  wallOffset: 0.3
+  obstacleLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  rotationSpeed: 200
+  minPitch: -30
+  maxPitch: 60
 --- !u!1001 &179156681
 PrefabInstance:
   m_ObjectHideFlags: 0

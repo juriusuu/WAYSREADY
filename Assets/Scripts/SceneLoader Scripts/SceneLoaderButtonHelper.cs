@@ -9,6 +9,8 @@ public class SceneLoaderButtonHelper : MonoBehaviour
         {
             Debug.Log($"SceneLoaderButtonHelper: Requesting to load scene '{sceneName}'");
             SceneLoader.Instance.LoadSceneByName(sceneName);
+            // Reset Time.timeScale before transitioning
+            Time.timeScale = 1f;
         }
         else
         {
@@ -22,6 +24,8 @@ public class SceneLoaderButtonHelper : MonoBehaviour
         if (SceneLoader.Instance != null)
         {
             Debug.Log("SceneLoaderButtonHelper: Requesting to load the Main Menu");
+            // Reset Time.timeScale before transitioning
+            Time.timeScale = 1f;
             SceneLoader.Instance.LoadMainMenu();
         }
         else
@@ -37,6 +41,8 @@ public class SceneLoaderButtonHelper : MonoBehaviour
         {
             Debug.Log("SceneLoaderButtonHelper: Requesting to reload the current scene");
             SceneLoader.Instance.ReloadCurrentScene();
+            // Reset Time.timeScale before transitioning
+            Time.timeScale = 1f;
         }
         else
         {
@@ -51,6 +57,8 @@ public class SceneLoaderButtonHelper : MonoBehaviour
         {
             Debug.Log("SceneLoaderButtonHelper: Requesting to quit the game");
             SceneLoader.Instance.QuitGame();
+            // Reset Time.timeScale before transitioning
+            Time.timeScale = 1f;
         }
         else
         {

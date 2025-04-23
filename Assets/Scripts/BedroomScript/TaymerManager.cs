@@ -186,7 +186,7 @@ using UnityEngine.SceneManagement;
 public class TaymerManager : MonoBehaviour
 {
     public Image timerImage; // Reference to the TimerImage
-    public float totalTime = 60f; // Total time in seconds
+    private float totalTime; // Total time in seconds
     private float remainingTime;
 
     public LayfManager layfManager; // Reference to the LifeManager (handles lives and hearts)
@@ -199,32 +199,127 @@ public class TaymerManager : MonoBehaviour
     public GameObject arrowPrefab; // Assign the arrow prefab in the Inspector
     private GameObject currentArrow; // Store the current arrow instance
 
+    /*   private void Start()
+      {
+          remainingTime = totalTime; // Initialize the remaining time
+          timerImage.fillAmount = 1f; // Start with a full bar
+
+          if (failPanel != null)
+          {
+              failPanel.SetActive(false); // Ensure the fail panel is hidden at the start
+          }
+      } */
+
     private void Start()
     {
-        remainingTime = totalTime; // Initialize the remaining time
-        timerImage.fillAmount = 1f; // Start with a full bar
+        // Get the current scene name
+        string currentSceneName = SceneManager.GetActiveScene().name;
 
+        // Fetch the default time for the current scene from GameManager
+        if (GameManager.Instance != null)
+        {
+            totalTime = GameManager.Instance.GetDefaultTimeForScene(currentSceneName);
+            Debug.Log($"Default time for scene '{currentSceneName}': {totalTime} seconds");
+            Debug.Log($"BOBOTIME'{GameManager.Instance.additionalTime}");
+
+            /*   // Add additional time purchased from the shop
+              if (GameManager.Instance.additionalTime > 0)
+              {
+                  Debug.Log($"GameManager additional time before addition: {GameManager.Instance.additionalTime}");
+
+                  // Add the additional time to both remainingTime and totalTime
+                  totalTime += GameManager.Instance.additionalTime;
+
+                  // Debug.Log($"Remaining time after addition: {remainingTime}, Total time after addition: {totalTime}");
+
+                  // Reset the additional time after applying
+                  GameManager.Instance.additionalTime = 0;
+              }
+              remainingTime = totalTime; // Update remaining time to reflect the new total
+              Debug.Log($"Remaining time after addition: {remainingTime}, Total time after addition: {totalTime}");
+   */
+            // Add additional time purchased from the shop
+            if (GameManager.Instance.additionalTime > 0)
+            {
+                Debug.Log($"GameManager additional time before addition: {GameManager.Instance.additionalTime}");
+
+                // Add the additional time to both remainingTime and totalTime
+                totalTime += GameManager.Instance.additionalTime;
+                remainingTime = totalTime; // Update remaining time to reflect the new total
+
+                Debug.Log($"Remaining time after addition: {remainingTime}, Total time after addition: {totalTime}");
+
+                // Reset the additional time after applying
+                GameManager.Instance.additionalTime = 0;
+                Debug.Log($"Default Time: {totalTime}, Additional Time: {GameManager.Instance.additionalTime}");
+
+            }
+            else
+            {
+                remainingTime = totalTime; // Initialize remaining time
+            }
+        }
+        else
+        {
+            Debug.LogError("GameManager instance is null! Using fallback default time.");
+            totalTime = 60f; // Fallback default time
+            remainingTime = totalTime;
+        }
+
+        // Initialize the timer UI
+        timerImage.fillAmount = 1f;
+
+        // Ensure the fail panel is hidden at the start
         if (failPanel != null)
         {
-            failPanel.SetActive(false); // Ensure the fail panel is hidden at the start
+            failPanel.SetActive(false);
+        }
+
+        // Start the timer coroutine
+        StartCoroutine(TimerCoroutine());
+    }
+    public void AddAdditionalTime(float timeToAdd)
+    {
+        remainingTime += timeToAdd;
+        totalTime += timeToAdd; // Update the total time dynamically
+        timerImage.fillAmount = remainingTime / totalTime; // Update the timer UI
+        Debug.Log($"{timeToAdd} seconds added. Remaining time: {remainingTime}, Total time: {totalTime}");
+    }
+    private System.Collections.IEnumerator TimerCoroutine()
+    {
+        while (remainingTime > 0)
+        {
+            yield return new WaitForSeconds(1f); // Wait for 1 second
+            remainingTime -= 1f; // Decrease time by 1 second
+
+            // Update the timer UI
+            timerImage.fillAmount = remainingTime / totalTime;
+        }
+
+        // Handle player death when time runs out
+        if (!isPlayerDead)
+        {
+            HandlePlayerDeath();
+            isPlayerDead = true;
         }
     }
-
     private bool isPlayerDead = false; // Flag to prevent repeated calls to HandlePlayerDeath
 
-    private void Update()
-    {
-        if (remainingTime > 0)
+    /*     private void Update()
         {
-            remainingTime -= Time.deltaTime; // Decrease the remaining time
-            timerImage.fillAmount = remainingTime / totalTime; // Update the fill amount
-        }
-        else if (!isPlayerDead) // Only call HandlePlayerDeath once
-        {
-            HandlePlayerDeath(); // Call the method to handle player death when time runs out
-            isPlayerDead = true; // Set the flag to true to prevent repeated calls
-        }
-    }
+            if (remainingTime > 0)
+            {
+                remainingTime -= Time.deltaTime; // Decrease the remaining time
+                timerImage.fillAmount = remainingTime / totalTime; // Update the fill amount
+                Debug.Log($"Remaining Time: {remainingTime}, Fill Amount: {timerImage.fillAmount}");
+
+            }
+            else if (!isPlayerDead) // Only call HandlePlayerDeath once
+            {
+                HandlePlayerDeath(); // Call the method to handle player death when time runs out
+                isPlayerDead = true; // Set the flag to true to prevent repeated calls
+            }
+        } */
     public void UseHint()
     {
         if (hintsUsed >= totalHintsAllowed)
@@ -306,27 +401,54 @@ public class TaymerManager : MonoBehaviour
     private void HandlePlayerDeath()
     {
         {
-            if (GameManager.Instance != null)
+            /*  if (GameManager.Instance != null)
+             {
+                 GameManager.Instance.ChangeState(GameManager.GameState.PlayerDead); // Notify the GameManager to handle player death
+             }
+             else
+             {
+                 Debug.LogError("GameManager instance not found!");
+             } */
+
+            if (layfManager != null)
             {
-                GameManager.Instance.ChangeState(GameManager.GameState.PlayerDead); // Notify the GameManager to handle player death
+                layfManager.LoseLife();
+                if (layfManager.GetRemainingLives() > 0)
+                {
+                    Debug.Log("Player lost a life. Restarting the scene...");
+                    RestartScene();
+                }
+                else
+                {
+                    Debug.Log("No lives remaining. Showing fail panel...");
+                    ShowFailPanel();
+                }
             }
             else
             {
-                Debug.LogError("GameManager instance not found!");
+                Debug.LogError("LayfManager is not assigned!");
             }
 
         }
     }
 
+    /*     public void AddTime(float seconds)
+        {
+            remainingTime += seconds;
+            if (remainingTime > totalTime)
+            {
+                remainingTime = totalTime; // Cap the time at the maximum
+            }
+            // timerImage.fillAmount = remainingTime / totalTime; // Update the timer UI
+            Debug.Log($"{seconds} seconds added. Remaining time: {remainingTime}");
+        } */
+
     public void AddTime(float seconds)
     {
         remainingTime += seconds;
-        if (remainingTime > totalTime)
-        {
-            remainingTime = totalTime; // Cap the time at the maximum
-        }
+        totalTime += seconds; // Update the total time dynamically
         timerImage.fillAmount = remainingTime / totalTime; // Update the timer UI
-        Debug.Log($"{seconds} seconds added. Remaining time: {remainingTime}");
+        Debug.Log($"{seconds} seconds added. Remaining time: {remainingTime}, Total time: {totalTime}");
     }
 
     private void RestartScene()

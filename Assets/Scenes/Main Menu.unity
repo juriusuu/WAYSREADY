@@ -4323,7 +4323,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 423840735}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 617535724}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: BuyLife
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &423840735
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5720,6 +5732,7 @@ GameObject:
   - component: {fileID: 617535718}
   - component: {fileID: 617535722}
   - component: {fileID: 617535723}
+  - component: {fileID: 617535724}
   m_Layer: 0
   m_Name: ManagerForAll
   m_TagString: Untagged
@@ -5792,6 +5805,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   coinCount: 0
   completedScenes: []
+  additionalTime: 0
+  additionalLives: 0
+  additionalHints: 0
+--- !u!114 &617535724
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 617535717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 366226a45008b554cbf295a145ac4893, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeCost: 20
+  lifeCost: 30
+  hintCost: 30
+  timeButton: {fileID: 999384296}
+  lifeButton: {fileID: 423840734}
+  hintButton: {fileID: 2086876874}
+  shopMenu: {fileID: 1925273154}
 --- !u!1 &620706191
 GameObject:
   m_ObjectHideFlags: 0
@@ -7562,7 +7597,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &758257074
 RectTransform:
   m_ObjectHideFlags: 0
@@ -10577,7 +10612,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 999384297}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 617535724}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: BuyTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &999384297
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11637,10 +11684,10 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1925273154}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 617535724}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: OpenShop
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -25068,7 +25115,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2086876875}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 617535724}
+        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
+        m_MethodName: BuyHint
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2086876875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25768,6 +25827,9 @@ SceneRoots:
   m_Roots:
   - {fileID: 2071155171}
   - {fileID: 250760429}
+  - {fileID: 2124480821}
+  - {fileID: 617535721}
+  - {fileID: 1471203944}
   - {fileID: 1575775471}
   - {fileID: 1132409523}
   - {fileID: 2039031005}
@@ -25807,6 +25869,3 @@ SceneRoots:
   - {fileID: 648422851}
   - {fileID: 893730931}
   - {fileID: 383950259}
-  - {fileID: 2124480821}
-  - {fileID: 617535721}
-  - {fileID: 1471203944}
