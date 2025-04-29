@@ -248,7 +248,6 @@ public class LayfManager : MonoBehaviour
         // Initialize the life panel
         UpdateHeartsUI();
     }
-
     public void LoseLife()
     {
         if (currentLives > 0)
@@ -261,8 +260,12 @@ public class LayfManager : MonoBehaviour
 
         if (currentLives <= 0)
         {
-            Debug.Log("Game Over!");
+            Debug.Log("Game Over! Triggering Game Over logic.");
             NotifyGameManagerGameOver(); // Notify the GameManager when lives are out
+        }
+        else
+        {
+            Debug.Log("Player still has lives remaining.");
         }
     }
 
@@ -319,5 +322,12 @@ public class LayfManager : MonoBehaviour
             Debug.LogWarning("Maximum lives reached. Cannot add more lives.");
         }
         Debug.Log($"AddLife called. Current lives after increment: {currentLives}");
+    }
+
+    public void ResetLives()
+    {
+        currentLives = hearts.Length; // Reset to maximum lives
+        UpdateHeartsUI(); // Update the heart UI
+        Debug.Log("Lives reset to maximum.");
     }
 }

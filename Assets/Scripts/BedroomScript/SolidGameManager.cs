@@ -36,9 +36,9 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<string, float> defaultSceneTimes = new Dictionary<string, float>
     {
-        { "Stage1Easy", 300f },
-        { "Stage1Normal", 240f },
-        { "Stage1Hard", 180f },
+        { "Stage1Easy", 10f },
+        { "Stage1Normal", 10f },
+        { "Stage1Hard", 10f },
         { "Stage2Easy", 300f },
         { "Stage2Normal", 240f },
         { "Stage2Hard", 180f },
@@ -504,21 +504,91 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("CoinUIManager instance is null. Unable to update coin UI.");
         }
     }
+    /*    private void OnEnterPlayingState()
+       {
+
+           Debug.Log("Entered Playing state.");
+           Time.timeScale = 1f; // Resume gameplay
+
+           // Reset the timer and death flag in TaymerManager
+           TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
+           if (taymerManager != null)
+           {
+               taymerManager.ResetTimer(); // Restart the timer
+               taymerManager.isPlayerDead = false; // Allow subsequent deaths
+               Debug.Log("[GameManager] Timer restarted and isPlayerDead reset in TaymerManager.");
+           }
+           else
+           {
+               Debug.LogWarning("[GameManager] TaymerManager not found! Unable to reset timer.");
+           }
+
+           // Ensure the game is ready to handle the next death
+           LayfManager layfManager = FindObjectOfType<LayfManager>();
+           if (layfManager != null)
+           {
+               Debug.Log($"[GameManager] Lives remaining: {layfManager.GetRemainingLives()}");
+           }
+           else
+           {
+               Debug.LogWarning("[GameManager] LayfManager not found! Unable to track lives.");
+           }
+       } */
 
     private void OnEnterPlayingState()
     {
         Debug.Log("Entered Playing state.");
         Time.timeScale = 1f; // Resume gameplay
+
+        // Dynamically find TaymerManager
+        TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
+        if (taymerManager != null)
+        {
+            taymerManager.ResetTimer();
+            taymerManager.isPlayerDead = false;
+            Debug.Log("[GameManager] Timer reset and player death flag cleared.");
+        }
+        else
+        {
+            Debug.LogWarning("[GameManager] TaymerManager not found in the scene. Timer cannot be reset.");
+        }
+
+        // Dynamically find LayfManager
+        LayfManager layfManager = FindObjectOfType<LayfManager>();
+        if (layfManager != null)
+        {
+            Debug.Log($"[GameManager] Lives remaining: {layfManager.GetRemainingLives()}");
+        }
+        else
+        {
+            Debug.LogWarning("[GameManager] LayfManager not found in the scene. Unable to track lives.");
+        }
     }
+
+    /// <summary>
+    /// //
+    /// </summary>
+    /// 
+
     private void OnEnterPlayerDeadState()
     {
         Debug.Log("Entered PlayerDead state.");
         Time.timeScale = 0f; // Pause gameplay
 
+        // Disable player movement
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player != null)
+        {
+            PlayerMovement movement = player.GetComponent<PlayerMovement>();
+            if (movement != null)
+            {
+                movement.enabled = false; // Disable movement
+                Debug.Log("Player movement disabled.");
+            }
+        }
+
         // Reference the LayfManager and TaymerManager
         LayfManager layfManager = FindObjectOfType<LayfManager>();
-        TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
-
         if (layfManager != null)
         {
             layfManager.LoseLife(); // Reduce a life
@@ -526,12 +596,8 @@ public class GameManager : MonoBehaviour
             if (layfManager.GetRemainingLives() > 0) // Check if the player has lives left
             {
                 Debug.Log("Player lost a life. Resetting the game state...");
-                if (taymerManager != null)
-                {
-                    taymerManager.ResetTimer(); // Reset the timer in TaymerManager
-                }
-
-                ResetGameState(); // Reset the game state without reloading the scene
+                StartCoroutine(HandlePlayerDeathWithDelay()); // Start the delay coroutine
+                                                              //  ResetGameState(); // Reset the game state without reloading the scene
             }
             else
             {
@@ -544,10 +610,128 @@ public class GameManager : MonoBehaviour
             Debug.LogError("LayfManager not found! Unable to reduce life.");
         }
     }
+    /*     private void OnEnterPlayerDeadState()
+        {
+            Debug.Log("Entered PlayerDead state.");
+            Time.timeScale = 0f; // Pause gameplay
 
+            // Reference the LayfManager and TaymerManager
+            LayfManager layfManager = FindObjectOfType<LayfManager>();
+            TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
+
+            if (layfManager != null)
+            {
+                layfManager.LoseLife(); // Reduce a life
+
+                if (layfManager.GetRemainingLives() > 0) // Check if the player has lives left
+                {
+                    Debug.Log("Player lost a life. Resetting the game state...");
+                    ResetGameState(); // Reset the game state without reloading the scene
+                }
+                else
+                {
+                    Debug.Log("No lives remaining. Transitioning to GameOver state...");
+                    ChangeState(GameState.GameOver); // Transition to GameOver state
+                }
+            }
+            else
+            {
+                Debug.LogError("LayfManager not found! Unable to reduce life.");
+            }
+        } */
+
+    /* 
+           if (layfManager != null)
+           {
+               layfManager.LoseLife(); // Reduce a life
+
+               if (layfManager.GetRemainingLives() > 0) // Check if the player has lives left
+               {
+                   Debug.Log("Player lost a life. Resetting the game state...");
+                   if (taymerManager != null)
+                   {
+                       taymerManager.ResetTimer(); // Reset the timer in TaymerManager
+                   }
+
+                   ResetGameState(); // Reset the game state without reloading the scene
+               }
+               else
+               {
+                   Debug.Log("No lives remaining. Transitioning to GameOver state...");
+                   ChangeState(GameState.GameOver); // Transition to GameOver state
+               }
+           }
+           else
+           {
+               Debug.LogError("LayfManager not found! Unable to reduce life.");
+           } */
+
+    /* 
+        private void ResetGameState()
+        {
+            Debug.Log("Resetting game state...");
+            Debug.Log("ResetGameState called.");
+
+            // Reset player position (if needed)
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                player.transform.position = playerStartingPosition; // Reset to the starting position
+                Debug.Log($"Player position reset to starting position: {playerStartingPosition}");
+            }
+            else
+            {
+                Debug.LogError("Player not found in the scene!");
+            }
+            // Resume gameplay
+            Time.timeScale = 1f;
+            Debug.Log($"Time.timeScale set to {Time.timeScale}");
+
+                     // Apply stored purchases (e.g., additional lives, time, hint ApplyStoredPurchases(); 
+
+
+            // Synchronize lives with LayfManager
+            LayfManager layfManager = FindObjectOfType<LayfManager>();
+            if (layfManager != null)
+            {
+                Debug.Log($"Synchronizing lives. Current lives in LayfManager: {layfManager.GetRemainingLives()}, Additional lives: {additionalLives}");
+                for (int i = 0; i < additionalLives; i++)
+                {
+                    layfManager.AddLife(); // Add any additional lives purchased
+                }
+                additionalLives = 0; // Reset additional lives after applying
+            }
+            else
+            {
+                Debug.LogError("LayfManager not found during ResetGameState!");
+            }
+
+            // Restart the timer
+            TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
+            if (taymerManager != null)
+            {
+                taymerManager.ResetTimer(); // Ensure the timer starts moving again
+                Debug.Log("Timer restarted.");
+            }
+            else
+            {
+                Debug.LogWarning("TaymerManager not found! Timer could not be restarted.");
+            }
+
+        }
+     */
     private void ResetGameState()
     {
         Debug.Log("Resetting game state...");
+
+        // Check if lives are still available
+        LayfManager layfManager = FindObjectOfType<LayfManager>();
+        if (layfManager != null && layfManager.GetRemainingLives() <= 0)
+        {
+            Debug.Log("No lives remaining. Transitioning to Game Over.");
+            ChangeState(GameState.GameOver); // Transition to Game Over
+            return; // Exit the method
+        }
 
         // Reset player position (if needed)
         GameObject player = GameObject.FindWithTag("Player");
@@ -555,6 +739,14 @@ public class GameManager : MonoBehaviour
         {
             player.transform.position = playerStartingPosition; // Reset to the starting position
             Debug.Log($"Player position reset to starting position: {playerStartingPosition}");
+
+            // Re-enable player movement
+            PlayerMovement movement = player.GetComponent<PlayerMovement>();
+            if (movement != null)
+            {
+                movement.enabled = true; // Re-enable movement
+                Debug.Log("Player movement re-enabled.");
+            }
         }
         else
         {
@@ -562,6 +754,30 @@ public class GameManager : MonoBehaviour
         }
         // Resume gameplay
         Time.timeScale = 1f;
+        Debug.Log($"Time.timeScale set to {Time.timeScale}");
+
+        // Restart the timer
+        TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
+        if (taymerManager != null)
+        {
+            taymerManager.ResetTimer(); // Ensure the timer starts moving again
+            taymerManager.isPlayerDead = false; // Reset the flag to allow subsequent deaths
+            Debug.Log("Timer restarted and isPlayerDead reset.");
+        }
+        else
+        {
+            Debug.LogWarning("TaymerManager not found! Timer could not be restarted.");
+        }
+
+        // Transition back to Playing state
+        ChangeState(GameState.Playing);
+    }
+
+    private System.Collections.IEnumerator HandlePlayerDeathWithDelay()
+    {
+        Debug.Log("Player death handled. Waiting before resetting the game state...");
+        yield return new WaitForSecondsRealtime(2f); // Wait for 2 seconds (real-time, not affected by time scale)
+        ResetGameState();
     }
     public void OnEnterGameOverState()
     {

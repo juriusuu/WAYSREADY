@@ -114,7 +114,7 @@ public class TelephoneInteractionManagerS3 : MonoBehaviour
             FindObjectOfType<QuestClipboardManager>()?.CompleteTask(1); // Assuming this is the first task
 
             // Activate the phone button
-            phoneButtonManager?.ActivatePhoneButton();
+            //  phoneButtonManager?.ActivatePhoneButton();
 
             // Mark interaction as complete and disable the button
             isInteractionComplete = true;
@@ -139,6 +139,10 @@ public class TelephoneInteractionManagerS3 : MonoBehaviour
                 panel.SetActive(false);
             }
         }
+
+        // Activate the phone button after all panels are shown
+        phoneButtonManager?.ActivatePhoneButton();
+        Debug.Log("Phone button activated after showing all panels.");
     }
 }
 

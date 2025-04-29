@@ -219,26 +219,13 @@ public class TaymerManager : MonoBehaviour
         if (GameManager.Instance != null)
         {
             totalTime = GameManager.Instance.GetDefaultTimeForScene(currentSceneName);
+            remainingTime = totalTime; // Initialize remaining time
             Debug.Log($"Default time for scene '{currentSceneName}': {totalTime} seconds");
-            Debug.Log($"BOBOTIME'{GameManager.Instance.additionalTime}");
-            Debug.Log($"BOBOTIME'{GameManager.Instance.additionalHints}");
+            Debug.Log($"BOBOTIME '{GameManager.Instance.additionalTime}");
+            Debug.Log($"BOBOHINT'{GameManager.Instance.additionalHints}");
+            Debug.Log($"BOBOLAYF'{GameManager.Instance.additionalLives}");
 
-            /*   // Add additional time purchased from the shop
-              if (GameManager.Instance.additionalTime > 0)
-              {
-                  Debug.Log($"GameManager additional time before addition: {GameManager.Instance.additionalTime}");
 
-                  // Add the additional time to both remainingTime and totalTime
-                  totalTime += GameManager.Instance.additionalTime;
-
-                  // Debug.Log($"Remaining time after addition: {remainingTime}, Total time after addition: {totalTime}");
-
-                  // Reset the additional time after applying
-                  GameManager.Instance.additionalTime = 0;
-              }
-              remainingTime = totalTime; // Update remaining time to reflect the new total
-              Debug.Log($"Remaining time after addition: {remainingTime}, Total time after addition: {totalTime}");
-   */
             // Add additional time purchased from the shop
             if (GameManager.Instance.additionalTime > 0)
             {
@@ -270,7 +257,20 @@ public class TaymerManager : MonoBehaviour
 
         // Initialize the timer UI
         timerImage.fillAmount = 1f;
-
+        /*    // Add additional lives purchased from the shop
+           if (GameManager.Instance.additionalLives > 0)
+           {
+               if (layfManager != null)
+               {
+                   layfManager.AddLives(GameManager.Instance.additionalLives); // Add lives to LayfManager
+                   Debug.Log($"Additional lives applied: {GameManager.Instance.additionalLives}");
+                   GameManager.Instance.additionalLives = 0; // Reset additional lives after applying
+               }
+               else
+               {
+                   Debug.LogError("LayfManager is not assigned! Unable to add additional lives.");
+               }
+           } */
 
 
         // Fetch the default hints for the current scene from GameManager
@@ -305,10 +305,15 @@ public class TaymerManager : MonoBehaviour
         {
             failPanel.SetActive(false);
         }
-
+        else
+        {
+            Debug.LogWarning("Fail panel is not assigned! Please assign it in the Inspector.");
+        }
+        isPlayerDead = false; // Ensure the death flag is reset
         // Start the timer coroutine
         StartCoroutine(TimerCoroutine());
     }
+
     public void AddAdditionalTime(float timeToAdd)
     {
         remainingTime += timeToAdd;
@@ -318,11 +323,12 @@ public class TaymerManager : MonoBehaviour
     }
     private System.Collections.IEnumerator TimerCoroutine()
     {
+        Debug.Log("[TaymerManager] TimerCoroutine started.");
+
         while (remainingTime > 0)
         {
             yield return new WaitForSeconds(1f); // Wait for 1 second
             remainingTime -= 1f; // Decrease time by 1 second
-
             // Update the timer UI
             timerImage.fillAmount = remainingTime / totalTime;
         }
@@ -330,12 +336,56 @@ public class TaymerManager : MonoBehaviour
         // Handle player death when time runs out
         if (!isPlayerDead)
         {
+            Debug.Log("[TaymerManager] Timer ran out in TimerCoroutine. Calling HandlePlayerDeath.");
             HandlePlayerDeath();
             isPlayerDead = true;
         }
     }
-    private bool isPlayerDead = false; // Flag to prevent repeated calls to HandlePlayerDeath
+    public bool isPlayerDead = false; // Flag to prevent repeated calls to HandlePlayerDeath
+    private void Update()
+    {
+        Debug.Log("[TaymerManager] Update is running."); // Add this log to confirm Update is being called
 
+        if (remainingTime > 0)
+        {
+            remainingTime -= Time.deltaTime; // Decrease the remaining time
+                                             // timerImage.fillAmount = remainingTime / totalTime; // Update the fill amount
+                                             //  Debug.Log($"[TaymerManager] Timer running. Remaining time: {remainingTime}");
+        }
+        else if (!isPlayerDead) // Only call HandlePlayerDeath once per death
+        {
+            Debug.Log("[TaymerManager] Timer ran out. Calling HandlePlayerDeath.");
+            isPlayerDead = true; // Set the flag to true to prevent repeated calls
+            NotifyGameManager(); // Call the method to handle player death when time runs out
+
+        }
+    }
+    /*    private void Update()
+       {
+           if (remainingTime > 0)
+           {
+               remainingTime -= Time.deltaTime;
+           }
+           else if (!isPlayerDead)
+           {
+               isPlayerDead = true;
+               NotifyGameManager(); // Notify GameManager when timer reaches 0
+           }
+       } */
+
+    private void NotifyGameManager()
+    {
+        GameManager gameManager = FindObjectOfType<GameManager>();
+        if (gameManager != null)
+        {
+            Debug.Log("[TaymerManager] Timer expired. Notifying GameManager to handle player death.");
+            HandlePlayerDeath(); // Call HandlePlayerDeath in GameManager
+        }
+        else
+        {
+            Debug.LogError("[TaymerManager] GameManager not found! Unable to notify.");
+        }
+    }
     /*     private void Update()
         {
             if (remainingTime > 0)
@@ -422,46 +472,92 @@ public class TaymerManager : MonoBehaviour
         Debug.Log($"Arrow placed above object: {obj.name}");
     }
 
+    public void StartTimer()
+    {
+        if (remainingTime > 0)
+        {
+            StopAllCoroutines(); // Stop any existing timer coroutine
+            StartCoroutine(TimerCoroutine()); // Restart the timer coroutine
+            Debug.Log("Timer started.");
+        }
+        else
+        {
+            Debug.LogWarning("Timer cannot be started because remaining time is 0.");
+        }
+    }
+
+
+
+    /*     public void ResetTimer()
+        {
+            remainingTime = totalTime; // Reset the timer
+            timerImage.fillAmount = 1f; // Reset the timer UI
+            Debug.Log("Timer reset.");
+
+            // Restart the timer coroutine
+            StopAllCoroutines(); // Stop any existing timer coroutine
+            StartCoroutine(TimerCoroutine()); // Start a new timer coroutine
+            Debug.Log("Timer coroutine restarted.");
+        } */
 
     public void ResetTimer()
     {
-        remainingTime = totalTime; // Reset the timer
-        timerImage.fillAmount = 1f; // Reset the timer UI
-        Debug.Log("Timer reset.");
+        // Reset the remaining time to the total time
+        remainingTime = totalTime;
+
+        // Update the timer UI to show a full timer
+        timerImage.fillAmount = 1f;
+        isPlayerDead = false; // Reset the death flag
+        Debug.Log("[TaymerManager] Timer reset. Remaining time set to total time.");
+
+        // Log the reset for debugging
+        Debug.Log("Timer reset. Remaining time set to total time.");
+
+        // Stop any existing timer coroutine to avoid multiple coroutines running
+        StopAllCoroutines();
+
+        // Restart the timer coroutine
+        StartCoroutine(TimerCoroutine());
+        Debug.Log("Timer coroutine restarted.");
     }
+
+
     private void HandlePlayerDeath()
     {
         {
-            /*  if (GameManager.Instance != null)
-             {
-                 GameManager.Instance.ChangeState(GameManager.GameState.PlayerDead); // Notify the GameManager to handle player death
-             }
-             else
-             {
-                 Debug.LogError("GameManager instance not found!");
-             } */
-
-            if (layfManager != null)
+            Debug.Log("HandlePlayerDeath called. Notifying GameManager.");
+            if (GameManager.Instance != null)
             {
-                layfManager.LoseLife();
-                if (layfManager.GetRemainingLives() > 0)
-                {
-                    Debug.Log("Player lost a life. Restarting the scene...");
-                    RestartScene();
-                }
-                else
-                {
-                    Debug.Log("No lives remaining. Showing fail panel...");
-                    ShowFailPanel();
-                }
+                GameManager.Instance.ChangeState(GameManager.GameState.PlayerDead); // Notify the GameManager to handle player death
             }
             else
             {
-                Debug.LogError("LayfManager is not assigned!");
+                Debug.LogError("GameManager instance not found!");
             }
-
         }
     }
+
+    /*             if (layfManager != null)
+                {
+                    layfManager.LoseLife();
+                    if (layfManager.GetRemainingLives() > 0)
+                    {
+                        Debug.Log("Player lost a life. Restarting the scene...");
+                        RestartScene();
+                    }
+                    else
+                    {
+                        Debug.Log("No lives remaining. Showing fail panel...");
+                        ShowFailPanel();
+                    }
+                }
+                else
+                {
+                    Debug.LogError("LayfManager is not assigned!");
+                }
+
+            } */
+
 
     /*     public void AddTime(float seconds)
         {
@@ -699,3 +795,21 @@ public class TaymerManager : MonoBehaviour
     {
         UnityEngine.SceneManagement.SceneManager.LoadScene(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
     } */
+
+
+/*   // Add additional time purchased from the shop
+  if (GameManager.Instance.additionalTime > 0)
+  {
+      Debug.Log($"GameManager additional time before addition: {GameManager.Instance.additionalTime}");
+
+      // Add the additional time to both remainingTime and totalTime
+      totalTime += GameManager.Instance.additionalTime;
+
+      // Debug.Log($"Remaining time after addition: {remainingTime}, Total time after addition: {totalTime}");
+
+      // Reset the additional time after applying
+      GameManager.Instance.additionalTime = 0;
+  }
+  remainingTime = totalTime; // Update remaining time to reflect the new total
+  Debug.Log($"Remaining time after addition: {remainingTime}, Total time after addition: {totalTime}");
+*/

@@ -51,21 +51,61 @@ public class HexTileInteraction : MonoBehaviour
         }
     }
 
+    /*     private void OnInteractButtonPressed()
+        {
+            if (isPlayerNear)
+            {
+                Debug.Log("Interact button pressed. Loading scene: " + sceneToLoad);
+
+                // Load the specified scene
+                if (!string.IsNullOrEmpty(sceneToLoad))
+                {
+                    SceneManager.LoadScene(sceneToLoad);
+                }
+                else
+                {
+                    Debug.LogError("Scene name is not set!");
+                }
+            }
+        } */
+
     private void OnInteractButtonPressed()
     {
         if (isPlayerNear)
         {
             Debug.Log("Interact button pressed. Loading scene: " + sceneToLoad);
 
-            // Load the specified scene
-            if (!string.IsNullOrEmpty(sceneToLoad))
+            // Mark the "Turn on the radio" task as completed
+            var questManager = FindObjectOfType<QuestClipboardManager>();
+            if (questManager != null)
             {
-                SceneManager.LoadScene(sceneToLoad);
+                questManager.CompleteTask(3); // Assuming this is the fourth task
+                questManager.SaveState(); // Save the state immediately
+                Debug.Log("Quest state saved before transitioning to the next scene.");
             }
             else
             {
-                Debug.LogError("Scene name is not set!");
+                Debug.LogError("QuestClipboardManager not found!");
             }
+
+            // Start a coroutine to delay the scene transition
+            StartCoroutine(DelayedSceneLoad());
+        }
+    }
+
+    private System.Collections.IEnumerator DelayedSceneLoad()
+    {
+        // Wait for 1 second (adjust the delay as needed)
+        yield return new WaitForSeconds(0.2f);
+
+        // Load the specified scene
+        if (!string.IsNullOrEmpty(sceneToLoad))
+        {
+            SceneManager.LoadScene(sceneToLoad);
+        }
+        else
+        {
+            Debug.LogError("Scene name is not set!");
         }
     }
 }

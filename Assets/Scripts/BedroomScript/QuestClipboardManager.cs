@@ -29,13 +29,35 @@ public class QuestClipboardManager : MonoBehaviour
         // Ensure all checkboxes are updated
         UpdateCheckboxes();
 
-        // Disable the proceed button at the start
-        if (proceedButton != null)
+        /*   // Disable the proceed button at the start
+          if (proceedButton != null)
+          {
+              Debug.LogWarning("Proceed button is not assigned in the Inspector!");
+              proceedButton.interactable = false; // Disabled until all tasks are completed
+              proceedButton.onClick.AddListener(OnProceedButtonPressed); // Add listener for button press
+          }
+   */// Check if all tasks are completed and enable the proceed button
+        if (AreAllTasksCompleted())
         {
-            proceedButton.interactable = false; // Disabled until all tasks are completed
-            proceedButton.onClick.AddListener(OnProceedButtonPressed); // Add listener for button press
+            if (proceedButton != null)
+            {
+                proceedButton.interactable = true; // Enable the button
+                proceedButton.onClick.AddListener(OnProceedButtonPressed); // Add listener for button press
+                Debug.Log("Proceed button re-enabled on scene load.");
+            }
+            else
+            {
+                Debug.LogError("Proceed button is not assigned in the Inspector!");
+            }
         }
-
+        else
+        {
+            if (proceedButton != null)
+            {
+                proceedButton.interactable = false; // Keep the button disabled
+                Debug.Log("Proceed button remains disabled on scene load.");
+            }
+        }
         // Add a listener to the help button if it exists
         if (helpButton != null)
         {
@@ -61,21 +83,40 @@ public class QuestClipboardManager : MonoBehaviour
         if (taskIndex >= 0 && taskIndex < taskCompletionStatus.Length)
         {
             taskCompletionStatus[taskIndex] = true;
+            Debug.Log($"Task {taskIndex} marked as completed.");
         }
 
         // Update the checkboxes
         UpdateCheckboxes();
-
-        // Check if all tasks are completed
+        /* 
+                // Check if all tasks are completed
+                if (AreAllTasksCompleted())
+                {
+                    Debug.Log($"All tasks for quest '{questName}' are completed.");
+                    if (proceedButton != null)
+                    {
+                        proceedButton.interactable = true; // Enable the proceed button
+                    }
+                }
+         */    // Check if all tasks are completed
         if (AreAllTasksCompleted())
         {
             Debug.Log($"All tasks for quest '{questName}' are completed.");
             if (proceedButton != null)
             {
                 proceedButton.interactable = true; // Enable the proceed button
+                proceedButton.onClick.AddListener(OnProceedButtonPressed); // A
+                Debug.Log("Proceed button is now interactable.");
+            }
+            else
+            {
+                Debug.LogError("Proceed button is not assigned in the Inspector!");
             }
         }
-
+        else
+        {
+            Debug.Log("Not all tasks are completed yet.");
+        }
         // Save the updated state
         SaveState();
     }
@@ -88,22 +129,35 @@ public class QuestClipboardManager : MonoBehaviour
             if (taskCheckboxes[i] != null)
             {
                 taskCheckboxes[i].isOn = taskCompletionStatus[i];
+                Debug.Log($"Checkbox {i} updated to: {taskCompletionStatus[i]}");
             }
         }
     }
 
+    /*    private bool AreAllTasksCompleted()
+       {
+           foreach (bool isCompleted in taskCompletionStatus)
+           {
+               if (!isCompleted)
+               {
+                   return false; // If any task is not completed, return false
+               }
+           }
+           return true; // All tasks are completed
+       } */
     private bool AreAllTasksCompleted()
     {
-        foreach (bool isCompleted in taskCompletionStatus)
+        for (int i = 0; i < taskCompletionStatus.Length; i++)
         {
-            if (!isCompleted)
+            if (!taskCompletionStatus[i])
             {
-                return false; // If any task is not completed, return false
+                Debug.Log($"Task {i} is not completed.");
+                return false;
             }
         }
-        return true; // All tasks are completed
+        Debug.Log("All tasks are completed.");
+        return true;
     }
-
     private void OnProceedButtonPressed()
     {
         Debug.Log($"Proceed button pressed for quest '{questName}'.");
@@ -187,12 +241,14 @@ public class QuestClipboardManager : MonoBehaviour
         }
     }
 
-    private void SaveState()
+    public void SaveState()
     {
         // Save the task completion status to the GameManager
         if (GameManager.Instance != null)
         {
             GameManager.Instance.SaveQuestState(questName, taskCompletionStatus);
+            Debug.Log($"Saved task completion status for quest '{questName}': {string.Join(", ", taskCompletionStatus)}");
+
         }
         else
         {
@@ -200,7 +256,7 @@ public class QuestClipboardManager : MonoBehaviour
         }
     }
 
-    private void LoadState()
+    public void LoadState()
     {
         if (string.IsNullOrEmpty(questName))
         {
@@ -213,6 +269,8 @@ public class QuestClipboardManager : MonoBehaviour
         if (GameManager.Instance != null)
         {
             taskCompletionStatus = GameManager.Instance.LoadQuestState(questName, taskCheckboxes.Length);
+            Debug.Log($"Loaded task completion status for quest '{questName}': {string.Join(", ", taskCompletionStatus)}");
+
         }
         else
         {
