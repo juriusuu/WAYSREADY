@@ -3383,6 +3383,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   arrowPrefab: {fileID: 7404223956060802447, guid: f2bfbd7b1d17434418016273ad70afb2, type: 3}
+  isPlayerDead: 0
 --- !u!4 &268380438
 Transform:
   m_ObjectHideFlags: 0
@@ -16276,7 +16277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3c5dac0d71a2c4fa3ab9306136c2d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  questName: Stage2Normal
+  questName: Stage2Easy
   clipboardPanel: {fileID: 826558617}
   helpButton: {fileID: 335043658}
   taskCheckboxes:

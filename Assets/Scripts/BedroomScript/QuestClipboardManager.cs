@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class QuestClipboardManager : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class QuestClipboardManager : MonoBehaviour
     public SceneLoaderButtonHelper sceneButtonHelper; // Reference to the SceneButtonHelper
 
     private bool[] taskCompletionStatus; // Tracks the completion status of tasks
+
+    public static string panelToActivate; // Static variable to store the panel name
 
     private void Start()
     {
@@ -157,7 +160,7 @@ public class QuestClipboardManager : MonoBehaviour
         }
         Debug.Log("All tasks are completed.");
         return true;
-    }
+    }/* 
     private void OnProceedButtonPressed()
     {
         Debug.Log($"Proceed button pressed for quest '{questName}'.");
@@ -182,6 +185,40 @@ public class QuestClipboardManager : MonoBehaviour
         else
         {
             Debug.LogError("SceneButtonHelper is not assigned!");
+        }
+    }
+ */
+    private void OnProceedButtonPressed()
+    {
+        Debug.Log($"Proceed button pressed for quest '{questName}'.");
+
+        // Reward the player
+        RewardPlayer();
+
+        // Get the next scene or panel identifier
+        string nextSceneOrPanel = GetNextSceneName();
+        if (!string.IsNullOrEmpty(nextSceneOrPanel))
+        {
+            // Check if the next step is a storyline panel
+            if (nextSceneOrPanel.Contains("Storyline"))
+            {
+                // Store the panel name in the static variable
+                panelToActivate = nextSceneOrPanel;
+
+                // Load the Main Menu scene
+                Debug.Log($"Loading Main Menu scene to activate panel: {nextSceneOrPanel}");
+                SceneManager.LoadScene("Main Menu"); // Replace "Main Menu" with the actual name of your Main Menu scene
+            }
+            else
+            {
+                // Otherwise, assume it's a scene and load it
+                Debug.Log($"Loading scene: {nextSceneOrPanel}");
+                SceneManager.LoadScene(nextSceneOrPanel);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No next scene or panel defined.");
         }
     }
 
@@ -211,8 +248,37 @@ public class QuestClipboardManager : MonoBehaviour
             Debug.LogError("GameManager instance is null! Unable to mark the stage as completed.");
         }
     }
+    /* 
+        // Helper method to determine the next scene name
+        private string GetNextSceneName()
+        {
+            // Define the mapping of quest names to next scene names
+            switch (questName)
+            {
+                case "Stage1Easy":
+                    return "Stage1Normal";
+                case "Stage1Normal":
+                    return "Stage1Hard";
+                case "Stage1Hard":
+                    return "Stage2Easy";
+                case "Stage2Easy":
+                    return "Stage2Normal";
+                case "Stage2Normal":
+                    return "Stage2Hard";
+                case "Stage2Hard":
+                    return "Stage3Easy";
+                case "Stage3Easy":
+                    return "Stage3Normal";
+                case "Stage3Normal":
+                    return "Stage3Hard";
+                case "Stage3Hard":
+                    return null; // No next scene, final stage
+                default:
+                    return null; // No next scene
+            }
+        }
+     */
 
-    // Helper method to determine the next scene name
     private string GetNextSceneName()
     {
         // Define the mapping of quest names to next scene names
@@ -223,12 +289,16 @@ public class QuestClipboardManager : MonoBehaviour
             case "Stage1Normal":
                 return "Stage1Hard";
             case "Stage1Hard":
+                return "Stage 2 Storyline"; // Transition to Storyline 2 after Stage1Hard
+            case "Stage 2 Storyline":
                 return "Stage2Easy";
             case "Stage2Easy":
                 return "Stage2Normal";
             case "Stage2Normal":
                 return "Stage2Hard";
             case "Stage2Hard":
+                return "Stage 3 Storyline"; // Transition to Storyline 3 after Stage2Hard
+            case "Stage 3 Storyline":
                 return "Stage3Easy";
             case "Stage3Easy":
                 return "Stage3Normal";
@@ -240,7 +310,6 @@ public class QuestClipboardManager : MonoBehaviour
                 return null; // No next scene
         }
     }
-
     public void SaveState()
     {
         // Save the task completion status to the GameManager

@@ -23,8 +23,8 @@ public class GameManager : MonoBehaviour
     public int coinCount = 0;
     private string currentScene; // Track the current scene
     public List<string> completedScenes = new List<string>(); // List of completed scenes
-    private Dictionary<string, bool[]> questCompletionStatus = new Dictionary<string, bool[]>(); // Quest completion status
-    private Dictionary<string, SceneState> sceneStates = new Dictionary<string, SceneState>(); // Tracks all scenes
+    public Dictionary<string, bool[]> questCompletionStatus = new Dictionary<string, bool[]>(); // Quest completion status
+    public Dictionary<string, SceneState> sceneStates = new Dictionary<string, SceneState>(); // Tracks all scenes
     private Vector3 playerStartingPosition; // Store the player's starting position
 
     private Dictionary<string, ObjectState> objectStates = new Dictionary<string, ObjectState>();
@@ -36,14 +36,14 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<string, float> defaultSceneTimes = new Dictionary<string, float>
     {
-        { "Stage1Easy", 10f },
-        { "Stage1Normal", 10f },
-        { "Stage1Hard", 10f },
-        { "Stage2Easy", 300f },
-        { "Stage2Normal", 240f },
+        { "Stage1Easy", 180f },
+        { "Stage1Normal", 180f },
+        { "Stage1Hard", 180f },
+        { "Stage2Easy", 180f },
+        { "Stage2Normal", 180f },
         { "Stage2Hard", 180f },
-        { "Stage3Easy", 300f },
-        { "Stage3Normal", 240f },
+        { "Stage3Easy", 180f },
+        { "Stage3Normal", 180f },
         { "Stage3Hard", 180f }
     };
 
@@ -776,7 +776,7 @@ public class GameManager : MonoBehaviour
     private System.Collections.IEnumerator HandlePlayerDeathWithDelay()
     {
         Debug.Log("Player death handled. Waiting before resetting the game state...");
-        yield return new WaitForSecondsRealtime(2f); // Wait for 2 seconds (real-time, not affected by time scale)
+        yield return new WaitForSecondsRealtime(0.5f); // Wait for 2 seconds (real-time, not affected by time scale)
         ResetGameState();
     }
     public void OnEnterGameOverState()
