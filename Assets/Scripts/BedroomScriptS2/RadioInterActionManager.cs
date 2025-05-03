@@ -138,5 +138,14 @@ public class RadioInteractionManager : MonoBehaviour
             yield return new WaitForSeconds(1.5f); // Wait for 1.5 seconds
             thirdPanel.SetActive(false);
         }
+
+        // Remove or disable the AudioSource after showing the panels
+        if (radioAudioSource != null)
+        {
+            // Destroy(radioAudioSource); // Completely remove the AudioSource component
+            // Alternatively, you can disable it instead:
+            radioAudioSource.enabled = false;
+            Debug.Log("AudioSource has been removed or disabled.");
+        }
     }
 }

@@ -36,14 +36,14 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<string, float> defaultSceneTimes = new Dictionary<string, float>
     {
-        { "Stage1Easy", 180f },
-        { "Stage1Normal", 180f },
+        { "Stage1Easy", 300f },
+        { "Stage1Normal", 240f },
         { "Stage1Hard", 180f },
-        { "Stage2Easy", 180f },
-        { "Stage2Normal", 180f },
+        { "Stage2Easy", 300f },
+        { "Stage2Normal", 240f },
         { "Stage2Hard", 180f },
-        { "Stage3Easy", 180f },
-        { "Stage3Normal", 180f },
+        { "Stage3Easy", 300f },
+        { "Stage3Normal", 240f },
         { "Stage3Hard", 180f }
     };
 
@@ -94,6 +94,60 @@ public class GameManager : MonoBehaviour
         // ApplyStoredPurchases();
 
 
+    }
+
+    /*     public void InitializeLives(string sceneName)
+        {
+            LayfManager layfManager = FindObjectOfType<LayfManager>();
+            if (layfManager != null)
+            {
+                if (File.Exists(saveFilePath)) // Check if a save file exists
+                {
+                    // Restore saved lives
+                    layfManager.currentLives = LoadSavedLives();
+                    Debug.Log($"Restored saved lives: {layfManager.currentLives}");
+                }
+                else
+                {
+                    // Use default lives for the scene
+                    layfManager.currentLives = GetDefaultLivesForScene(sceneName);
+                    Debug.Log($"Initialized default lives for scene '{sceneName}': {layfManager.currentLives}");
+                }
+            }
+        }
+     */
+
+    public void InitializeLives(string sceneName, bool isNewGame = false)
+    {
+        LayfManager layfManager = FindObjectOfType<LayfManager>();
+        if (layfManager != null)
+        {
+            if (isNewGame || !File.Exists(saveFilePath)) // Use default lives only for new games
+            {
+                layfManager.currentLives = GetDefaultLivesForScene(sceneName);
+                Debug.Log($"[InitializeLives] Initialized default lives for scene '{sceneName}': {layfManager.currentLives}");
+            }
+            else
+            {
+                layfManager.currentLives = LoadSavedLives();
+                Debug.Log($"[InitializeLives] Restored saved lives: {layfManager.currentLives}");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[InitializeLives] LayfManager not found. Unable to initialize lives.");
+        }
+    }
+    private int LoadSavedLives()
+    {
+        if (File.Exists(saveFilePath))
+        {
+            string json = File.ReadAllText(saveFilePath);
+            SaveData saveData = JsonConvert.DeserializeObject<SaveData>(json);
+            return saveData.currentLives; // Return the saved lives
+        }
+
+        return 0; // Default to 0 if no save file exists
     }
 
     public float GetDefaultTimeForScene(string sceneName)
@@ -225,6 +279,48 @@ public class GameManager : MonoBehaviour
         ApplyStoredPurchases();
         Debug.Log($"[GameManager] Scene loaded: {scene.name}");
 
+
+
+        /*  // Initialize lives for the scene
+         InitializeLives(scene.name);
+
+         // Check if lives are 0 and transition to GameOver state
+         LayfManager layfManager = FindObjectOfType<LayfManager>();
+         if (layfManager != null && layfManager.currentLives <= 0)
+         {
+             Debug.Log($"No lives remaining in scene '{scene.name}'. Transitioning to GameOver state.");
+             ChangeState(GameState.GameOver);
+             return;
+         } */
+
+        // Check if lives are already restored
+        LayfManager layfManager = FindObjectOfType<LayfManager>();
+        if (layfManager != null)
+        {
+            Debug.Log($"[OnSceneLoaded] Current lives: {layfManager.currentLives}");
+            if (layfManager.currentLives <= 0)
+            {
+                Debug.Log("[OnSceneLoaded] No lives remaining. Transitioning to GameOver state.");
+                ChangeState(GameState.GameOver);
+                return;
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[OnSceneLoaded] LayfManager not found. Initializing lives.");
+            InitializeLives(scene.name);
+        }
+
+        // Update the coin display
+        if (CoinUIManager.Instance != null)
+        {
+            CoinUIManager.Instance.UpdateCoinUI(coinCount);
+            Debug.Log($"Coin display updated. Total coins: {coinCount}");
+        }
+        else
+        {
+            Debug.LogWarning("CoinUIManager instance is null. Unable to update coin display.");
+        }
         if (scene.name == "Main Menu")
         {
             Debug.Log("Main Menu loaded. Reassigning ShopMenu.");
@@ -448,6 +544,7 @@ public class GameManager : MonoBehaviour
         }
 
 
+
         // Apply additional hints to TaymerManager if present
         if (taymerManager != null && additionalHints > 0)
         {
@@ -592,6 +689,10 @@ public class GameManager : MonoBehaviour
         if (layfManager != null)
         {
             layfManager.LoseLife(); // Reduce a life
+
+            // Save the game after losing a life
+            SaveGame();
+
 
             if (layfManager.GetRemainingLives() > 0) // Check if the player has lives left
             {
@@ -799,13 +900,50 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogError("Fail panel or TaymerManager not found!");
         }
+        // Save the player's state (including lives)
+        SaveGame();
+
+        // Wait for the player to press the button to go to the Main Menu
+        Debug.Log("Waiting for player to press the Main Menu button.");
     }
 
     // -------------------- Scene Management --------------------
+    /* 
+        public void LoadScene(string sceneName)
+        {
+            Debug.Log($"Loading scene: {sceneName}");
+
+
+
+            // Save the current scene state before transitioning
+            SaveCurrentSceneState();
+
+            // Update the current scene
+            currentScene = sceneName;
+
+            // Save the game to persist all scene states
+            SaveGame(currentScene);
+
+            // Load the new scene
+            SceneManager.LoadScene(sceneName);
+
+            // Reset to Playing state on scene load
+            ChangeState(GameState.Playing);
+        } */
 
     public void LoadScene(string sceneName)
     {
-        Debug.Log($"Loading scene: {sceneName}");
+        Debug.Log($"Attempting to load scene: {sceneName}");
+
+        /*       // Find the LayfManager in the current scene
+              LayfManager layfManager = FindObjectOfType<LayfManager>();
+              if (layfManager != null && layfManager.currentLives <= 0)
+              {
+                  Debug.LogWarning($"Cannot load scene '{sceneName}' because the player has no lives left.");
+                  // Redirect to the Main Menu
+                  SceneManager.LoadScene("Main Menu");
+                  return;
+              } */
 
         // Save the current scene state before transitioning
         SaveCurrentSceneState();
@@ -873,9 +1011,10 @@ public class GameManager : MonoBehaviour
             {
                 this.currentScene = currentScene;
             }
-            else
+            else if (string.IsNullOrEmpty(this.currentScene))
             {
-                Debug.LogWarning("No current scene provided. Using the existing currentScene value.");
+                // Fallback to the active scene if currentScene is not set
+                this.currentScene = SceneManager.GetActiveScene().name;
             }
 
             // Save the current scene state
@@ -892,6 +1031,9 @@ public class GameManager : MonoBehaviour
                 inventorySprites[item.Key] = item.Value.sprite != null ? item.Value.sprite.name : null;
             }
 
+            // Retrieve currentLives from LayfManager
+            int currentLives = FindObjectOfType<LayfManager>()?.currentLives ?? 0;
+
             // Create save data
             SaveData saveData = new SaveData
             {
@@ -901,7 +1043,9 @@ public class GameManager : MonoBehaviour
                 itemSprites = inventorySprites,
                 completedScenes = completedScenes,
                 questCompletionStatus = questCompletionStatus,
-                sceneStates = sceneStates // Save all scene states
+                sceneStates = sceneStates, // Save all scene states
+
+                currentLives = currentLives // Save current lives
             };
 
             // Serialize and save to file
@@ -940,6 +1084,21 @@ public class GameManager : MonoBehaviour
                 {
                     CoinUIManager.Instance.UpdateCoinUI(coinCount);
                 }
+
+                // Restore current lives
+                LayfManager layfManager = FindObjectOfType<LayfManager>();
+                if (layfManager != null)
+                {
+                    layfManager.currentLives = saveData.currentLives;
+                    Debug.Log($"Loaded game. Current lives: {saveData.currentLives}");
+                }
+                else
+                {
+                    Debug.LogWarning("LayfManager not found in the scene. Unable to restore current lives.");
+                }
+
+                Debug.Log($"Loaded completed scenes: {string.Join(", ", completedScenes)}");
+
 
                 // Determine the scene to load
                 if (!string.IsNullOrEmpty(nextScene))
@@ -1231,6 +1390,8 @@ public class GameManager : MonoBehaviour
         public List<string> completedScenes; // List of completed scenes
         public Dictionary<string, bool[]> questCompletionStatus; // Quest completion status
         public Dictionary<string, SceneState> sceneStates; // Save all scene states
+
+        public int currentLives; // Add current lives to save data
     }
 
     [System.Serializable]

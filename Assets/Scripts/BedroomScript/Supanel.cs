@@ -6,10 +6,11 @@ public class PanelsManager : MonoBehaviour
 
     public GameObject stage2StorylinePanel; // Reference to the Stage 2 Storyline panel
     public GameObject stage3StorylinePanel; // Reference to the Stage 3 Storyline panel
+    public GameObject congratulationsPanel; // Reference to the Congratulations panel
 
     private void Awake()
     {
-        // Ensure this is the only instance of PanelManager
+        // Ensure this is the only instance of PanelsManager
         if (Instance == null)
         {
             Instance = this;
@@ -31,6 +32,11 @@ public class PanelsManager : MonoBehaviour
         {
             stage3StorylinePanel.SetActive(true);
             Debug.Log("Activated Stage 3 Storyline panel.");
+        }
+        else if (panelName == "Congratulations" && congratulationsPanel != null)
+        {
+            congratulationsPanel.SetActive(true);
+            Debug.Log("Activated Congratulations panel.");
         }
         else
         {

@@ -187,7 +187,7 @@ public class QuestClipboardManager : MonoBehaviour
             Debug.LogError("SceneButtonHelper is not assigned!");
         }
     }
- */
+ *//* 
     private void OnProceedButtonPressed()
     {
         Debug.Log($"Proceed button pressed for quest '{questName}'.");
@@ -220,8 +220,63 @@ public class QuestClipboardManager : MonoBehaviour
         {
             Debug.LogWarning("No next scene or panel defined.");
         }
-    }
+    } */
+    private void OnProceedButtonPressed()
+    {
+        Debug.Log($"Proceed button pressed for quest '{questName}'.");
 
+        // Reward the player
+        RewardPlayer();
+
+        // Get the next scene or panel identifier
+        string nextSceneOrPanel = GetNextSceneName();
+        if (!string.IsNullOrEmpty(nextSceneOrPanel))
+        {
+            // Check if the next step is a storyline panel
+            if (nextSceneOrPanel.Contains("Storyline"))
+            {
+                // Store the panel name in the static variable
+                panelToActivate = nextSceneOrPanel;
+
+                // Save the game before transitioning
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.SaveGame(SceneManager.GetActiveScene().name);
+                    Debug.Log("Game saved before transitioning to the Main Menu.");
+                }
+                else
+                {
+                    Debug.LogError("GameManager instance is null! Unable to save the game.");
+                }
+
+                // Load the Main Menu scene
+                Debug.Log($"Loading Main Menu scene to activate panel: {nextSceneOrPanel}");
+                SceneManager.LoadScene("Main Menu"); // Replace "Main Menu" with the actual name of your Main Menu scene
+            }
+            else
+            {
+                // Otherwise, assume it's a scene and load it
+                Debug.Log($"Loading scene: {nextSceneOrPanel}");
+
+                // Save the game before transitioning
+                if (GameManager.Instance != null)
+                {
+                    GameManager.Instance.SaveGame(SceneManager.GetActiveScene().name);
+                    Debug.Log("Game saved before transitioning to the next scene.");
+                }
+                else
+                {
+                    Debug.LogError("GameManager instance is null! Unable to save the game.");
+                }
+
+                SceneManager.LoadScene(nextSceneOrPanel);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No next scene or panel defined.");
+        }
+    }
     private void RewardPlayer()
     {
         Debug.Log($"All tasks for quest '{questName}' completed! Rewarding the player with coins.");
@@ -305,7 +360,7 @@ public class QuestClipboardManager : MonoBehaviour
             case "Stage3Normal":
                 return "Stage3Hard";
             case "Stage3Hard":
-                return null; // No next scene, final stage
+                return "Stage 3 Storyline (20)"; // Transition to Congratulations panel after Stage3Hard
             default:
                 return null; // No next scene
         }

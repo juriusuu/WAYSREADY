@@ -330,4 +330,18 @@ public class LayfManager : MonoBehaviour
         UpdateHeartsUI(); // Update the heart UI
         Debug.Log("Lives reset to maximum.");
     }
+
+    public bool CanLoadStage()
+    {
+        if (currentLives > 0)
+        {
+            Debug.Log($"Player has {currentLives} lives. Stage can be loaded.");
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning("No lives left! Cannot load stage.");
+            return false;
+        }
+    }
 }
