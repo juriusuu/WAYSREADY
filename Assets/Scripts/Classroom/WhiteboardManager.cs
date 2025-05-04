@@ -7,7 +7,7 @@ public class WhiteboardManager : MonoBehaviour
     public GameObject[] panels; // Array of panels (9 panels for the whiteboard interaction)
     private GameObject currentInteractable; // The object the player is near
     private bool isInteractionComplete = false; // Tracks if the interaction is already completed
-
+    public PostWhiteboardInteractionManager postWhiteboardInteractionManager; // Reference to the PostWhiteboardInteractionManager
     private void Start()
     {
         // Ensure the button is hidden at the start
@@ -107,5 +107,20 @@ public class WhiteboardManager : MonoBehaviour
         // Mark the task as completed after showing all panels
         FindObjectOfType<QuestClipboardManager>()?.CompleteTask(0);
         Debug.Log("Task 0 completed in QuestClipboardManagerS4.");
+
+
+        // Add a 1-second delay before triggering the PostWhiteboardInteractionManager
+        yield return new WaitForSeconds(1f);
+
+
+        // Trigger the PostWhiteboardInteractionManager
+        if (postWhiteboardInteractionManager != null)
+        {
+            postWhiteboardInteractionManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostWhiteboardInteractionManager is not assigned!");
+        }
     }
 }

@@ -12,7 +12,7 @@ public class RadioInteractionManagerS4 : MonoBehaviour
     private GameObject currentInteractable; // The object the player is near
     private AudioSource radioAudioSource; // Reference to the radio's AudioSource
     private bool isInteractionComplete = false; // Tracks if the interaction is already completed
-
+    public PostRadioInteractionManagerH postRadioInteractionManager; // Reference to the PostRadioInteractionManager
     private bool isPhoneButtonPressed = false; // Tracks if the phone button has been pressed
 
     private void Start()
@@ -206,6 +206,17 @@ public class RadioInteractionManagerS4 : MonoBehaviour
         else
         {
             Debug.LogWarning("QuestClipboardManager not found in the scene.");
+        }
+
+
+        // Trigger the PostRadioInteractionManager
+        if (postRadioInteractionManager != null)
+        {
+            postRadioInteractionManager.ActivatePostInteractionRad();
+        }
+        else
+        {
+            Debug.LogError("PostRadioInteractionManager is not assigned!");
         }
     }
 }

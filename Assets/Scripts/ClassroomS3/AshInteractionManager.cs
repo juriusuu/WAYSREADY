@@ -7,7 +7,7 @@ public class AshInteractionManager : MonoBehaviour
     private GameObject currentAsh; // The ash object the player is near
     private int destroyedAshCount = 0; // Tracks the number of destroyed ash objects
     private float detectionRadius = 0.5f; // Distance threshold for detecting ash objects
-
+    public PostAshInteractionManager postAshInteractionManager;
     private void Start()
     {
         // Ensure the button is hidden at the start
@@ -109,6 +109,16 @@ public class AshInteractionManager : MonoBehaviour
         else
         {
             Debug.LogError("QuestClipboardManagerS6 not found in the scene.");
+        }
+
+        // Trigger the PostAshInteractionManager
+        if (postAshInteractionManager != null)
+        {
+            postAshInteractionManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostAshInteractionManager is not assigned!");
         }
     }
 }

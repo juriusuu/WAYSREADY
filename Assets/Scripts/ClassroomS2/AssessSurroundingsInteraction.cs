@@ -11,6 +11,8 @@ public class AssessSurroundingsInteraction : MonoBehaviour
     private bool isMarkingModeActive = false; // Tracks if marking mode is active
     private GameObject currentNearbyObject; // Tracks the object the player is near
 
+    public PostAssessSurroundingsManager postAssessSurroundingsManager; // Reference to the PostAssessSurroundingsManager
+
     private void Start()
     {
         // Initialize the marked status for all objects
@@ -170,5 +172,24 @@ public class AssessSurroundingsInteraction : MonoBehaviour
         // Notify the quest manager
         FindObjectOfType<QuestClipboardManager>()?.CompleteTask(1); // Task index 1
         Debug.Log("All dangerous objects have been marked. Task completed.");
+
+
+        // Delay the activation of the PostAssessSurroundingsManager by 1 second
+        StartCoroutine(ActivatePostInteractionWithDelay(1f));
+    }
+
+    private System.Collections.IEnumerator ActivatePostInteractionWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Trigger the PostAssessSurroundingsManager
+        if (postAssessSurroundingsManager != null)
+        {
+            postAssessSurroundingsManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostAssessSurroundingsManager is not assigned!");
+        }
     }
 }

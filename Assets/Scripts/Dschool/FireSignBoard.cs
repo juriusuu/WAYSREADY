@@ -7,7 +7,7 @@ public class FireSignBoard : MonoBehaviour
     public GameObject[] panels; // Array of panels (9 panels for the whiteboard interaction)
     private GameObject currentInteractable; // The object the player is near
     private bool isInteractionComplete = false; // Tracks if the interaction is already completed
-
+    public PostFireSignBoardInteractionManager postFireSignBoardInteractionManager; // Reference to the PostFireSignBoardInteractionManager
     private void Start()
     {
         // Ensure the button is hidden at the start
@@ -107,5 +107,15 @@ public class FireSignBoard : MonoBehaviour
         // Mark the task as completed after showing all panels
         FindObjectOfType<QuestClipboardManager>()?.CompleteTask(2);
         Debug.Log("Task 0 completed in QuestClipboardManagerS4.");
+
+        // Trigger the PostFireSignBoardInteractionManager
+        if (postFireSignBoardInteractionManager != null)
+        {
+            postFireSignBoardInteractionManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostFireSignBoardInteractionManager is not assigned!");
+        }
     }
 }

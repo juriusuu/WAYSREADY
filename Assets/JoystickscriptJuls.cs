@@ -38,7 +38,7 @@ namespace Supercyan.FreeSample
 
         private List<Collider> m_collisions = new List<Collider>();
 
-        [SerializeField] private PickupButtons pickupButtons;
+        [SerializeField] private PickupButtonss pickupButtons;
         private List<PickupItems> currentPickupItems = new List<PickupItems>(); // List to track current pickup items
 
         [SerializeField] private float crouchHeight = 0.5f; // Height when crouching

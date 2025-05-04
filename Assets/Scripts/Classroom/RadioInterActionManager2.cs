@@ -11,6 +11,7 @@ public class RadioInteractionManagerS2 : MonoBehaviour
     private GameObject currentInteractable; // The object the player is near
     private AudioSource radioAudioSource; // Reference to the radio's AudioSource
     private bool isInteractionComplete = false; // Tracks if the interaction is already completed
+    public PostRadio postRadio; // Reference to the PostWhiteboardInteractionManager
 
     private void Start()
     {
@@ -169,6 +170,21 @@ public class RadioInteractionManagerS2 : MonoBehaviour
             thirdPanel.SetActive(true);
             yield return new WaitForSeconds(1.5f); // Wait for 1.5 seconds
             thirdPanel.SetActive(false);
+        }
+
+
+        // Add a 1-second delay before triggering the PostWhiteboardInteractionManager
+        yield return new WaitForSeconds(1f);
+
+
+        // Trigger the PostWhiteboardInteractionManager
+        if (postRadio != null)
+        {
+            postRadio.ActivatePostInteractionRadio();
+        }
+        else
+        {
+            Debug.LogError("PostWhiteboardInteractionManager is not assigned!");
         }
 
         // Remove or disable the AudioSource after showing the panels

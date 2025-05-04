@@ -9,6 +9,7 @@ public class TelephoneInteractionManager : MonoBehaviour
     private GameObject currentInteractable; // The object the player is near
     private AudioSource telephoneAudioSource; // Reference to the telephone's AudioSource
     private bool isInteractionComplete = false; // Tracks if the interaction is already completed
+    public PostTelephoneInteractionManager postTelephoneInteractionManager; // Reference to the PostTelephoneInteractionManager
 
     private void Start()
     {
@@ -132,12 +133,15 @@ public class TelephoneInteractionManager : MonoBehaviour
             isInteractionComplete = true;
             interactButton.gameObject.SetActive(false); // Hide the button permanently
             Debug.Log("Interaction completed. Button is now inactive.");
+
         }
+
         else
         {
             Debug.LogError("Telephone AudioSource is not set!");
         }
     }
+
 
     private System.Collections.IEnumerator StopRingAudioAfterDelay(float delay)
     {
@@ -170,6 +174,18 @@ public class TelephoneInteractionManager : MonoBehaviour
         {
             telephoneAudioSource.enabled = false; // Disable the AudioSource
             Debug.Log("Telephone AudioSource has been removed or disabled.");
+        }
+
+
+        // Trigger the PostTelephoneInteractionManager after the panels are done
+        if (postTelephoneInteractionManager != null)
+        {
+            postTelephoneInteractionManager.ActivatePostInteraction();
+            Debug.Log("PostTelephoneInteractionManager activated after telephone panels.");
+        }
+        else
+        {
+            Debug.LogError("PostTelephoneInteractionManager is not assigned!");
         }
     }
 }

@@ -14,7 +14,7 @@ public class TaymerManagerHexafall : MonoBehaviour
     public float fallThreshold = -10f; // Y-axis threshold for detecting a fall
 
     private bool isGameOver = false; // Tracks if the game is already over
-
+    public AdditionalPanelManager additionalPanelManager; // Reference to the AdditionalPanelManager
     private void Start()
     {
         remainingTime = totalTime; // Initialize the remaining time
@@ -69,13 +69,25 @@ public class TaymerManagerHexafall : MonoBehaviour
             Debug.LogError("PanelManager is not assigned or found!");
         }
 
-        // Pause the game
-        Time.timeScale = 0f;
+        // Show the additional panel
+        if (additionalPanelManager != null)
+        {
+            additionalPanelManager.ShowAdditionalPanel();
+            StartCoroutine(WaitForAdditionalPanelToFinish(1f)); // Wait for the additional panel to finish
+        }
+        else
+        {
+            Debug.LogError("AdditionalPanelManager is not assigned!");
+            MarkGameOver(); // If no additional panel, mark the game as over immediately
+        }
 
         // Stop the timer from continuing to decrease
         remainingTime = 0;
 
-        isGameOver = true; // Mark the game as over
+        // Pause the game
+        Time.timeScale = 0f;
+
+        //  isGameOver = true; // Mark the game as over
     }
 
     private void HandlePlayerFall()
@@ -95,7 +107,22 @@ public class TaymerManagerHexafall : MonoBehaviour
         // Pause the game
         Time.timeScale = 0f;
 
+        //  isGameOver = true; // Mark the game as over
+        MarkGameOver();
+    }
+
+    private System.Collections.IEnumerator WaitForAdditionalPanelToFinish(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Mark the game as over after the additional panel is hidden
+        MarkGameOver();
+    }
+
+    private void MarkGameOver()
+    {
         isGameOver = true; // Mark the game as over
+        Debug.Log("Game is now over.");
     }
 
     // Method to retry the current scene

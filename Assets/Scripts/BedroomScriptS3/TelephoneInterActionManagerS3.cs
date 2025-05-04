@@ -12,6 +12,7 @@ public class TelephoneInteractionManagerS3 : MonoBehaviour
 
     public PhoneButtonManager phoneButtonManager; // Drag and drop the PhoneButtonManager GameObject in the Inspector
 
+    public PostTelephoneInteractionHard postTelephoneInteractionManager; // Reference to the PostTelephoneInteractionManagerS3
     private void Start()
     {
         // Ensure the button is hidden at the start
@@ -170,6 +171,17 @@ public class TelephoneInteractionManagerS3 : MonoBehaviour
         {
             telephoneAudioSource.enabled = false; // Disable the AudioSource
             Debug.Log("Telephone AudioSource has been disabled.");
+        }
+
+
+        // Trigger the PostTelephoneInteractionManagerS3
+        if (postTelephoneInteractionManager != null)
+        {
+            postTelephoneInteractionManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostTelephoneInteractionManagerS3 is not assigned!");
         }
 
         // Activate the phone button after all panels are shown

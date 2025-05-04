@@ -11,6 +11,7 @@ public class RadioInteractionManager : MonoBehaviour
     private AudioSource radioAudioSource; // Reference to the radio's AudioSource
     private bool isInteractionComplete = false; // Tracks if the interaction is already completed
 
+    public PostRadioInteractionManager postRadioInteractionManager; // Reference to the PostRadioInteractionManager
     private void Start()
     {
         // Ensure the button is hidden at the start
@@ -146,6 +147,16 @@ public class RadioInteractionManager : MonoBehaviour
             // Alternatively, you can disable it instead:
             radioAudioSource.enabled = false;
             Debug.Log("AudioSource has been removed or disabled.");
+        }
+
+        // Trigger the PostRadioInteractionManager
+        if (postRadioInteractionManager != null)
+        {
+            postRadioInteractionManager.ActivatePostRadioInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostRadioInteractionManager is not assigned!");
         }
     }
 }

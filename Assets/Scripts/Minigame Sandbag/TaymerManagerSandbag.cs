@@ -9,6 +9,7 @@ public class TaymerManagerSandbag : MonoBehaviour
     private float remainingTime;
 
     private PanelManager panelManager; // Reference to the PanelManager
+    public AdditionalPanelManager additionalPanelManager; // Reference to the AdditionalPanelManager
 
     private void Start()
     {
@@ -67,12 +68,25 @@ public class TaymerManagerSandbag : MonoBehaviour
     }
 
     // Method to finish or exit
+
     public void Finish()
     {
         Debug.Log("Finishing the game...");
 
         // Use the PanelManager to show the finish panel
         panelManager?.ShowFinishPanel();
+
+
+        // Call the AdditionalPanelManager
+        if (additionalPanelManager != null)
+        {
+            additionalPanelManager.ShowAdditionalPanel();
+            Debug.Log("AdditionalPanelManager activated.");
+        }
+        else
+        {
+            Debug.LogError("AdditionalPanelManager is not assigned in the Inspector!");
+        }
 
         // Pause the game
         Time.timeScale = 0f;

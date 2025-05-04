@@ -7,6 +7,7 @@ public class FacemaskInteractionManager : MonoBehaviour
     public GameObject facemaskPanel; // Reference to the panel that shows "You found the facemask"
     private bool isFacemaskFound = false; // Tracks if the facemask has already been found
 
+    public PostFacemaskInteractionManager postFacemaskInteractionManager; // Reference to the PostFacemaskInteractionManager
     private void Start()
     {
         // Ensure the facemask button is hidden at the start
@@ -83,6 +84,17 @@ public class FacemaskInteractionManager : MonoBehaviour
         {
             facemaskPanel.SetActive(false); // Hide the facemask panel
             Debug.Log("Facemask panel hidden after 1.4 seconds.");
+        }
+        yield return new WaitForSeconds(0.5f); // Wait for 0.5 seconds
+        // After hiding the panel, trigger the PostFacemaskInteractionManager
+        // Trigger the PostFacemaskInteractionManager
+        if (postFacemaskInteractionManager != null)
+        {
+            postFacemaskInteractionManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostFacemaskInteractionManager is not assigned!");
         }
     }
 }

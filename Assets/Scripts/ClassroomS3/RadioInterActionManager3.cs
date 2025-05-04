@@ -314,6 +314,9 @@ public class RadioInteractionManagerS3 : MonoBehaviour
 
     public PhoneButtonManager1 phoneButtonManager; // Reference to PhoneButtonManager1
 
+    public PostRadio postRadio; // Reference to the PostWhiteboardInteractionManager
+
+
     private void Start()
     {
         // Ensure the button is hidden at the start
@@ -470,7 +473,19 @@ public class RadioInteractionManagerS3 : MonoBehaviour
             radioAudioSource.enabled = false; // Disable the AudioSource
             Debug.Log("AudioSource has been removed or disabled.");
         }
+        // Add a 1-second delay before triggering the PostWhiteboardInteractionManager
+        yield return new WaitForSeconds(0.5f);
 
+
+        // Trigger the PostWhiteboardInteractionManager
+        if (postRadio != null)
+        {
+            postRadio.ActivatePostInteractionRadio();
+        }
+        else
+        {
+            Debug.LogError("PostWhiteboardInteractionManager is not assigned!");
+        }
         // Activate the phone button after all panels are shown
         if (phoneButtonManager != null)
         {

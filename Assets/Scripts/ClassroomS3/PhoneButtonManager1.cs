@@ -11,7 +11,7 @@ namespace ClassroomS3
         public AudioSource phoneAudioSource; // Reference to the phone's AudioSource
         public AudioSource ringAudioSource; // Reference to the ring AudioSource
         private bool isPhoneButtonPressed = false; // Tracks if the phone button has been pressed
-
+        public PostPhoneInteractionManagerHard postPhoneInteractionManager; // Reference to the PostPhoneInteractionManager
         private void Start()
         {
             // Ensure the phone button is hidden at the start
@@ -175,6 +175,18 @@ namespace ClassroomS3
             {
                 phoneAudioSource.enabled = false;
                 Debug.Log("Phone AudioSource has been disabled.");
+            }
+
+            yield return new WaitForSeconds(0.5f); // Wait for 1 second before triggering the next interaction
+
+            // Trigger the PostPhoneInteractionManager
+            if (postPhoneInteractionManager != null)
+            {
+                postPhoneInteractionManager.ActivatePostInteraction();
+            }
+            else
+            {
+                Debug.LogError("PostPhoneInteractionManager is not assigned!");
             }
 
             Debug.Log("Finished showing all panels.");

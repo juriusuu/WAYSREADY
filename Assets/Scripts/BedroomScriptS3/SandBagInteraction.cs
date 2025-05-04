@@ -99,7 +99,7 @@ public class SandbagInteraction : MonoBehaviour
     private System.Collections.IEnumerator DelayedSceneLoad()
     {
         // Wait for 1 second (adjust the delay as needed)
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(0.2f);
 
         // Load the specified scene
         if (!string.IsNullOrEmpty(sceneToLoad))

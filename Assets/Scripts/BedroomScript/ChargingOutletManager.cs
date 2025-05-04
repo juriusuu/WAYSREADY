@@ -6,6 +6,231 @@ public class ChargingOutletManager : MonoBehaviour
     public Button interactButton; // Reference to the interact button
     public GameObject chargingPanel; // Reference to the "charging" panel
     public GameObject fullyChargedPanel; // Reference to the "fully charged" panel
+    public GameObject finalPanel; // Reference to the final panel
+    public Text chargingStatusText; // Reference to the text inside the charging panel
+    public AudioSource chargingAudioSource; // AudioSource for the charging process
+    public AudioSource finalAudioSource; // AudioSource for the final panel
+
+    private bool isPlayerNearby = false; // Tracks if the player is near the charging outlet
+    private InventoryManagers inventoryManager; // Reference to the inventory system
+
+    private void Start()
+    {
+        // Ensure the button is hidden at the start
+        if (interactButton != null)
+        {
+            interactButton.gameObject.SetActive(false);
+            interactButton.onClick.AddListener(OnInteractButtonPressed); // Add listener for button click
+        }
+
+        // Ensure the panels are hidden at the start
+        if (chargingPanel != null)
+        {
+            chargingPanel.SetActive(false);
+        }
+        if (fullyChargedPanel != null)
+        {
+            fullyChargedPanel.SetActive(false);
+        }
+        if (finalPanel != null)
+        {
+            finalPanel.SetActive(false);
+        }
+
+        // Ensure the AudioSources are assigned
+        if (chargingAudioSource == null)
+        {
+            chargingAudioSource = GetComponent<AudioSource>();
+            if (chargingAudioSource == null)
+            {
+                Debug.LogError("No AudioSource found for chargingAudioSource!");
+            }
+        }
+
+        if (finalAudioSource == null)
+        {
+            Debug.LogWarning("No AudioSource assigned for finalAudioSource!");
+        }
+
+        // Find the inventory manager in the scene
+        inventoryManager = FindObjectOfType<InventoryManagers>();
+    }
+
+    private void Update()
+    {
+        // Show or hide the interact button based on proximity
+        if (isPlayerNearby)
+        {
+            interactButton.gameObject.SetActive(true); // Show the button when the player is near
+        }
+        else
+        {
+            interactButton.gameObject.SetActive(false); // Hide the button when the player is far
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNearby = true; // Set the flag to true when the player enters the trigger
+            Debug.Log("Player is near the charging outlet.");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            isPlayerNearby = false;
+            Debug.Log("Player left the charging outlet.");
+        }
+    }
+
+    private void OnInteractButtonPressed()
+    {
+
+        // Disable the button to prevent multiple clicks
+        if (interactButton != null)
+        {
+            interactButton.interactable = false; // Disable the button
+        }
+
+        if (inventoryManager != null)
+        {
+            // Check if the phone and power bank are in the inventory
+            int phoneCount = inventoryManager.GetItemCount("phone"); // Ensure correct case
+            int powerBankCount = inventoryManager.GetItemCount("powerbank"); // Ensure correct case
+
+            if (phoneCount <= 0 || powerBankCount <= 0)
+            {
+                Debug.LogWarning("You need to pick up the phone and power bank before charging!");
+                ShowChargingPanel("You need to pick up the phone and power bank before charging!");
+                return;
+            }
+
+            // Show the charging panel with a success message
+            ShowChargingPanel("Phone and PowerBank are now charging!");
+
+            // Start the charging process
+            StartCoroutine(HandleChargingPanels());
+        }
+        else
+        {
+            Debug.LogError("InventoryManager is not set!");
+        }
+    }
+
+    private void ShowChargingPanel(string message)
+    {
+        if (chargingPanel != null && chargingStatusText != null)
+        {
+            chargingPanel.SetActive(true);
+            chargingStatusText.text = message;
+
+            // Hide the panel after 2 seconds
+            StartCoroutine(HideChargingPanelAfterDelay(2f));
+        }
+    }
+
+    private System.Collections.IEnumerator HideChargingPanelAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (chargingPanel != null)
+        {
+            chargingPanel.SetActive(false);
+        }
+    }
+
+    private System.Collections.IEnumerator HandleChargingPanels()
+    {
+        // Play the charging audio
+        if (chargingAudioSource != null && !chargingAudioSource.isPlaying)
+        {
+            chargingAudioSource.Play();
+            Debug.Log("Charging audio started.");
+        }
+
+        // Show the "charging" panel
+        if (chargingPanel != null)
+        {
+            chargingPanel.SetActive(true);
+        }
+
+        if (fullyChargedPanel != null)
+        {
+            fullyChargedPanel.SetActive(false);
+        }
+
+        // Wait for 2 seconds
+        yield return new WaitForSeconds(2f);
+
+        // Hide the "charging" panel and show the "fully charged" panel
+        if (chargingPanel != null)
+        {
+            chargingPanel.SetActive(false);
+        }
+
+        if (fullyChargedPanel != null)
+        {
+            fullyChargedPanel.SetActive(true);
+        }
+
+        Debug.Log("Charging complete! Phone and PowerBank are fully charged.");
+
+        // Mark the "Charge devices" task as completed
+        FindObjectOfType<QuestClipboardManager>().CompleteTask(2); // Assuming this is the third task
+
+        // Wait for 3 seconds before hiding the "fully charged" panel
+        yield return new WaitForSeconds(3f);
+
+        if (fullyChargedPanel != null)
+        {
+            fullyChargedPanel.SetActive(false);
+        }
+
+        // Show the final panel
+        if (finalPanel != null)
+        {
+            finalPanel.SetActive(true);
+            Debug.Log("Final panel displayed.");
+
+            // Play the final panel audio
+            if (finalAudioSource != null)
+            {
+                finalAudioSource.Play();
+                Debug.Log("Final panel audio started.");
+            }
+        }
+
+        // Wait for 2 seconds before hiding the final panel
+        yield return new WaitForSeconds(2f);
+
+        if (finalPanel != null)
+        {
+            finalPanel.SetActive(false);
+            Debug.Log("Final panel hidden.");
+        }
+
+        // Stop and disable the charging audio
+        if (chargingAudioSource != null)
+        {
+            chargingAudioSource.Stop();
+            chargingAudioSource.enabled = false;
+            Debug.Log("Charging audio stopped and disabled.");
+        }
+    }
+}
+
+/* using UnityEngine;
+using UnityEngine.UI;
+
+public class ChargingOutletManager : MonoBehaviour
+{
+    public Button interactButton; // Reference to the interact button
+    public GameObject chargingPanel; // Reference to the "charging" panel
+    public GameObject fullyChargedPanel; // Reference to the "fully charged" panel
     public Text chargingStatusText; // Reference to the text inside the charging panel
     public AudioSource chargingAudioSource; // Reference to the AudioSource for charging sound
 
@@ -146,7 +371,7 @@ public class ChargingOutletManager : MonoBehaviour
         }
 
         // Wait for 4 seconds
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(2f);
 
         // Hide the "charging" panel and show the "fully charged" panel
         if (chargingPanel != null)
@@ -165,7 +390,7 @@ public class ChargingOutletManager : MonoBehaviour
         FindObjectOfType<QuestClipboardManager>().CompleteTask(2); // Assuming this is the third task
 
         // Wait for 4 seconds before hiding the "fully charged" panel
-        yield return new WaitForSeconds(4f);
+        yield return new WaitForSeconds(3f);
 
         if (fullyChargedPanel != null)
         {
@@ -180,7 +405,7 @@ public class ChargingOutletManager : MonoBehaviour
             Debug.Log("Charging audio stopped and disabled.");
         }
     }
-}
+} */
 
 /* using UnityEngine;
 using UnityEngine.UI;

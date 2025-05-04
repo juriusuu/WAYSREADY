@@ -22,6 +22,7 @@ TagManager:
   - FireExtinguisher
   - Unplug
   - Fire
+  - MedKit
   layers:
   - Default
   - TransparentFX

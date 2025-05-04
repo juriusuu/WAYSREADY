@@ -6,7 +6,7 @@ public class LocateTableInteraction : MonoBehaviour
     public Button locateButton; // Button to interact with the table
     public GameObject tablePanel; // Panel to display "You found the Table"
     private bool isTableFound = false; // Tracks if the table has already been found
-
+    public PostTableInteractionManager postTableInteractionManager; // Reference to the PostTableInteractionManager
     private void Start()
     {
         // Ensure the button is hidden at the start
@@ -75,8 +75,26 @@ public class LocateTableInteraction : MonoBehaviour
         // Notify the quest manager
         FindObjectOfType<QuestClipboardManager>()?.CompleteTask(2); // Task index 1
         Debug.Log("Table located. Task completed.");
+
+
+        // Delay the activation of the PostTableInteractionManager by 1 second
+        StartCoroutine(ActivatePostInteractionWithDelay(1f));
     }
 
+    private System.Collections.IEnumerator ActivatePostInteractionWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Trigger the PostTableInteractionManager
+        if (postTableInteractionManager != null)
+        {
+            postTableInteractionManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostTableInteractionManager is not assigned!");
+        }
+    }
     private System.Collections.IEnumerator HideTablePanelAfterDelay()
     {
         yield return new WaitForSeconds(1.4f); // Wait for 1.4 seconds

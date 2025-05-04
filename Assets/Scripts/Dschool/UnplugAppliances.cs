@@ -10,7 +10,7 @@ public class UnplugAppliancesTask : MonoBehaviour
     private HashSet<GameObject> interactedAppliances = new HashSet<GameObject>(); // Tracks appliances already interacted with
     [SerializeField]
     private float detectionRadius = 0.5f; // Distance threshold for detecting appliances
-
+    public PostUnplugAppliancesManager postUnplugAppliancesManager; // Reference to the PostUnplugAppliancesManager
     private void Start()
     {
         // Ensure the button is hidden at the start
@@ -127,5 +127,17 @@ public class UnplugAppliancesTask : MonoBehaviour
         {
             Debug.LogError("QuestClipboardManager not found in the scene.");
         }
+
+
+        // Trigger the PostUnplugAppliancesManager
+        if (postUnplugAppliancesManager != null)
+        {
+            postUnplugAppliancesManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostUnplugAppliancesManager is not assigned!");
+        }
     }
+
 }

@@ -12,7 +12,7 @@ namespace ClassroomS3
         public AudioSource ringAudioSource; // Reference to the ring AudioSource
 
         private bool isPhoneButtonPressed = false; // Tracks if the phone button has been pressed
-
+        public PostPhoneInteractionManager postPhoneInteractionManager; // Reference to the PostPhoneInteractionManager
         private RadioInteractionManagerS4 radioInteractionManagerS4;
 
         private void Start()
@@ -179,6 +179,18 @@ namespace ClassroomS3
             else
             {
                 Debug.LogWarning("RadioInteractionManagerS4 not found in the scene.");
+            }
+
+
+
+            // Trigger the PostPhoneInteractionManager
+            if (postPhoneInteractionManager != null)
+            {
+                postPhoneInteractionManager.ActivatePostInteraction();
+            }
+            else
+            {
+                Debug.LogError("PostPhoneInteractionManager is not assigned!");
             }
         }
     }

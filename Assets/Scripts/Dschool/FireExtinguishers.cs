@@ -9,7 +9,7 @@ public class FireExtinguishersTask : MonoBehaviour
     private int interactedExtinguisherCount = 0; // Tracks the number of interacted extinguishers
     private int totalExtinguishers = 0; // Total number of extinguishers in the scene
     private HashSet<GameObject> interactedExtinguishers = new HashSet<GameObject>(); // Tracks extinguishers already interacted with
-
+    public PostFireExtinguishersManager postFireExtinguishersManager; // Reference to the PostFireExtinguishersManager
     private void Start()
     {
         // Ensure the button is hidden at the start
@@ -110,6 +110,16 @@ public class FireExtinguishersTask : MonoBehaviour
         else
         {
             Debug.LogError("QuestClipboardManager not found in the scene.");
+        }
+
+        // Trigger the PostFireExtinguishersManager
+        if (postFireExtinguishersManager != null)
+        {
+            postFireExtinguishersManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostFireExtinguishersManager is not assigned!");
         }
     }
 }

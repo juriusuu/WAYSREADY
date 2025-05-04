@@ -8,7 +8,7 @@ public class WindowInteractionManager : MonoBehaviour
     public float interactionDistance = 3f; // Distance within which the player can interact
     public AudioSource ringAudioSource; // Reference to the ring AudioSource
     private bool isPlayerNear = false; // Tracks if the player is near the object
-
+    public PostWindowInteractionManager postWindowInteractionManager; // Reference to the PostWindowInteractionManager
     void Start()
     {
         // Ensure the button is hidden at the start
@@ -68,8 +68,25 @@ public class WindowInteractionManager : MonoBehaviour
         // Hide the button after interaction
         interactButton.gameObject.SetActive(false);
         Debug.Log("Window interaction completed. Task 0 marked as complete.");
-    }
 
+
+        // Delay the activation of the PostWindowInteractionManager by 1 second
+        StartCoroutine(ActivatePostInteractionWithDelay(1f));
+    }
+    private System.Collections.IEnumerator ActivatePostInteractionWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        // Trigger the PostWindowInteractionManager
+        if (postWindowInteractionManager != null)
+        {
+            postWindowInteractionManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostWindowInteractionManager is not assigned!");
+        }
+    }
     private System.Collections.IEnumerator StopRingAudioAfterDelay(float delay)
     {
         // Wait for the specified delay
@@ -83,6 +100,7 @@ public class WindowInteractionManager : MonoBehaviour
         }
     }
 }
+
 
 /* using UnityEngine;
 using UnityEngine.UI;

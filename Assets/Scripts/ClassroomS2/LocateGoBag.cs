@@ -7,7 +7,7 @@ public class LocateGoBagInteraction : MonoBehaviour
     public GameObject goBagPanel; // Panel to display "You found the Go Bag"
     public GameObject inventoryOpenButton; // Reference to the InventoryOpenButton
     private bool isBagFound = false; // Tracks if the bag has already been found
-
+    public PostGoBagInteractionManager postGoBagInteractionManager; // Reference to the PostGoBagInteractionManager
     private void Start()
     {
         // Ensure the locate button is hidden at the start
@@ -92,6 +92,17 @@ public class LocateGoBagInteraction : MonoBehaviour
         // Notify the quest manager
         FindObjectOfType<QuestClipboardManager>()?.CompleteTask(0); // Task index 0
         Debug.Log("Go Bag located. Task completed.");
+
+
+        // Trigger the PostGoBagInteractionManager
+        if (postGoBagInteractionManager != null)
+        {
+            postGoBagInteractionManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostGoBagInteractionManager is not assigned!");
+        }
     }
 
     private System.Collections.IEnumerator HideGoBagPanelAfterDelay()

@@ -133,6 +133,18 @@ public class DrinkInteractionManager : MonoBehaviour
             drinkAudioSource.Stop();
             Debug.Log("Drink audio stopped after 4 seconds.");
         }
+
+
+        // Trigger the PostDrinkInteractionManager
+        PostDrinkInteractionManager postManager = FindObjectOfType<PostDrinkInteractionManager>();
+        if (postManager != null)
+        {
+            postManager.ActivatePostDrinkInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostDrinkInteractionManager not found!");
+        }
     }
 
     private System.Collections.IEnumerator ResetDrinkingState()

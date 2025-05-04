@@ -10,6 +10,7 @@ public class WaveController : MonoBehaviour
 
     private float outOfBoundsX = 6.476028f; // X position to check against
     private PanelManager panelManager; // Reference to the PanelManager
+    public AdditionalPanelManager additionalPanelManager; // Reference to the AdditionalPanelManager
 
     private void Start()
     {
@@ -21,6 +22,17 @@ public class WaveController : MonoBehaviour
             Debug.LogError("PanelManager not found in the scene!");
         }
 
+        // Find the AdditionalPanelManager dynamically
+        GameObject additionalPanelPrefab = GameObject.Find("PostComplete"); // Replace "PostComplete" with the prefab's name
+        if (additionalPanelPrefab != null)
+        {
+            additionalPanelManager = additionalPanelPrefab.GetComponent<AdditionalPanelManager>();
+        }
+
+        if (additionalPanelManager == null)
+        {
+            Debug.LogError("AdditionalPanelManager not found or not assigned!");
+        }
         StartCoroutine(MoveWave());
     }
 
@@ -83,6 +95,32 @@ public class WaveController : MonoBehaviour
         {
             Debug.Log("Sufficient sandbags remain. Showing finish panel.");
             panelManager?.ShowFinishPanel();
+
+
+            // Show the AdditionalPanelManager
+            if (additionalPanelManager != null)
+            {
+                additionalPanelManager.ShowAdditionalPanel();
+
+                // Start a coroutine to hide the panel after 1 second
+                StartCoroutine(HideAdditionalPanelAfterDelay(0.5f));
+            }
+            else
+            {
+                Debug.LogError("AdditionalPanelManager is not assigned in the Inspector!");
+            }
+        }
+    }
+    // Coroutine to hide the additional panel after a delay
+    private IEnumerator HideAdditionalPanelAfterDelay(float delay)
+    {
+        Debug.Log("Coroutine started. Waiting for " + delay + " seconds.");
+        yield return new WaitForSeconds(delay);
+
+        if (additionalPanelManager != null && additionalPanelManager.additionalPanel != null)
+        {
+            additionalPanelManager.additionalPanel.SetActive(false);
+            Debug.Log("Additional Panel hidden after " + delay + " seconds.");
         }
     }
 

@@ -3,7 +3,7 @@ using UnityEngine;
 public class FindEscapeRouteTask : MonoBehaviour
 {
     private bool isTaskCompleted = false;
-
+    public EscapeRoutePanelManager escapeRoutePanelManager; // Reference to the EscapeRoutePanelManager
     private void OnTriggerEnter(Collider other)
     {
         // Check if the player enters the trigger
@@ -22,6 +22,16 @@ public class FindEscapeRouteTask : MonoBehaviour
             else
             {
                 Debug.LogError("QuestClipboardManager not found in the scene.");
+            }
+
+            // Trigger the EscapeRoutePanelManager
+            if (escapeRoutePanelManager != null)
+            {
+                escapeRoutePanelManager.ShowEscapeRoutePanel();
+            }
+            else
+            {
+                Debug.LogError("EscapeRoutePanelManager is not assigned!");
             }
         }
     }
