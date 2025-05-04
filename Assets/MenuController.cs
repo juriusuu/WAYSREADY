@@ -40,12 +40,12 @@ public class MenuController : MonoBehaviour
   {
     if (PlayerPrefs.HasKey("SavedLevel"))
     {
-      levelToLoad = PlayerPrefs.GetString("SavedLevel");
-      SceneManager.LoadScene(levelToLoad);
+        levelToLoad = PlayerPrefs.GetString("SavedLevel");
+        SceneManager.LoadScene(levelToLoad);
     }
     else
     {
-      noSavedGameDialog.SetActive(true);
+        noSavedGameDialog.SetActive(true);
     }
   }
 
@@ -93,7 +93,7 @@ public class MenuController : MonoBehaviour
 
   public void ResetButton(string MenuType)
   {
-    if (MenuType == "Graphics")
+    if(MenuType == "Graphics")
     {
       brightnessSlider.value = defaultBrightness;
       brightnessTextValue.text = defaultBrightness.ToString("0.0");

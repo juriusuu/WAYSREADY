@@ -6044,7 +6044,7 @@ MonoBehaviour:
   interactButton: {fileID: 167442979}
   player: {fileID: 634862032}
   interactionDistance: 4
-  ringAudioSource: {fileID: 0}
+  ringAudioSource: {fileID: 206336821}
   postWindowInteractionManager: {fileID: 798284576}
 --- !u!1 &355352017 stripped
 GameObject:
