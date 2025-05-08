@@ -3932,6 +3932,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585550}
   - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
@@ -4101,6 +4102,26 @@ MonoBehaviour:
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 0
+  rotationSpeed: 30
+  minPitch: 0
+  maxPitch: 0
+--- !u!114 &330585550
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71bbdd632c212848a70e28f8bd5d4b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 1220990609}
+  distance: 5
+  height: 2
+  smoothSpeed: 0.125
+  wallOffset: 0.3
   rotationSpeed: 30
   minPitch: 0
   maxPitch: 0
@@ -5920,6 +5941,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 343638522572748073, guid: 9854bb05e98038145add8ed7c25af4b1, type: 3}
       insertIndex: 5
       addedObject: {fileID: 1220990617}
+    - targetCorrespondingSourceObject: {fileID: 343638522572748073, guid: 9854bb05e98038145add8ed7c25af4b1, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 1220990621}
     - targetCorrespondingSourceObject: {fileID: 343638522572748073, guid: 9854bb05e98038145add8ed7c25af4b1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1220990613}
@@ -12375,6 +12399,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facemaskButton: {fileID: 26257186}
   facemaskPanel: {fileID: 0}
+  postFacemaskInteractionManager: {fileID: 0}
 --- !u!1 &864251966 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -2822990130209519980, guid: 42c53569dcb60e5479dc1eb4393f9c5a, type: 3}
@@ -16191,6 +16216,26 @@ MonoBehaviour:
   xMarkPrefab: {fileID: 2388601586022867296, guid: 6f005735a74511d4193efe91f2d20274, type: 3}
   xMarkButton: {fileID: 1824771608}
   postAssessSurroundingsManager: {fileID: 524561590}
+--- !u!114 &1220990621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434930137}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d71bbdd632c212848a70e28f8bd5d4b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  distance: 5
+  height: 2
+  smoothSpeed: 0.125
+  wallOffset: 0.3
+  rotationSpeed: 200
+  minPitch: -30
+  maxPitch: 60
 --- !u!1 &1222312084 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6507013780406177751, guid: 42c53569dcb60e5479dc1eb4393f9c5a, type: 3}
@@ -17812,6 +17857,7 @@ MonoBehaviour:
   - {fileID: 870468180}
   - {fileID: 1196489591}
   - {fileID: 587153251}
+  postWhiteboardInteractionManager: {fileID: 0}
 --- !u!135 &1351619358
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -20827,6 +20873,7 @@ MonoBehaviour:
   secondPanel: {fileID: 0}
   thirdPanel: {fileID: 0}
   ringAudioSource: {fileID: 0}
+  postRadio: {fileID: 0}
 --- !u!1 &1541321372 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4960526190344041523, guid: 42c53569dcb60e5479dc1eb4393f9c5a, type: 3}

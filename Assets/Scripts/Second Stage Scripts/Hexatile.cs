@@ -4,7 +4,7 @@ public class Hexatile : MonoBehaviour
 {
     private bool isPlayerAbove = false;
     private float timeAbove = 0f;
-    private const float timeToDestroy = 3f; // Time in seconds to destroy the tile
+    private const float timeToDestroy = 0.7f; // Time in seconds to destroy the tile
 
     private void Update()
     {

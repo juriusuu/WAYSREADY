@@ -87,7 +87,7 @@ public class TaymerManagerHexafall : MonoBehaviour
         // Pause the game
         Time.timeScale = 0f;
 
-        //  isGameOver = true; // Mark the game as over
+        isGameOver = true; // Mark the game as over
     }
 
     private void HandlePlayerFall()
