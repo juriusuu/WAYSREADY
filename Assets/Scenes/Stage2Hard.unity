@@ -3798,6 +3798,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerImage: {fileID: 1396270569}
+  remainingTime: 0
   layfManager: {fileID: 1171708883}
   failPanel: {fileID: 1321273556}
   totalHintsAllowed: 3
@@ -20971,7 +20972,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1470965231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26783,6 +26784,8 @@ MonoBehaviour:
   secondCompletionPanel: {fileID: 0}
   firstCompletionAudioClip: {fileID: 0}
   secondCompletionAudioClip: {fileID: 0}
+  timerDecreasingPickupItems: []
+  timerManager: {fileID: 0}
 --- !u!114 &1824771610
 MonoBehaviour:
   m_ObjectHideFlags: 0

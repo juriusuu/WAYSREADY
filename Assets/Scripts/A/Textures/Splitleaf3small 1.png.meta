@@ -1,0 +1,793 @@
+fileFormatVersion: 2
+guid: fe6450ccbbfd60247b34cb92299ade94
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 216852170825431232
+    second: Splitleaf3small_0
+  - first:
+      213: 7471208813319571421
+    second: Splitleaf3small_1
+  - first:
+      213: -4916474055500452324
+    second: Splitleaf3small_2
+  - first:
+      213: -32956405505147869
+    second: Splitleaf3small_3
+  - first:
+      213: 49926234834587551
+    second: Splitleaf3small_4
+  - first:
+      213: 1205965779383109824
+    second: Splitleaf3small_5
+  - first:
+      213: -8284090962204738912
+    second: Splitleaf3small_6
+  - first:
+      213: 6619515738858347941
+    second: Splitleaf3small_7
+  - first:
+      213: 1321395196314571336
+    second: Splitleaf3small_8
+  - first:
+      213: -7357979584051303308
+    second: Splitleaf3small_9
+  - first:
+      213: -2535084170950980460
+    second: Splitleaf3small_10
+  - first:
+      213: 8183170259849400849
+    second: Splitleaf3small_11
+  - first:
+      213: 5583836886336792508
+    second: Splitleaf3small_12
+  - first:
+      213: -3891489728971607395
+    second: Splitleaf3small_13
+  - first:
+      213: 4757040946434402096
+    second: Splitleaf3small_14
+  - first:
+      213: -652874679518872103
+    second: Splitleaf3small_15
+  - first:
+      213: 6889138062698774783
+    second: Splitleaf3small_16
+  - first:
+      213: -6791644879153276336
+    second: Splitleaf3small_17
+  - first:
+      213: -1841929918287868497
+    second: Splitleaf3small_18
+  - first:
+      213: -4802028230892207855
+    second: Splitleaf3small_19
+  - first:
+      213: 3756113874873784671
+    second: Splitleaf3small_20
+  - first:
+      213: -4333559907359385039
+    second: Splitleaf3small_21
+  - first:
+      213: 7929817390122581431
+    second: Splitleaf3small_22
+  - first:
+      213: 2268949877056457303
+    second: Splitleaf3small_23
+  - first:
+      213: -4065667014833777361
+    second: Splitleaf3small_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Splitleaf3small_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 205
+        width: 26
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c872d286e9620300800000000000000
+      internalID: 216852170825431232
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_1
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 1
+        width: 258
+        height: 210
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd74ea0e4d01fa760800000000000000
+      internalID: 7471208813319571421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_2
+      rect:
+        serializedVersion: 2
+        x: 21
+        y: 205
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1ea87625ec25cbb0800000000000000
+      internalID: -4916474055500452324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_3
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 205
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32cbac4e25aea8ff0800000000000000
+      internalID: -32956405505147869
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_4
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 205
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9fc94465af51b000800000000000000
+      internalID: 49926234834587551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_5
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 205
+        width: 8
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c84863ac737cb010800000000000000
+      internalID: 1205965779383109824
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_6
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 205
+        width: 9
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0aa33ce292ff80d80800000000000000
+      internalID: -8284090962204738912
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_7
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 205
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ad52c72e7e3ddb50800000000000000
+      internalID: 6619515738858347941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_8
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 205
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 842dc341ee9865210800000000000000
+      internalID: 1321395196314571336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_9
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 205
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47cab047d8433e990800000000000000
+      internalID: -7357979584051303308
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_10
+      rect:
+        serializedVersion: 2
+        x: 81
+        y: 205
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49c40c2c06291dcd0800000000000000
+      internalID: -2535084170950980460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_11
+      rect:
+        serializedVersion: 2
+        x: 86
+        y: 203
+        width: 6
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1125ddabef5709170800000000000000
+      internalID: 8183170259849400849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 190
+        width: 11
+        height: 13
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb7e3dd4016cd7d40800000000000000
+      internalID: 5583836886336792508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_13
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d92f091a5b6aef9c0800000000000000
+      internalID: -3891489728971607395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_14
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 1
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 037e5327987640240800000000000000
+      internalID: 4757040946434402096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_15
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 1
+        width: 12
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dd3e6420f580f6f0800000000000000
+      internalID: -652874679518872103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_16
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 1
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff088cb51922b9f50800000000000000
+      internalID: 6889138062698774783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_17
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 0
+        width: 9
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05ad77157fa3fb1a0800000000000000
+      internalID: -6791644879153276336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_18
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 1
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fad894f8f762076e0800000000000000
+      internalID: -1841929918287868497
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_19
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 1
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 111c54824c4cb5db0800000000000000
+      internalID: -4802028230892207855
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_20
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 1
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5994cf1ba5602430800000000000000
+      internalID: 3756113874873784671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_21
+      rect:
+        serializedVersion: 2
+        x: 66
+        y: 1
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13a18f4793a1cd3c0800000000000000
+      internalID: -4333559907359385039
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_22
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 1
+        width: 8
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bdb8fff6ee5c0e60800000000000000
+      internalID: 7929817390122581431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_23
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 1
+        width: 6
+        height: 6
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75acd1b44edec7f10800000000000000
+      internalID: 2268949877056457303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Splitleaf3small_24
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 1
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f255fcd0469d397c0800000000000000
+      internalID: -4065667014833777361
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Splitleaf3small_0: 216852170825431232
+      Splitleaf3small_1: 7471208813319571421
+      Splitleaf3small_10: -2535084170950980460
+      Splitleaf3small_11: 8183170259849400849
+      Splitleaf3small_12: 5583836886336792508
+      Splitleaf3small_13: -3891489728971607395
+      Splitleaf3small_14: 4757040946434402096
+      Splitleaf3small_15: -652874679518872103
+      Splitleaf3small_16: 6889138062698774783
+      Splitleaf3small_17: -6791644879153276336
+      Splitleaf3small_18: -1841929918287868497
+      Splitleaf3small_19: -4802028230892207855
+      Splitleaf3small_2: -4916474055500452324
+      Splitleaf3small_20: 3756113874873784671
+      Splitleaf3small_21: -4333559907359385039
+      Splitleaf3small_22: 7929817390122581431
+      Splitleaf3small_23: 2268949877056457303
+      Splitleaf3small_24: -4065667014833777361
+      Splitleaf3small_3: -32956405505147869
+      Splitleaf3small_4: 49926234834587551
+      Splitleaf3small_5: 1205965779383109824
+      Splitleaf3small_6: -8284090962204738912
+      Splitleaf3small_7: 6619515738858347941
+      Splitleaf3small_8: 1321395196314571336
+      Splitleaf3small_9: -7357979584051303308
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

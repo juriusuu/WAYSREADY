@@ -1,3 +1,4 @@
+using System.Numerics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -129,9 +130,14 @@ public class AssessSurroundingsInteraction : MonoBehaviour
     {
         if (xMarkPrefab != null)
         {
-            Vector3 xMarkPosition = obj.transform.position + Vector3.up * 0.9f + Vector3.forward * .2f; // Adjust height as needed
-            Instantiate(xMarkPrefab, xMarkPosition, Quaternion.identity);
-            Debug.Log($"Placed X mark on {obj.name}.");
+            /*  Vector3 xMarkPosition = obj.transform.position + Vector3.up * 0.9f + Vector3.left * .3f + Vector3.forward * .4f; // Adjust height as needed
+            Instantiate(xMarkPrefab, xMarkPosition, UnityEngine.Quaternion.identity);
+             Debug.Log($"Placed X mark on {obj.name}."); */
+
+            UnityEngine.Vector3 offset = UnityEngine.Vector3.up * 0.9f + UnityEngine.Vector3.left * 0.3f + UnityEngine.Vector3.back * 0.2f;
+            UnityEngine.Vector3 xMarkPosition = obj.transform.position + offset;
+            Instantiate(xMarkPrefab, xMarkPosition, UnityEngine.Quaternion.identity);
+            Debug.Log($"Placed X mark on {obj.name} at position {xMarkPosition}.");
         }
         else
         {

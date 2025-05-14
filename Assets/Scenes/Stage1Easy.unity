@@ -1908,10 +1908,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1519877658}
-  distance: 2
+  distance: 3
   height: 1
   smoothSpeed: 0.125
-  wallOffset: 0.1
+  wallOffset: 0.01
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -3897,6 +3897,8 @@ MonoBehaviour:
   secondCompletionPanel: {fileID: 1769965213}
   firstCompletionAudioClip: {fileID: 8300000, guid: dab2d89140cffb9469b07de5d4aa7ccf, type: 3}
   secondCompletionAudioClip: {fileID: 8300000, guid: 25bfec69fa95a254d94c4f9668b84938, type: 3}
+  timerDecreasingPickupItems: []
+  timerManager: {fileID: 0}
 --- !u!1 &540084007
 GameObject:
   m_ObjectHideFlags: 0
@@ -7024,7 +7026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb57c6ec433002b43a4c091e2307577a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 15.69
+      value: 15.72
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fb57c6ec433002b43a4c091e2307577a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10641,8 +10643,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3370819, y: 0.7003458, z: 0.28746313}
-  m_Center: {x: 4.9041653, y: -10.657702, z: -0.19082904}
+  m_Size: {x: 0.3370819, y: 0.79364854, z: 0.28746313}
+  m_Center: {x: 4.9041653, y: -10.611052, z: -0.19082904}
 --- !u!54 &1349358821
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11694,6 +11696,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerImage: {fileID: 276143812}
+  remainingTime: 0
   layfManager: {fileID: 1521513590}
   failPanel: {fileID: 340998348}
   totalHintsAllowed: 5
@@ -11741,6 +11744,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerImage: {fileID: 0}
+  remainingTime: 0
   layfManager: {fileID: 0}
   failPanel: {fileID: 0}
   totalHintsAllowed: 3
@@ -14185,8 +14189,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.84150124, y: 0.68852335, z: 0.48313904}
-  m_Center: {x: 5.100507, y: -0.166904, z: 10.717541}
+  m_Size: {x: 0.84150124, y: 0.68852335, z: 0.53424835}
+  m_Center: {x: 5.100507, y: -0.166904, z: 10.743095}
 --- !u!54 &1723615480
 Rigidbody:
   m_ObjectHideFlags: 0

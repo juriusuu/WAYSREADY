@@ -15,6 +15,10 @@ public class PickupButtonss : MonoBehaviour
     public AudioClip firstCompletionAudioClip; // Audio clip for the first completion panel
     public AudioClip secondCompletionAudioClip; // Audio clip for the second completion panel
 
+
+    public List<PickupItems> timerDecreasingPickupItems; // List of items that decrease the timer
+    public TaymerManager timerManager; // Reference to the TaymerManager to modify the timer
+
     private bool isPlayerNear = false; // Tracks if the player is near any pickup object
 
     private void Start()
@@ -46,6 +50,17 @@ public class PickupButtonss : MonoBehaviour
         {
             inventoryPanel.SetActive(true); // Show the panel initially
         }
+
+        // Ensure the timer manager is assigned
+        if (timerManager == null)
+        {
+            timerManager = FindObjectOfType<TaymerManager>();
+            if (timerManager == null)
+            {
+                Debug.LogError("TaymerManager not found! Timer functionality will not work.");
+            }
+        }
+
     }
 
     private void OnTriggerEnter(Collider other)
@@ -143,6 +158,26 @@ public class PickupButtonss : MonoBehaviour
             Debug.Log("Inventory contains exactly 11 items. Showing completion panels.");
             ShowFirstCompletionPanel(); // Show the first completion panel
             gameObject.SetActive(false); // Deactivate the button when done
+        }
+
+
+        // Handle timer-decreasing items
+        if (timerDecreasingPickupItems != null && timerDecreasingPickupItems.Count > 0)
+        {
+            foreach (var timerItem in timerDecreasingPickupItems)
+            {
+                if (timerItem != null && !timerItem.HasBeenPickedUp)
+                {
+                    Debug.Log($"Processing timer-decreasing item: {timerItem.gameObject.name}");
+                    timerItem.OnPickupButtonPressed(); // Call the pickup method on the timer-decreasing item
+
+                    if (timerManager != null)
+                    {
+                        timerManager.AddTime(-5f); // Decrease the timer by 5 seconds (adjust as needed)
+                        Debug.Log($"Timer decreased by 5 seconds. Remaining time: {timerManager.remainingTime}");
+                    }
+                }
+            }
         }
     }
 

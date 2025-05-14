@@ -187,7 +187,7 @@ public class TaymerManager : MonoBehaviour
 {
     public Image timerImage; // Reference to the TimerImage
     private float totalTime; // Total time in seconds
-    private float remainingTime;
+    public float remainingTime;
 
     public LayfManager layfManager; // Reference to the LifeManager (handles lives and hearts)
     public GameObject failPanel; // Reference to the fail panel UI
