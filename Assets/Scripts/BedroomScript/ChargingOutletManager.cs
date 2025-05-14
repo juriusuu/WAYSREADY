@@ -205,7 +205,7 @@ public class ChargingOutletManager : MonoBehaviour
         }
 
         // Wait for 2 seconds before hiding the final panel
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(4f);
 
         if (finalPanel != null)
         {

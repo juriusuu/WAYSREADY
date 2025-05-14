@@ -344,7 +344,7 @@ public class QuestClipboardManager : MonoBehaviour
             case "Stage1Normal":
                 return "Stage1Hard";
             case "Stage1Hard":
-                return "Stage 2 Storyline"; // Transition to Storyline 2 after Stage1Hard
+                return "Stage 1 Storyline  (20)"; // Transition to Storyline 2 after Stage1Hard
             case "Stage 2 Storyline":
                 return "Stage2Easy";
             case "Stage2Easy":
@@ -352,7 +352,7 @@ public class QuestClipboardManager : MonoBehaviour
             case "Stage2Normal":
                 return "Stage2Hard";
             case "Stage2Hard":
-                return "Stage 3 Storyline"; // Transition to Storyline 3 after Stage2Hard
+                return "Stage 2 Storyline (17)"; // Transition to Storyline 3 after Stage2Hard
             case "Stage 3 Storyline":
                 return "Stage3Easy";
             case "Stage3Easy":

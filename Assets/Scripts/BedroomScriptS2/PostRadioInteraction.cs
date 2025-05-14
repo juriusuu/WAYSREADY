@@ -53,7 +53,7 @@ public class PostRadioInteractionManager : MonoBehaviour
         }
 
         // Wait for 3 seconds (or the duration of the panel display)
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(4f);
 
         // Hide the panel
         if (postRadioPanel != null)

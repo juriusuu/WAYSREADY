@@ -119,6 +119,11 @@ public class GameManager : MonoBehaviour
 
     public void InitializeLives(string sceneName, bool isNewGame = false)
     {
+        if (CurrentState == GameState.GameOver)
+        {
+            Debug.Log("[InitializeLives] Skipping lives initialization in GameOver state.");
+            return;
+        }
         LayfManager layfManager = FindObjectOfType<LayfManager>();
         if (layfManager != null)
         {
@@ -280,7 +285,13 @@ public class GameManager : MonoBehaviour
         Debug.Log($"[GameManager] Scene loaded: {scene.name}");
 
 
-
+        // Check if the game is in GameOver state
+        if (CurrentState == GameState.GameOver)
+        {
+            Debug.Log("[OnSceneLoaded] Game is in GameOver state. Preventing further initialization.");
+            //  OnEnterGameOverState(); // Trigger GameOver state logic
+            return;
+        }
         /*  // Initialize lives for the scene
          InitializeLives(scene.name);
 
@@ -302,6 +313,7 @@ public class GameManager : MonoBehaviour
             {
                 Debug.Log("[OnSceneLoaded] No lives remaining. Transitioning to GameOver state.");
                 ChangeState(GameState.GameOver);
+                //  OnEnterGameOverState(); // Trigger GameOver logic
                 return;
             }
         }
@@ -831,6 +843,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.Log("No lives remaining. Transitioning to Game Over.");
             ChangeState(GameState.GameOver); // Transition to Game Over
+            //OnEnterGameOverState(); // Trigger GameOver logic
             return; // Exit the method
         }
 
@@ -898,7 +911,7 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            Debug.LogError("Fail panel or TaymerManager not found!");
+            Debug.LogWarning("Fail panel or TaymerManager not found!");
         }
         // Save the player's state (including lives)
         SaveGame();
@@ -1045,7 +1058,9 @@ public class GameManager : MonoBehaviour
                 questCompletionStatus = questCompletionStatus,
                 sceneStates = sceneStates, // Save all scene states
 
-                currentLives = currentLives // Save current lives
+                //currentLives = currentLives // Save current lives
+                currentLives = FindObjectOfType<LayfManager>()?.currentLives ?? 0,
+                gameState = CurrentState // Save the current game state
             };
 
             // Serialize and save to file
@@ -1075,10 +1090,20 @@ public class GameManager : MonoBehaviour
                 completedScenes = saveData.completedScenes ?? new List<string>();
                 questCompletionStatus = saveData.questCompletionStatus ?? new Dictionary<string, bool[]>();
                 sceneStates = saveData.sceneStates ?? new Dictionary<string, SceneState>();
-
+                CurrentState = saveData.gameState; // Restore the game state
 
                 Debug.Log($"Loaded completed scenes: {string.Join(", ", completedScenes)}");
 
+
+                // Check if the game is in GameOver state
+                if (CurrentState == GameState.GameOver)
+                {
+                    Debug.Log("[LoadGame] Game is in GameOver state. Loading GameOver screen.");
+                    //  SceneManager.LoadScene("GameOver"); // Replace "GameOver" with your GameOver scene name
+                    // OnEnterGameOverState(); // Trigger GameOver state logic
+
+                    return;
+                }
                 // Update the coin UI
                 if (CoinUIManager.Instance != null)
                 {
@@ -1134,7 +1159,7 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("No save file found. Starting a new game.");
             // Fallback to a default scene if no save file exists
-            currentScene = "MainMenu"; // Replace with your fallback scene name
+            currentScene = "Main Menu"; // Replace with your fallback scene name
             SceneManager.LoadScene(currentScene);
         }
     }
@@ -1392,6 +1417,8 @@ public class GameManager : MonoBehaviour
         public Dictionary<string, SceneState> sceneStates; // Save all scene states
 
         public int currentLives; // Add current lives to save data
+
+        public GameManager.GameState gameState; // Add gameState to save data
     }
 
     [System.Serializable]

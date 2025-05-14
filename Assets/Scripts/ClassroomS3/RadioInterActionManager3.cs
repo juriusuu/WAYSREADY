@@ -297,7 +297,7 @@ public class RadioInteractionManagerS3 : MonoBehaviour
         }
     }
 } */
-
+/* 
 using UnityEngine;
 using UnityEngine.UI;
 using ClassroomS3;
@@ -314,7 +314,7 @@ public class RadioInteractionManagerS3 : MonoBehaviour
 
     public PhoneButtonManager1 phoneButtonManager; // Reference to PhoneButtonManager1
 
-    public PostRadio postRadio; // Reference to the PostWhiteboardInteractionManager
+    public PostRadio1 postRadio1; // Reference to the PostWhiteboardInteractionManager
 
 
     private void Start()
@@ -478,14 +478,144 @@ public class RadioInteractionManagerS3 : MonoBehaviour
 
 
         // Trigger the PostWhiteboardInteractionManager
-        if (postRadio != null)
+        if (postRadio1 != null)
         {
-            postRadio.ActivatePostInteractionRadio();
+            postRadio1.ActivatePostInteractionRadio1();
         }
         else
         {
             Debug.LogError("PostWhiteboardInteractionManager is not assigned!");
         }
+        // Activate the phone button after all panels are shown
+        if (phoneButtonManager != null)
+        {
+            phoneButtonManager.ActivatePhoneButton();
+            Debug.Log("Phone button activated after panels are shown.");
+        }
+    }
+} */
+
+
+
+
+using UnityEngine;
+using UnityEngine.UI;
+using ClassroomS3;
+public class RadioInteractionManagerS3 : MonoBehaviour
+{
+    public Button interactButton; // Reference to the interact button
+    public GameObject firstPanel; // Reference to the first panel
+    public GameObject secondPanel; // Reference to the second panel
+    private GameObject currentInteractable; // The object the player is near
+    private bool isInteractionComplete = false; // Tracks if the interaction is already completed
+
+    public AudioClip audioClip1; // First audio clip
+    public AudioClip audioClip2; // Second audio clip
+
+    public PostRadio1 postRadio1; // Reference to the PostRadioInteractionManager
+    public PhoneButtonManager1 phoneButtonManager; // Reference to PhoneButtonManager1
+
+    private void Start()
+    {
+        // Ensure the button is hidden at the start
+        if (interactButton != null)
+        {
+            interactButton.gameObject.SetActive(false);
+            interactButton.onClick.AddListener(OnInteractButtonPressed); // Add listener for button click
+        }
+
+        // Ensure all panels are hidden at the start
+        if (firstPanel != null) firstPanel.SetActive(false);
+        if (secondPanel != null) secondPanel.SetActive(false);
+    }
+
+    private void Update()
+    {
+        // Handle button visibility based on the current interactable and interaction state
+        if (!isInteractionComplete && currentInteractable != null && currentInteractable.CompareTag("Radio"))
+        {
+            interactButton.gameObject.SetActive(true); // Show the button
+        }
+        else
+        {
+            interactButton.gameObject.SetActive(false); // Hide the button
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            currentInteractable = gameObject; // Set the current interactable object
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (currentInteractable == gameObject && other.CompareTag("Player"))
+        {
+            currentInteractable = null;
+        }
+    }
+
+    private void OnInteractButtonPressed()
+    {
+        if (isInteractionComplete)
+        {
+            return;
+        }
+
+        // Play the audio clips and show panels in sequence
+        StartCoroutine(PlayAudioAndShowPanelsInSequence());
+
+        // Mark interaction as complete and disable the button
+        isInteractionComplete = true;
+        interactButton.gameObject.SetActive(false); // Hide the button permanently
+    }
+
+    private System.Collections.IEnumerator PlayAudioAndShowPanelsInSequence()
+    {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>(); // Add an AudioSource dynamically
+
+        // Play the first audio clip and show the first panel
+        if (audioClip1 != null && firstPanel != null)
+        {
+            firstPanel.SetActive(true);
+            audioSource.clip = audioClip1;
+            audioSource.Play();
+            Debug.Log($"Playing audio: {audioSource.clip.name}");
+            yield return new WaitForSeconds(audioClip1.length); // Wait for the duration of the audio clip
+            firstPanel.SetActive(false);
+        }
+
+        // Play the second audio clip and show the second panel
+        if (audioClip2 != null && secondPanel != null)
+        {
+            secondPanel.SetActive(true);
+            audioSource.clip = audioClip2;
+            audioSource.Play();
+            Debug.Log($"Playing audio: {audioSource.clip.name}");
+            yield return new WaitForSeconds(audioClip2.length); // Wait for the duration of the audio clip
+            secondPanel.SetActive(false);
+
+
+            // Mark the task as completed
+            FindObjectOfType<QuestClipboardManager>()?.CompleteTask(1); // Task index 1
+            Debug.Log("Task 1 completed in QuestClipboardManager.");
+        }
+
+        Destroy(audioSource); // Remove the AudioSource after playing all clips
+
+        // Trigger the PostRadioInteractionManager
+        if (postRadio1 != null)
+        {
+            postRadio1.ActivatePostInteractionRadio1();
+        }
+        else
+        {
+            Debug.LogError("PostRadioInteractionManager is not assigned!");
+        }
+
         // Activate the phone button after all panels are shown
         if (phoneButtonManager != null)
         {

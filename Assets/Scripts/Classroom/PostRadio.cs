@@ -4,7 +4,8 @@ public class PostRadio : MonoBehaviour
 {
     public GameObject panel1; // First panel to display
     public GameObject panel2; // Second panel to display
-    public AudioSource audioSource; // Single audio source for both panels
+    public AudioClip audioClip1; // Audio clip for the first panel
+    public AudioClip audioClip2; // Audio clip for the second panel
     private bool isActivated = false; // Tracks if the script has been activated
 
     private void Start()
@@ -12,24 +13,18 @@ public class PostRadio : MonoBehaviour
         // Ensure both panels are hidden at the start
         if (panel1 != null) panel1.SetActive(false);
         if (panel2 != null) panel2.SetActive(false);
-
-        // Ensure the audio source is not playing at the start
-        if (audioSource != null && audioSource.isPlaying)
-        {
-            audioSource.Stop();
-        }
     }
 
     public void ActivatePostInteractionRadio()
     {
         if (isActivated)
         {
-            Debug.LogWarning("Post-whiteboard interaction has already been activated.");
+            Debug.LogWarning("Post-radio interaction has already been activated.");
             return;
         }
 
         isActivated = true; // Mark as activated
-        Debug.Log("Post-whiteboard interaction activated!");
+        Debug.Log("Post-radio interaction activated!");
 
         // Start the sequence of showing the panels and playing audio
         StartCoroutine(ShowPanelsAndPlayAudio());
@@ -37,39 +32,38 @@ public class PostRadio : MonoBehaviour
 
     private System.Collections.IEnumerator ShowPanelsAndPlayAudio()
     {
-        // Show the first panel and play the audio
+        // Show the first panel and play its audio
         if (panel1 != null)
         {
             panel1.SetActive(true);
             Debug.Log("Panel 1 displayed.");
 
-            if (audioSource != null)
+            if (audioClip1 != null)
             {
-                audioSource.Play();
-                Debug.Log("Audio started for Panel 1.");
+                AudioSource.PlayClipAtPoint(audioClip1, Camera.main.transform.position);
+                Debug.Log("Audio for Panel 1 played.");
             }
 
-            yield return new WaitForSeconds(1.5f); // Wait for 1.5 seconds
+            yield return new WaitForSeconds(3f); // Wait for 1.5 seconds
             panel1.SetActive(false);
             Debug.Log("Panel 1 hidden.");
         }
 
-        // Show the second panel
+        // Show the second panel and play its audio
         if (panel2 != null)
         {
             panel2.SetActive(true);
             Debug.Log("Panel 2 displayed.");
 
-            yield return new WaitForSeconds(1.5f); // Wait for 1.5 seconds
+            if (audioClip2 != null)
+            {
+                AudioSource.PlayClipAtPoint(audioClip2, Camera.main.transform.position);
+                Debug.Log("Audio for Panel 2 played.");
+            }
+
+            yield return new WaitForSeconds(3f); // Wait for 1.5 seconds
             panel2.SetActive(false);
             Debug.Log("Panel 2 hidden.");
-        }
-
-        // Stop the audio after both panels are shown
-        if (audioSource != null && audioSource.isPlaying)
-        {
-            audioSource.Stop();
-            Debug.Log("Audio stopped after Panel 2.");
         }
     }
 }

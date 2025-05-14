@@ -2,69 +2,68 @@ using UnityEngine;
 
 public class EscapeRoutePanelManager : MonoBehaviour
 {
-    public GameObject escapeRoutePanel; // Panel to display when the player enters the trigger
-    public AudioSource audioSource; // Audio source to play with the panel
-    private bool isActivated = false; // Tracks if the panel has already been shown
+    public GameObject panel1; // First panel to display
+    public GameObject panel2; // Second panel to display
+    public AudioClip audioClip1; // Audio clip for the first panel
+    public AudioClip audioClip2; // Audio clip for the second panel
+    private bool isActivated = false; // Tracks if the panels have already been shown
 
     private void Start()
     {
-        // Ensure the panel is hidden at the start
-        if (escapeRoutePanel != null)
-        {
-            escapeRoutePanel.SetActive(false);
-        }
-
-        // Ensure the audio source is not playing at the start
-        if (audioSource != null && audioSource.isPlaying)
-        {
-            audioSource.Stop();
-        }
+        // Ensure both panels are hidden at the start
+        if (panel1 != null) panel1.SetActive(false);
+        if (panel2 != null) panel2.SetActive(false);
     }
 
     public void ShowEscapeRoutePanel()
     {
         if (isActivated)
         {
-            Debug.LogWarning("Escape route panel has already been shown.");
+            Debug.LogWarning("Escape route panels have already been shown.");
             return;
         }
 
         isActivated = true; // Mark as activated
-        Debug.Log("Escape route panel activated!");
+        Debug.Log("Escape route panels activated!");
 
-        // Show the panel and play the audio
-        if (escapeRoutePanel != null)
-        {
-            escapeRoutePanel.SetActive(true);
-            Debug.Log("Escape route panel displayed.");
-        }
-
-        if (audioSource != null)
-        {
-            audioSource.Play();
-            Debug.Log("Audio for escape route panel started.");
-        }
-
-        // Hide the panel after 3 seconds
-        StartCoroutine(HideEscapeRoutePanelAfterDelay(3f));
+        // Start the sequence of showing the panels and playing audio
+        StartCoroutine(ShowPanelsAndPlayAudio());
     }
 
-    private System.Collections.IEnumerator HideEscapeRoutePanelAfterDelay(float delay)
+    private System.Collections.IEnumerator ShowPanelsAndPlayAudio()
     {
-        yield return new WaitForSeconds(delay);
-
-        // Hide the panel
-        if (escapeRoutePanel != null)
+        // Show the first panel and play its audio
+        if (panel1 != null)
         {
-            escapeRoutePanel.SetActive(false);
-            Debug.Log("Escape route panel hidden.");
+            panel1.SetActive(true);
+            Debug.Log("Panel 1 displayed.");
+
+            if (audioClip1 != null)
+            {
+                AudioSource.PlayClipAtPoint(audioClip1, Camera.main.transform.position);
+                Debug.Log("Audio for Panel 1 played.");
+            }
+
+            yield return new WaitForSeconds(3f); // Wait for 3 seconds
+            panel1.SetActive(false);
+            Debug.Log("Panel 1 hidden.");
         }
 
-        // Stop the audio
-        if (audioSource != null && audioSource.isPlaying)
+        // Show the second panel and play its audio
+        if (panel2 != null)
         {
-            audioSource.Stop();
-            Debug.Log("Audio for escape route panel stopped.");
+            panel2.SetActive(true);
+            Debug.Log("Panel 2 displayed.");
+
+            if (audioClip2 != null)
+            {
+                AudioSource.PlayClipAtPoint(audioClip2, Camera.main.transform.position);
+                Debug.Log("Audio for Panel 2 played.");
+            }
+
+            yield return new WaitForSeconds(3f); // Wait for 3 seconds
+            panel2.SetActive(false);
+            Debug.Log("Panel 2 hidden.");
         }
     }
 }

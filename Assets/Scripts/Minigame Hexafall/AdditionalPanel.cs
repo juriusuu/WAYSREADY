@@ -120,7 +120,7 @@ public class AdditionalPanelManager : MonoBehaviour
         }
 
         // Automatically hide the panel after 1 second
-        Invoke(nameof(HideAdditionalPanel), 1f);
+        Invoke(nameof(HideAdditionalPanel), 3f);
     }
 
     public void HideAdditionalPanel()

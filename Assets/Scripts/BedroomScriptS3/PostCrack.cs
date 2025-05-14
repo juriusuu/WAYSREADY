@@ -2,23 +2,17 @@ using UnityEngine;
 
 public class PostWindowInteractionManager : MonoBehaviour
 {
-    public GameObject postInteractionPanel; // Panel to display after the window interaction
-    public AudioSource postInteractionAudioSource; // Audio source to play with the panel
+    public GameObject panel1; // First panel to display
+    public GameObject panel2; // Second panel to display
+    public AudioClip panel1AudioClip; // Audio clip for the first panel
+    public AudioClip panel2AudioClip; // Audio clip for the second panel
     private bool isActivated = false; // Tracks if the script has been activated
 
     private void Start()
     {
-        // Ensure the panel is hidden at the start
-        if (postInteractionPanel != null)
-        {
-            postInteractionPanel.SetActive(false);
-        }
-
-        // Ensure the audio source is not playing at the start
-        if (postInteractionAudioSource != null && postInteractionAudioSource.isPlaying)
-        {
-            postInteractionAudioSource.Stop();
-        }
+        // Ensure both panels are hidden at the start
+        if (panel1 != null) panel1.SetActive(false);
+        if (panel2 != null) panel2.SetActive(false);
     }
 
     public void ActivatePostInteraction()
@@ -32,41 +26,44 @@ public class PostWindowInteractionManager : MonoBehaviour
         isActivated = true; // Mark as activated
         Debug.Log("Post-window interaction activated!");
 
-        // Start the sequence of showing the panel and playing audio
-        StartCoroutine(ShowPanelAndPlayAudio());
+        // Start the sequence of showing panels and playing audio
+        StartCoroutine(ShowPanelsAndPlayAudio());
     }
 
-    private System.Collections.IEnumerator ShowPanelAndPlayAudio()
+    private System.Collections.IEnumerator ShowPanelsAndPlayAudio()
     {
-        // Show the panel
-        if (postInteractionPanel != null)
+        // Show the first panel and play its audio
+        if (panel1 != null)
         {
-            postInteractionPanel.SetActive(true);
-            Debug.Log("Post-interaction panel displayed.");
+            panel1.SetActive(true);
+            Debug.Log("Panel 1 displayed.");
+
+            if (panel1AudioClip != null)
+            {
+                AudioSource.PlayClipAtPoint(panel1AudioClip, Camera.main.transform.position);
+                Debug.Log("Panel 1 audio played.");
+            }
+
+            yield return new WaitForSeconds(5f); // Wait for 3 seconds
+            panel1.SetActive(false);
+            Debug.Log("Panel 1 hidden.");
         }
 
-        // Play the audio
-        if (postInteractionAudioSource != null)
+        // Show the second panel and play its audio
+        if (panel2 != null)
         {
-            postInteractionAudioSource.Play();
-            Debug.Log("Post-interaction audio started.");
-        }
+            panel2.SetActive(true);
+            Debug.Log("Panel 2 displayed.");
 
-        // Wait for 3 seconds (or the duration of the panel display)
-        yield return new WaitForSeconds(3f);
+            if (panel2AudioClip != null)
+            {
+                AudioSource.PlayClipAtPoint(panel2AudioClip, Camera.main.transform.position);
+                Debug.Log("Panel 2 audio played.");
+            }
 
-        // Hide the panel
-        if (postInteractionPanel != null)
-        {
-            postInteractionPanel.SetActive(false);
-            Debug.Log("Post-interaction panel hidden.");
-        }
-
-        // Stop the audio
-        if (postInteractionAudioSource != null)
-        {
-            postInteractionAudioSource.Stop();
-            Debug.Log("Post-interaction audio stopped.");
+            yield return new WaitForSeconds(3f); // Wait for 3 seconds
+            panel2.SetActive(false);
+            Debug.Log("Panel 2 hidden.");
         }
     }
 }

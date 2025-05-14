@@ -10,8 +10,11 @@ public class PickupButtonss : MonoBehaviour
     public GameObject inventorySlotPrefab; // Reference to the Inventory Slot Prefab
     public GameObject firstCompletionPanel; // First panel to show after all items are picked up
     public GameObject secondCompletionPanel; // Second panel to show after the first panel
-    public AudioSource completionAudio; // Audio source to play when the panels are shown
+    // public AudioSource completionAudio;  // Audio source to play when the panels are shown
     private int currentItemIndex = 0; // Track the current item index
+    public AudioClip firstCompletionAudioClip; // Audio clip for the first completion panel
+    public AudioClip secondCompletionAudioClip; // Audio clip for the second completion panel
+
     private bool isPlayerNear = false; // Tracks if the player is near any pickup object
 
     private void Start()
@@ -193,6 +196,7 @@ public class PickupButtonss : MonoBehaviour
         }
     }
 
+
     private void ShowFirstCompletionPanel()
     {
         if (firstCompletionPanel != null)
@@ -200,16 +204,18 @@ public class PickupButtonss : MonoBehaviour
             firstCompletionPanel.SetActive(true); // Show the first completion panel
             Debug.Log("First completion panel displayed.");
 
-            if (completionAudio != null)
+            // Play the audio for the first completion panel
+            if (firstCompletionAudioClip != null)
             {
-                completionAudio.Play(); // Play the audio
-                Debug.Log("Completion audio played.");
+                AudioSource.PlayClipAtPoint(firstCompletionAudioClip, Camera.main.transform.position);
+                Debug.Log("First completion audio played.");
             }
 
             // Hide the first panel and show the second panel after 2 seconds
-            Invoke(nameof(ShowSecondCompletionPanel), 1.5f);
+            Invoke(nameof(ShowSecondCompletionPanel), 3f);
         }
     }
+
 
     private void ShowSecondCompletionPanel()
     {
@@ -224,10 +230,18 @@ public class PickupButtonss : MonoBehaviour
             secondCompletionPanel.SetActive(true); // Show the second completion panel
             Debug.Log("Second completion panel displayed.");
 
+            // Play the audio for the second completion panel
+            if (secondCompletionAudioClip != null)
+            {
+                AudioSource.PlayClipAtPoint(secondCompletionAudioClip, Camera.main.transform.position);
+                Debug.Log("Second completion audio played.");
+            }
+
             // Hide the second panel after 2 seconds
-            Invoke(nameof(HideSecondCompletionPanel), 2f);
+            Invoke(nameof(HideSecondCompletionPanel), 5f);
         }
     }
+
 
     private void HideSecondCompletionPanel()
     {
@@ -237,13 +251,7 @@ public class PickupButtonss : MonoBehaviour
             Debug.Log("Second completion panel hidden.");
         }
 
-        // Deactivate the final audio source
-        if (completionAudio != null)
-        {
-            completionAudio.Stop(); // Stop the audio
-            completionAudio.enabled = false; // Disable the audio source
-            Debug.Log("Final audio source stopped and deactivated.");
-        }
+
     }
 
 

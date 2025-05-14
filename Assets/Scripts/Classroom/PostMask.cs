@@ -53,7 +53,7 @@ public class PostFacemaskInteractionManager : MonoBehaviour
         }
 
         // Wait for 2 seconds (or the duration of the panel display)
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(3f);
 
         // Hide the panel
         if (postFacemaskPanel != null)
