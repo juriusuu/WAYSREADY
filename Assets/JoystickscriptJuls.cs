@@ -51,7 +51,8 @@ namespace Supercyan.FreeSample
 
         // [SerializeField] private InputActionReference moveActionToUse;
         public TimerManager timerManager; // Reference to TimerManager
-
+        [SerializeField]
+        private float glideGravityMultiplier = 0.3f;
         private void Awake()
         {
             if (!m_animator) { m_animator = gameObject.GetComponent<Animator>(); }
@@ -349,7 +350,14 @@ namespace Supercyan.FreeSample
             {
                 Debug.LogError("Unsupported state");
             }
-
+            // --- GLIDE LOGIC START ---
+            if (!m_isGrounded && m_rigidBody.linearVelocity.y < 0)
+            {
+                // Reduce the effect of gravity while falling
+                Vector3 velocity = m_rigidBody.linearVelocity;
+                velocity.y *= glideGravityMultiplier;
+                m_rigidBody.linearVelocity = velocity;
+            }
             m_wasGrounded = m_isGrounded;
             m_jumpInput = false;
         }
