@@ -2593,6 +2593,8 @@ MonoBehaviour:
   secondCompletionPanel: {fileID: 0}
   firstCompletionAudioClip: {fileID: 0}
   secondCompletionAudioClip: {fileID: 0}
+  timerDecreasingPickupItems: []
+  timerManager: {fileID: 0}
 --- !u!114 &167442981
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4939,6 +4941,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerImage: {fileID: 236659570}
+  remainingTime: 0
   layfManager: {fileID: 1411184667}
   failPanel: {fileID: 1470916742}
   totalHintsAllowed: 0
@@ -10520,6 +10523,7 @@ MonoBehaviour:
   - 7
   - 5
   - 5
+  - 5
   - 2
   postPhoneInteractionManager: {fileID: 1240150506}
 --- !u!1 &516332076 stripped
@@ -12984,6 +12988,7 @@ MonoBehaviour:
   crouchSpeed: 1
   lifeManager: {fileID: 0}
   timerManager: {fileID: 0}
+  glideGravityMultiplier: 0.3
 --- !u!54 &634862037 stripped
 Rigidbody:
   m_CorrespondingSourceObject: {fileID: 1350703527288031278, guid: 9854bb05e98038145add8ed7c25af4b1, type: 3}
@@ -28289,7 +28294,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 249527686075fb44a9c4c6d69fd2d1ba, type: 3}
   m_Resource: {fileID: 8300000, guid: 249527686075fb44a9c4c6d69fd2d1ba, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -41817,63 +41822,6 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: -1938620446593799202, guid: c7a85b0e92853dd43ab92d03ba96f6fc, type: 3}
---- !u!1001 &2046755638
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: -8679921383154817045, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.7269993
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.31800002
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 5.12
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: -8679921383154817045, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: a25581f677299d5408f28d71caad4217, type: 3}
-      propertyPath: m_Name
-      value: TOWEL (2)
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: a25581f677299d5408f28d71caad4217, type: 3}
 --- !u!1 &2048847860
 GameObject:
   m_ObjectHideFlags: 0
@@ -43862,7 +43810,6 @@ SceneRoots:
   - {fileID: 1852214301}
   - {fileID: 1906653526}
   - {fileID: 151307448}
-  - {fileID: 2046755638}
   - {fileID: 1304162955}
   - {fileID: 1489147691}
   - {fileID: 1320176810}

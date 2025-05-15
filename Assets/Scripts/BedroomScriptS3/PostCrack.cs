@@ -40,7 +40,7 @@ public class PostWindowInteractionManager : MonoBehaviour
 
             if (panel1AudioClip != null)
             {
-                AudioSource.PlayClipAtPoint(panel1AudioClip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(panel1AudioClip, Camera.main.transform.position, 2.0f);
                 Debug.Log("Panel 1 audio played.");
             }
 
@@ -57,7 +57,7 @@ public class PostWindowInteractionManager : MonoBehaviour
 
             if (panel2AudioClip != null)
             {
-                AudioSource.PlayClipAtPoint(panel2AudioClip, Camera.main.transform.position);
+                AudioSource.PlayClipAtPoint(panel2AudioClip, Camera.main.transform.position, 2.0f);
                 Debug.Log("Panel 2 audio played.");
             }
 

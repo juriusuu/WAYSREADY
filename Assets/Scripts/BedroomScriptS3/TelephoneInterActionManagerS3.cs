@@ -95,7 +95,7 @@ public class TelephoneInteractionManagerS3 : MonoBehaviour
         // Play the ring audio before starting the interaction
         if (ringAudioClip != null)
         {
-            AudioSource.PlayClipAtPoint(ringAudioClip, transform.position);
+            AudioSource.PlayClipAtPoint(ringAudioClip, Camera.main.transform.position);
             Debug.Log("Playing ring audio.");
             StartCoroutine(PlayRingAudioAndShowPanelsInSequence());
         }
@@ -124,7 +124,7 @@ public class TelephoneInteractionManagerS3 : MonoBehaviour
                 panels[i].SetActive(true);
 
                 // Play the corresponding audio clip
-                AudioSource.PlayClipAtPoint(telephoneAudioClips[i], transform.position);
+                AudioSource.PlayClipAtPoint(telephoneAudioClips[i], transform.position, 2.0f);
                 Debug.Log($"Playing audio clip {i}: {telephoneAudioClips[i].name}");
 
                 // Wait for the specified display time for this panel

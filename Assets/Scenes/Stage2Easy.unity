@@ -31511,6 +31511,7 @@ MonoBehaviour:
   crouchSpeed: 1
   lifeManager: {fileID: 0}
   timerManager: {fileID: 0}
+  glideGravityMultiplier: 0.3
 --- !u!114 &1220990617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -53675,7 +53676,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 249527686075fb44a9c4c6d69fd2d1ba, type: 3}
   m_Resource: {fileID: 8300000, guid: 249527686075fb44a9c4c6d69fd2d1ba, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.6
   m_Pitch: 1
   Loop: 1
   Mute: 0

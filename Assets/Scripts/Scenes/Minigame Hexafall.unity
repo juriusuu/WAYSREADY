@@ -18206,6 +18206,7 @@ MonoBehaviour:
   crouchSpeed: 1
   lifeManager: {fileID: 0}
   timerManager: {fileID: 0}
+  glideGravityMultiplier: 1
 --- !u!1 &78732043 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5579635048419291156, guid: e3f07080ef7e5c64b8e4033a95661b00, type: 3}
