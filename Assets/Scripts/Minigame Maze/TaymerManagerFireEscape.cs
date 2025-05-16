@@ -31,7 +31,12 @@ public class TaymerManagerFireEscape : MonoBehaviour
         // Ensure the game is not paused at the start
         Time.timeScale = 1f;
     }
-
+    public void DecreaseTime(float amount)
+    {
+        remainingTime -= amount;
+        if (remainingTime < 0) remainingTime = 0;
+        timerImage.fillAmount = remainingTime / totalTime;
+    }
     private void Update()
     {
         if (!isGameOver)

@@ -144,16 +144,17 @@ public class PickupButtonss : MonoBehaviour
                     {
                         Debug.LogWarning("TaymerManager not found! Timer functionality will not work.");
                     }
+                    // Show the warning panel
+                    if (warningPanel != null)
+                    {
+                        warningPanel.SetActive(true);
+                        // Optionally, hide it after a few seconds:
+                        Invoke(nameof(HideWarningPanel), 6f);
+                    }
                 }
 
 
-                // Show the warning panel
-                if (warningPanel != null)
-                {
-                    warningPanel.SetActive(true);
-                    // Optionally, hide it after a few seconds:
-                    Invoke(nameof(HideWarningPanel), 6f);
-                }
+
 
                 currentItemIndex++;
                 Debug.Log($"CurrentItemIndex incremented to: {currentItemIndex}");
