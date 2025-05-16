@@ -14,10 +14,10 @@ public class PickupButtonss : MonoBehaviour
     private int currentItemIndex = 0; // Track the current item index
     public AudioClip firstCompletionAudioClip; // Audio clip for the first completion panel
     public AudioClip secondCompletionAudioClip; // Audio clip for the second completion panel
-
+    public GameObject warningPanel; // Assign this in the Inspector
 
     public List<PickupItems> timerDecreasingPickupItems; // List of items that decrease the timer
-    public TaymerManager timerManager; // Reference to the TaymerManager to modify the timer
+                                                         // public TaymerManager timerManager; // Reference to the TaymerManager to modify the timer
 
     private bool isPlayerNear = false; // Tracks if the player is near any pickup object
 
@@ -51,15 +51,6 @@ public class PickupButtonss : MonoBehaviour
             inventoryPanel.SetActive(true); // Show the panel initially
         }
 
-        // Ensure the timer manager is assigned
-        if (timerManager == null)
-        {
-            timerManager = FindObjectOfType<TaymerManager>();
-            if (timerManager == null)
-            {
-                Debug.LogError("TaymerManager not found! Timer functionality will not work.");
-            }
-        }
 
     }
 
@@ -103,7 +94,81 @@ public class PickupButtonss : MonoBehaviour
 
         Debug.Log($"CurrentItemIndex: {currentItemIndex}, PickupItems.Count: {pickupItems.Count}");
 
+
+
         if (currentItemIndex < pickupItems.Count)
+        {
+            var item = pickupItems[currentItemIndex];
+            if (item != null && !item.HasBeenPickedUp)
+            {
+                Debug.Log($"Processing PickupItems instance at index {currentItemIndex}");
+                item.OnPickupButtonPressed(); // Call the pickup method on the current item
+
+                // Only add to inventory if NOT a timer-decreasing item
+                bool isTimerDecreasing = timerDecreasingPickupItems != null && timerDecreasingPickupItems.Contains(item);
+
+                if (!isTimerDecreasing)
+                {
+                    foreach (var pickupItem in item.Items)
+                    {
+                        string itemName = pickupItem.name;
+
+                        // Get the Image component
+                        Image itemImage = pickupItem.GetComponent<Image>();
+
+                        if (itemImage == null || itemImage.sprite == null)
+                        {
+                            Debug.LogWarning($"Item {itemName} does not have an Image component or sprite assigned.");
+                            continue; // Skip this item if no Image or sprite is found
+                        }
+
+                        // Retrieve the sprite from the Image component
+                        Sprite itemSprite = itemImage.sprite;
+
+                        Debug.Log($"Adding item to inventory: {itemName}");
+                        AddItemToInventory(itemName, itemSprite); // Add the item to the inventory UI
+                        Debug.Log($"Added {itemName} to inventory.");
+                    }
+                }
+
+                // Only decrease timer if this item is in the timerDecreasingPickupItems list
+                if (isTimerDecreasing)
+                {
+                    TaymerManager timerManager = FindObjectOfType<TaymerManager>();
+                    if (timerManager != null)
+                    {
+                        timerManager.AddTime(-20f); // Decrease the timer by 20 seconds (adjust as needed)
+                        Debug.Log($"Timer decreased by 20 seconds. Remaining time: {timerManager.remainingTime}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("TaymerManager not found! Timer functionality will not work.");
+                    }
+                }
+
+
+                // Show the warning panel
+                if (warningPanel != null)
+                {
+                    warningPanel.SetActive(true);
+                    // Optionally, hide it after a few seconds:
+                    Invoke(nameof(HideWarningPanel), 6f);
+                }
+
+                currentItemIndex++;
+                Debug.Log($"CurrentItemIndex incremented to: {currentItemIndex}");
+            }
+            else if (item != null && item.HasBeenPickedUp)
+            {
+                Debug.LogWarning($"Item {item.gameObject.name} has already been picked up.");
+            }
+            else
+            {
+                Debug.LogWarning($"PickupItems instance at index {currentItemIndex} is null.");
+            }
+        }
+
+        /* if (currentItemIndex < pickupItems.Count)
         {
             var item = pickupItems[currentItemIndex];
             if (item != null && !item.HasBeenPickedUp)
@@ -132,6 +197,21 @@ public class PickupButtonss : MonoBehaviour
                     Debug.Log($"Added {itemName} to inventory.");
                 }
 
+                // Only decrease timer if this item is in the timerDecreasingPickupItems list
+                if (timerDecreasingPickupItems != null && timerDecreasingPickupItems.Contains(item))
+                {
+                    TaymerManager timerManager = FindObjectOfType<TaymerManager>();
+                    if (timerManager != null)
+                    {
+                        timerManager.AddTime(-20f); // Decrease the timer by 40 seconds (adjust as needed)
+                        Debug.Log($"Timer decreased by 40 seconds. Remaining time: {timerManager.remainingTime}");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("TaymerManager not found! Timer functionality will not work.");
+                    }
+                }
+
                 currentItemIndex++;
                 Debug.Log($"CurrentItemIndex incremented to: {currentItemIndex}");
             }
@@ -143,7 +223,7 @@ public class PickupButtonss : MonoBehaviour
             {
                 Debug.LogWarning($"PickupItems instance at index {currentItemIndex} is null.");
             }
-        }
+        } */
 
         /*   if (currentItemIndex >= pickupItems.Count)
           {
@@ -161,26 +241,56 @@ public class PickupButtonss : MonoBehaviour
         }
 
 
-        // Handle timer-decreasing items
-        if (timerDecreasingPickupItems != null && timerDecreasingPickupItems.Count > 0)
-        {
-            foreach (var timerItem in timerDecreasingPickupItems)
-            {
-                if (timerItem != null && !timerItem.HasBeenPickedUp)
-                {
-                    Debug.Log($"Processing timer-decreasing item: {timerItem.gameObject.name}");
-                    timerItem.OnPickupButtonPressed(); // Call the pickup method on the timer-decreasing item
+        /*      // Handle timer-decreasing items
+             if (timerDecreasingPickupItems != null && timerDecreasingPickupItems.Count > 0)
+             {
+                 foreach (var timerItem in timerDecreasingPickupItems)
+                 {
+                     if (timerItem != null && !timerItem.HasBeenPickedUp)
+                     {
+                         Debug.Log($"Processing timer-decreasing item: {timerItem.gameObject.name}");
+                         timerItem.OnPickupButtonPressed(); // Call the pickup method on the timer-decreasing item
 
-                    if (timerManager != null)
+                         if (timerManager != null)
+                         {
+                             timerManager.AddTime(-5f); // Decrease the timer by 5 seconds (adjust as needed)
+                             Debug.Log($"Timer decreased by 5 seconds. Remaining time: {timerManager.remainingTime}");
+                         }
+                     }
+                 }
+             } */
+        /*         // Handle timer-decreasing items
+                if (timerDecreasingPickupItems != null && timerDecreasingPickupItems.Count > 0)
+                {
+                    foreach (var timerItem in timerDecreasingPickupItems)
                     {
-                        timerManager.AddTime(-5f); // Decrease the timer by 5 seconds (adjust as needed)
-                        Debug.Log($"Timer decreased by 5 seconds. Remaining time: {timerManager.remainingTime}");
+                        if (timerItem != null && !timerItem.HasBeenPickedUp)
+                        {
+                            Debug.Log($"Processing timer-decreasing item: {timerItem.gameObject.name}");
+                            timerItem.OnPickupButtonPressed(); // Call the pickup method on the timer-decreasing item
+
+                            // Find the timer manager at runtime instead of using the field
+                            TaymerManager timerManager = FindObjectOfType<TaymerManager>();
+                            if (timerManager != null)
+                            {
+                                timerManager.AddTime(-40f); // Decrease the timer by 5 seconds (adjust as needed)
+                                Debug.Log($"Timer decreased by 5 seconds. Remaining time: {timerManager.remainingTime}");
+                            }
+                            else
+                            {
+                                Debug.LogWarning("TaymerManager not found! Timer functionality will not work.");
+                            }
+                        }
                     }
-                }
-            }
+                } */
+    }
+    private void HideWarningPanel()
+    {
+        if (warningPanel != null)
+        {
+            warningPanel.SetActive(false);
         }
     }
-
     private bool InventoryHasRequiredItems()
     {
         // Assuming the inventory is managed by a separate InventoryManager

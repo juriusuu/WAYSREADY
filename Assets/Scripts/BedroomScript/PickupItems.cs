@@ -14,7 +14,7 @@ public class PickupItems : MonoBehaviour
 
     // Getter and Setter for hasBeenPickedUp
     public bool HasBeenPickedUp { get; private set; } = false;
-
+    public bool isTimerDecreasingItem = false; // Set this in the Inspector for timer-decreasing items
     private void Awake()
     {
         // Attempt to find the InventoryManager if not set
@@ -49,6 +49,15 @@ public class PickupItems : MonoBehaviour
         }
 
         Debug.Log($"Initiating pickup for items: {string.Join(", ", items.ConvertAll(item => item.name))}");
+
+        if (isTimerDecreasingItem)
+        {
+            Debug.Log($"{gameObject.name} is a timer-decreasing item. Not adding to inventory.");
+            hasBeenPickedUp = true;
+            SaveState(false);
+            gameObject.SetActive(false);
+            return;
+        }
 
         if (InventoryManagers != null)
         {

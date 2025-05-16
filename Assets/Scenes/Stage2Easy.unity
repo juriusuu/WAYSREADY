@@ -6603,6 +6603,7 @@ MonoBehaviour:
   - {fileID: 744298308}
   - {fileID: 222440837}
   arrowPrefab: {fileID: 7404223956060802447, guid: f2bfbd7b1d17434418016273ad70afb2, type: 3}
+  timePenaltyPerHint: 30
   isPlayerDead: 0
 --- !u!4 &268380438
 Transform:
@@ -31511,7 +31512,7 @@ MonoBehaviour:
   crouchSpeed: 1
   lifeManager: {fileID: 0}
   timerManager: {fileID: 0}
-  glideGravityMultiplier: 0.3
+  glideGravityMultiplier: 0.8
 --- !u!114 &1220990617
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51802,8 +51803,8 @@ MonoBehaviour:
   secondCompletionPanel: {fileID: 0}
   firstCompletionAudioClip: {fileID: 0}
   secondCompletionAudioClip: {fileID: 0}
+  warningPanel: {fileID: 0}
   timerDecreasingPickupItems: []
-  timerManager: {fileID: 0}
 --- !u!114 &1824771610
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -124,7 +124,7 @@ public class TelephoneInteractionManagerS3 : MonoBehaviour
                 panels[i].SetActive(true);
 
                 // Play the corresponding audio clip
-                AudioSource.PlayClipAtPoint(telephoneAudioClips[i], transform.position, 2.0f);
+                AudioSource.PlayClipAtPoint(telephoneAudioClips[i], Camera.main.transform.position, 10f); ;
                 Debug.Log($"Playing audio clip {i}: {telephoneAudioClips[i].name}");
 
                 // Wait for the specified display time for this panel

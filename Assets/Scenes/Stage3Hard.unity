@@ -24764,15 +24764,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 8d74ed8e8778dd343a4a55f06229dc31, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.78
+      value: -16.83
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d74ed8e8778dd343a4a55f06229dc31, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.777
+      value: 1.401
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d74ed8e8778dd343a4a55f06229dc31, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 7.56
+      value: 10.379
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8d74ed8e8778dd343a4a55f06229dc31, type: 3}
       propertyPath: m_LocalRotation.w
@@ -24836,7 +24836,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 145120363}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8b9a64b03769b1f47af6574497a2f2c7, type: 3}
@@ -24963,7 +24963,9 @@ MonoBehaviour:
   firstPanel: {fileID: 1963911065}
   secondPanel: {fileID: 270215936}
   thirdPanel: {fileID: 181377106}
-  ringAudioSource: {fileID: 1997220275}
+  audioClip1: {fileID: 8300000, guid: 6fea3f7ceaa02d34bba90615790515e7, type: 3}
+  audioClip2: {fileID: 8300000, guid: 64c5f09914c091341b0f8cad7318fb3a, type: 3}
+  audioClip3: {fileID: 8300000, guid: 12007949272fd554f924d68897790613, type: 3}
   postRadioInteractionManager: {fileID: 266026665}
 --- !u!1 &145862590 stripped
 GameObject:
@@ -31958,7 +31960,6 @@ MonoBehaviour:
   firstCompletionAudioClip: {fileID: 0}
   secondCompletionAudioClip: {fileID: 0}
   timerDecreasingPickupItems: []
-  timerManager: {fileID: 0}
 --- !u!114 &216812796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80755,7 +80756,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &687972945
 AudioSource:
   m_ObjectHideFlags: 0
@@ -80763,7 +80764,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 687972944}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8b9a64b03769b1f47af6574497a2f2c7, type: 3}
@@ -96047,7 +96048,7 @@ MonoBehaviour:
   crouchSpeed: 1
   lifeManager: {fileID: 0}
   timerManager: {fileID: 0}
-  glideGravityMultiplier: 0.3
+  glideGravityMultiplier: 0.8
 --- !u!4 &837767832 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1121125582535847827, guid: 9854bb05e98038145add8ed7c25af4b1, type: 3}
@@ -122500,7 +122501,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1091803120
 AudioSource:
   m_ObjectHideFlags: 0
@@ -122508,7 +122509,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1091803119}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8b9a64b03769b1f47af6574497a2f2c7, type: 3}
@@ -136689,7 +136690,7 @@ MonoBehaviour:
   obstacleLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  rotationSpeed: 20
+  rotationSpeed: 5
   minPitch: 0
   maxPitch: 0
 --- !u!114 &1228210603
@@ -166464,7 +166465,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &1425196334
 AudioSource:
   m_ObjectHideFlags: 0
@@ -166472,7 +166473,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425196333}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8b9a64b03769b1f47af6574497a2f2c7, type: 3}
@@ -235763,7 +235764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!82 &2105341676
 AudioSource:
   m_ObjectHideFlags: 0
@@ -235771,7 +235772,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2105341675}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8b9a64b03769b1f47af6574497a2f2c7, type: 3}

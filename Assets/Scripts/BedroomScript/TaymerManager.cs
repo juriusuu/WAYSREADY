@@ -199,6 +199,9 @@ public class TaymerManager : MonoBehaviour
     public GameObject arrowPrefab; // Assign the arrow prefab in the Inspector
     private GameObject currentArrow; // Store the current arrow instance
 
+    public float timePenaltyPerHint = 30f; // Set this in the Inspector or change the value
+
+
     /*   private void Start()
       {
           remainingTime = totalTime; // Initialize the remaining time
@@ -416,6 +419,13 @@ public class TaymerManager : MonoBehaviour
             objectsToHighlight.Remove(nearestObject); // Remove it from the list
             hintsUsed++; // Increment the hint counter
             Debug.Log($"Hint used: {hintsUsed}/{totalHintsAllowed}");
+
+
+            // Decrease the timer as a penalty for using a hint
+            remainingTime -= timePenaltyPerHint;
+            if (remainingTime < 0) remainingTime = 0; // Prevent negative time
+
+            Debug.Log($"Hint used: {hintsUsed}/{totalHintsAllowed}. Time penalty applied: {timePenaltyPerHint} seconds.");
         }
         else
         {

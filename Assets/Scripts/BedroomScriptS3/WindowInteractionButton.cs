@@ -3,6 +3,94 @@ using UnityEngine.UI;
 
 public class WindowInteractionManager : MonoBehaviour
 {
+    public Button interactButton;
+    public AudioSource ringAudioSource;
+    public PostWindowInteractionManager postWindowInteractionManager;
+
+    private void Start()
+    {
+        if (interactButton != null)
+        {
+            interactButton.gameObject.SetActive(false);
+            interactButton.onClick.AddListener(OnInteractButtonPressed);
+        }
+
+        if (ringAudioSource == null)
+        {
+            Debug.LogError("Ring AudioSource is not assigned in the Inspector!");
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player") && interactButton != null)
+        {
+            interactButton.gameObject.SetActive(true);
+            Debug.Log("Player entered window trigger. Interaction enabled.");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player") && interactButton != null)
+        {
+            interactButton.gameObject.SetActive(false);
+            Debug.Log("Player exited window trigger. Interaction disabled.");
+        }
+    }
+
+    private void OnInteractButtonPressed()
+    {
+        if (ringAudioSource != null)
+        {
+            ringAudioSource.Play();
+            Debug.Log("Ring sound started!");
+            StartCoroutine(StopRingAudioAfterDelay(2f));
+        }
+        else
+        {
+            Debug.LogError("Ring AudioSource is not set!");
+        }
+
+        FindObjectOfType<QuestClipboardManager>()?.CompleteTask(0);
+
+        interactButton.gameObject.SetActive(false);
+        Debug.Log("Window interaction completed. Task 0 marked as complete.");
+
+        StartCoroutine(ActivatePostInteractionWithDelay(1f));
+    }
+
+    private System.Collections.IEnumerator ActivatePostInteractionWithDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (postWindowInteractionManager != null)
+        {
+            postWindowInteractionManager.ActivatePostInteraction();
+        }
+        else
+        {
+            Debug.LogError("PostWindowInteractionManager is not assigned!");
+        }
+    }
+
+    private System.Collections.IEnumerator StopRingAudioAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+
+        if (ringAudioSource != null)
+        {
+            ringAudioSource.Stop();
+            Debug.Log("Ring sound stopped after 2 seconds.");
+        }
+    }
+}
+
+/* using UnityEngine;
+using UnityEngine.UI;
+
+public class WindowInteractionManager : MonoBehaviour
+{
     public Button interactButton; // Reference to the interact button
     public GameObject player; // Reference to the player GameObject
     public float interactionDistance = 3f; // Distance within which the player can interact
@@ -100,7 +188,7 @@ public class WindowInteractionManager : MonoBehaviour
         }
     }
 }
-
+ */
 
 /* using UnityEngine;
 using UnityEngine.UI;

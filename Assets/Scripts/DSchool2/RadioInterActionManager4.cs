@@ -4,6 +4,359 @@ using ClassroomS3;
 
 public class RadioInteractionManagerS4 : MonoBehaviour
 {
+    public Button interactButton;
+    public GameObject firstPanel;
+    public GameObject secondPanel;
+    public GameObject thirdPanel;
+    public AudioClip audioClip1; // First panel audio
+    public AudioClip audioClip2; // Second panel audio
+    public AudioClip audioClip3; // Third panel audio
+    private GameObject currentInteractable;
+    private bool isInteractionComplete = false;
+    public PostRadioInteractionManagerH postRadioInteractionManager;
+    private bool isPhoneButtonPressed = false;
+
+    private void Start()
+    {
+        if (interactButton != null)
+        {
+            interactButton.gameObject.SetActive(false);
+            interactButton.onClick.AddListener(OnInteractButtonPressed);
+        }
+
+        if (firstPanel != null) firstPanel.SetActive(false);
+        if (secondPanel != null) secondPanel.SetActive(false);
+        if (thirdPanel != null) thirdPanel.SetActive(false);
+    }
+
+    public void ActivateRadioButton()
+    {
+        if (interactButton != null && !isPhoneButtonPressed)
+        {
+            interactButton.gameObject.SetActive(true);
+            Debug.Log("Radio button is now active.");
+        }
+        else if (isPhoneButtonPressed)
+        {
+            Debug.LogWarning("Radio button is already pressed. Cannot activate again.");
+        }
+        else
+        {
+            Debug.LogError("Radio button is not assigned in the Inspector!");
+        }
+    }
+
+    private void Update()
+    {
+        if (!isInteractionComplete && currentInteractable != null && currentInteractable.CompareTag("Radio"))
+        {
+            interactButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            interactButton.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            currentInteractable = gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (currentInteractable == gameObject && other.CompareTag("Player"))
+        {
+            currentInteractable = null;
+        }
+    }
+
+    private void OnInteractButtonPressed()
+    {
+        if (isInteractionComplete)
+        {
+            return;
+        }
+
+        StartCoroutine(PlayAudioAndShowPanelsInSequence());
+
+        isInteractionComplete = true;
+        interactButton.gameObject.SetActive(false);
+    }
+
+    private System.Collections.IEnumerator PlayAudioAndShowPanelsInSequence()
+    {
+        AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+
+        // First panel
+        if (audioClip1 != null && firstPanel != null)
+        {
+            firstPanel.SetActive(true);
+            audioSource.clip = audioClip1;
+            audioSource.Play();
+            Debug.Log($"Playing audio: {audioSource.clip.name}");
+            yield return new WaitForSeconds(audioClip1.length);
+            firstPanel.SetActive(false);
+        }
+
+        // Second panel
+        if (audioClip2 != null && secondPanel != null)
+        {
+            secondPanel.SetActive(true);
+            audioSource.clip = audioClip2;
+            audioSource.Play();
+            Debug.Log($"Playing audio: {audioSource.clip.name}");
+            yield return new WaitForSeconds(audioClip2.length);
+            secondPanel.SetActive(false);
+        }
+
+        // Third panel
+        if (audioClip3 != null && thirdPanel != null)
+        {
+            thirdPanel.SetActive(true);
+            audioSource.clip = audioClip3;
+            audioSource.Play();
+            Debug.Log($"Playing audio: {audioSource.clip.name}");
+            yield return new WaitForSeconds(audioClip3.length);
+            thirdPanel.SetActive(false);
+        }
+
+        Destroy(audioSource);
+
+        // Mark the "Use the radio" task as completed
+        var questManager = FindObjectOfType<QuestClipboardManager>();
+        if (questManager != null)
+        {
+            questManager.CompleteTask(1);
+            Debug.Log("Quest task 'Use the radio' marked as completed.");
+        }
+        else
+        {
+            Debug.LogWarning("QuestClipboardManager not found in the scene.");
+        }
+
+        // Trigger the PostRadioInteractionManager
+        if (postRadioInteractionManager != null)
+        {
+            postRadioInteractionManager.ActivatePostInteractionRad();
+        }
+        else
+        {
+            Debug.LogError("PostRadioInteractionManager is not assigned!");
+        }
+    }
+}
+
+/* using UnityEngine;
+using UnityEngine.UI;
+using ClassroomS3;
+
+public class RadioInteractionManagerS4 : MonoBehaviour
+{
+    public Button interactButton;
+    public GameObject firstPanel;
+    public GameObject secondPanel;
+    public GameObject thirdPanel;
+   public AudioSource audioSource; // Assign this in the Inspector (can be on this GameObject)
+    public AudioClip ringAudioClip;
+    public AudioClip firstPanelClip;
+    public AudioClip secondPanelClip;
+    public AudioClip thirdPanelClip;
+    private GameObject currentInteractable;
+    private bool isInteractionComplete = false;
+    public PostRadioInteractionManagerH postRadioInteractionManager;
+    private bool isPhoneButtonPressed = false;
+
+    private void Start()
+    {
+        if (interactButton != null)
+        {
+            interactButton.onClick.AddListener(OnInteractButtonPressed);
+        }
+
+        if (firstPanel != null) firstPanel.SetActive(false);
+        if (secondPanel != null) secondPanel.SetActive(false);
+        if (thirdPanel != null) thirdPanel.SetActive(false);
+
+        if (audioSource == null)
+        {
+            Debug.LogError("AudioSource is not assigned in the Inspector!");
+        }
+        if (ringAudioClip == null)
+        {
+            Debug.LogError("Ring AudioClip is not assigned in the Inspector!");
+        }
+    }
+
+    public void ActivateRadioButton()
+    {
+        if (interactButton != null && !isPhoneButtonPressed)
+        {
+            interactButton.gameObject.SetActive(true);
+            Debug.Log("Radio button is now active.");
+        }
+        else if (isPhoneButtonPressed)
+        {
+            Debug.LogWarning("Radio button is already pressed. Cannot activate again.");
+        }
+        else
+        {
+            Debug.LogError("Radio button is not assigned in the Inspector!");
+        }
+    }
+
+    private void Update()
+    {
+        if (!isInteractionComplete && currentInteractable != null && currentInteractable.CompareTag("Radio"))
+        {
+            if (!interactButton.gameObject.activeSelf)
+            {
+                Debug.Log("Showing interact button.");
+            }
+            interactButton.gameObject.SetActive(true);
+        }
+        else
+        {
+            if (interactButton.gameObject.activeSelf)
+            {
+                Debug.Log("Hiding interact button.");
+            }
+            interactButton.gameObject.SetActive(false);
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log($"Trigger entered by: {other.name}");
+        if (other.CompareTag("Player"))
+        {
+            currentInteractable = gameObject;
+            Debug.Log($"Player is near the radio. CurrentInteractable set to: {currentInteractable.name}");
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        Debug.Log($"Trigger exited by: {other.name}");
+        if (currentInteractable == gameObject && other.CompareTag("Player"))
+        {
+            currentInteractable = null;
+            Debug.Log("Player left the radio.");
+        }
+    }
+
+    private void OnInteractButtonPressed()
+    {
+        if (isInteractionComplete)
+        {
+            Debug.Log("Interaction already completed. Button press ignored.");
+            return;
+        }
+
+        // Play the ring sound for 1 second
+        if (audioSource != null && ringAudioClip != null)
+        {
+            audioSource.clip = ringAudioClip;
+            audioSource.Play();
+            Debug.Log("Ring sound started!");
+            StartCoroutine(StopAudioAfterDelay(1f));
+        }
+        else
+        {
+            Debug.LogError("AudioSource or Ring AudioClip is not set!");
+        }
+
+        // Start the panel and audio sequence
+        StartCoroutine(ShowPanelsAndPlayClipsInSequence());
+
+        isInteractionComplete = true;
+        interactButton.gameObject.SetActive(false);
+    }
+
+    private System.Collections.IEnumerator StopAudioAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        if (audioSource != null)
+        {
+            audioSource.Stop();
+            Debug.Log("Audio stopped after delay.");
+        }
+    }
+
+    private System.Collections.IEnumerator ShowPanelsAndPlayClipsInSequence()
+    {
+        // First panel
+        if (firstPanel != null)
+        {
+            firstPanel.SetActive(true);
+            if (audioSource != null && firstPanelClip != null)
+            {
+                audioSource.clip = firstPanelClip;
+                audioSource.Play();
+            }
+            yield return new WaitForSeconds(11.5f);
+            firstPanel.SetActive(false);
+        }
+
+        // Second panel
+        if (secondPanel != null)
+        {
+            secondPanel.SetActive(true);
+            if (audioSource != null && secondPanelClip != null)
+            {
+                audioSource.clip = secondPanelClip;
+                audioSource.Play();
+            }
+            yield return new WaitForSeconds(6.5f);
+            secondPanel.SetActive(false);
+        }
+
+        // Third panel
+        if (thirdPanel != null)
+        {
+            thirdPanel.SetActive(true);
+            if (audioSource != null && thirdPanelClip != null)
+            {
+                audioSource.clip = thirdPanelClip;
+                audioSource.Play();
+            }
+            yield return new WaitForSeconds(4f);
+            thirdPanel.SetActive(false);
+        }
+
+        // Mark the "Use the radio" task as completed
+        var questManager = FindObjectOfType<QuestClipboardManager>();
+        if (questManager != null)
+        {
+            questManager.CompleteTask(1);
+            Debug.Log("Quest task 'Use the radio' marked as completed.");
+        }
+        else
+        {
+            Debug.LogWarning("QuestClipboardManager not found in the scene.");
+        }
+
+        // Trigger the PostRadioInteractionManager
+        if (postRadioInteractionManager != null)
+        {
+            postRadioInteractionManager.ActivatePostInteractionRad();
+        }
+        else
+        {
+            Debug.LogError("PostRadioInteractionManager is not assigned!");
+        }
+    }
+} */
+
+/* using UnityEngine;
+using UnityEngine.UI;
+using ClassroomS3;
+
+public class RadioInteractionManagerS4 : MonoBehaviour
+{
     public Button interactButton; // Reference to the interact button
     public GameObject firstPanel; // Reference to the first panel
     public GameObject secondPanel; // Reference to the second panel
@@ -220,7 +573,7 @@ public class RadioInteractionManagerS4 : MonoBehaviour
         }
     }
 }
-
+ */
 /* using UnityEngine;
 using UnityEngine.UI;
 using ClassroomS3;

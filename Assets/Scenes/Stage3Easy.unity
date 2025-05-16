@@ -5582,8 +5582,8 @@ MonoBehaviour:
   secondCompletionPanel: {fileID: 0}
   firstCompletionAudioClip: {fileID: 0}
   secondCompletionAudioClip: {fileID: 0}
+  warningPanel: {fileID: 0}
   timerDecreasingPickupItems: []
-  timerManager: {fileID: 0}
 --- !u!114 &216812796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14671,7 +14671,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &531831252
 RectTransform:
   m_ObjectHideFlags: 0
@@ -53360,6 +53360,7 @@ MonoBehaviour:
   - {fileID: 349541133}
   - {fileID: 1201983069}
   arrowPrefab: {fileID: 7404223956060802447, guid: f2bfbd7b1d17434418016273ad70afb2, type: 3}
+  timePenaltyPerHint: 30
   isPlayerDead: 0
 --- !u!4 &2102608418
 Transform:
