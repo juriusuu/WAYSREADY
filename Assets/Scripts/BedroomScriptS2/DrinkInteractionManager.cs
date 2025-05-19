@@ -28,7 +28,7 @@ public class DrinkInteractionManager : MonoBehaviour
 
     private void Update()
     {
-        // Handle button visibility based on the current interactable and task completion state
+        /* // Handle button visibility based on the current interactable and task completion state
         if (!isTaskComplete && !isDrinking && currentInteractable != null && currentInteractable.CompareTag("Table"))
         {
             if (!drinkButton.gameObject.activeSelf)
@@ -44,7 +44,12 @@ public class DrinkInteractionManager : MonoBehaviour
                 Debug.Log("Hiding drink button.");
             }
             drinkButton.gameObject.SetActive(false); // Hide the button
+        } */
+        if (drinkButton.gameObject.activeSelf)
+        {
+            Debug.Log("Hiding drink button.");
         }
+        drinkButton.gameObject.SetActive(false); // Hide the button
     }
 
     private void OnTriggerEnter(Collider other)
@@ -75,7 +80,7 @@ public class DrinkInteractionManager : MonoBehaviour
 
     private void OnDrinkButtonPressed()
     {
-        if (isDrinking || isTaskComplete)
+        if (isDrinking /* || isTaskComplete) */)
         {
             Debug.Log("Player is already drinking or task is completed. Button press ignored.");
             return;
@@ -104,7 +109,7 @@ public class DrinkInteractionManager : MonoBehaviour
             }
 
             // Mark the task as complete and reset the drinking state after the animation finishes
-            isTaskComplete = true;
+            //   isTaskComplete = true;
 
             // Start the audio after 4 seconds and stop it after 4 seconds
             StartCoroutine(PlayDrinkAudioAfterDelay(4f));
@@ -156,6 +161,11 @@ public class DrinkInteractionManager : MonoBehaviour
 
         // The button will remain inactive since the task is complete
         Debug.Log("Drink button will remain inactive as the task is completed.");
+    }
+
+    public void TriggerDrinkFromInventory()
+    {
+        OnDrinkButtonPressed();
     }
 }
 

@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem; // Required for the new Input System
+using System.Collections; // Required for IEnumerator (coroutines)
 using System.Collections.Generic; // Required for List<>
 using System.Linq; // Required for LINQ queries
 namespace Supercyan.FreeSample
@@ -589,9 +590,31 @@ namespace Supercyan.FreeSample
                 Debug.Log("Pickup item exited: " + string.Join(", ", pickupItems.Items.Select(item => item.name)));
             }
         }
-    }
+        private Coroutine slowCoroutine;
 
+        // Call this to apply a slow effect
+        public void ApplySlow(float slowMultiplier, float duration)
+        {
+            if (slowCoroutine != null)
+                StopCoroutine(slowCoroutine);
+            slowCoroutine = StartCoroutine(SlowRoutine(slowMultiplier, duration));
+        }
+
+        private IEnumerator SlowRoutine(float slowMultiplier, float duration)
+        {
+            float originalSpeed = m_moveSpeed;
+            m_moveSpeed = originalSpeed * slowMultiplier;
+            Debug.Log($"Player slowed! Speed is now {m_moveSpeed}");
+            yield return new WaitForSeconds(duration);
+            m_moveSpeed = originalSpeed;
+            Debug.Log("Player speed restored!");
+        }
+
+    }
 }
+
+// ...existing code...
+
 /* 
 namespace Supercyan.FreeSample
 {

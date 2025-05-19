@@ -142,7 +142,7 @@ public class InventoryUIManager : MonoBehaviour
             InventorySlot slotComponent = slot.GetComponent<InventorySlot>();
             if (slotComponent != null)
             {
-                slotComponent.Setup(item.Key, item.Value.quantity, item.Value.sprite);
+                slotComponent.Setup(item.Key, item.Value.quantity, item.Value.sprite, item.Value.pickupItemRef);
                 Debug.Log($"Updated slot {index} with item: {item.Key}, quantity: {item.Value.quantity}");
             }
             else

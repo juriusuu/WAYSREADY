@@ -23,6 +23,9 @@ TagManager:
   - Unplug
   - Fire
   - MedKit
+  - TreeTrunk
+  - Puddle
+  - Mud
   layers:
   - Default
   - TransparentFX

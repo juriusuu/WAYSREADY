@@ -18,7 +18,7 @@ public class PickupButtonss : MonoBehaviour
 
     public List<PickupItems> timerDecreasingPickupItems; // List of items that decrease the timer
                                                          // public TaymerManager timerManager; // Reference to the TaymerManager to modify the timer
-
+    [SerializeField] private Animator playerAnimator;
     private bool isPlayerNear = false; // Tracks if the player is near any pickup object
 
     private void Start()
@@ -100,7 +100,15 @@ public class PickupButtonss : MonoBehaviour
         {
             var item = pickupItems[currentItemIndex];
             if (item != null && !item.HasBeenPickedUp)
-            {
+            {    // Trigger the pickup animation
+                if (playerAnimator != null)
+                {
+                    playerAnimator.SetTrigger("Pickup");
+                }
+                else
+                {
+                    Debug.LogWarning("Player Animator not assigned in PickupButtonss!");
+                }
                 Debug.Log($"Processing PickupItems instance at index {currentItemIndex}");
                 item.OnPickupButtonPressed(); // Call the pickup method on the current item
 
@@ -306,8 +314,45 @@ public class PickupButtonss : MonoBehaviour
         Debug.LogError("InventoryManager not found!");
         return false;
     }
+    /* 
+        private void AddItemToInventory(string itemName, Sprite itemSprite)
+        {
+            if (inventoryPanel == null || inventorySlotPrefab == null)
+            {
+                Debug.LogWarning("Inventory panel or slot prefab is not assigned.");
+                return;
+            }
 
-    private void AddItemToInventory(string itemName, Sprite itemSprite)
+            // Create a new inventory slot
+            GameObject newSlot = Instantiate(inventorySlotPrefab, inventoryPanel.transform);
+
+            // Set the item's sprite using the Image component
+            Image slotImage = newSlot.GetComponent<Image>();
+            if (slotImage != null && itemSprite != null)
+            {
+                slotImage.sprite = itemSprite; // Assign the sprite to the Image component
+                Debug.Log($"Assigned sprite for item: {itemName}");
+            }
+            else
+            {
+                Debug.LogWarning($"Failed to assign sprite for item: {itemName}. Ensure the prefab has an Image component and the sprite is not null.");
+            }
+
+            // Set the item's name in the text component
+            Text itemNameText = newSlot.GetComponentInChildren<Text>();
+            if (itemNameText != null)
+            {
+                itemNameText.text = itemName; // Set the item's name
+            }
+            else
+            {
+                Debug.LogWarning($"Failed to find Text component in inventory slot prefab for item: {itemName}");
+            }
+        }
+
+     */
+
+    private void AddItemToInventory(string itemName, Sprite itemSprite, PickupItems pickupItemRef = null)
     {
         if (inventoryPanel == null || inventorySlotPrefab == null)
         {
@@ -330,6 +375,16 @@ public class PickupButtonss : MonoBehaviour
             Debug.LogWarning($"Failed to assign sprite for item: {itemName}. Ensure the prefab has an Image component and the sprite is not null.");
         }
 
+        // Get the InventorySlot script and setup the slot
+        InventorySlot slotScript = newSlot.GetComponent<InventorySlot>();
+        if (slotScript != null)
+        {
+            slotScript.Setup(itemName, 1, itemSprite, pickupItemRef); // Pass quantity and PickupItems reference as needed
+        }
+        else
+        {
+            Debug.LogWarning("InventorySlot script not found on the slot prefab.");
+        }
         // Set the item's name in the text component
         Text itemNameText = newSlot.GetComponentInChildren<Text>();
         if (itemNameText != null)
@@ -341,8 +396,6 @@ public class PickupButtonss : MonoBehaviour
             Debug.LogWarning($"Failed to find Text component in inventory slot prefab for item: {itemName}");
         }
     }
-
-
     private void ShowFirstCompletionPanel()
     {
         if (firstCompletionPanel != null)

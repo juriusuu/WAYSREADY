@@ -40,6 +40,13 @@ public class PickupItems : MonoBehaviour
                 } */
     }
 
+    // Add this to your PickupItems.cs
+    public void Use()
+    {
+        // Implement your use logic here (e.g., consume, equip, inspect, etc.)
+        Debug.Log($"{name} used from inventory!");
+    }
+
     public void OnPickupButtonPressed()
     {
         if (hasBeenPickedUp)

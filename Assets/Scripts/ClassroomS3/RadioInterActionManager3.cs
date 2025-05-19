@@ -615,12 +615,14 @@ public class RadioInteractionManagerS3 : MonoBehaviour
         {
             Debug.LogError("PostRadioInteractionManager is not assigned!");
         }
-
-        // Activate the phone button after all panels are shown
-        if (phoneButtonManager != null)
-        {
-            phoneButtonManager.ActivatePhoneButton();
-            Debug.Log("Phone button activated after panels are shown.");
-        }
+        /* 
+                // Activate the phone button after all panels are shown
+                if (phoneButtonManager != null)
+                {
+                    phoneButtonManager.ActivatePhoneButton();
+                    Debug.Log("Phone button activated after panels are shown.");
+                } */
     }
+
+    public bool IsRadioQuestComplete => isInteractionComplete;
 }

@@ -145,8 +145,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00f13ef9b5ffdb24a93e161400917f2a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemNameText: {fileID: 0}
+  itemImage: {fileID: 0}
   itemQuantityText: {fileID: 0}
+  waterbottleClip: {fileID: 0}
+  cannedGoodsClip: {fileID: 0}
+  toiletriesClip: {fileID: 0}
+  flashlightClipActivated: {fileID: 8300000, guid: 3183cf42ff9a7c54baad6bfb80c9313a, type: 3}
+  flashlightClipDeactivated: {fileID: 8300000, guid: 98c48c181544abb43855dac270b705b8, type: 3}
+  firstAidKitClip: {fileID: 0}
+  phoneClip: {fileID: 0}
+  powerbankClip: {fileID: 0}
+  towelActivatedClip: {fileID: 8300000, guid: d8f9ec0a665c5434c98c8fa2c7503ef8, type: 3}
+  towelDeactivatedClip: {fileID: 8300000, guid: b8ace6f1576cd7c42912e73c64f2061d, type: 3}
+  clothesActivatedClip: {fileID: 8300000, guid: 024a58d69654ddf45ab7b496c1ee1e14, type: 3}
+  clothesDeactivatedClip: {fileID: 8300000, guid: 89c5e1d506cdf6e4ead0538f35aea183, type: 3}
+  moneyClip: {fileID: 0}
+  clothesClip: {fileID: 0}
+  folderClip: {fileID: 0}
 --- !u!1 &3802448988162163117
 GameObject:
   m_ObjectHideFlags: 0

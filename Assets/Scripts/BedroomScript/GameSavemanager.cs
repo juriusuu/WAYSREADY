@@ -119,19 +119,23 @@ public class GameSaveManager : MonoBehaviour
                 completedScenes = saveData.completedScenes ?? new List<string>();
 
                 // Reconstruct inventory
-                Dictionary<string, (int quantity, Sprite sprite)> inventory = new Dictionary<string, (int, Sprite)>();
+                Dictionary<string, (int quantity, Sprite sprite, PickupItems pickupItemRef)> inventory = new Dictionary<string, (int, Sprite, PickupItems)>();
                 foreach (var item in saveData.inventory)
                 {
                     string itemName = item.Key;
                     int quantity = item.Value;
                     Sprite sprite = null;
+                    PickupItems pickupItemRef = null;
 
                     if (saveData.itemSprites.ContainsKey(itemName) && !string.IsNullOrEmpty(saveData.itemSprites[itemName]))
                     {
                         sprite = Resources.Load<Sprite>($"Sprites/{saveData.itemSprites[itemName]}");
                     }
 
-                    inventory[itemName] = (quantity, sprite);
+                    // Attempt to find the PickupItems reference in the scene or via a manager (update this as needed for your project)
+                    // Example: pickupItemRef = PickupItemsManager.Instance.GetPickupItemByName(itemName);
+
+                    inventory[itemName] = (quantity, sprite, pickupItemRef);
                 }
 
                 InventoryManagers.Instance.SetInventory(inventory);

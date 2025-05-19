@@ -4,9 +4,26 @@ public class WaterPuddleHazard : MonoBehaviour
 {
     [SerializeField] private float timePenalty = 5f; // Amount of time to subtract
     private void OnTriggerEnter(Collider other)
+
     {
         if (other.CompareTag("Player"))
+
+            // Check if towel is active
+            if (InventorySlot.IsTowelActive)
+            {
+                Debug.Log("Player is protected by towel! No time penalty.");
+                Destroy(gameObject);
+                return;
+            }
         {
+            // Make the player slip
+            Animator playerAnimator = other.GetComponent<Animator>();
+            if (playerAnimator != null)
+            {
+                playerAnimator.SetTrigger("Slip");
+                Debug.Log("Player slipped on puddle!");
+            }
+
             TaymerManager timerManager = FindObjectOfType<TaymerManager>();
             if (timerManager != null)
             {

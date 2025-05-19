@@ -8910,7 +8910,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -122500,7 +122500,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1403265757
 RectTransform:
   m_ObjectHideFlags: 0
@@ -143867,7 +143867,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 625888c43a88e0b43a506a6d6f3e13e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  phoneButton: {fileID: 140680597}
   phonePanels:
   - {fileID: 1560673894}
   - {fileID: 1860208162}
@@ -149711,6 +149710,7 @@ MonoBehaviour:
   secondCompletionAudioClip: {fileID: 0}
   warningPanel: {fileID: 0}
   timerDecreasingPickupItems: []
+  playerAnimator: {fileID: 0}
 --- !u!114 &1824771610
 MonoBehaviour:
   m_ObjectHideFlags: 0

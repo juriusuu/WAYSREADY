@@ -5,6 +5,168 @@ namespace ClassroomS3
 {
     public class PhoneButtonManager1 : MonoBehaviour
     {
+        // public Button phoneButton; // REMOVE or comment out this line
+        public GameObject[] phonePanels;
+        public AudioClip ringAudioClip;
+        public AudioClip[] phoneAudioClips;
+        public float ringAudioDuration = 1.0f;
+        public float[] panelDisplayTimes;
+
+        private bool isPhoneButtonPressed = false;
+        public PostPhoneInteractionManagerHard postPhoneInteractionManager;
+
+        private void Start()
+        {
+            // REMOVE or comment out all phoneButton logic
+            /*
+            if (phoneButton != null)
+            {
+                phoneButton.gameObject.SetActive(false);
+                phoneButton.onClick.AddListener(OnPhoneButtonPressed);
+                Debug.Log("Phone button initialized and hidden.");
+            }
+            else
+            {
+                Debug.LogError("Phone button is not assigned in the Inspector!");
+            }
+            */
+
+            // Ensure all phone panels are hidden at the start
+            if (phonePanels != null && phonePanels.Length > 0)
+            {
+                foreach (var panel in phonePanels)
+                {
+                    if (panel != null)
+                    {
+                        panel.SetActive(false);
+                    }
+                    else
+                    {
+                        Debug.LogWarning("One of the phone panels is null. Please check the Inspector.");
+                    }
+                }
+                Debug.Log("All phone panels are initialized and hidden.");
+            }
+            else
+            {
+                Debug.LogError("Phone panels are not assigned in the Inspector!");
+            }
+
+            // Ensure the audio clips and display times match the number of panels
+            if (phoneAudioClips == null || phoneAudioClips.Length != phonePanels.Length)
+            {
+                Debug.LogError("The number of phone audio clips must match the number of phone panels!");
+            }
+
+            if (panelDisplayTimes == null || panelDisplayTimes.Length != phonePanels.Length)
+            {
+                Debug.LogError("The number of panel display times must match the number of phone panels!");
+            }
+        }
+
+        // This is now your only entry point for the phone sequence
+        public void TriggerPhoneSequenceFromInventory()
+        {
+            // Only allow if radio quest is complete
+            var radioManager = FindObjectOfType<RadioInteractionManagerS3>();
+            if (radioManager != null && !radioManager.IsRadioQuestComplete)
+            {
+                Debug.Log("You must finish the radio quest before using the phone.");
+                return;
+            }
+
+            if (isPhoneButtonPressed)
+            {
+                Debug.Log("Phone sequence already triggered.");
+                return;
+            }
+            Debug.Log("Phone sequence triggered from inventory.");
+            StartCoroutine(PlayRingAudioAndShowPanelsInSequence());
+            isPhoneButtonPressed = true;
+        }
+        // Remove or comment out ActivatePhoneButton and OnPhoneButtonPressed
+
+        private System.Collections.IEnumerator PlayRingAudioAndShowPanelsInSequence()
+        {
+            AudioSource audioSource = gameObject.AddComponent<AudioSource>();
+            audioSource.spatialBlend = 0.0f;
+
+            if (ringAudioClip != null)
+            {
+                audioSource.clip = ringAudioClip;
+                audioSource.Play();
+                Debug.Log($"Playing ring audio: {ringAudioClip.name}");
+                yield return new WaitForSeconds(ringAudioDuration);
+            }
+            else
+            {
+                Debug.LogWarning("Ring audio clip is not assigned!");
+            }
+
+            Debug.Log("Starting panel and audio sequence...");
+            for (int i = 0; i < phonePanels.Length; i++)
+            {
+                if (phonePanels[i] != null && phoneAudioClips[i] != null)
+                {
+                    Debug.Log($"Showing panel {i}: {phonePanels[i].name}");
+                    phonePanels[i].SetActive(true);
+
+                    audioSource.clip = phoneAudioClips[i];
+                    audioSource.Play();
+                    Debug.Log($"Playing audio clip {i}: {phoneAudioClips[i].name}");
+
+                    yield return new WaitForSeconds(panelDisplayTimes[i]);
+
+                    phonePanels[i].SetActive(false);
+                    Debug.Log($"Hiding panel {i}: {phonePanels[i].name}");
+                }
+                else
+                {
+                    Debug.LogWarning($"Panel or audio clip at index {i} is null. Skipping.");
+                }
+            }
+
+            CompleteTaskAndTriggerNextInteraction();
+
+            // No need to disable phoneButton anymore
+
+            Destroy(audioSource);
+
+            Debug.Log("Finished showing all panels and playing all audio clips.");
+        }
+
+        private void CompleteTaskAndTriggerNextInteraction()
+        {
+            var questManager = FindObjectOfType<QuestClipboardManager>();
+            if (questManager != null)
+            {
+                questManager.CompleteTask(2);
+                Debug.Log("Quest task 'Use the phone' marked as completed.");
+            }
+            else
+            {
+                Debug.LogWarning("QuestClipboardManagerS3 not found in the scene.");
+            }
+
+            if (postPhoneInteractionManager != null)
+            {
+                postPhoneInteractionManager.ActivatePostInteraction();
+            }
+            else
+            {
+                Debug.LogError("PostPhoneInteractionManager is not assigned!");
+            }
+        }
+    }
+}
+
+/* using UnityEngine;
+using UnityEngine.UI;
+
+namespace ClassroomS3
+{
+    public class PhoneButtonManager1 : MonoBehaviour
+    {
         public Button phoneButton; // Reference to the phone button
         public GameObject[] phonePanels; // Array of panels for the phone button interaction
         public AudioClip ringAudioClip; // Ring audio clip to play before the first panel
@@ -61,7 +223,17 @@ namespace ClassroomS3
                 Debug.LogError("The number of panel display times must match the number of phone panels!");
             }
         }
-
+        public void TriggerPhoneSequenceFromInventory()
+        {
+            if (isPhoneButtonPressed)
+            {
+                Debug.Log("Phone sequence already triggered.");
+                return;
+            }
+            Debug.Log("Phone sequence triggered from inventory.");
+            StartCoroutine(PlayRingAudioAndShowPanelsInSequence());
+            isPhoneButtonPressed = true;
+        }
         public void ActivatePhoneButton()
         {
             // Activate the phone button
@@ -184,7 +356,7 @@ namespace ClassroomS3
             }
         }
     }
-}
+} */
 
 /* using UnityEngine;
 using UnityEngine.UI;

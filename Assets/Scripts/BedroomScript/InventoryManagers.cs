@@ -5,7 +5,7 @@ using UnityEngine.UI;
 public class InventoryManagers : MonoBehaviour
 {
     private static InventoryManagers _instance;
-    private Dictionary<string, (int quantity, Sprite sprite)> itemInventory = new Dictionary<string, (int, Sprite)>();
+    private Dictionary<string, (int quantity, Sprite sprite, PickupItems pickupItemRef)> itemInventory = new Dictionary<string, (int, Sprite, PickupItems)>();
     private int totalItemsToCollect = 11;
 
     public static InventoryManagers Instance
@@ -35,9 +35,9 @@ public class InventoryManagers : MonoBehaviour
 
 
     // Method to set the inventory
-    public void SetInventory(Dictionary<string, (int quantity, Sprite sprite)> newInventory)
+    public void SetInventory(Dictionary<string, (int quantity, Sprite sprite, PickupItems pickupItemRef)> newInventory)
     {
-        itemInventory = new Dictionary<string, (int, Sprite)>(newInventory);
+        itemInventory = new Dictionary<string, (int, Sprite, PickupItems)>(newInventory);
         Debug.Log("Inventory has been updated.");
     }
 
@@ -52,13 +52,13 @@ public class InventoryManagers : MonoBehaviour
         if (itemInventory.ContainsKey(itemName))
         {
             // Update the quantity if the item already exists
-            itemInventory[itemName] = (itemInventory[itemName].quantity + quantity, itemSprite);
+            itemInventory[itemName] = (itemInventory[itemName].quantity + quantity, itemSprite, itemInventory[itemName].pickupItemRef);
             Debug.Log($"Updated {itemName} in inventory. New total: {itemInventory[itemName].quantity}");
         }
         else
         {
-            // Add a new item with its sprite
-            itemInventory[itemName] = (quantity, itemSprite);
+            // Add a new item with its sprite and a null reference for PickupItems
+            itemInventory[itemName] = (quantity, itemSprite, null);
             Debug.Log($"Added new item {itemName} with quantity: {quantity}");
         }
 
@@ -130,14 +130,14 @@ public class InventoryManagers : MonoBehaviour
     /// <summary>
     /// Gets the entire inventory as a dictionary.
     /// </summary>
-    public Dictionary<string, (int quantity, Sprite sprite)> GetInventory()
+    public Dictionary<string, (int quantity, Sprite sprite, PickupItems pickupItemRef)> GetInventory()
     {
         Debug.Log("Fetching Inventory:");
         foreach (var item in itemInventory)
         {
             Debug.Log($"{item.Key}: {item.Value.quantity}");
         }
-        return new Dictionary<string, (int, Sprite)>(itemInventory);
+        return itemInventory;
     }
 
     /// <summary>

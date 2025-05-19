@@ -16,7 +16,7 @@ public class TelephoneInteractionManagerS3 : MonoBehaviour
 
     public PhoneButtonManager phoneButtonManager; // Reference to the PhoneButtonManager
     public PostTelephoneInteractionHard postTelephoneInteractionManager; // Reference to the PostTelephoneInteractionManager
-
+    public static bool CanUsePhoneFromInventory = false;
     private void Start()
     {
         // Ensure the button is hidden at the start
@@ -162,13 +162,17 @@ public class TelephoneInteractionManagerS3 : MonoBehaviour
         {
             Debug.LogError("PostTelephoneInteractionManager is not assigned!");
         }
-
-        // Activate the phone button after all panels are shown
-        if (phoneButtonManager != null)
-        {
-            phoneButtonManager.ActivatePhoneButton();
-            Debug.Log("Phone button activated after showing all panels.");
-        }
+        /* 
+                // Activate the phone button after all panels are shown
+                if (phoneButtonManager != null)
+                {
+                    phoneButtonManager.ActivatePhoneButton();
+                    Debug.Log("Phone button activated after showing all panels.");
+                }
+         */
+        // ---- ADD THIS LINE HERE ----
+        CanUsePhoneFromInventory = true;
+        Debug.Log("Phone can now be used from inventory!");
 
         Debug.Log("Finished showing all panels and playing all audio clips.");
 
