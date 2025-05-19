@@ -250,6 +250,20 @@ namespace Supercyan.FreeSample
                 }
                 if (m_collisions.Count == 0) { m_isGrounded = false; }
             }
+
+            // --- PUSH ANIMATION LOGIC ---
+            if (collision.gameObject.CompareTag("Ball"))
+            {
+                // Optional: Only trigger if player is moving
+                if (m_movementInput.magnitude > 0.1f)
+                {
+                    m_animator.SetBool("isPushing", true);
+                }
+                else
+                {
+                    m_animator.SetBool("isPushing", false);
+                }
+            }
         }
 
         private void OnCollisionExit(Collision collision)
@@ -260,7 +274,13 @@ namespace Supercyan.FreeSample
                 m_collisions.Remove(collision.collider);
             }
             if (m_collisions.Count == 0) { m_isGrounded = false; }
+            // Stop push animation when leaving the ball
+            if (collision.gameObject.CompareTag("Ball"))
+            {
+                m_animator.SetBool("isPushing", false);
+            }
         }
+
 
         /*         private void OnCollisionEnter(Collision collision)
                 {
