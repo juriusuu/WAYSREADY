@@ -629,8 +629,23 @@ namespace Supercyan.FreeSample
             m_moveSpeed = originalSpeed;
             Debug.Log("Player speed restored!");
         }
+        public void ApplySpeedBoost(float boostMultiplier, float duration)
+        {
+            StartCoroutine(SpeedBoostCoroutine(boostMultiplier, duration));
+        }
 
+        private System.Collections.IEnumerator SpeedBoostCoroutine(float boostMultiplier, float duration)
+        {
+            float originalSpeed = m_moveSpeed;
+            m_moveSpeed *= boostMultiplier;
+            Debug.Log("Speed boosted!");
+            yield return new WaitForSeconds(duration);
+            m_moveSpeed = originalSpeed;
+            Debug.Log("Speed boost ended.");
+        }
     }
+
+
 }
 
 // ...existing code...

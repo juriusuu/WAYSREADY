@@ -588,6 +588,7 @@ public class TaymerManager : MonoBehaviour
         Debug.Log($"{seconds} seconds added. Remaining time: {remainingTime}, Total time: {totalTime}");
     }
 
+
     public void AddHint()
     {
         totalHintsAllowed++; // Increment the total hints allowed

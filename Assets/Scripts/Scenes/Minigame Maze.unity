@@ -4774,6 +4774,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: fireextinguisher
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cec0225747a2b5d439494a3d1d048915, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2693134670784664569, guid: cec0225747a2b5d439494a3d1d048915, type: 3}
       propertyPath: m_Name
       value: nozzle

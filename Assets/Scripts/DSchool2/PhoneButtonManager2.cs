@@ -61,8 +61,13 @@ namespace ClassroomS3
                 Debug.LogError("The number of panel display times must match the number of phone panels!");
             }
         }
-
-        private void OnPhoneButtonPressed()
+        // Call this from inventory slot
+        public void TriggerPhoneSequenceFromInventory()
+        {
+            Debug.Log("TriggerPhoneSequenceFromInventory called!");
+            StartCoroutine(PlayRingAudioAndShowPanelsInSequence());
+        }
+        public void OnPhoneButtonPressed()
         {
             if (isPhoneButtonPressed)
             {

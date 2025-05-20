@@ -148,7 +148,7 @@ MonoBehaviour:
   itemImage: {fileID: 0}
   itemQuantityText: {fileID: 0}
   waterbottleClip: {fileID: 0}
-  cannedGoodsClip: {fileID: 0}
+  cannedGoodsClip: {fileID: 8300000, guid: 329f831bdeb043a4b9a410e61fb67412, type: 3}
   toiletriesClip: {fileID: 0}
   flashlightClipActivated: {fileID: 8300000, guid: 3183cf42ff9a7c54baad6bfb80c9313a, type: 3}
   flashlightClipDeactivated: {fileID: 8300000, guid: 98c48c181544abb43855dac270b705b8, type: 3}

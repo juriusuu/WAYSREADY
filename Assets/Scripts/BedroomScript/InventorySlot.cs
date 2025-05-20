@@ -2,6 +2,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using BedroomScriptS3;
+// Add the correct namespace for Joystickscript if it exists, for example:
+// <-- Replace 'PlayerControls' with the actual namespace of Joystickscript, or remove if not needed
+using Supercyan.FreeSample;
 public class InventorySlot : MonoBehaviour
 {
     public Image itemImage; // Reference to the Image component for the item's sprite
@@ -110,8 +113,31 @@ public class InventorySlot : MonoBehaviour
                 // Add your waterbottle logic here
                 break;
             case "canned goods":
+
                 Debug.Log("Used canned goods!");
-                // Add your canned goods logic here
+                if (audioSource != null && cannedGoodsClip != null)
+                {
+                    audioSource.PlayOneShot(cannedGoodsClip);
+                }
+                if (SceneManager.GetActiveScene().name == "Stage3Normal")
+                {
+                    Joystickscript playerMovement = GameObject.FindObjectOfType<Joystickscript>();
+                    if (playerMovement != null)
+                    {
+                        float boostMultiplier = 2f; // 50% speed increase
+                        float boostDuration = 5f;     // Boost lasts 5 seconds
+                        playerMovement.ApplySpeedBoost(boostMultiplier, boostDuration);
+                        Debug.Log("Applied speed boost from canned goods!");
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Player movement script not found!");
+                    }
+                }
+                else
+                {
+                    Debug.Log("Canned goods speed boost only works in Stage3Normal.");
+                }
                 break;
             case "toiletries":
                 Debug.Log("Used toiletries!");
@@ -170,11 +196,13 @@ public class InventorySlot : MonoBehaviour
                           else
                           {
                               Debug.Log("You can't use the phone yet!");
+
                           } */
+                string sceneName = SceneManager.GetActiveScene().name;
                 if (TelephoneInteractionManagerS3.CanUsePhoneFromInventory)
                 {
                     Debug.Log("Used phone from inventory!");
-                    string sceneName = SceneManager.GetActiveScene().name;
+
 
                     if (sceneName == "Stage1Hard")
                     {
@@ -189,22 +217,39 @@ public class InventorySlot : MonoBehaviour
                             Debug.LogWarning("PhoneButtonManager not found in the scene!");
                         }
                     }
-                    else if (sceneName == "Stage2Hard")
-                    {
-                        // Find the PhoneButtonManager1 in the scene and trigger the phone sequence
-                        ClassroomS3.PhoneButtonManager1 phoneButtonManager1 = GameObject.FindObjectOfType<ClassroomS3.PhoneButtonManager1>();
-                        if (phoneButtonManager1 != null)
-                        {
-                            phoneButtonManager1.TriggerPhoneSequenceFromInventory();
-                        }
-                        else
-                        {
-                            Debug.LogWarning("PhoneButtonManager1 not found in the scene!");
-                        }
-                    }
+
                     else
                     {
                         Debug.Log("Phone use is not available in this stage.");
+                    }
+                }
+                if (sceneName == "Stage2Hard")
+                {
+                    // Find the PhoneButtonManager1 in the scene and trigger the phone sequence
+                    ClassroomS3.PhoneButtonManager1 phoneButtonManager1 = GameObject.FindObjectOfType<ClassroomS3.PhoneButtonManager1>();
+                    if (phoneButtonManager1 != null)
+                    {
+                        phoneButtonManager1.TriggerPhoneSequenceFromInventory();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("PhoneButtonManager1 not found in the scene!");
+                    }
+                }
+                if (sceneName == "Stage3Hard")
+                {
+                    // Find the PhoneButtonManager2 in the scene and trigger the phone sequence
+                    ClassroomS3.PhoneButtonManager2 phoneButtonManager2 = GameObject.FindObjectOfType<ClassroomS3.PhoneButtonManager2>();
+                    if (phoneButtonManager2 != null)
+                    {
+                        // Call the phone button logic directly
+                        // phoneButtonManager2.SendMessage("OnPhoneButtonPressed");
+                        // Or, if OnPhoneButtonPressed is public, you can call:
+                        phoneButtonManager2.TriggerPhoneSequenceFromInventory();
+                    }
+                    else
+                    {
+                        Debug.LogWarning("PhoneButtonManager2 not found in the scene!");
                     }
                 }
                 else

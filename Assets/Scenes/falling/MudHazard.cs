@@ -5,6 +5,7 @@ public class MudHazard : MonoBehaviour
 {
     [SerializeField] private float slowAmount = 0.5f; // Player speed multiplier (e.g., 0.5 = 50% speed)
     [SerializeField] private float slowDuration = 5f; // Duration in seconds
+    [SerializeField] private AudioClip mudSlowSound; // Assign your mud sound in the Inspector
 
     private void OnTriggerEnter(Collider other)
     {
@@ -24,6 +25,11 @@ public class MudHazard : MonoBehaviour
             {
                 playerMovement.ApplySlow(slowAmount, slowDuration);
                 Debug.Log("Player slowed by mud!");
+                // Play mud slow sound
+                if (mudSlowSound != null)
+                {
+                    AudioSource.PlayClipAtPoint(mudSlowSound, transform.position);
+                }
             }
 
             Destroy(gameObject); // Remove mud after triggering
