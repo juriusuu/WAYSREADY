@@ -249,27 +249,27 @@ public class StageSelectionManager : MonoBehaviour
                 stageButtons[i].interactable = isCompleted;
             }
         }
-    }
-    /*     private void UpdateButtonStates()
+    } /* 
+    private void UpdateButtonStates()
+    {
+        if (stageButtons.Length != stageNames.Length)
         {
-            if (stageButtons.Length != stageNames.Length)
+            Debug.LogError("Mismatch between stageButtons and stageNames arrays. Please ensure they have the same length.");
+            return;
+        }
+
+        for (int i = 0; i < stageButtons.Length; i++)
+        {
+            if (stageButtons[i] == null)
             {
-                Debug.LogError("Mismatch between stageButtons and stageNames arrays. Please ensure they have the same length.");
-                return;
+                Debug.LogError($"Button at index {i} is not assigned in the Inspector.");
+                continue;
             }
 
-            for (int i = 0; i < stageButtons.Length; i++)
-            {
-                if (stageButtons[i] == null)
-                {
-                    Debug.LogError($"Button at index {i} is not assigned in the Inspector.");
-                    continue;
-                }
-
-                // Make all buttons interactable
-                stageButtons[i].interactable = true;
-            }
-        } */
+            // Make all buttons interactable
+            stageButtons[i].interactable = true;
+        }
+    } */
     private bool IsStageCompleted(string stageName)
     {
         if (GameManager.Instance != null)

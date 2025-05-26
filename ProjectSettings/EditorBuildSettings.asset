@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 324f5834992147746928c536ed2bcdff
   - enabled: 1
-    path: Assets/Scenes/Stage1Easy.unity
+    path: Assets/Scenes/Stage1Easy LANG.unity
     guid: 2e5b4bcf890d62b46941d677303441a0
   - enabled: 1
     path: Assets/Scenes/Stage1Normal.unity
@@ -47,6 +47,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scripts/Scenes/Minigame Maze.unity
     guid: f9e5c7943f11d694c8e8ec2b3dd911c3
+  - enabled: 1
+    path: Assets/Scenes/Stage1Easy.unity
+    guid: 719eedd8f4ef29a41aa67cd3ad407ab5
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: cb9074c90c1bff547852cc751a38017a, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 0ab810b47b94d334dad59d94ea8f8d86, type: 2}

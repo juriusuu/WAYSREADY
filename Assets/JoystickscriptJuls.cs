@@ -355,13 +355,60 @@ namespace Supercyan.FreeSample
             }
 
         }
+        [SerializeField] private float sprintMultiplier = 2f;
+        [SerializeField] private float sprintHoldTime = 1f; // Seconds to hold joystick for sprint
+        private float joystickHoldTimer = 0f;
+        private bool isSprinting = false;
+        /*         private void FixedUpdate()
+                {
+                    m_animator.SetBool("Grounded", m_isGrounded);
 
+                    // Get input from the left joystick
+                    m_movementInput = Gamepad.current.leftStick.ReadValue(); // Read the left joystick input
+
+                    if (m_controlMode == ControlMode.Direct)
+                    {
+                        DirectUpdate();
+                    }
+                    else
+                    {
+                        Debug.LogError("Unsupported state");
+                    }
+                    // --- GLIDE LOGIC START ---
+                    if (!m_isGrounded && m_rigidBody.linearVelocity.y < 0)
+                    {
+                        // Reduce the effect of gravity while falling
+                        Vector3 velocity = m_rigidBody.linearVelocity;
+                        velocity.y *= glideGravityMultiplier;
+                        m_rigidBody.linearVelocity = velocity;
+                    }
+                    m_wasGrounded = m_isGrounded;
+                    m_jumpInput = false;
+                } */
         private void FixedUpdate()
         {
             m_animator.SetBool("Grounded", m_isGrounded);
 
             // Get input from the left joystick
-            m_movementInput = Gamepad.current.leftStick.ReadValue(); // Read the left joystick input
+            m_movementInput = Gamepad.current.leftStick.ReadValue();
+
+            // --- AUTO SPRINT LOGIC ---
+            if (m_movementInput.magnitude > 0.95f) // Joystick fully tilted
+            {
+                joystickHoldTimer += Time.fixedDeltaTime;
+                if (!isSprinting && joystickHoldTimer >= sprintHoldTime)
+                {
+                    StartSprinting();
+                }
+            }
+            else
+            {
+                joystickHoldTimer = 0f;
+                if (isSprinting)
+                {
+                    StopSprinting();
+                }
+            }
 
             if (m_controlMode == ControlMode.Direct)
             {
@@ -371,16 +418,30 @@ namespace Supercyan.FreeSample
             {
                 Debug.LogError("Unsupported state");
             }
+
             // --- GLIDE LOGIC START ---
             if (!m_isGrounded && m_rigidBody.linearVelocity.y < 0)
             {
-                // Reduce the effect of gravity while falling
                 Vector3 velocity = m_rigidBody.linearVelocity;
                 velocity.y *= glideGravityMultiplier;
                 m_rigidBody.linearVelocity = velocity;
             }
             m_wasGrounded = m_isGrounded;
-            m_jumpInput = false;
+            //    m_jumpInput = false;
+        }
+
+        private void StartSprinting()
+        {
+            isSprinting = true;
+            m_moveSpeed = originalSpeed * sprintMultiplier;
+            Debug.Log("Sprinting!");
+        }
+
+        private void StopSprinting()
+        {
+            isSprinting = false;
+            m_moveSpeed = originalSpeed;
+            Debug.Log("Stopped sprinting.");
         }
         public void Jump()
         {
@@ -510,6 +571,7 @@ namespace Supercyan.FreeSample
             {
                 m_jumpTimeStamp = Time.time;
                 m_rigidBody.AddForce(Vector3.up * m_jumpForce, ForceMode.Impulse);
+                m_jumpInput = false; // <-- Reset here, only after jump is triggered
             }
         }
 
