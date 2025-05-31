@@ -1,6 +1,6 @@
 using UnityEngine;
-using UnityEngine;
-
+using System.Collections;
+using Supercyan.FreeSample;
 public class CameraFollowe : MonoBehaviour
 {
     public Transform target; // Target to follow (e.g., player)
@@ -27,11 +27,21 @@ public class CameraFollowe : MonoBehaviour
     private Vector3 currentVelocity = Vector3.zero;
     private float smoothedY;
 
+    private Vector3 originalLocalPosition;
+    private Coroutine shakeCoroutine;
+
+    public Joystickscript playerScript; // Assign in Inspector
     void Awake()
     {
         if (target != null)
             smoothedY = target.position.y;
+
+        //update
+
+        originalLocalPosition = transform.localPosition;
     }
+
+
     /*     void LateUpdate()
         {
             if (target == null) return;
@@ -84,11 +94,15 @@ public class CameraFollowe : MonoBehaviour
     } */
 
 
+
     void LateUpdate()
     {
         if (target == null) return;
 
         HandleRotation(); // Handle swipe input
+
+        // Only update smoothedY quickly if grounded, otherwise use slower smoothing
+        float lerpSpeed = (playerScript != null && playerScript.IsGrounded()) ? smoothSpeed : smoothSpeed * 0.3f;
 
         // Smoothly follow the player's Y position (prevents flicker)
         smoothedY = Mathf.Lerp(smoothedY, target.position.y, smoothSpeed);
@@ -138,6 +152,37 @@ public class CameraFollowe : MonoBehaviour
             yaw += rotateY;
             pitch = Mathf.Clamp(pitch + rotateX, minPitch, maxPitch); // Limit vertical movement
         }
+    }
+
+    // Call this method to start the shake
+    public void ShakeCamera(float duration, float magnitude)
+    {
+        if (shakeCoroutine != null)
+            StopCoroutine(shakeCoroutine);
+        shakeCoroutine = StartCoroutine(Shake(duration, magnitude));
+    }
+
+    private IEnumerator Shake(float duration, float magnitude)
+    {
+        float elapsed = 0f;
+        Vector3 startPos = transform.localPosition;
+
+        while (elapsed < duration)
+        {
+            float x = Random.Range(-1f, 1f) * magnitude;
+            float y = Random.Range(-1f, 1f) * magnitude;
+
+            transform.localPosition = startPos + new Vector3(x, y, 0);
+
+            elapsed += Time.deltaTime;
+            yield return null;
+        }
+
+        transform.localPosition = startPos;
+    }
+    public void TriggerEarthquake()
+    {
+        ShakeCamera(0.5f, 0.2f); // 0.5 seconds, 0.2 magnitude (adjust as needed)
     }
 }
 /* 

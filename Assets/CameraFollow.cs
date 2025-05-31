@@ -41,6 +41,7 @@ public class CameraFollowd : MonoBehaviour
             desiredPosition = hit.point + hit.normal * wallOffset;
         }
 
+
         // Smoothly move the camera to the new position
         transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref currentVelocity, smoothSpeed);
 

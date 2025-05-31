@@ -27,12 +27,12 @@ namespace Supercyan.FreeSample
 
         private readonly float m_interpolation = 10;
         private readonly float m_walkScale = 0.33f;
-
+        public bool IsGrounded() => m_isGrounded;
         private bool m_wasGrounded;
         private Vector3 m_currentDirection = Vector3.zero;
 
         private float m_jumpTimeStamp = 0;
-        private float m_minJumpInterval = 0.25f;
+        private float m_minJumpInterval = 0.05f;
         private bool m_jumpInput = false;
 
         private bool m_isGrounded;
@@ -80,6 +80,8 @@ namespace Supercyan.FreeSample
             if (!isCrouching)
             {
                 isCrouching = true;
+                if (m_animator != null)
+                    m_animator.SetBool("isCrouching", true); // <-- Add this line
 
                 // Adjust the visual model's position to represent crouching
                 Transform visualModel = transform.Find("common_people_male_1");
@@ -102,7 +104,8 @@ namespace Supercyan.FreeSample
             if (isCrouching)
             {
                 isCrouching = false;
-
+                if (m_animator != null)
+                    m_animator.SetBool("isCrouching", false); // <-- Add this line
                 // Restore the visual model's position to represent standing
                 Transform visualModel = transform.Find("common_people_male_1");
                 if (visualModel != null)
@@ -352,6 +355,17 @@ namespace Supercyan.FreeSample
             if (transform.position.y < -5) // Adjust this value as needed
             {
                 //  HandlePlayerDeath();
+                m_rigidBody.linearVelocity = Vector3.zero; // Stop any movement
+                transform.position = new Vector3(0, 0.5f, 0);
+                Debug.Log("Player fell and was reset to (0, 0, 0)");
+                // Snap to ground if possible
+                /*             RaycastHit hit;
+                            if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out hit, 2f))
+                            {
+                                transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+                            }
+
+                            Debug.Log("Player fell and was reset to (0, 0, 0)"); */
             }
 
         }
@@ -387,6 +401,16 @@ namespace Supercyan.FreeSample
                 } */
         private void FixedUpdate()
         {
+            if (isStunned)
+            {
+                m_animator.SetFloat("MoveSpeed", 0);
+                return; // Skip movement while stunned
+            }
+            // --- RAYCAST GROUND CHECK ---
+            float rayLength = 0.2f; // Adjust as needed for your character's size
+            Vector3 rayOrigin = transform.position + Vector3.up * 0.1f; // Slightly above feet
+            m_isGrounded = Physics.Raycast(rayOrigin, Vector3.down, rayLength);
+
             m_animator.SetBool("Grounded", m_isGrounded);
 
             // Get input from the left joystick
@@ -705,11 +729,29 @@ namespace Supercyan.FreeSample
             m_moveSpeed = originalSpeed;
             Debug.Log("Speed boost ended.");
         }
+
+        private bool isStunned = false;
+
+        public void Stun(float duration)
+        {
+            if (!isStunned)
+                StartCoroutine(StunCoroutine(duration));
+        }
+
+        private IEnumerator StunCoroutine(float duration)
+        {
+            isStunned = true;
+            // Optionally play a stun animation or effect here
+            if (m_animator != null)
+                m_animator.SetBool("isStunned", true); // If you have a stun animation
+            yield return new WaitForSeconds(duration);
+            isStunned = false;
+            if (m_animator != null)
+                m_animator.SetBool("isStunned", false);
+        }
+
     }
-
-
 }
-
 // ...existing code...
 
 /* 
