@@ -18207,6 +18207,8 @@ MonoBehaviour:
   lifeManager: {fileID: 0}
   timerManager: {fileID: 0}
   glideGravityMultiplier: 1
+  sprintMultiplier: 2
+  sprintHoldTime: 1
 --- !u!1 &78732043 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5579635048419291156, guid: e3f07080ef7e5c64b8e4033a95661b00, type: 3}
@@ -37888,7 +37890,7 @@ MonoBehaviour:
   target: {fileID: 78445321}
   distance: 5
   height: 2
-  smoothSpeed: 0.0125
+  smoothSpeed: 0.3
   wallOffset: 0.3
   obstacleLayers:
     serializedVersion: 2
@@ -37896,6 +37898,7 @@ MonoBehaviour:
   rotationSpeed: 30
   minPitch: 0
   maxPitch: 0
+  playerScript: {fileID: 78445329}
 --- !u!1001 &176030337
 PrefabInstance:
   m_ObjectHideFlags: 0

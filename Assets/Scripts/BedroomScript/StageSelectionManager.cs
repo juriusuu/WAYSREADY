@@ -220,36 +220,36 @@ public class StageSelectionManager : MonoBehaviour
         }
     }
 
-    private void UpdateButtonStates()
-    {
-        if (stageButtons.Length != stageNames.Length)
-        {
-            Debug.LogError("Mismatch between stageButtons and stageNames arrays. Please ensure they have the same length.");
-            return;
-        }
+    /*    private void UpdateButtonStates()
+       {
+           if (stageButtons.Length != stageNames.Length)
+           {
+               Debug.LogError("Mismatch between stageButtons and stageNames arrays. Please ensure they have the same length.");
+               return;
+           }
 
-        for (int i = 0; i < stageButtons.Length; i++)
-        {
-            if (stageButtons[i] == null)
-            {
-                Debug.LogError($"Button at index {i} is not assigned in the Inspector.");
-                continue;
-            }
+           for (int i = 0; i < stageButtons.Length; i++)
+           {
+               if (stageButtons[i] == null)
+               {
+                   Debug.LogError($"Button at index {i} is not assigned in the Inspector.");
+                   continue;
+               }
 
-            if (i == 0)
-            {
-                // Always enable the first stage
-                stageButtons[i].interactable = true;
-            }
-            else
-            {
-                // Enable the button if the previous stage is completed
-                string previousStage = stageNames[i - 1];
-                bool isCompleted = IsStageCompleted(previousStage);
-                stageButtons[i].interactable = isCompleted;
-            }
-        }
-    } /* 
+               if (i == 0)
+               {
+                   // Always enable the first stage
+                   stageButtons[i].interactable = true;
+               }
+               else
+               {
+                   // Enable the button if the previous stage is completed
+                   string previousStage = stageNames[i - 1];
+                   bool isCompleted = IsStageCompleted(previousStage);
+                   stageButtons[i].interactable = isCompleted;
+               }
+           }
+       } */
     private void UpdateButtonStates()
     {
         if (stageButtons.Length != stageNames.Length)
@@ -269,7 +269,7 @@ public class StageSelectionManager : MonoBehaviour
             // Make all buttons interactable
             stageButtons[i].interactable = true;
         }
-    } */
+    }
     private bool IsStageCompleted(string stageName)
     {
         if (GameManager.Instance != null)

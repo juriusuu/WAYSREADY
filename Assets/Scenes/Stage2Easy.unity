@@ -42456,7 +42456,7 @@ MonoBehaviour:
   target: {fileID: 1220990609}
   distance: 2
   height: 2
-  smoothSpeed: 0.125
+  smoothSpeed: 0.3
   wallOffset: 0.1
   obstacleLayers:
     serializedVersion: 2
@@ -42464,7 +42464,7 @@ MonoBehaviour:
   rotationSpeed: 20
   minPitch: 0
   maxPitch: 0
-  playerScript: {fileID: 0}
+  playerScript: {fileID: 1220990613}
 --- !u!114 &330585550
 MonoBehaviour:
   m_ObjectHideFlags: 0

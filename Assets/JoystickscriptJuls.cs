@@ -3,6 +3,8 @@ using UnityEngine.InputSystem; // Required for the new Input System
 using System.Collections; // Required for IEnumerator (coroutines)
 using System.Collections.Generic; // Required for List<>
 using System.Linq; // Required for LINQ queries
+using UnityEngine.SceneManagement; // Add this at the top if not already present
+
 namespace Supercyan.FreeSample
 {
     public class Joystickscript : MonoBehaviour
@@ -74,6 +76,7 @@ namespace Supercyan.FreeSample
                 originalHeight = playerCollider.height;
             }
             originalSpeed = m_moveSpeed;
+
         }
         public void Crouch()
         {
@@ -351,23 +354,158 @@ namespace Supercyan.FreeSample
             }
 
 
-            // Call the HandlePlayerDeath method
-            if (transform.position.y < -5) // Adjust this value as needed
+            /*     // Call the HandlePlayerDeath method
+                if (transform.position.y < -5) // Adjust this value as needed
+                {
+                    //  HandlePlayerDeath();
+                    m_rigidBody.linearVelocity = Vector3.zero; // Stop any movement
+                    transform.position = new Vector3(0, 0.5f, 0);
+                    Debug.Log("Player fell and was reset to (0, 0, 0)"); */
+            // Snap to ground if possible
+            /*             RaycastHit hit;
+                        if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out hit, 2f))
+                        {
+                            transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
+                        }
+
+                        Debug.Log("Player fell and was reset to (0, 0, 0)"); */
+            //  }
+            // ...existing code...
+            /*          if (transform.position.y < -5) // Adjust this value as needed
+                     {
+                         m_rigidBody.linearVelocity = Vector3.zero; // Stop any movement
+
+                         // Set to respawn position
+                         Vector3 respawnPosition = new Vector3(0, 2f, 0); // Start a bit higher
+                         transform.position = respawnPosition;
+
+                         // Snap to ground if possible
+                         RaycastHit hit;
+                         if (Physics.Raycast(transform.position, Vector3.down, out hit, 10f))
+                         {
+                             transform.position = new Vector3(transform.position.x, hit.point.y + 0.01f, transform.position.z);
+                             Debug.Log("Player snapped to ground at: " + transform.position);
+                         }
+                         else
+                         {
+                             Debug.LogWarning("No ground found below respawn point!");
+                         }
+                     }
+          */           // Check if the player is falling below a certain height
+            /*   if (transform.position.y < -5f) // Adjust this value as needed
+              {
+                  m_rigidBody.velocity = Vector3.zero; // Stop any movement
+                  transform.position = new Vector3(0, 2f, 0); // Reset position to a safe point
+                  Debug.Log("Player fell and was reset to (0, 2, 0)");
+              } */
+
+            /*        // Only run respawn logic in Stage 2 Normal and Stage 3
+                   string sceneName = SceneManager.GetActiveScene().name;
+                   if ((sceneName == "Stage2Normal" || sceneName == "Stage2Hard") && transform.position.y < -5)
+                   {
+                       m_rigidBody.linearVelocity = Vector3.zero;
+                       Vector3 respawnPosition = new Vector3(0, 0, 0); // Use your ground's X/Z
+                       transform.position = respawnPosition;
+                       m_rigidBody.isKinematic = false;
+                       m_rigidBody.useGravity = true;
+                       StartCoroutine(SnapToGroundAfterDelay());
+                   }
+            */
+            /*    string sceneName = SceneManager.GetActiveScene().name;
+               if ((sceneName == "Stage2Normal" || sceneName == "Stage2Hard") && transform.position.y < -5)
+               {
+                   m_rigidBody.linearVelocity = Vector3.zero;
+
+                   // Set your desired respawn X/Z here
+                   Vector3 respawnXZ = new Vector3(0, 0, 0);
+
+                   // Get CapsuleCollider and calculate feet offset
+                   CapsuleCollider cc = GetComponent<CapsuleCollider>();
+                   float feetOffset = 0f;
+                   if (cc != null)
+                   {
+                       feetOffset = cc.center.y - (cc.height / 2f);
+                   }
+
+                   // Raycast from above to find the ground
+                   RaycastHit hit;
+                   if (Physics.Raycast(respawnXZ + Vector3.up * 100f, Vector3.down, out hit, 200f))
+                   {
+                       // Place the feet just above the ground
+                       transform.position = hit.point + Vector3.up * -feetOffset + Vector3.up * 0.01f;
+                   }
+                   else
+                   {
+                       // Fallback if no ground found
+                       transform.position = respawnXZ + Vector3.up * 1f;
+                   }
+
+                   m_rigidBody.isKinematic = false;
+                   m_rigidBody.useGravity = true;
+               } */
+            string sceneName = SceneManager.GetActiveScene().name;
+            if ((sceneName == "Stage2Normal" || sceneName == "Stage2Hard") && transform.position.y < -5)
             {
-                //  HandlePlayerDeath();
-                m_rigidBody.linearVelocity = Vector3.zero; // Stop any movement
-                transform.position = new Vector3(0, 0.5f, 0);
-                Debug.Log("Player fell and was reset to (0, 0, 0)");
-                // Snap to ground if possible
-                /*             RaycastHit hit;
-                            if (Physics.Raycast(transform.position + Vector3.up * 0.5f, Vector3.down, out hit, 2f))
-                            {
-                                transform.position = new Vector3(transform.position.x, hit.point.y, transform.position.z);
-                            }
+                // Stop any movement
+                m_rigidBody.linearVelocity = Vector3.zero;
+                m_rigidBody.angularVelocity = Vector3.zero;
 
-                            Debug.Log("Player fell and was reset to (0, 0, 0)"); */
+                // Set your desired respawn X/Z here
+                Vector3 respawnXZ = new Vector3(0, 0, 0);
+
+                // Get CapsuleCollider and calculate feet offset
+                CapsuleCollider cc = GetComponent<CapsuleCollider>();
+                float feetOffset = 0f;
+                if (cc != null)
+                {
+                    feetOffset = cc.center.y - (cc.height / 2f);
+                }
+
+                // Raycast from above to find the ground
+                RaycastHit hit;
+                if (Physics.Raycast(respawnXZ + Vector3.up * 100f, Vector3.down, out hit, 200f))
+                {
+                    // Place the feet just above the ground
+                    transform.position = hit.point + Vector3.up * -feetOffset + Vector3.up * 0.01f;
+                }
+                else
+                {
+                    // Fallback if no ground found
+                    transform.position = respawnXZ + Vector3.up * (cc != null ? cc.height / 2f + 0.01f : 1f);
+                }
+
+                // Force physics update (important for mobile)
+                Physics.SyncTransforms();
+
+                m_rigidBody.isKinematic = false;
+                m_rigidBody.useGravity = true;
             }
+        }
+        private IEnumerator SnapToGroundAfterDelay()
+        {
+            float rayDistance = 100f;
+            int maxTries = 10;
+            int tries = 0;
+            RaycastHit hit;
 
+            while (tries < maxTries)
+            {
+                yield return new WaitForSeconds(0.1f);
+                Debug.DrawRay(transform.position, Vector3.down * rayDistance, Color.red, 2f);
+
+                if (Physics.Raycast(transform.position, Vector3.down, out hit, rayDistance))
+                {
+                    Debug.Log("Raycast hit: " + hit.collider.name + " at " + hit.point);
+                    transform.position = new Vector3(transform.position.x, hit.point.y + 0.01f, transform.position.z);
+                    yield break;
+                }
+                else
+                {
+                    Debug.LogWarning("No ground found below respawn point! Try: " + tries);
+                }
+                tries++;
+            }
+            Debug.LogError("Failed to find ground after respawn!");
         }
         [SerializeField] private float sprintMultiplier = 2f;
         [SerializeField] private float sprintHoldTime = 1f; // Seconds to hold joystick for sprint
@@ -407,7 +545,7 @@ namespace Supercyan.FreeSample
                 return; // Skip movement while stunned
             }
             // --- RAYCAST GROUND CHECK ---
-            float rayLength = 0.2f; // Adjust as needed for your character's size
+            float rayLength = 0.4f; // Adjust as needed for your character's size
             Vector3 rayOrigin = transform.position + Vector3.up * 0.1f; // Slightly above feet
             m_isGrounded = Physics.Raycast(rayOrigin, Vector3.down, rayLength);
 

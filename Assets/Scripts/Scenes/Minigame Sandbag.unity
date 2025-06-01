@@ -16040,6 +16040,7 @@ MonoBehaviour:
   rotationSpeed: 30
   minPitch: 0
   maxPitch: 0
+  playerScript: {fileID: 0}
 --- !u!114 &1136385246
 MonoBehaviour:
   m_ObjectHideFlags: 0

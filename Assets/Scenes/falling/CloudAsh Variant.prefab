@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timePenalty: 5
-  fallThreshold: -10
+  fallThreshold: -6
   hitCooldown: 1
 --- !u!54 &2901643054187128914
 Rigidbody:

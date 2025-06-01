@@ -129580,7 +129580,7 @@ MonoBehaviour:
   crouchSpeed: 1
   lifeManager: {fileID: 0}
   timerManager: {fileID: 0}
-  glideGravityMultiplier: 0.8
+  glideGravityMultiplier: 1
   sprintMultiplier: 2
   sprintHoldTime: 1
 --- !u!54 &634862037 stripped
@@ -178324,6 +178324,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 69014faa435186d4098dfbf9d4318f98, type: 3}
       propertyPath: m_Name
       value: Table
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 69014faa435186d4098dfbf9d4318f98, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 69014faa435186d4098dfbf9d4318f98, type: 3}
       propertyPath: m_TagString
@@ -306064,7 +306068,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2511279219084428715, guid: bbd1a620ba2597b4f80031050fdf4906, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 5.741
+      value: 18.68
       objectReference: {fileID: 0}
     - target: {fileID: 2511279219084428715, guid: bbd1a620ba2597b4f80031050fdf4906, type: 3}
       propertyPath: m_LocalPosition.y
@@ -306072,7 +306076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2511279219084428715, guid: bbd1a620ba2597b4f80031050fdf4906, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -2.337
+      value: -10.74
       objectReference: {fileID: 0}
     - target: {fileID: 2511279219084428715, guid: bbd1a620ba2597b4f80031050fdf4906, type: 3}
       propertyPath: m_LocalRotation.w
@@ -443747,7 +443751,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 8acf515ee49d3dc4fac40ef2e33268cd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects:

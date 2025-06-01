@@ -36,13 +36,13 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<string, float> defaultSceneTimes = new Dictionary<string, float>
     {
-        { "Stage1Easy", 480f },
-        { "Stage1Normal", 420f },
-        { "Stage1Hard", 360f },
-        { "Stage2Easy", 480f },
-        { "Stage2Normal", 420f },
-        { "Stage2Hard", 360f },
-        { "Stage3Easy", 480f },
+        { "Stage1Easy", 600f },
+        { "Stage1Normal", 600f },
+        { "Stage1Hard", 600f },
+        { "Stage2Easy", 600f },
+        { "Stage2Normal", 600f },
+        { "Stage2Hard", 600f },
+        { "Stage3Easy", 600f },
         { "Stage3Normal", 420f },
         { "Stage3Hard", 360f }
     };
