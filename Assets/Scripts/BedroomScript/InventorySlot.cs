@@ -236,15 +236,38 @@ public class InventorySlot : MonoBehaviour
                         Debug.LogWarning("PhoneButtonManager1 not found in the scene!");
                     }
                 }
+                /*  if (sceneName == "Stage3Hard")
+                 {
+                     // Find the PhoneButtonManager2 in the scene and trigger the phone sequence
+                     ClassroomS3.PhoneButtonManager2 phoneButtonManager2 = GameObject.FindObjectOfType<ClassroomS3.PhoneButtonManager2>();
+                     if (phoneButtonManager2 != null)
+                     {
+                         // Call the phone button logic directly
+                         // phoneButtonManager2.SendMessage("OnPhoneButtonPressed");
+                         // Or, if OnPhoneButtonPressed is public, you can call:
+                         phoneButtonManager2.TriggerPhoneSequenceFromInventory();
+                     }
+                     else
+                     {
+                         Debug.LogWarning("PhoneButtonManager2 not found in the scene!");
+                     }
+                 }
+                 else
+                 {
+                     Debug.Log("You can't use the phone yet!");
+                 } */
                 if (sceneName == "Stage3Hard")
                 {
+                    // Only allow phone use if player is inside the trigger zone
+                    if (!PhoneUseZone.PlayerInside)
+                    {
+                        Debug.Log("You must be in the correct spot to use the phone!");
+                        return;
+                    }
                     // Find the PhoneButtonManager2 in the scene and trigger the phone sequence
                     ClassroomS3.PhoneButtonManager2 phoneButtonManager2 = GameObject.FindObjectOfType<ClassroomS3.PhoneButtonManager2>();
                     if (phoneButtonManager2 != null)
                     {
-                        // Call the phone button logic directly
-                        // phoneButtonManager2.SendMessage("OnPhoneButtonPressed");
-                        // Or, if OnPhoneButtonPressed is public, you can call:
                         phoneButtonManager2.TriggerPhoneSequenceFromInventory();
                     }
                     else

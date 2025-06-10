@@ -36,15 +36,15 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<string, float> defaultSceneTimes = new Dictionary<string, float>
     {
-        { "Stage1Easy", 600f },
-        { "Stage1Normal", 600f },
-        { "Stage1Hard", 600f },
-        { "Stage2Easy", 600f },
-        { "Stage2Normal", 600f },
-        { "Stage2Hard", 600f },
-        { "Stage3Easy", 600f },
-        { "Stage3Normal", 420f },
-        { "Stage3Hard", 360f }
+        { "Stage1Easy", 540f },
+        { "Stage1Normal", 480f },
+        { "Stage1Hard", 420f },
+        { "Stage2Easy", 540f },
+        { "Stage2Normal", 480f },
+        { "Stage2Hard", 420f },
+        { "Stage3Easy", 540f },
+        { "Stage3Normal", 480f },
+        { "Stage3Hard", 420f }
     };
 
     public Dictionary<string, int> defaultSceneHints = new Dictionary<string, int>
@@ -89,7 +89,8 @@ public class GameManager : MonoBehaviour
 
         saveFilePath = Path.Combine(Application.persistentDataPath, "SavedGameWR.json");
         Debug.Log($"Save file path: {saveFilePath}");
-
+        // Load saved game data on startup
+        /*    LoadGame(); */
         // Apply stored purchases early
         // ApplyStoredPurchases();
 
@@ -224,7 +225,7 @@ public class GameManager : MonoBehaviour
         InitializePlayerStartingPosition();
         // Apply stored purchases after all managers are initialized
         //   ApplyStoredPurchases();
-
+        LoadGame();
     }
 
 
@@ -1013,7 +1014,10 @@ public class GameManager : MonoBehaviour
 
         Debug.Log($"Scene state for '{currentScene}' saved successfully.");
     }
-
+    private void OnApplicationQuit()
+    {
+        SaveGame();
+    }
     // -------------------- Save and Load --------------------
 
     public void SaveGame(string currentScene = null)
@@ -1085,6 +1089,22 @@ public class GameManager : MonoBehaviour
                 string json = File.ReadAllText(saveFilePath);
                 SaveData saveData = JsonConvert.DeserializeObject<SaveData>(json);
 
+
+                // --- ADD THIS BLOCK HERE ---
+                if (saveData.inventory != null)
+                {
+                    var inventoryDict = new Dictionary<string, (int quantity, Sprite sprite, PickupItems pickupItemRef)>();
+                    foreach (var kvp in saveData.inventory)
+                    {
+                        Sprite sprite = null;
+                        if (saveData.itemSprites != null && saveData.itemSprites.TryGetValue(kvp.Key, out string spriteName) && !string.IsNullOrEmpty(spriteName))
+                        {
+                            sprite = Resources.Load<Sprite>(spriteName); // Or your own sprite loading logic
+                        }
+                        inventoryDict[kvp.Key] = (kvp.Value, sprite, null);
+                    }
+                    InventoryManagers.Instance.SetInventory(inventoryDict);
+                }
                 // Restore game data
                 coinCount = saveData.coinCount;
                 completedScenes = saveData.completedScenes ?? new List<string>();
@@ -1170,6 +1190,7 @@ public class GameManager : MonoBehaviour
         {
             completedScenes.Add(sceneName);
             Debug.Log($"Scene '{sceneName}' marked as completed.");
+            SaveGame(); // Save after adding coins
         }
     }
 
@@ -1198,6 +1219,7 @@ public class GameManager : MonoBehaviour
         }
 
         Debug.Log($"Quest state for '{questName}' saved successfully.");
+        SaveGame(); // <-- Add this line
         return true; // Indicate success
     }
 
@@ -1233,6 +1255,7 @@ public class GameManager : MonoBehaviour
 
             CoinUIManager.Instance.UpdateCoinUI(coinCount);
         }
+        SaveGame(); // Save after adding coins
     }
 
     public bool SpendCoins(int amount)
@@ -1250,6 +1273,7 @@ public class GameManager : MonoBehaviour
             {
                 CoinUIManager.Instance.UpdateCoinUI(coinCount);
             }
+            SaveGame(); // Save after adding coins
             return true;
         }
         else

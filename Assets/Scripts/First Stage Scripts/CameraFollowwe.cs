@@ -94,39 +94,196 @@ public class CameraFollowe : MonoBehaviour
     } */
 
 
+    /* 
+        void LateUpdate()
+        {
+            if (target == null) return;
 
+            HandleRotation(); // Handle swipe input
+
+            // Only update smoothedY quickly if grounded, otherwise use slower smoothing
+            float lerpSpeed = (playerScript != null && playerScript.IsGrounded()) ? smoothSpeed : smoothSpeed * 0.3f;
+
+            // Smoothly follow the player's Y position (prevents flicker)
+            smoothedY = Mathf.Lerp(smoothedY, target.position.y, smoothSpeed);
+
+            // Calculate desired camera position
+            Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+            Vector3 targetXZ = new Vector3(target.position.x, 0, target.position.z);
+            Vector3 desiredPosition = targetXZ - (rotation * Vector3.forward * distance);
+            desiredPosition.y = smoothedY + height; // Use smoothed Y
+
+            // Prevent camera from clipping into walls
+            RaycastHit hit;
+            Vector3 wallCheckOrigin = new Vector3(target.position.x, smoothedY + height, target.position.z);
+            if (Physics.Linecast(wallCheckOrigin, desiredPosition, out hit, obstacleLayers))
+            {
+                desiredPosition = hit.point + hit.normal * wallOffset;
+            }
+
+            // Smoothly move the camera to the new position
+            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref currentVelocity, smoothSpeed);
+
+            // Make the camera look at the player (use smoothed Y)
+            Vector3 lookAtPoint = new Vector3(target.position.x, smoothedY + height * 0.5f, target.position.z);
+            transform.LookAt(lookAtPoint);
+        } */
+    /* 
+        void LateUpdate()
+        {
+            if (target == null) return;
+
+            HandleRotation(); // Handle swipe input
+
+            // Lock camera Y to a fixed height above the target's starting Y (or a set value)
+            float fixedY = target.position.y + height; // Or use a constant, e.g., float fixedY = 2.0f;
+
+            // Calculate desired camera position (XZ follows player, Y is fixed)
+            Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+            Vector3 targetXZ = new Vector3(target.position.x, 0, target.position.z);
+            Vector3 desiredPosition = targetXZ - (rotation * Vector3.forward * distance);
+            desiredPosition.y = fixedY; // Always use fixed Y
+
+            // Prevent camera from clipping into walls
+            RaycastHit hit;
+            Vector3 wallCheckOrigin = new Vector3(target.position.x, fixedY, target.position.z);
+            if (Physics.Linecast(wallCheckOrigin, desiredPosition, out hit, obstacleLayers))
+            {
+                desiredPosition = hit.point + hit.normal * wallOffset;
+            }
+
+            // Smoothly move the camera to the new position
+            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref currentVelocity, smoothSpeed);
+
+            // Make the camera look at the player (XZ only, Y is fixed)
+            Vector3 lookAtPoint = new Vector3(target.position.x, fixedY * 0.5f, target.position.z);
+            transform.LookAt(lookAtPoint);
+        } */
+    /*     void LateUpdate()
+        {
+            if (target == null) return;
+
+            HandleRotation(); // Handle swipe input
+
+            // Lock camera Y to a constant world height (e.g., 2.0f)
+            float fixedY = height; // Just use the height value as world Y
+
+            // Calculate desired camera position (XZ follows player, Y is fixed)
+            Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+            Vector3 targetXZ = new Vector3(target.position.x, 0, target.position.z);
+            Vector3 desiredPosition = targetXZ - (rotation * Vector3.forward * distance);
+            desiredPosition.y = fixedY; // Always use fixed Y
+
+            // Prevent camera from clipping into walls
+            RaycastHit hit;
+            Vector3 wallCheckOrigin = new Vector3(target.position.x, fixedY, target.position.z);
+            if (Physics.Linecast(wallCheckOrigin, desiredPosition, out hit, obstacleLayers))
+            {
+                desiredPosition = hit.point + hit.normal * wallOffset;
+            }
+
+            // Smoothly move the camera to the new position
+            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref currentVelocity, smoothSpeed);
+
+            // Make the camera look at the player (XZ only, Y is fixed)
+            Vector3 lookAtPoint = new Vector3(target.position.x, fixedY * 0.5f, target.position.z);
+            transform.LookAt(lookAtPoint);
+        } */
+    /*   void LateUpdate()
+      {
+          if (target == null) return;
+
+          HandleRotation(); // Handle swipe input
+
+          // Determine if the player is grounded
+          bool isGrounded = playerScript != null && playerScript.IsGrounded();
+
+          // Smoothly follow the player's Y when grounded, otherwise keep last Y
+          if (isGrounded)
+          {
+              smoothedY = Mathf.Lerp(smoothedY, target.position.y, smoothSpeed);
+          }
+          // else: keep smoothedY as is (camera doesn't follow jump)
+
+          // Calculate desired camera position
+          Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+          Vector3 targetXZ = new Vector3(target.position.x, 0, target.position.z);
+          Vector3 desiredPosition = targetXZ - (rotation * Vector3.forward * distance);
+          desiredPosition.y = smoothedY + height;
+
+          // Prevent camera from clipping into walls
+          RaycastHit hit;
+          Vector3 wallCheckOrigin = new Vector3(target.position.x, smoothedY + height, target.position.z);
+          if (Physics.Linecast(wallCheckOrigin, desiredPosition, out hit, obstacleLayers))
+          {
+              desiredPosition = hit.point + hit.normal * wallOffset;
+          }
+
+          // Smoothly move the camera to the new position
+          transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref currentVelocity, smoothSpeed);
+
+          // Make the camera look at the player (use smoothed Y)
+          Vector3 lookAtPoint = new Vector3(target.position.x, smoothedY + height * 0.5f, target.position.z);
+          transform.LookAt(lookAtPoint);
+      } */
     void LateUpdate()
     {
         if (target == null) return;
 
-        HandleRotation(); // Handle swipe input
+        HandleRotation();
 
-        // Only update smoothedY quickly if grounded, otherwise use slower smoothing
-        float lerpSpeed = (playerScript != null && playerScript.IsGrounded()) ? smoothSpeed : smoothSpeed * 0.3f;
+        string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
 
-        // Smoothly follow the player's Y position (prevents flicker)
-        smoothedY = Mathf.Lerp(smoothedY, target.position.y, smoothSpeed);
-
-        // Calculate desired camera position
-        Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
-        Vector3 targetXZ = new Vector3(target.position.x, 0, target.position.z);
-        Vector3 desiredPosition = targetXZ - (rotation * Vector3.forward * distance);
-        desiredPosition.y = smoothedY + height; // Use smoothed Y
-
-        // Prevent camera from clipping into walls
-        RaycastHit hit;
-        Vector3 wallCheckOrigin = new Vector3(target.position.x, smoothedY + height, target.position.z);
-        if (Physics.Linecast(wallCheckOrigin, desiredPosition, out hit, obstacleLayers))
+        if (scene == "Stage2Easy" || scene == "Stage2Normal" || scene == "Stage2Hard")
         {
-            desiredPosition = hit.point + hit.normal * wallOffset;
+            // Follow Y only when grounded
+            bool isGrounded = playerScript != null && playerScript.IsGrounded();
+            if (isGrounded)
+            {
+                smoothedY = Mathf.Lerp(smoothedY, target.position.y, smoothSpeed);
+            }
+            // else: keep smoothedY as is
+
+            Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+            Vector3 targetXZ = new Vector3(target.position.x, 0, target.position.z);
+            Vector3 desiredPosition = targetXZ - (rotation * Vector3.forward * distance);
+            desiredPosition.y = smoothedY + height;
+
+            RaycastHit hit;
+            Vector3 wallCheckOrigin = new Vector3(target.position.x, smoothedY + height, target.position.z);
+            if (Physics.Linecast(wallCheckOrigin, desiredPosition, out hit, obstacleLayers))
+            {
+                desiredPosition = hit.point + hit.normal * wallOffset;
+            }
+
+            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref currentVelocity, smoothSpeed);
+            Vector3 lookAtPoint = new Vector3(target.position.x, smoothedY + height * 0.5f, target.position.z);
+            transform.LookAt(lookAtPoint);
         }
+        else
+        {
+            // Always smoothly follow the player's Y position (prevents flicker)
+            float lerpSpeed = (playerScript != null && playerScript.IsGrounded()) ? smoothSpeed : smoothSpeed * 0.3f;
 
-        // Smoothly move the camera to the new position
-        transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref currentVelocity, smoothSpeed);
+            smoothedY = Mathf.Lerp(smoothedY, target.position.y, smoothSpeed);
 
-        // Make the camera look at the player (use smoothed Y)
-        Vector3 lookAtPoint = new Vector3(target.position.x, smoothedY + height * 0.5f, target.position.z);
-        transform.LookAt(lookAtPoint);
+            Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+            Vector3 targetXZ = new Vector3(target.position.x, 0, target.position.z);
+            Vector3 desiredPosition = targetXZ - (rotation * Vector3.forward * distance);
+            desiredPosition.y = smoothedY + height; // Use smoothed Y
+
+            RaycastHit hit;
+            Vector3 wallCheckOrigin = new Vector3(target.position.x, smoothedY + height, target.position.z);
+            if (Physics.Linecast(wallCheckOrigin, desiredPosition, out hit, obstacleLayers))
+            {
+                desiredPosition = hit.point + hit.normal * wallOffset;
+            }
+
+            transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref currentVelocity, smoothSpeed);
+
+            Vector3 lookAtPoint = new Vector3(target.position.x, smoothedY + height * 0.5f, target.position.z);
+            transform.LookAt(lookAtPoint);
+        }
     }
     void HandleRotation()
     {

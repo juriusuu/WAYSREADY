@@ -225,6 +225,13 @@ namespace Supercyan.FreeSample
                 }
                 if (m_collisions.Count == 0) { m_isGrounded = false; }
             }
+            for (int i = 0; i < contactPoints.Length; i++)
+            {
+                if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.2f) // <-- Change 0.5f to 0.2f here
+                {
+                    validSurfaceNormal = true; break;
+                }
+            }
         }
 
         private void OnCollisionStay(Collision collision)
@@ -234,7 +241,7 @@ namespace Supercyan.FreeSample
             bool validSurfaceNormal = false;
             for (int i = 0; i < contactPoints.Length; i++)
             {
-                if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.5f)
+                if (Vector3.Dot(contactPoints[i].normal, Vector3.up) > 0.2f)
                 {
                     validSurfaceNormal = true; break;
                 }
@@ -537,6 +544,65 @@ namespace Supercyan.FreeSample
                     m_wasGrounded = m_isGrounded;
                     m_jumpInput = false;
                 } */
+
+        /*      // Add these fields at the top of your class:
+             [SerializeField] private float stepHeight = 0.3f; // Adjust to match your stair height
+             [SerializeField] private float stepCheckDistance = 0.3f; // How far in front to check for a step
+
+             // Add this method to your class:
+             private void StepClimb()
+             {
+                 // Check directions: forward, forward-left, forward-right for smoother climbing
+                 Vector3[] directions = {
+             transform.forward,
+             (transform.forward + transform.right * 0.5f).normalized,
+             (transform.forward - transform.right * 0.5f).normalized
+         };
+
+                 foreach (var dir in directions)
+                 {
+                     // Lower raycast (at foot level)
+                     Vector3 origin = transform.position + Vector3.up * 0.05f;
+                     if (Physics.Raycast(origin, dir, stepCheckDistance))
+                     {
+                         // Upper raycast (at step height)
+                         Vector3 upperOrigin = transform.position + Vector3.up * stepHeight;
+                         if (!Physics.Raycast(upperOrigin, dir, stepCheckDistance))
+                         {
+                             // Step up by moving the Rigidbody up
+                             m_rigidBody.position += Vector3.up * stepHeight;
+                             break;
+                         }
+                     }
+                 }
+             }
+      */
+        [SerializeField] private float stepHeight = 0.3f; // Adjust to match your stair height
+        [SerializeField] private float stepCheckDistance = 0.3f; // How far in front to check for a step
+        [SerializeField] private LayerMask stairLayer; // Assign this in the Inspector to only include "Stairs"
+
+        private void StepClimb()
+        {
+            Vector3[] directions = {
+        transform.forward,
+        (transform.forward + transform.right * 0.5f).normalized,
+        (transform.forward - transform.right * 0.5f).normalized
+    };
+
+            foreach (var dir in directions)
+            {
+                Vector3 origin = transform.position + Vector3.up * 0.05f;
+                if (Physics.Raycast(origin, dir, stepCheckDistance, stairLayer))
+                {
+                    Vector3 upperOrigin = transform.position + Vector3.up * stepHeight;
+                    if (!Physics.Raycast(upperOrigin, dir, stepCheckDistance, stairLayer))
+                    {
+                        m_rigidBody.position += Vector3.up * stepHeight;
+                        break;
+                    }
+                }
+            }
+        }
         private void FixedUpdate()
         {
             if (isStunned)
@@ -590,6 +656,8 @@ namespace Supercyan.FreeSample
             }
             m_wasGrounded = m_isGrounded;
             //    m_jumpInput = false;
+
+            StepClimb();
         }
 
         private void StartSprinting()
