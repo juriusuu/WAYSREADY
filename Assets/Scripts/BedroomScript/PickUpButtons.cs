@@ -112,6 +112,13 @@ public class PickupButtonss : MonoBehaviour
                 Debug.Log($"Processing PickupItems instance at index {currentItemIndex}");
                 item.OnPickupButtonPressed(); // Call the pickup method on the current item
 
+                if (item.usagePanel != null)
+                {
+                    item.usagePanel.SetActive(true);
+                    Invoke(nameof(HideUsagePanel), 3f); // Hide after 3 seconds
+                }
+
+
                 // Only add to inventory if NOT a timer-decreasing item
                 bool isTimerDecreasing = timerDecreasingPickupItems != null && timerDecreasingPickupItems.Contains(item);
 
@@ -175,6 +182,7 @@ public class PickupButtonss : MonoBehaviour
             {
                 Debug.LogWarning($"PickupItems instance at index {currentItemIndex} is null.");
             }
+
         }
 
         /* if (currentItemIndex < pickupItems.Count)
@@ -292,6 +300,18 @@ public class PickupButtonss : MonoBehaviour
                         }
                     }
                 } */
+
+    }
+
+    private void HideUsagePanel()
+    {
+        foreach (var pickupItem in pickupItems)
+        {
+            if (pickupItem != null && pickupItem.usagePanel != null && pickupItem.usagePanel.activeSelf)
+            {
+                pickupItem.usagePanel.SetActive(false);
+            }
+        }
     }
     private void HideWarningPanel()
     {

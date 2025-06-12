@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class PickupItems : MonoBehaviour
 {
+
+    public GameObject usagePanel;
     [SerializeField] private List<GameObject> items; // List of items to be picked up
     private bool hasBeenPickedUp = false; // Flag to prevent double pickup
 

@@ -82,7 +82,7 @@ public class TVNextPanelManager : MonoBehaviour
 } */
 
 using UnityEngine;
-
+using System;
 public class TVNextPanelManager : MonoBehaviour
 {
     public GameObject firstNextPanel; // Reference to the first panel to display
@@ -91,7 +91,7 @@ public class TVNextPanelManager : MonoBehaviour
     public float secondPanelDisplayDuration = 6f; // Duration to display the second panel
     public AudioClip firstPanelAudioClip; // Audio clip for the first panel
     public AudioClip secondPanelAudioClip; // Audio clip for the second panel
-
+    public Action OnPanelsFinished; // <-- Add this line
     private bool isNextPanelsTriggered = false; // Ensures the panels are triggered only once
 
     public void TriggerNextPanels()
@@ -162,5 +162,6 @@ public class TVNextPanelManager : MonoBehaviour
             secondNextPanel.SetActive(false); // Hide the second panel
             Debug.Log("Second next panel hidden.");
         }
+        OnPanelsFinished?.Invoke(); // <-- Add this line
     }
 }
