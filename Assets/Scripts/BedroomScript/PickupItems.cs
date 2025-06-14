@@ -4,6 +4,8 @@ using UnityEngine;
 public class PickupItems : MonoBehaviour
 {
 
+    public GameObject markerToDeactivate; // Assign this in the Inspector for each pickup item
+
     public GameObject usagePanel;
     [SerializeField] private List<GameObject> items; // List of items to be picked up
     private bool hasBeenPickedUp = false; // Flag to prevent double pickup
@@ -64,6 +66,10 @@ public class PickupItems : MonoBehaviour
             Debug.Log($"{gameObject.name} is a timer-decreasing item. Not adding to inventory.");
             hasBeenPickedUp = true;
             SaveState(false);
+            if (markerToDeactivate != null)
+            {
+                markerToDeactivate.SetActive(false); // Deactivate the marker
+            }
             gameObject.SetActive(false);
             return;
         }
@@ -108,6 +114,11 @@ public class PickupItems : MonoBehaviour
 
                 hasBeenPickedUp = true; // Mark as picked up
                 SaveState(false); // Save the state as inactive
+                if (markerToDeactivate != null)
+                {
+                    markerToDeactivate.SetActive(false); // Deactivate the marker
+                }
+
                 gameObject.SetActive(false); // Deactivate the GameObject
                 Debug.Log($"Deactivated pickup items for {gameObject.name}");
             }
