@@ -113963,7 +113963,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1f0fe66fb0dca4dad5963b90af03cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueScript: {fileID: 11400000, guid: 7c71e2e9ac527f641b14986504b834ae, type: 2}
+  dialogueScript: {fileID: 11400000, guid: 509408d612a06414b931838f5dc6e6c7, type: 2}
 --- !u!1 &555558153 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -6546201254988283673, guid: 1d621cfcbfdc0ba499c8b815e65e7223, type: 3}

@@ -57056,7 +57056,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1f1f0fe66fb0dca4dad5963b90af03cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueScript: {fileID: 11400000, guid: 7c71e2e9ac527f641b14986504b834ae, type: 2}
+  dialogueScript: {fileID: 11400000, guid: 2960d2274731ff342b6fddcede6f892a, type: 2}
 --- !u!64 &385564343
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -61149,7 +61149,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!108 &410087040
 Light:
   m_ObjectHideFlags: 0

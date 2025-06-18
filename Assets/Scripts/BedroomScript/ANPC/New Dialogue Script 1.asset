@@ -15,11 +15,11 @@ MonoBehaviour:
   dialogueGroup:
     dialogueSpeakers:
     - sprite: {fileID: 21300000, guid: 04669710f012a504fbdd9ded0e4bea43, type: 3}
-      name: 'Teacher - Option 1:  '
+      name: 'NPC - Option 1:  '
       sentences:
       - "\rHere are your tasks:  \r\n1. Click on the TV screen to watch the news. 
         \r\n2. Prepare an emergency kit.  \r\n3. Charge all devices such as your
-        mobile phone and power bank.  \r\n- Okay, thank you!"
+        mobile phone and power bank.  \r\n"
     dialogueButtons:
     - name: Go Back
       dialogueTrigger: {fileID: 11400000, guid: 7c71e2e9ac527f641b14986504b834ae, type: 2}

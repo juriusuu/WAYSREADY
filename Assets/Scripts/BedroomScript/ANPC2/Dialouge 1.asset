@@ -1,0 +1,29 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d738d68ab42c266428f0d0e824f08569, type: 3}
+  m_Name: Dialouge 1
+  m_EditorClassIdentifier: 
+  dialogueGroup:
+    dialogueSpeakers:
+    - sprite: {fileID: 21300000, guid: 04669710f012a504fbdd9ded0e4bea43, type: 3}
+      name: 'NPC - Option 1:  '
+      sentences:
+      - "\r1. Find and check your go-bag for quick access in case of emergency. 
+        \r\n2. Assess the surroundings (put an X on items that are not safe).  \r\n3.
+        Find a sturdy object nearby to shield your head from falling debris.  \r\n4.
+        Hexafall."
+    dialogueButtons:
+    - name: Go Back
+      dialogueTrigger: {fileID: 11400000, guid: b0b307584fb0d5848b42b15dc82c1d6e, type: 2}
+      onClick:
+        m_PersistentCalls:
+          m_Calls: []
