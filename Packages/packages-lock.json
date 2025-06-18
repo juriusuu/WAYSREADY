@@ -1,5 +1,12 @@
 {
   "dependencies": {
+    "com.jasonskillman.dialoguemanager": {
+      "version": "https://github.com/Jason-Skillman/Dialogue-Manager.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "9508cbb3166f871052efd824b80f2a4ddfc107f0"
+    },
     "com.unity.2d.animation": {
       "version": "10.1.4",
       "depth": 1,

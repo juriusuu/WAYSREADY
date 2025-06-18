@@ -80,10 +80,25 @@ public class ShowcaseCameraController : MonoBehaviour
     {
         StartCoroutine(ShowItemsSequenceCoroutine(itemFocusPoints, playerFocus));
     }
+    /* 
+        private IEnumerator ShowItemsSequenceCoroutine(List<Transform> itemFocusPoints, Transform playerFocus)
+        {
+            // Switch to showcase camera at the start
+            if (mainCamera != null) mainCamera.enabled = false;
+            if (showcaseCamera != null) showcaseCamera.enabled = true;
 
-    private IEnumerator ShowItemsSequenceCoroutine(List<Transform> itemFocusPoints, Transform playerFocus)
+            foreach (var itemFocus in itemFocusPoints)
+            {
+                yield return ShowItemAndMoveToPlayer(itemFocus, playerFocus);
+                yield return new WaitForSeconds(0.5f);
+            }
+
+            // Switch back to main camera at the end
+            if (showcaseCamera != null) showcaseCamera.enabled = false;
+            if (mainCamera != null) mainCamera.enabled = true;
+        } */
+    public IEnumerator ShowItemsSequenceCoroutine(List<Transform> itemFocusPoints, Transform playerFocus)
     {
-        // Switch to showcase camera at the start
         if (mainCamera != null) mainCamera.enabled = false;
         if (showcaseCamera != null) showcaseCamera.enabled = true;
 
@@ -93,11 +108,9 @@ public class ShowcaseCameraController : MonoBehaviour
             yield return new WaitForSeconds(0.5f);
         }
 
-        // Switch back to main camera at the end
         if (showcaseCamera != null) showcaseCamera.enabled = false;
         if (mainCamera != null) mainCamera.enabled = true;
     }
-
     private IEnumerator ShowItemAndMoveToPlayer(Transform itemFocus, Transform playerFocus)
     {
         showcaseCamera.transform.position = itemFocus.position;

@@ -86,7 +86,8 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject); // Destroy duplicate instances
             return;
         }
-
+        Application.targetFrameRate = 30;
+        QualitySettings.SetQualityLevel(0);
         saveFilePath = Path.Combine(Application.persistentDataPath, "SavedGameWR.json");
         Debug.Log($"Save file path: {saveFilePath}");
         // Load saved game data on startup

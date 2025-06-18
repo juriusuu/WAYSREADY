@@ -19,7 +19,8 @@ public class CameraFollowe : MonoBehaviour
     public float rotationSpeed = 200f; // Sensitivity of swipe rotation
     public float minPitch = -30f; // Lower limit for vertical rotation
     public float maxPitch = 60f; // Upper limit for vertical rotation
-
+    private Vector3 cachedDesiredPosition;
+    private bool wallCheckNeeded = true;
     private Vector2 lastTouchPosition;
     private bool isDragging = false;
     private float yaw = 0f; // Horizontal rotation (left/right)
@@ -39,8 +40,17 @@ public class CameraFollowe : MonoBehaviour
         //update
 
         originalLocalPosition = transform.localPosition;
-    }
 
+        StartCoroutine(WallCheckRoutine());
+    }
+    private IEnumerator WallCheckRoutine()
+    {
+        while (true)
+        {
+            wallCheckNeeded = true;
+            yield return new WaitForSeconds(0.1f); // Adjust as needed
+        }
+    }
 
     /*     void LateUpdate()
         {
@@ -285,6 +295,60 @@ public class CameraFollowe : MonoBehaviour
             transform.LookAt(lookAtPoint);
         }
     }
+
+    /*    void LateUpdate()
+       {
+           if (target == null) return;
+
+           HandleRotation();
+
+           string scene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+
+           float lerpSpeed = (playerScript != null && playerScript.IsGrounded()) ? smoothSpeed : smoothSpeed * 0.3f;
+
+           if (scene == "Stage2Easy" || scene == "Stage2Normal" || scene == "Stage2Hard")
+           {
+               // Follow Y only when grounded
+               bool isGrounded = playerScript != null && playerScript.IsGrounded();
+               if (isGrounded)
+               {
+                   smoothedY = Mathf.Lerp(smoothedY, target.position.y, smoothSpeed);
+               }
+               // else: keep smoothedY as is
+           }
+           else
+           {
+               // Always smoothly follow the player's Y position (prevents flicker)
+               smoothedY = Mathf.Lerp(smoothedY, target.position.y, lerpSpeed);
+           }
+
+           Quaternion rotation = Quaternion.Euler(pitch, yaw, 0);
+           Vector3 targetXZ = new Vector3(target.position.x, 0, target.position.z);
+           Vector3 desiredPosition = targetXZ - (rotation * Vector3.forward * distance);
+           desiredPosition.y = smoothedY + height;
+
+           // Throttled wall avoidance for all scenes
+           if (wallCheckNeeded)
+           {
+               RaycastHit hit;
+               Vector3 wallCheckOrigin = new Vector3(target.position.x, smoothedY + height, target.position.z);
+               if (Physics.Linecast(wallCheckOrigin, desiredPosition, out hit, obstacleLayers))
+               {
+                   desiredPosition = hit.point + hit.normal * wallOffset;
+               }
+               cachedDesiredPosition = desiredPosition;
+               wallCheckNeeded = false;
+           }
+           else
+           {
+               desiredPosition = cachedDesiredPosition;
+           }
+
+           transform.position = Vector3.SmoothDamp(transform.position, desiredPosition, ref currentVelocity, smoothSpeed);
+
+           Vector3 lookAtPoint = new Vector3(target.position.x, smoothedY + height * 0.5f, target.position.z);
+           transform.LookAt(lookAtPoint);
+       } */
     void HandleRotation()
     {
         // Mouse or Touch Input

@@ -351,9 +351,11 @@ namespace Supercyan.FreeSample
                 }
 
          */
+        public static bool IsShowcasing = false; // Add this at the top of your class
 
         private void Update()
         {
+            if (IsShowcasing) return; // Prevent movement during showcase
             // Check for jump input from the gamepad
             if (!m_jumpInput && Gamepad.current.buttonSouth.wasPressedThisFrame) // Typically the "A" button
             {
@@ -605,6 +607,7 @@ namespace Supercyan.FreeSample
         }
         private void FixedUpdate()
         {
+            if (IsShowcasing) return; // Prevent movement during showcase
             if (isStunned)
             {
                 m_animator.SetFloat("MoveSpeed", 0);
