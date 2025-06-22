@@ -115609,7 +115609,7 @@ MonoBehaviour:
   - {fileID: 1351619355}
   - {fileID: 1540790627}
   - {fileID: 860118368}
-  arrowPrefab: {fileID: 7404223956060802447, guid: f2bfbd7b1d17434418016273ad70afb2, type: 3}
+  arrowPrefab: {fileID: 8271299200069495501, guid: 4ca51290ec3263d44bf289da98b7c192, type: 3}
   timePenaltyPerHint: 30
   isPlayerDead: 0
 --- !u!4 &268380438

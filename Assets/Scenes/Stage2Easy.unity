@@ -37692,7 +37692,7 @@ MonoBehaviour:
   - {fileID: 2011058703}
   - {fileID: 744298308}
   - {fileID: 222440837}
-  arrowPrefab: {fileID: 7404223956060802447, guid: f2bfbd7b1d17434418016273ad70afb2, type: 3}
+  arrowPrefab: {fileID: 8271299200069495501, guid: 4ca51290ec3263d44bf289da98b7c192, type: 3}
   timePenaltyPerHint: 30
   isPlayerDead: 0
 --- !u!4 &268380438
@@ -125175,7 +125175,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_moveSpeed: 2
   m_turnSpeed: 200
-  m_jumpForce: 4
+  m_jumpForce: 5
   m_animator: {fileID: 434930139}
   m_rigidBody: {fileID: 434930138}
   m_controlMode: 0

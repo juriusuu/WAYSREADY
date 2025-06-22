@@ -188,6 +188,7 @@ public class TaymerManager : MonoBehaviour
     public Image timerImage; // Reference to the TimerImage
     private float totalTime; // Total time in seconds
     public float remainingTime;
+    private GameObject currentHintTarget = null; // Add this at the top with your other fields
 
     public LayfManager layfManager; // Reference to the LifeManager (handles lives and hearts)
     public GameObject failPanel; // Reference to the fail panel UI
@@ -362,6 +363,30 @@ public class TaymerManager : MonoBehaviour
             NotifyGameManager(); // Call the method to handle player death when time runs out
 
         }
+
+        // Add this to your Update() method (inside Update, not as a new method):
+        /*    if (currentArrow != null && currentHintTarget != null)
+           {
+               GameObject player = GameObject.FindWithTag("Player");
+               if (player != null)
+               {
+                   // Update arrow position above player
+                   currentArrow.transform.position = player.transform.position + Vector3.up * 1.5f;
+
+                   // Update arrow rotation to point to the target
+                   Vector3 direction = (currentHintTarget.transform.position - player.transform.position).normalized;
+                   Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
+                   currentArrow.transform.rotation = lookRotation;
+               }
+           } */
+        if (currentArrow != null && currentHintTarget != null)
+        {
+            UpdateArrowDirection();
+            // Keep the arrow above the player
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+                currentArrow.transform.position = player.transform.position + Vector3.up * 2f;
+        }
     }
     /*    private void Update()
        {
@@ -459,7 +484,7 @@ public class TaymerManager : MonoBehaviour
         }
 
         return nearestObject; // Return the nearest object
-    }
+    }/* 
 
     private void AttachArrowToObject(GameObject obj)
     {
@@ -481,7 +506,114 @@ public class TaymerManager : MonoBehaviour
 
         Debug.Log($"Arrow placed above object: {obj.name}");
     }
+ *//* 
+    private void AttachArrowToObject(GameObject targetItem)
+    {
+        // Remove the previous arrow if it exists
+        if (currentArrow != null)
+        {
+            Destroy(currentArrow);
+        }
 
+        // Find the player
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogError("Player object not found!");
+            return;
+        }
+
+        // Position the arrow above the player
+        Vector3 arrowPosition = player.transform.position + Vector3.up * 1.5f;
+
+        // Calculate direction from player to target item
+        Vector3 direction = (targetItem.transform.position - player.transform.position).normalized;
+
+        // Set the arrow's rotation to point toward the item
+        Quaternion lookRotation = Quaternion.LookRotation(direction, Vector3.up);
+
+        // Instantiate the arrow
+        currentArrow = Instantiate(arrowPrefab, arrowPosition, lookRotation);
+
+        // Optionally, scale the arrow
+        currentArrow.transform.localScale = new Vector3(0.07f, 0.07f, 0.07f);
+
+        // Make the arrow a child of the player so it moves with them
+        currentArrow.transform.SetParent(player.transform);
+
+        // Store the current target for real-time updating
+        currentHintTarget = targetItem;
+
+        Debug.Log($"Arrow placed near player, pointing to: {targetItem.name}");
+    }
+ */
+    private void AttachArrowToObject(GameObject targetItem)
+    {
+        // Remove the previous arrow if it exists
+        if (currentArrow != null)
+        {
+            Destroy(currentArrow);
+        }
+
+        // Find the player
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player == null)
+        {
+            Debug.LogError("Player object not found!");
+            return;
+        }
+
+        // Position the arrow above the player
+        /*   Vector3 arrowPosition = player.transform.position + Vector3.up * 0.1f; // Adjust height as needed
+   */
+        /*   float arrowHeight = 1f; // Replace with your arrow's height in model units
+          float scale = 15f;
+          float offset = arrowHeight * scale / 2f; // If pivot is at base
+          Vector3 arrowPosition = player.transform.position + Vector3.up * (0.1f + offset); */
+
+
+        // Place the arrow at a fixed height above the player, regardless of scale
+        float desiredHeightAboveHead = 0.5f; // Adjust as needed
+        Vector3 arrowPosition = player.transform.position + Vector3.up * desiredHeightAboveHead;
+
+        // Instantiate the arrow
+        currentArrow = Instantiate(arrowPrefab, arrowPosition, Quaternion.identity);
+
+        // --- Add this block to offset the arrow downward based on its scale and model height ---
+        float arrowModelHeight = 1f; // Replace with your arrow's Y size in model units (check in Mesh Renderer bounds)
+        float downwardOffset = arrowModelHeight * currentArrow.transform.localScale.y / 2f;
+        currentArrow.transform.position -= Vector3.up * downwardOffset;
+
+        // Make the arrow a child of the player so it moves with them
+        currentArrow.transform.SetParent(player.transform);
+        currentArrow.transform.localPosition = new Vector3(0, 1.2f, 0); // Adjust as needed
+        // Set the scale to make it visible
+        currentArrow.transform.localScale = new Vector3(100f, 100f, 100f); // Adjust as needed
+
+        // Store the current target for real-time updating
+        currentHintTarget = targetItem;
+
+        // Set the initial rotation to point at the target
+        UpdateArrowDirection();
+    }
+
+    // Add this method if you don't have it yet:
+    private void UpdateArrowDirection()
+    {
+        if (currentArrow == null || currentHintTarget == null) return;
+
+        GameObject player = GameObject.FindWithTag("Player");
+        if (player == null) return;
+
+        // Calculate direction from player to target
+        Vector3 direction = (currentHintTarget.transform.position - player.transform.position).normalized;
+
+        // Set the arrow's rotation to point toward the target
+        if (direction != Vector3.zero)
+            /*   currentArrow.transform.rotation = Quaternion.LookRotation(direction, Vector3.up);
+    */
+            currentArrow.transform.rotation = Quaternion.LookRotation(direction, Vector3.up) * Quaternion.Euler(0, 90, 0);
+    }
     public void StartTimer()
     {
         if (remainingTime > 0)

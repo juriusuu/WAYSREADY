@@ -129933,7 +129933,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_moveSpeed: 2
   m_turnSpeed: 200
-  m_jumpForce: 4
+  m_jumpForce: 5.5
   m_animator: {fileID: 634862038}
   m_rigidBody: {fileID: 634862037}
   m_controlMode: 0
@@ -245319,7 +245319,7 @@ MonoBehaviour:
   - {fileID: 13514692}
   - {fileID: 427986429}
   - {fileID: 954437987}
-  arrowPrefab: {fileID: 7404223956060802447, guid: f2bfbd7b1d17434418016273ad70afb2, type: 3}
+  arrowPrefab: {fileID: 8271299200069495501, guid: 4ca51290ec3263d44bf289da98b7c192, type: 3}
   timePenaltyPerHint: 30
   isPlayerDead: 0
 --- !u!4 &1207602312

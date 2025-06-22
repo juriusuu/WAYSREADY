@@ -97839,7 +97839,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_moveSpeed: 2
   m_turnSpeed: 200
-  m_jumpForce: 6
+  m_jumpForce: 6.5
   m_animator: {fileID: 837767826}
   m_rigidBody: {fileID: 837767825}
   m_controlMode: 0
@@ -239361,10 +239361,10 @@ MonoBehaviour:
   failPanel: {fileID: 844290209}
   totalHintsAllowed: 3
   objectsToHighlight:
-  - {fileID: 409840298}
+  - {fileID: 1583448675}
   - {fileID: 145120363}
   - {fileID: 1745253068}
-  arrowPrefab: {fileID: 7404223956060802447, guid: f2bfbd7b1d17434418016273ad70afb2, type: 3}
+  arrowPrefab: {fileID: 8271299200069495501, guid: 4ca51290ec3263d44bf289da98b7c192, type: 3}
   timePenaltyPerHint: 30
   isPlayerDead: 0
 --- !u!4 &2102608418

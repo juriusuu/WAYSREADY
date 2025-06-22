@@ -91,7 +91,7 @@ public class GameManager : MonoBehaviour
         saveFilePath = Path.Combine(Application.persistentDataPath, "SavedGameWR.json");
         Debug.Log($"Save file path: {saveFilePath}");
         // Load saved game data on startup
-        /*    LoadGame(); */
+        LoadGame();
         // Apply stored purchases early
         // ApplyStoredPurchases();
 
@@ -226,7 +226,7 @@ public class GameManager : MonoBehaviour
         InitializePlayerStartingPosition();
         // Apply stored purchases after all managers are initialized
         //   ApplyStoredPurchases();
-        LoadGame();
+        // LoadGame();
     }
 
 
