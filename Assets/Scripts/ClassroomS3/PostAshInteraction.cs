@@ -1,5 +1,5 @@
 using UnityEngine;
-
+using System;
 public class PostAshInteractionManager : MonoBehaviour
 {
     public GameObject panel1; // First panel to display
@@ -8,6 +8,7 @@ public class PostAshInteractionManager : MonoBehaviour
     public AudioClip audioClip2; // Audio clip for the second panel
     private bool isActivated = false; // Tracks if the script has been activated
 
+    //  public Action OnPanelsFinished; // <-- Add this line
     private void Start()
     {
         // Ensure both panels are hidden at the start
@@ -65,5 +66,6 @@ public class PostAshInteractionManager : MonoBehaviour
             panel2.SetActive(false);
             Debug.Log("Panel 2 hidden.");
         }
+        // OnPanelsFinished?.Invoke(); // <-- Add this line
     }
 }
