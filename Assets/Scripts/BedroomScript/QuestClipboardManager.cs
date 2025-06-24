@@ -67,7 +67,12 @@ public class QuestClipboardManager : MonoBehaviour
             helpButton.GetComponent<Button>().onClick.AddListener(ToggleClipboard);
         }
     }
-
+    public bool IsTaskDone(int taskIndex)
+    {
+        if (taskIndex >= 0 && taskIndex < taskCompletionStatus.Length)
+            return taskCompletionStatus[taskIndex];
+        return false;
+    }
     public void ToggleClipboard()
     {
         // Toggle the visibility of the clipboard panel

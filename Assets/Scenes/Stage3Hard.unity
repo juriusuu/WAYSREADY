@@ -97990,7 +97990,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c16be442d636d4a89c0568340e40ae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_moveSpeed: 2
+  m_moveSpeed: 3
   m_turnSpeed: 200
   m_jumpForce: 6.5
   m_animator: {fileID: 837767826}

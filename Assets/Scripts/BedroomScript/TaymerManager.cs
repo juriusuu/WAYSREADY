@@ -317,7 +317,10 @@ public class TaymerManager : MonoBehaviour
         // Start the timer coroutine
         StartCoroutine(TimerCoroutine());
     }
-
+    private int GetTaskIndexForTarget(GameObject target)
+    {
+        return objectsToHighlight.IndexOf(target);
+    }
     public void AddAdditionalTime(float timeToAdd)
     {
         remainingTime += timeToAdd;
@@ -364,6 +367,15 @@ public class TaymerManager : MonoBehaviour
 
         }
 
+        /*   // Remove arrow if the target object is gone or inactive
+          if (currentArrow != null && (currentHintTarget == null || !currentHintTarget.activeInHierarchy))
+          {
+              Destroy(currentArrow);
+              currentArrow = null;
+              currentHintTarget = null;
+          }
+   */
+
         // Add this to your Update() method (inside Update, not as a new method):
         /*    if (currentArrow != null && currentHintTarget != null)
            {
@@ -379,14 +391,25 @@ public class TaymerManager : MonoBehaviour
                    currentArrow.transform.rotation = lookRotation;
                }
            } */
-        if (currentArrow != null && currentHintTarget != null)
+        /*     if (currentArrow != null && currentHintTarget != null)
+            {
+                UpdateArrowDirection();
+                // Keep the arrow above the player
+                GameObject player = GameObject.FindWithTag("Player");
+                if (player != null)
+                    currentArrow.transform.position = player.transform.position + Vector3.up * 2f;
+            } */
+        if (currentArrow != null && (
+        currentHintTarget == null ||
+        !currentHintTarget.activeInHierarchy ||
+        IsQuestTaskDone(currentHintTarget) // <-- Add this check
+    ))
         {
-            UpdateArrowDirection();
-            // Keep the arrow above the player
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player != null)
-                currentArrow.transform.position = player.transform.position + Vector3.up * 2f;
+            Destroy(currentArrow);
+            currentArrow = null;
+            currentHintTarget = null;
         }
+
     }
     /*    private void Update()
        {
@@ -400,7 +423,18 @@ public class TaymerManager : MonoBehaviour
                NotifyGameManager(); // Notify GameManager when timer reaches 0
            }
        } */
-
+    // Add this method to your class:
+    private bool IsQuestTaskDone(GameObject target)
+    {
+        var questManager = FindObjectOfType<QuestClipboardManager>();
+        if (questManager != null)
+        {
+            int taskIndex = GetTaskIndexForTarget(target);
+            if (taskIndex >= 0)
+                return questManager.IsTaskDone(taskIndex);
+        }
+        return false;
+    }
     private void NotifyGameManager()
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
@@ -440,6 +474,12 @@ public class TaymerManager : MonoBehaviour
         GameObject nearestObject = GetNearestObject(); // Find the nearest object
         if (nearestObject != null)
         {
+
+            if (IsQuestTaskDone(nearestObject))
+            {
+                Debug.Log("Task for this object is already completed. No hint needed.");
+                return;
+            }
             AttachArrowToObject(nearestObject); // Attach the arrow to the nearest object
             objectsToHighlight.Remove(nearestObject); // Remove it from the list
             hintsUsed++; // Increment the hint counter
