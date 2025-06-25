@@ -8318,7 +8318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &42746125
 MeshCollider:
@@ -14453,7 +14453,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &75830373
 MeshCollider:
@@ -28888,7 +28888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &155142007 stripped
 GameObject:
@@ -32179,7 +32179,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1001 &169497786
 PrefabInstance:
@@ -32290,7 +32290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &169568461
 MeshCollider:
@@ -46418,7 +46418,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &245557519
 MeshCollider:
@@ -49832,7 +49832,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &263665626
 MeshCollider:
@@ -52993,6 +52993,7 @@ MonoBehaviour:
   - {fileID: 1884928266}
   arrowPrefab: {fileID: 8271299200069495501, guid: 4ca51290ec3263d44bf289da98b7c192, type: 3}
   timePenaltyPerHint: 30
+  currentTime: 0
   isPlayerDead: 0
 --- !u!4 &278194074
 Transform:
@@ -60471,7 +60472,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &317914888
 MeshCollider:
@@ -62648,7 +62649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &325654403
 MeshCollider:
@@ -68887,7 +68888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &360562957
 MeshCollider:
@@ -76775,7 +76776,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &400277913
 MeshCollider:
@@ -84423,7 +84424,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &442021000
 MeshCollider:
@@ -96776,7 +96777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &511179122
 MeshCollider:
@@ -101374,7 +101375,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &537282233 stripped
 GameObject:
@@ -105147,7 +105148,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &558685327
 MeshCollider:
@@ -115568,7 +115569,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &615177236
 MeshCollider:
@@ -118521,7 +118522,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &627862891
 MeshCollider:
@@ -119983,7 +119984,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &636181828
 MeshCollider:
@@ -120467,7 +120468,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &637816243
 MeshCollider:
@@ -120932,7 +120933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!65 &639084019
 BoxCollider:
@@ -125517,7 +125518,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &664161307
 MeshCollider:
@@ -126163,7 +126164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &667098818
 MeshCollider:
@@ -128856,7 +128857,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &681202435
 MeshCollider:
@@ -141710,7 +141711,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &751160392
 MeshCollider:
@@ -147991,7 +147992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &780722140
 MeshCollider:
@@ -149734,7 +149735,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &790275577
 MeshCollider:
@@ -164314,7 +164315,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &871186680
 MeshCollider:
@@ -167669,7 +167670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &891193913
 MeshCollider:
@@ -176674,7 +176675,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &940628661
 MeshCollider:
@@ -186384,7 +186385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &979150106 stripped
 GameObject:
@@ -194991,7 +194992,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1025305379 stripped
 GameObject:
@@ -202231,7 +202232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1060583348
 MeshCollider:
@@ -202430,7 +202431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1061118650 stripped
 GameObject:
@@ -206370,7 +206371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1084316839
 MeshCollider:
@@ -212305,7 +212306,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1116887656
 MeshCollider:
@@ -215876,7 +215877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1134987157 stripped
 GameObject:
@@ -218995,7 +218996,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1150642116
 MeshCollider:
@@ -359047,7 +359048,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1301066404
 MeshCollider:
@@ -367873,7 +367874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1341988497
 MeshCollider:
@@ -368339,7 +368340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1343625751
 MeshCollider:
@@ -377876,7 +377877,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1391873798
 MeshCollider:
@@ -390486,7 +390487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1465900390
 MeshCollider:
@@ -400257,7 +400258,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1517685584
 MeshCollider:
@@ -431044,7 +431045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1684600223
 MeshCollider:
@@ -448045,7 +448046,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1775421689
 MeshCollider:
@@ -451426,7 +451427,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1792669976
 MeshCollider:
@@ -456749,7 +456750,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1824011068
 MeshCollider:
@@ -458536,7 +458537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1835529988
 MeshCollider:
@@ -461137,7 +461138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1847794064
 MeshCollider:
@@ -464306,7 +464307,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1864567524
 MeshCollider:
@@ -468635,7 +468636,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1888711384
 MeshCollider:
@@ -469466,7 +469467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1893142603
 MeshCollider:
@@ -476497,7 +476498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!65 &1928868281
 BoxCollider:
@@ -484485,7 +484486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &1973185681
 MeshCollider:
@@ -493044,7 +493045,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1986291365 stripped
 GameObject:
@@ -499725,7 +499726,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &2022102555
 MeshCollider:
@@ -506509,7 +506510,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &2062339213
 MeshCollider:
@@ -508536,7 +508537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!64 &2071105869
 MeshCollider:

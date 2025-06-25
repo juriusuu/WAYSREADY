@@ -201,6 +201,12 @@ public class TaymerManager : MonoBehaviour
     private GameObject currentArrow; // Store the current arrow instance
 
     public float timePenaltyPerHint = 30f; // Set this in the Inspector or change the value
+    public float currentTime; // Your timer variable
+
+    public float GetCurrentTime()
+    {
+        return currentTime;
+    }
 
 
     /*   private void Start()
@@ -409,7 +415,7 @@ public class TaymerManager : MonoBehaviour
             currentArrow = null;
             currentHintTarget = null;
         }
-
+        currentTime = remainingTime;
     }
     /*    private void Update()
        {
@@ -628,7 +634,7 @@ public class TaymerManager : MonoBehaviour
         currentArrow.transform.SetParent(player.transform);
         currentArrow.transform.localPosition = new Vector3(0, 1.2f, 0); // Adjust as needed
         // Set the scale to make it visible
-        currentArrow.transform.localScale = new Vector3(100f, 100f, 100f); // Adjust as needed
+        currentArrow.transform.localScale = new Vector3(80f, 80f, 80f); // Adjust as needed
 
         // Store the current target for real-time updating
         currentHintTarget = targetItem;
@@ -668,6 +674,14 @@ public class TaymerManager : MonoBehaviour
         }
     }
 
+    //settimer
+    public void SetTime(float time)
+    {
+        remainingTime = time;
+        currentTime = time;
+        if (totalTime > 0 && timerImage != null)
+            timerImage.fillAmount = remainingTime / totalTime;
+    }
 
 
     /*     public void ResetTimer()

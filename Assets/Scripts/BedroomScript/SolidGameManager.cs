@@ -147,14 +147,25 @@ public class GameManager : MonoBehaviour
     }
     private int LoadSavedLives()
     {
+        /*        if (File.Exists(saveFilePath))
+               {
+                   string json = File.ReadAllText(saveFilePath);
+                   SaveData saveData = JsonConvert.DeserializeObject<SaveData>(json);
+                   return saveData.currentLives; // Return the saved lives
+               }
+
+               return 0; // Default to 0 if no save file exists */
         if (File.Exists(saveFilePath))
         {
             string json = File.ReadAllText(saveFilePath);
             SaveData saveData = JsonConvert.DeserializeObject<SaveData>(json);
-            return saveData.currentLives; // Return the saved lives
+            string sceneName = SceneManager.GetActiveScene().name;
+            if (saveData.livesPerScene != null && saveData.livesPerScene.ContainsKey(sceneName))
+                return saveData.livesPerScene[sceneName];
+            else
+                return GetDefaultLivesForScene(sceneName); // fallback to default
         }
-
-        return 0; // Default to 0 if no save file exists
+        return GetDefaultLivesForScene(SceneManager.GetActiveScene().name);
     }
 
     public float GetDefaultTimeForScene(string sceneName)
@@ -282,6 +293,43 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+
+        Debug.Log($"Scene loaded: {scene.name}. Restoring game state...");
+
+        // Restore coins
+        if (CoinUIManager.Instance != null)
+            CoinUIManager.Instance.UpdateCoinUI(coinCount);
+
+        // Restore inventory
+        if (InventoryManagers.Instance != null)
+            InventoryManagers.Instance.SetInventory(InventoryManagers.Instance.GetInventory()); // Or use your loaded inventory dictionary if you store it
+
+        // Restore lives
+        LayfManager layfManager = FindObjectOfType<LayfManager>();
+        if (layfManager != null)
+            layfManager.currentLives = LoadSavedLives(); // Or use your loaded value
+
+        // Restore current lives
+        /*      LayfManager layfManager = FindObjectOfType<LayfManager>();
+             if (layfManager != null)
+             {
+                 string sceneName = SceneManager.GetActiveScene().name;
+                 if (saveData.livesPerScene != null && saveData.livesPerScene.ContainsKey(sceneName))
+                     layfManager.currentLives = saveData.livesPerScene[sceneName];
+                 else
+                     layfManager.currentLives = GetDefaultLivesForScene(sceneName);
+                 Debug.Log($"Loaded game. Current lives for scene '{sceneName}': {layfManager.currentLives}");
+             } */
+        // Restore timer/time if needed
+        TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
+        if (taymerManager != null)
+            taymerManager.SetTime(LoadSavedTimer()); // Or use your loaded value
+
+        // Restore quest progress
+        foreach (var questManager in FindObjectsOfType<QuestClipboardManager>())
+            questManager.LoadState();
+
+
         Debug.Log($"Scene loaded: {scene.name}. Applying stored purchases.");
         ApplyStoredPurchases();
         Debug.Log($"[GameManager] Scene loaded: {scene.name}");
@@ -307,7 +355,7 @@ public class GameManager : MonoBehaviour
          } */
 
         // Check if lives are already restored
-        LayfManager layfManager = FindObjectOfType<LayfManager>();
+        //  LayfManager layfManager = FindObjectOfType<LayfManager>();
         if (layfManager != null)
         {
             Debug.Log($"[OnSceneLoaded] Current lives: {layfManager.currentLives}");
@@ -614,6 +662,17 @@ public class GameManager : MonoBehaviour
         {
             Debug.LogWarning("CoinUIManager instance is null. Unable to update coin UI.");
         }
+    }
+
+    private float LoadSavedTimer()
+    {
+        if (File.Exists(saveFilePath))
+        {
+            string json = File.ReadAllText(saveFilePath);
+            SaveData saveData = JsonConvert.DeserializeObject<SaveData>(json);
+            return saveData.currentTimer;
+        }
+        return 0f; // Default if no save file exists
     }
     /*    private void OnEnterPlayingState()
        {
@@ -1052,6 +1111,23 @@ public class GameManager : MonoBehaviour
             // Retrieve currentLives from LayfManager
             int currentLives = FindObjectOfType<LayfManager>()?.currentLives ?? 0;
 
+            // --- ADD THIS BLOCK HERE ---
+            string sceneName = this.currentScene ?? SceneManager.GetActiveScene().name;
+            Dictionary<string, int> livesPerScene = new Dictionary<string, int>();
+            if (File.Exists(saveFilePath))
+            {
+                string jsonRead = File.ReadAllText(saveFilePath);
+                var existingSave = JsonConvert.DeserializeObject<SaveData>(jsonRead);
+                if (existingSave != null && existingSave.livesPerScene != null)
+                    livesPerScene = new Dictionary<string, int>(existingSave.livesPerScene);
+            }
+            livesPerScene[sceneName] = currentLives;
+            // --- END BLOCK ---
+
+            // --- ADD THIS BLOCK ---
+            TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
+            float timerValue = taymerManager != null ? taymerManager.GetCurrentTime() : 0f; // You need a GetCurrentTime() method
+
             // Create save data
             SaveData saveData = new SaveData
             {
@@ -1064,8 +1140,11 @@ public class GameManager : MonoBehaviour
                 sceneStates = sceneStates, // Save all scene states
 
                 //currentLives = currentLives // Save current lives
-                currentLives = FindObjectOfType<LayfManager>()?.currentLives ?? 0,
-                gameState = CurrentState // Save the current game state
+                //  currentLives = FindObjectOfType<LayfManager>()?.currentLives ?? 0,
+                currentLives = currentLives, // Save current lives
+                currentTimer = timerValue,   // <-- Save timer value
+                gameState = CurrentState, // Save the current game state
+                livesPerScene = livesPerScene // <-- Add this line
             };
 
             // Serialize and save to file
@@ -1442,8 +1521,10 @@ public class GameManager : MonoBehaviour
         public Dictionary<string, SceneState> sceneStates; // Save all scene states
 
         public int currentLives; // Add current lives to save data
-
+        public float currentTimer; // <-- Add this line
         public GameManager.GameState gameState; // Add gameState to save data
+
+        public Dictionary<string, int> livesPerScene = new Dictionary<string, int>(); // <-- Add this
     }
 
     [System.Serializable]

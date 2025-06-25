@@ -57,11 +57,17 @@ EditorBuildSettings:
     path: Assets/Scenes/DragAndDropQuiz.unity
     guid: 90c33df4c05d46a4cb5e0e460e496041
   - enabled: 1
-    path: Assets/Scenes/Stage1QuizAssessment.unity
+    path: Assets/Scenes/Stage1Assessment.unity
     guid: 0ffdbb90e6a05de41a29a0e3c37c44c7
   - enabled: 1
     path: Assets/Scenes/Stage3QuizAssessment.unity
     guid: aaf334b14d468e14fbe7ed961520f428
+  - enabled: 1
+    path: Assets/Scenes/Stage1Quiz.unity
+    guid: ffcf789e6ad94f0428266bdb392e483a
+  - enabled: 1
+    path: Assets/Scenes/Stage3QuizWord.unity
+    guid: 73732d540e086354da2bb43aa54b66fd
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000, guid: cb9074c90c1bff547852cc751a38017a, type: 2}
     com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: 0ab810b47b94d334dad59d94ea8f8d86, type: 2}

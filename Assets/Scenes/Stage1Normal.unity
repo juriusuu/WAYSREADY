@@ -1942,7 +1942,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &10023566 stripped
 GameObject:
@@ -3663,7 +3663,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &19327146 stripped
 GameObject:
@@ -22765,7 +22765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &119676214 stripped
 GameObject:
@@ -32617,7 +32617,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &167026157 stripped
 GameObject:
@@ -46760,7 +46760,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &232493695 stripped
 GameObject:
@@ -53054,7 +53054,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &261851197 stripped
 GameObject:
@@ -57198,7 +57198,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &282678956 stripped
 GameObject:
@@ -68605,7 +68605,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &339308683 stripped
 GameObject:
@@ -72122,7 +72122,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &356703394 stripped
 GameObject:
@@ -75208,7 +75208,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &369026660 stripped
 GameObject:
@@ -76176,7 +76176,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &373945274 stripped
 GameObject:
@@ -78344,7 +78344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &386643730 stripped
 GameObject:
@@ -95920,7 +95920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &470960316 stripped
 GameObject:
@@ -101875,7 +101875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &498959756 stripped
 GameObject:
@@ -109780,7 +109780,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &535674630 stripped
 GameObject:
@@ -111798,7 +111798,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &543876927 stripped
 GameObject:
@@ -115815,7 +115815,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &563039877 stripped
 GameObject:
@@ -116956,7 +116956,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &568919718 stripped
 GameObject:
@@ -147209,7 +147209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &722651095 stripped
 GameObject:
@@ -152271,7 +152271,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &748195018 stripped
 GameObject:
@@ -153093,7 +153093,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &753319927 stripped
 GameObject:
@@ -153729,7 +153729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &755676906 stripped
 GameObject:
@@ -158454,7 +158454,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &775594416 stripped
 GameObject:
@@ -158781,7 +158781,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &776292433 stripped
 GameObject:
@@ -159485,7 +159485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &778976262 stripped
 GameObject:
@@ -167818,7 +167818,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &823101135 stripped
 GameObject:
@@ -171947,7 +171947,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &845801402 stripped
 GameObject:
@@ -222203,7 +222203,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1098736446 stripped
 GameObject:
@@ -226967,7 +226967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1122583483 stripped
 GameObject:
@@ -243805,7 +243805,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1199978045 stripped
 GameObject:
@@ -244088,7 +244088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1201328694 stripped
 GameObject:
@@ -245771,6 +245771,7 @@ MonoBehaviour:
   - {fileID: 954437987}
   arrowPrefab: {fileID: 8271299200069495501, guid: 4ca51290ec3263d44bf289da98b7c192, type: 3}
   timePenaltyPerHint: 30
+  currentTime: 0
   isPlayerDead: 0
 --- !u!4 &1207602312
 Transform:
@@ -271739,7 +271740,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1348990747 stripped
 GameObject:
@@ -273898,7 +273899,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1359378120 stripped
 GameObject:
@@ -275960,7 +275961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1370635435 stripped
 GameObject:
@@ -278897,7 +278898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1384712740 stripped
 GameObject:
@@ -280039,7 +280040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1388628642 stripped
 GameObject:
@@ -294264,7 +294265,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1458972284 stripped
 GameObject:
@@ -298372,7 +298373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1479911175 stripped
 GameObject:
@@ -302115,7 +302116,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1499720709 stripped
 GameObject:
@@ -312556,7 +312557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1552122687 stripped
 GameObject:
@@ -317259,7 +317260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1575237911 stripped
 GameObject:
@@ -332515,7 +332516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1648068394 stripped
 GameObject:
@@ -339937,7 +339938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1684566278 stripped
 GameObject:
@@ -350277,7 +350278,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1722740528 stripped
 GameObject:
@@ -352466,7 +352467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1733682208 stripped
 GameObject:
@@ -356868,7 +356869,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1757172754 stripped
 GameObject:
@@ -358167,7 +358168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1763361573 stripped
 GameObject:
@@ -358764,7 +358765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1767366299 stripped
 GameObject:
@@ -363999,7 +364000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1793633523 stripped
 GameObject:
@@ -417972,7 +417973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1863688060 stripped
 GameObject:
@@ -435682,7 +435683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1955605209 stripped
 GameObject:
@@ -443622,7 +443623,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &1998529241
 GameObject:
@@ -467553,7 +467554,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67662a3cd96cd984d9cb9178de6f7fcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timePenalty: 50
+  timePenalty: 25
   slipSound: {fileID: 8300000, guid: 0cf4cad818f439d40b952fa6e825dd9f, type: 3}
 --- !u!1 &2115312411 stripped
 GameObject:

@@ -24,6 +24,12 @@ public class QuizManager : MonoBehaviour
     int totalQuestions = 0;
     public int score;
     public Button CompleteButton; // Assign in Inspector
+
+    public CanvasGroup wrongAnswerCanvas;
+    public float feedbackFadeDuration = 0.3f;
+    public float feedbackDisplayTime = 1.2f;
+    private Coroutine feedbackRoutine;
+
     private void Start()
     {
         totalQuestions = QnA.Count;
@@ -83,7 +89,48 @@ public class QuizManager : MonoBehaviour
     {
         isTimerRunning = false;
         QnA.RemoveAt(currentQuestion);
+
+        // Show feedback UI
+        if (wrongAnswerCanvas != null)
+            StartCoroutine(ShowWrongAnswerFeedback());
+
         generateQuestion();
+    }
+
+    private IEnumerator ShowWrongAnswerFeedback()
+    {
+        if (feedbackRoutine != null)
+            StopCoroutine(feedbackRoutine);
+
+        feedbackRoutine = StartCoroutine(FadeWrongAnswerFeedback());
+        yield return null;
+    }
+
+    private IEnumerator FadeWrongAnswerFeedback()
+    {
+        // Fade in
+        yield return StartCoroutine(FadeCanvasGroup(wrongAnswerCanvas, 0f, 1f, feedbackFadeDuration));
+
+        // Wait
+        yield return new WaitForSeconds(feedbackDisplayTime);
+
+        // Fade out
+        yield return StartCoroutine(FadeCanvasGroup(wrongAnswerCanvas, 1f, 0f, feedbackFadeDuration));
+    }
+
+    private IEnumerator FadeCanvasGroup(CanvasGroup cg, float start, float end, float duration)
+    {
+        float elapsed = 0f;
+        cg.alpha = start;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.deltaTime;
+            cg.alpha = Mathf.Lerp(start, end, elapsed / duration);
+            yield return null;
+        }
+
+        cg.alpha = end;
     }
 
 
