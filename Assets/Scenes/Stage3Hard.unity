@@ -7418,6 +7418,7 @@ GameObject:
   m_Component:
   - component: {fileID: 67060638}
   - component: {fileID: 67060637}
+  - component: {fileID: 67060639}
   m_Layer: 0
   m_Name: FirstDialogoue
   m_TagString: Untagged
@@ -7432,7 +7433,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 67060636}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afce5d1571b3d26429d932274b440e8a, type: 3}
   m_Name: 
@@ -7455,6 +7456,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &67060639
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 67060636}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328ae4f313fe0044d92ddf4666c9c41f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 475447372}
+  voiceAudioSource: {fileID: 396801402}
+  dialogueDisplayDuration: 3
 --- !u!1 &68001733 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8738011830842303934, guid: 27dd042ffc7e2d846ad99a21f74f7990, type: 3}
@@ -8721,7 +8737,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: -8, z: 0}
   moveDistance: 5
-  speed: 1
+  speed: 0.5
 --- !u!23 &77978031
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -167021,7 +167037,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: 4, z: 0}
   moveDistance: 5
-  speed: 1
+  speed: 0.5
 --- !u!23 &1405540099
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -239735,6 +239751,7 @@ MonoBehaviour:
   - {fileID: 1745253068}
   arrowPrefab: {fileID: 8271299200069495501, guid: 4ca51290ec3263d44bf289da98b7c192, type: 3}
   timePenaltyPerHint: 30
+  currentTime: 0
   isPlayerDead: 0
 --- !u!4 &2102608418
 Transform:
@@ -239910,7 +239927,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveDirection: {x: 0, y: -2, z: 0}
   moveDistance: 4
-  speed: 1
+  speed: 0.5
 --- !u!23 &2104187154
 MeshRenderer:
   m_ObjectHideFlags: 0

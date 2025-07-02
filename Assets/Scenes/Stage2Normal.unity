@@ -115892,6 +115892,7 @@ MonoBehaviour:
   - {fileID: 860118368}
   arrowPrefab: {fileID: 8271299200069495501, guid: 4ca51290ec3263d44bf289da98b7c192, type: 3}
   timePenaltyPerHint: 30
+  currentTime: 0
   isPlayerDead: 0
 --- !u!4 &268380438
 Transform:
@@ -181189,6 +181190,7 @@ GameObject:
   m_Component:
   - component: {fileID: 522900085}
   - component: {fileID: 522900084}
+  - component: {fileID: 522900086}
   m_Layer: 0
   m_Name: FirstDialogoue
   m_TagString: Untagged
@@ -181203,7 +181205,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 522900083}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afce5d1571b3d26429d932274b440e8a, type: 3}
   m_Name: 
@@ -181226,6 +181228,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &522900086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 522900083}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328ae4f313fe0044d92ddf4666c9c41f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 19651873}
+  voiceAudioSource: {fileID: 1192042990}
+  dialogueDisplayDuration: 4
 --- !u!1 &522947828 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -919582939920460783, guid: afa37df3e44fe0f4382c8e6991c52bae, type: 3}

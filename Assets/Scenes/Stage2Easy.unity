@@ -3521,8 +3521,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 2018826416}
-  minimapRect: {fileID: 0}
-  minimapCamera: {fileID: 0}
+  minimapRect: {fileID: 1294540194}
+  minimapCamera: {fileID: 1949194919}
 --- !u!114 &44678696
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143981,6 +143981,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1422956557}
   - component: {fileID: 1422956558}
+  - component: {fileID: 1422956559}
   m_Layer: 0
   m_Name: FirstDialogoue
   m_TagString: Untagged
@@ -144010,9 +144011,24 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1422956555}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afce5d1571b3d26429d932274b440e8a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 554158111}
+  voiceAudioSource: {fileID: 505185566}
+  dialogueDisplayDuration: 5
+--- !u!114 &1422956559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1422956555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328ae4f313fe0044d92ddf4666c9c41f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   dialoguePanel: {fileID: 554158111}

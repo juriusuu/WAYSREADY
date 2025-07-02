@@ -36,15 +36,15 @@ public class GameManager : MonoBehaviour
 
     public Dictionary<string, float> defaultSceneTimes = new Dictionary<string, float>
     {
-        { "Stage1Easy", 540f },
-        { "Stage1Normal", 480f },
-        { "Stage1Hard", 420f },
-        { "Stage2Easy", 540f },
-        { "Stage2Normal", 480f },
-        { "Stage2Hard", 420f },
-        { "Stage3Easy", 540f },
-        { "Stage3Normal", 480f },
-        { "Stage3Hard", 420f }
+        { "Stage1Easy", 300f }, //540
+        { "Stage1Normal", 300f }, //480
+        { "Stage1Hard", 300f }, //420
+        { "Stage2Easy", 300f },
+        { "Stage2Normal", 300f },
+        { "Stage2Hard", 300f },
+        { "Stage3Easy", 300f },
+        { "Stage3Normal", 300f },
+        { "Stage3Hard", 300f }
     };
 
     public Dictionary<string, int> defaultSceneHints = new Dictionary<string, int>
@@ -251,79 +251,9 @@ public class GameManager : MonoBehaviour
     {
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
-    /* 
-        private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
-        {
-            Debug.Log($"Scene loaded: {scene.name}. Applying stored purchases.");
-            ApplyStoredPurchases();
-            Debug.Log($"[GameManager] Scene loaded: {scene.name}");
-
-            if (scene.name == "Main Menu")
-            {
-                Debug.Log("Checking for ShopManager in Main Menu.");
-                ShopManager shopManager = FindObjectOfType<ShopManager>();
-                if (shopManager != null)
-                {
-                    Debug.Log("ShopManager found. Reassigning ShopMenu reference.");
-                    GameObject shopMenu = GameObject.Find("ShopMenu");
-                    if (shopMenu != null)
-                    {
-                        shopManager.shopMenu = shopMenu;
-                        Debug.Log("ShopMenu reference reassigned.");
-
-                        // Reassign button references
-                        shopManager.ReassignButtonEvents();
-
-                        // Activate the ShopMenu if needed
-                        shopMenu.SetActive(false); // Ensure it starts inactive
-                        Debug.Log("ShopMenu is ready but inactive.");
-                    }
-                    else
-                    {
-                        Debug.LogWarning("ShopMenu not found in the Main Menu scene. It will be assigned dynamically when the shop is opened.");
-                    }
-                }
-                else
-                {
-                    Debug.LogWarning("ShopManager not found in the scene. It will be initialized dynamically.");
-                }
-            }
-        }
-     */
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-
-        Debug.Log($"Scene loaded: {scene.name}. Restoring game state...");
-
-        // Restore coins
-        if (CoinUIManager.Instance != null)
-            CoinUIManager.Instance.UpdateCoinUI(coinCount);
-
-        // Restore inventory
-        if (InventoryManagers.Instance != null)
-            InventoryManagers.Instance.SetInventory(InventoryManagers.Instance.GetInventory()); // Or use your loaded inventory dictionary if you store it
-
-        // Restore lives
-        LayfManager layfManager = FindObjectOfType<LayfManager>();
-        if (layfManager != null)
-            layfManager.currentLives = LoadSavedLives(); // Or use your loaded value
-
-        // Restore current lives
-        /*      LayfManager layfManager = FindObjectOfType<LayfManager>();
-             if (layfManager != null)
-             {
-                 string sceneName = SceneManager.GetActiveScene().name;
-                 if (saveData.livesPerScene != null && saveData.livesPerScene.ContainsKey(sceneName))
-                     layfManager.currentLives = saveData.livesPerScene[sceneName];
-                 else
-                     layfManager.currentLives = GetDefaultLivesForScene(sceneName);
-                 Debug.Log($"Loaded game. Current lives for scene '{sceneName}': {layfManager.currentLives}");
-             } */
-        // Restore timer/time if needed
-        TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
-        if (taymerManager != null)
-            taymerManager.SetTime(LoadSavedTimer()); // Or use your loaded value
 
         // Restore quest progress
         foreach (var questManager in FindObjectsOfType<QuestClipboardManager>())
@@ -342,20 +272,10 @@ public class GameManager : MonoBehaviour
             //  OnEnterGameOverState(); // Trigger GameOver state logic
             return;
         }
-        /*  // Initialize lives for the scene
-         InitializeLives(scene.name);
 
-         // Check if lives are 0 and transition to GameOver state
-         LayfManager layfManager = FindObjectOfType<LayfManager>();
-         if (layfManager != null && layfManager.currentLives <= 0)
-         {
-             Debug.Log($"No lives remaining in scene '{scene.name}'. Transitioning to GameOver state.");
-             ChangeState(GameState.GameOver);
-             return;
-         } */
 
         // Check if lives are already restored
-        //  LayfManager layfManager = FindObjectOfType<LayfManager>();
+        LayfManager layfManager = FindObjectOfType<LayfManager>();
         if (layfManager != null)
         {
             Debug.Log($"[OnSceneLoaded] Current lives: {layfManager.currentLives}");
@@ -434,146 +354,6 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("ShopManager not found in the scene!");
         }
     }
-    /* 
-    private System.Collections.IEnumerator AssignShopMenuWithDelay()
-    {
-        yield return new WaitForEndOfFrame(); // Wait for the end of the frame to ensure all objects are initialized
-
-        ShopManager shopManager = ShopManager.Instance;
-        if (shopManager != null)
-        {
-            Debug.Log("ShopManager found. Reassigning ShopMenu reference.");
-
-            // Use Resources.FindObjectsOfTypeAll to find inactive objects
-            GameObject shopMenu = null;
-            foreach (GameObject obj in Resources.FindObjectsOfTypeAll<GameObject>())
-            {
-                if (obj.name == "ShopMenu" && obj.hideFlags == HideFlags.None) // Ensure it's not hidden in the hierarchy
-                {
-                    shopMenu = obj;
-                    break;
-                }
-            }
-
-            if (shopMenu != null)
-            {
-                shopManager.shopMenu = shopMenu;
-                Debug.Log("ShopMenu reference reassigned.");
-
-                // Reassign button references
-                shopManager.ReassignButtonEvents();
-
-                // Ensure the ShopMenu starts inactive
-                shopMenu.SetActive(false);
-                Debug.Log("ShopMenu is ready but inactive.");
-            }
-            else
-            {
-                Debug.LogError("ShopMenu not found in the scene!");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("ShopManager not found in the scene!");
-        }
-    } */
-    /* 
-        private System.Collections.IEnumerator AssignShopMenuWithDelay()
-        {
-            yield return new WaitForEndOfFrame(); // Wait for the end of the frame to ensure all objects are initialized
-
-            ShopManager shopManager = ShopManager.Instance;
-            if (shopManager != null)
-            {
-                Debug.Log("ShopManager found. Reassigning ShopMenu reference.");
-
-                // Search for the ShopMenu in the scene hierarchy, including inactive objects
-                Transform shopMenuTransform = GameObject.Find("Main Menu")?.transform.Find("ShopMenu");
-                if (shopMenuTransform != null)
-                {
-                    GameObject shopMenu = shopMenuTransform.gameObject;
-                    shopManager.shopMenu = shopMenu;
-                    Debug.Log("ShopMenu reference reassigned.");
-
-                    // Reassign button references
-                    shopManager.ReassignButtonEvents();
-
-                    // Ensure the ShopMenu starts inactive
-                    shopMenu.SetActive(false);
-                    Debug.Log("ShopMenu is ready but inactive.");
-                }
-                else
-                {
-                    Debug.LogError("ShopMenu not found in the Main Menu scene!");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("ShopManager not found in the scene!");
-            }
-        } */
-
-
-    /* 
-    private System.Collections.IEnumerator AssignShopMenuWithDelay()
-    {
-        yield return new WaitForEndOfFrame(); // Wait for the end of the frame to ensure all objects are initialized
-
-        ShopManager shopManager = FindObjectOfType<ShopManager>();
-        if (shopManager != null)
-        {
-            Debug.Log("ShopManager found. Reassigning ShopMenu reference.");
-            if (shopManager.shopMenu != null)
-            {
-                Debug.Log("ShopMenu reference already assigned.");
-                shopManager.ReassignButtonEvents();
-
-                // Ensure the ShopMenu starts inactive
-                shopManager.shopMenu.SetActive(false);
-                Debug.Log("ShopMenu is ready but inactive.");
-            }
-            else
-            {
-                Debug.LogError("ShopMenu reference is missing in ShopManager! Please assign it in the Inspector.");
-            }
-        }
-        else
-        {
-            Debug.LogWarning("ShopManager not found in the scene!");
-        }
-    } */
-    /* 
-        private System.Collections.IEnumerator AssignShopMenuWithDelay()
-        {
-            yield return new WaitForEndOfFrame(); // Wait for the end of the frame to ensure all objects are initialized
-
-            ShopManager shopManager = FindObjectOfType<ShopManager>();
-            if (shopManager != null)
-            {
-                Debug.Log("ShopManager found. Reassigning ShopMenu reference.");
-                GameObject shopMenu = GameObject.Find("ShopMenu");
-                if (shopMenu != null)
-                {
-                    shopManager.shopMenu = shopMenu;
-                    Debug.Log("ShopMenu reference reassigned.");
-
-                    // Reassign button references
-                    shopManager.ReassignButtonEvents();
-
-                    // Ensure the ShopMenu starts inactive
-                    shopMenu.SetActive(false);
-                    Debug.Log("ShopMenu is ready but inactive.");
-                }
-                else
-                {
-                    Debug.LogError("ShopMenu not found in the Main Menu scene!");
-                }
-            }
-            else
-            {
-                Debug.LogWarning("ShopManager not found in the scene!");
-            }
-        } */
     public void ApplyStoredPurchases()
 
     {
@@ -604,8 +384,6 @@ public class GameManager : MonoBehaviour
             Debug.Log($"Applying stored purchases. Additional time: {additionalTime}, Additional lives: {additionalLives}, Additional hints: {additionalHints}");
 
         }
-
-
 
         // Apply additional hints to TaymerManager if present
         if (taymerManager != null && additionalHints > 0)
@@ -674,36 +452,6 @@ public class GameManager : MonoBehaviour
         }
         return 0f; // Default if no save file exists
     }
-    /*    private void OnEnterPlayingState()
-       {
-
-           Debug.Log("Entered Playing state.");
-           Time.timeScale = 1f; // Resume gameplay
-
-           // Reset the timer and death flag in TaymerManager
-           TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
-           if (taymerManager != null)
-           {
-               taymerManager.ResetTimer(); // Restart the timer
-               taymerManager.isPlayerDead = false; // Allow subsequent deaths
-               Debug.Log("[GameManager] Timer restarted and isPlayerDead reset in TaymerManager.");
-           }
-           else
-           {
-               Debug.LogWarning("[GameManager] TaymerManager not found! Unable to reset timer.");
-           }
-
-           // Ensure the game is ready to handle the next death
-           LayfManager layfManager = FindObjectOfType<LayfManager>();
-           if (layfManager != null)
-           {
-               Debug.Log($"[GameManager] Lives remaining: {layfManager.GetRemainingLives()}");
-           }
-           else
-           {
-               Debug.LogWarning("[GameManager] LayfManager not found! Unable to track lives.");
-           }
-       } */
 
     private void OnEnterPlayingState()
     {
@@ -734,11 +482,6 @@ public class GameManager : MonoBehaviour
             Debug.LogWarning("[GameManager] LayfManager not found in the scene. Unable to track lives.");
         }
     }
-
-    /// <summary>
-    /// //
-    /// </summary>
-    /// 
 
     private void OnEnterPlayerDeadState()
     {
@@ -784,116 +527,7 @@ public class GameManager : MonoBehaviour
             Debug.LogError("LayfManager not found! Unable to reduce life.");
         }
     }
-    /*     private void OnEnterPlayerDeadState()
-        {
-            Debug.Log("Entered PlayerDead state.");
-            Time.timeScale = 0f; // Pause gameplay
 
-            // Reference the LayfManager and TaymerManager
-            LayfManager layfManager = FindObjectOfType<LayfManager>();
-            TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
-
-            if (layfManager != null)
-            {
-                layfManager.LoseLife(); // Reduce a life
-
-                if (layfManager.GetRemainingLives() > 0) // Check if the player has lives left
-                {
-                    Debug.Log("Player lost a life. Resetting the game state...");
-                    ResetGameState(); // Reset the game state without reloading the scene
-                }
-                else
-                {
-                    Debug.Log("No lives remaining. Transitioning to GameOver state...");
-                    ChangeState(GameState.GameOver); // Transition to GameOver state
-                }
-            }
-            else
-            {
-                Debug.LogError("LayfManager not found! Unable to reduce life.");
-            }
-        } */
-
-    /* 
-           if (layfManager != null)
-           {
-               layfManager.LoseLife(); // Reduce a life
-
-               if (layfManager.GetRemainingLives() > 0) // Check if the player has lives left
-               {
-                   Debug.Log("Player lost a life. Resetting the game state...");
-                   if (taymerManager != null)
-                   {
-                       taymerManager.ResetTimer(); // Reset the timer in TaymerManager
-                   }
-
-                   ResetGameState(); // Reset the game state without reloading the scene
-               }
-               else
-               {
-                   Debug.Log("No lives remaining. Transitioning to GameOver state...");
-                   ChangeState(GameState.GameOver); // Transition to GameOver state
-               }
-           }
-           else
-           {
-               Debug.LogError("LayfManager not found! Unable to reduce life.");
-           } */
-
-    /* 
-        private void ResetGameState()
-        {
-            Debug.Log("Resetting game state...");
-            Debug.Log("ResetGameState called.");
-
-            // Reset player position (if needed)
-            GameObject player = GameObject.FindWithTag("Player");
-            if (player != null)
-            {
-                player.transform.position = playerStartingPosition; // Reset to the starting position
-                Debug.Log($"Player position reset to starting position: {playerStartingPosition}");
-            }
-            else
-            {
-                Debug.LogError("Player not found in the scene!");
-            }
-            // Resume gameplay
-            Time.timeScale = 1f;
-            Debug.Log($"Time.timeScale set to {Time.timeScale}");
-
-                     // Apply stored purchases (e.g., additional lives, time, hint ApplyStoredPurchases(); 
-
-
-            // Synchronize lives with LayfManager
-            LayfManager layfManager = FindObjectOfType<LayfManager>();
-            if (layfManager != null)
-            {
-                Debug.Log($"Synchronizing lives. Current lives in LayfManager: {layfManager.GetRemainingLives()}, Additional lives: {additionalLives}");
-                for (int i = 0; i < additionalLives; i++)
-                {
-                    layfManager.AddLife(); // Add any additional lives purchased
-                }
-                additionalLives = 0; // Reset additional lives after applying
-            }
-            else
-            {
-                Debug.LogError("LayfManager not found during ResetGameState!");
-            }
-
-            // Restart the timer
-            TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
-            if (taymerManager != null)
-            {
-                taymerManager.ResetTimer(); // Ensure the timer starts moving again
-                Debug.Log("Timer restarted.");
-            }
-            else
-            {
-                Debug.LogWarning("TaymerManager not found! Timer could not be restarted.");
-            }
-
-        }
-     */
     private void ResetGameState()
     {
         Debug.Log("Resetting game state...");
@@ -956,9 +590,8 @@ public class GameManager : MonoBehaviour
     }
     public void OnEnterGameOverState()
     {
-        /*  Debug.Log("Entered GameOver state.");
-         Time.timeScale = 0f; // Pause gameplay
-         // Show Game Over UI */
+
+        // Show Game Over UI */
         Debug.Log("Entered GameOver state.");
         Time.timeScale = 0f; // Pause gameplay
 
@@ -981,43 +614,11 @@ public class GameManager : MonoBehaviour
         Debug.Log("Waiting for player to press the Main Menu button.");
     }
 
-    // -------------------- Scene Management --------------------
-    /* 
-        public void LoadScene(string sceneName)
-        {
-            Debug.Log($"Loading scene: {sceneName}");
 
-
-
-            // Save the current scene state before transitioning
-            SaveCurrentSceneState();
-
-            // Update the current scene
-            currentScene = sceneName;
-
-            // Save the game to persist all scene states
-            SaveGame(currentScene);
-
-            // Load the new scene
-            SceneManager.LoadScene(sceneName);
-
-            // Reset to Playing state on scene load
-            ChangeState(GameState.Playing);
-        } */
 
     public void LoadScene(string sceneName)
     {
         Debug.Log($"Attempting to load scene: {sceneName}");
-
-        /*       // Find the LayfManager in the current scene
-              LayfManager layfManager = FindObjectOfType<LayfManager>();
-              if (layfManager != null && layfManager.currentLives <= 0)
-              {
-                  Debug.LogWarning($"Cannot load scene '{sceneName}' because the player has no lives left.");
-                  // Redirect to the Main Menu
-                  SceneManager.LoadScene("Main Menu");
-                  return;
-              } */
 
         // Save the current scene state before transitioning
         SaveCurrentSceneState();
@@ -1138,9 +739,6 @@ public class GameManager : MonoBehaviour
                 completedScenes = completedScenes,
                 questCompletionStatus = questCompletionStatus,
                 sceneStates = sceneStates, // Save all scene states
-
-                //currentLives = currentLives // Save current lives
-                //  currentLives = FindObjectOfType<LayfManager>()?.currentLives ?? 0,
                 currentLives = currentLives, // Save current lives
                 currentTimer = timerValue,   // <-- Save timer value
                 gameState = CurrentState, // Save the current game state
@@ -1185,6 +783,7 @@ public class GameManager : MonoBehaviour
                     }
                     InventoryManagers.Instance.SetInventory(inventoryDict);
                 }
+
                 // Restore game data
                 coinCount = saveData.coinCount;
                 completedScenes = saveData.completedScenes ?? new List<string>();
@@ -1199,8 +798,6 @@ public class GameManager : MonoBehaviour
                 if (CurrentState == GameState.GameOver)
                 {
                     Debug.Log("[LoadGame] Game is in GameOver state. Loading GameOver screen.");
-                    //  SceneManager.LoadScene("GameOver"); // Replace "GameOver" with your GameOver scene name
-                    // OnEnterGameOverState(); // Trigger GameOver state logic
 
                     return;
                 }
@@ -1362,72 +959,11 @@ public class GameManager : MonoBehaviour
             return false;
         }
     }
-    /* 
-        public void BuyTime(int cost, float timeToAdd)
-        {
-            if (SpendCoins(cost))
-            {
-                TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
-                if (taymerManager != null)
-                {
-                    taymerManager.AddTime(timeToAdd);
-                    Debug.Log($"{timeToAdd} seconds added to the timer.");
-                }
-            }
-        }
 
-        public void BuyLife(int cost)
-        {
-            if (SpendCoins(cost))
-            {
-                LayfManager layfManager = FindObjectOfType<LayfManager>();
-                if (layfManager != null)
-                {
-                    layfManager.AddLife();
-                    Debug.Log("1 life added.");
-                }
-            }
-        }
-
-        public void BuyHint(int cost)
-        {
-            if (SpendCoins(cost))
-            {
-                TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
-                if (taymerManager != null)
-                {
-                    taymerManager.UseHint();
-                    Debug.Log("Hint purchased and used.");
-                }
-            }
-        }
-
-     */
 
     public void BuyTime(int cost, float timeToAdd)
     {
-        /*      if (SpendCoins(cost))
-             {
-                 TaymerManager taymerManager = FindObjectOfType<TaymerManager>();
-                 if (taymerManager != null)
-                 {
-                     //  taymerManager.AddTime(timeToAdd); // Apply time directly
-                     taymerManager.AddAdditionalTime(timeToAdd); // Apply time directly
-                     Debug.Log($"{timeToAdd} seconds added to the timer.");
-                 }
-                 else
-                 {
-                     // Store the purchased time in GameManager for later use
-                     additionalTime += (int)timeToAdd;
-                     Debug.Log($"TaymerManager not found! Storing {timeToAdd} seconds for later. Total additional time: {additionalTime}");
 
-                 }
-             } */
-        /*  if (SpendCoins(cost))
-         {
-             GameManager.Instance.additionalTime += (int)timeToAdd;
-             Debug.Log($"[Shop] Additional time purchased: {timeToAdd}. Total additional time: {GameManager.Instance.additionalTime}");
-         } */
         if (GameManager.Instance == null)
         {
             Debug.LogError("[ShopManager] GameManager.Instance is null!");

@@ -357,21 +357,21 @@ public class TaymerManager : MonoBehaviour
     public bool isPlayerDead = false; // Flag to prevent repeated calls to HandlePlayerDeath
     private void Update()
     {
-        Debug.Log("[TaymerManager] Update is running."); // Add this log to confirm Update is being called
+        /*         Debug.Log("[TaymerManager] Update is running."); // Add this log to confirm Update is being called
+         */
+        /*     if (remainingTime > 0)
+            {
+                remainingTime -= Time.deltaTime; // Decrease the remaining time
+                                                 // timerImage.fillAmount = remainingTime / totalTime; // Update the fill amount
+                                                 //  Debug.Log($"[TaymerManager] Timer running. Remaining time: {remainingTime}");
+            }
+            else if (!isPlayerDead) // Only call HandlePlayerDeath once per death
+            {
+                Debug.Log("[TaymerManager] Timer ran out. Calling HandlePlayerDeath.");
+                isPlayerDead = true; // Set the flag to true to prevent repeated calls
+                NotifyGameManager(); // Call the method to handle player death when time runs out
 
-        if (remainingTime > 0)
-        {
-            remainingTime -= Time.deltaTime; // Decrease the remaining time
-                                             // timerImage.fillAmount = remainingTime / totalTime; // Update the fill amount
-                                             //  Debug.Log($"[TaymerManager] Timer running. Remaining time: {remainingTime}");
-        }
-        else if (!isPlayerDead) // Only call HandlePlayerDeath once per death
-        {
-            Debug.Log("[TaymerManager] Timer ran out. Calling HandlePlayerDeath.");
-            isPlayerDead = true; // Set the flag to true to prevent repeated calls
-            NotifyGameManager(); // Call the method to handle player death when time runs out
-
-        }
+            } */
 
         /*   // Remove arrow if the target object is gone or inactive
           if (currentArrow != null && (currentHintTarget == null || !currentHintTarget.activeInHierarchy))
@@ -405,6 +405,18 @@ public class TaymerManager : MonoBehaviour
                 if (player != null)
                     currentArrow.transform.position = player.transform.position + Vector3.up * 2f;
             } */
+
+
+        // Update arrow direction and position when player moves
+        if (currentArrow != null && currentHintTarget != null)
+        {
+            UpdateArrowDirection();
+            // Keep the arrow above the player
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+                currentArrow.transform.position = player.transform.position + Vector3.up * 1.2f;
+        }
+
         if (currentArrow != null && (
         currentHintTarget == null ||
         !currentHintTarget.activeInHierarchy ||
@@ -432,7 +444,7 @@ public class TaymerManager : MonoBehaviour
     // Add this method to your class:
     private bool IsQuestTaskDone(GameObject target)
     {
-        var questManager = FindObjectOfType<QuestClipboardManager>();
+        var questManager = FindFirstObjectByType<QuestClipboardManager>();
         if (questManager != null)
         {
             int taskIndex = GetTaskIndexForTarget(target);
@@ -443,7 +455,7 @@ public class TaymerManager : MonoBehaviour
     }
     private void NotifyGameManager()
     {
-        GameManager gameManager = FindObjectOfType<GameManager>();
+        GameManager gameManager = FindFirstObjectByType<GameManager>();
         if (gameManager != null)
         {
             Debug.Log("[TaymerManager] Timer expired. Notifying GameManager to handle player death.");
@@ -486,11 +498,14 @@ public class TaymerManager : MonoBehaviour
                 Debug.Log("Task for this object is already completed. No hint needed.");
                 return;
             }
-            AttachArrowToObject(nearestObject); // Attach the arrow to the nearest object
-            objectsToHighlight.Remove(nearestObject); // Remove it from the list
-            hintsUsed++; // Increment the hint counter
-            Debug.Log($"Hint used: {hintsUsed}/{totalHintsAllowed}");
 
+            AttachArrowToObject(nearestObject);
+            Debug.Log($"Item Hint: {nearestObject}");
+
+            // Only remove and increment if hint was successfully applied
+            objectsToHighlight.Remove(nearestObject);
+            hintsUsed++;
+            Debug.Log($"Hint used: {hintsUsed}/{totalHintsAllowed}");
 
             // Decrease the timer as a penalty for using a hint
             remainingTime -= timePenaltyPerHint;
@@ -634,7 +649,7 @@ public class TaymerManager : MonoBehaviour
         currentArrow.transform.SetParent(player.transform);
         currentArrow.transform.localPosition = new Vector3(0, 1.2f, 0); // Adjust as needed
         // Set the scale to make it visible
-        currentArrow.transform.localScale = new Vector3(80f, 80f, 80f); // Adjust as needed
+        currentArrow.transform.localScale = new Vector3(30f, 10f, 10f); // Adjust as needed
 
         // Store the current target for real-time updating
         currentHintTarget = targetItem;

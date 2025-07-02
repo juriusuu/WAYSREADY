@@ -240620,6 +240620,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1326566234}
   - component: {fileID: 1326566233}
+  - component: {fileID: 1326566235}
   m_Layer: 0
   m_Name: FirstDialogoue
   m_TagString: Untagged
@@ -240634,7 +240635,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1326566232}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: afce5d1571b3d26429d932274b440e8a, type: 3}
   m_Name: 
@@ -240657,6 +240658,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1326566235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326566232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 328ae4f313fe0044d92ddf4666c9c41f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialoguePanel: {fileID: 520142508}
+  voiceAudioSource: {fileID: 228728569}
+  dialogueDisplayDuration: 5
 --- !u!64 &1326716689
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -387842,6 +387858,7 @@ MonoBehaviour:
   - {fileID: 1201983069}
   arrowPrefab: {fileID: 8271299200069495501, guid: 4ca51290ec3263d44bf289da98b7c192, type: 3}
   timePenaltyPerHint: 30
+  currentTime: 0
   isPlayerDead: 0
 --- !u!4 &2102608418
 Transform:
@@ -392563,8 +392580,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 785461631}
-  minimapRect: {fileID: 0}
-  minimapCamera: {fileID: 0}
+  minimapRect: {fileID: 1624982354}
+  minimapCamera: {fileID: 557633686}
 --- !u!114 &2129583380
 MonoBehaviour:
   m_ObjectHideFlags: 0

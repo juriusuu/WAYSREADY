@@ -11,13 +11,13 @@ public class InstructionManagerSandBag : MonoBehaviour
 
     private int currentPage = 0;
     private StageDialogueManager1 stageDialogueManager;
-    public TaymerManagerHexafall taymerManager; // Also control the timer
+    public TaymerManagerSandbag taymerManager; // Fixed: Use TaymerManagerSandbag instead of TaymerManagerHexafall
 
     void Awake() // Use Awake to run before other Start() methods
     {
         // Find managers
-        stageDialogueManager = FindObjectOfType<StageDialogueManager1>();
-        taymerManager = FindObjectOfType<TaymerManagerHexafall>();
+        stageDialogueManager = FindFirstObjectByType<StageDialogueManager1>();
+        taymerManager = FindFirstObjectByType<TaymerManagerSandbag>();
 
         // Pause everything at the very beginning
         Time.timeScale = 0f;

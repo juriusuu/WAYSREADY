@@ -115,7 +115,7 @@ public class PickupButtonss : MonoBehaviour
                 if (item.usagePanel != null)
                 {
                     item.usagePanel.SetActive(true);
-                    Invoke(nameof(HideUsagePanel), 3f); // Hide after 3 seconds
+                    Invoke(nameof(HideUsagePanel), 1f); // Hide after 3 seconds
                 }
 
 

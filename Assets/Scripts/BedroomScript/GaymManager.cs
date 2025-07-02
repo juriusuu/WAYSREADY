@@ -208,36 +208,3 @@ public class GameManager2 : MonoBehaviour
         }
     }
 }
-
-/*     public void ShowCollections()
-    {
-        Debug.Log("Opening Collections Panel...");
-        collectionsPanel.SetActive(true);
-        shopPanel.SetActive(false);
-        libraryPanel.SetActive(false);
-    }
-
-    public void ShowShop()
-    {
-        Debug.Log("Opening Shop Panel...");
-        collectionsPanel.SetActive(false);
-        shopPanel.SetActive(true);
-        libraryPanel.SetActive(false);
-    }
-
-    public void ShowLibrary()
-    {
-        Debug.Log("Opening Library Panel...");
-        collectionsPanel.SetActive(false);
-        shopPanel.SetActive(false);
-        libraryPanel.SetActive(true);
-    }
-
-    public void CloseAllPanels()
-    {
-        Debug.Log("Closing all panels...");
-        collectionsPanel.SetActive(false);
-        shopPanel.SetActive(false);
-        libraryPanel.SetActive(false);
-    }
-} */
