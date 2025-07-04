@@ -51,25 +51,6 @@ public class FireExtinguisherInteraction : MonoBehaviour
         }
     }
 
-    /* public void OnInteractButtonPressed()
-    {
-        if (isPlayerNear)
-        {
-            Debug.Log("Interact button pressed. Loading scene: " + sceneToLoad);
-
-            // Load the specified scene
-            if (!string.IsNullOrEmpty(sceneToLoad))
-            {
-                SceneManager.LoadScene(sceneToLoad);
-            }
-            else
-            {
-                Debug.LogError("Scene name is not set!");
-            }
-        }
-    }
-
- */
 
     private void OnInteractButtonPressed()
     {
